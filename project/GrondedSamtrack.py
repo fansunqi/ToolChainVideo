@@ -33,7 +33,7 @@ import torch
 import torchvision
 import sys
 sys.path.append(f"./project/Grounded-Segment-Anything")
-# sys.path.append
+sys.path.append("./src/groundingdino")
 from groundingdino.util.inference import Model
 from segment_anything import SamPredictor,sam_model_registry
 sys.path.append(f"./project/Grounded-Segment-Anything/EfficientSAM")
