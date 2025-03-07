@@ -21,7 +21,8 @@ from transformers import (
 from langchain.chains.conversation.memory import ConversationBufferMemory
 from langchain.llms.openai import OpenAI
 from langchain_experimental.sql import SQLDatabaseChain
-from langchain import OpenAI, SQLDatabase
+# from langchain import OpenAI, SQLDatabase
+from langchain import SQLDatabase
 
 import sys
 
@@ -82,10 +83,11 @@ class InstanceBase(object):
             "./checkpoints/blip", torch_dtype=self.torch_dtype
         ).to(self.device)
 
+        # pdb.set_trace()
         self.llm = OpenAI(
             openai_api_key = self.config.openai.GPT_API_KEY, 
             model_name = self.config.openai.AGENT_GPT_MODEL_NAME, 
-            base_url=self.config.openai.PROXY,
+            openai_api_base = self.config.openai.PROXY,
             temperature = 0
         )
         self.tracker = GrandedSamTracker()
@@ -337,6 +339,7 @@ class InstanceBase(object):
             return prediction
 
     def ref_vos(self, video_path, question):
+        # pdb.set_trace()
         flag_ref_vos = self.llm(f"Please determine if this task is related to inpaint, generally referring to the word inpaint in the task. Reply 0 if it is related and 1 if it is not. The task is as follows:{question}.")
         if int(flag_ref_vos) == 0:
             try:

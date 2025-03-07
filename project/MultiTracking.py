@@ -31,8 +31,8 @@ import numpy as np
 import torch
 from ultralytics.yolo.utils import ops
 
-os.environ["http_proxy"] = "http://127.0.0.1:7890"
-os.environ["https_proxy"] = "http://127.0.0.1:7890"
+# os.environ["http_proxy"] = "http://127.0.0.1:7890"
+# os.environ["https_proxy"] = "http://127.0.0.1:7890"
 
 from ultralytics.yolo.utils.ops import clip_boxes, xywh2xyxy, xyxy2xywh
 import shutil
