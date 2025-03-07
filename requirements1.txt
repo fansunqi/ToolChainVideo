@@ -21,7 +21,8 @@ bcrypt==4.1.3
 beautifulsoup4==4.12.3
 blendmodes==2024
 blessed==1.20.0
--e git+https://github.com/fansunqi/dgpt.git@197d63ac79994ef7791497a17fd485181b2fdba3#egg=boxmot&subdirectory=yolo_tracking-master
+# Editable install with no version control (boxmot==10.0.72)
+-e /home/fsq/miniconda3/envs/dgpt/lib/python3.9/site-packages
 cachetools==5.3.1
 certifi==2023.7.22
 cffi==1.15.1
@@ -150,7 +151,7 @@ nltk==3.8.1
 nodeenv==1.9.0
 numba==0.59.1
 numexpr==2.9.0
-numpy==1.23.1
+numpy==1.24.4
 nvidia-cublas-cu11==11.10.3.66
 nvidia-cublas-cu12==12.1.3.1
 nvidia-cuda-cupti-cu11==11.7.101

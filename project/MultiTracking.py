@@ -113,7 +113,7 @@ class YoloInterface:
     def overwrite_results(self, i, im0_shape, predictor):
         # overwrite bbox results with tracker predictions
         if predictor.tracker_outputs[i].size != 0:
-            pdb.set_trace()
+            # pdb.set_trace()
             predictor.results[i].boxes = Boxes(
                 # xyxy, (track_id), conf, cls
                 boxes=torch.from_numpy(predictor.tracker_outputs[i]).to(
