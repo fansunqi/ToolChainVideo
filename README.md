@@ -55,7 +55,7 @@
      ```python
      openai:
        GPT_API_KEY: ["put your openai key here", ...]
-
+     
      google_cloud:
        CLOUD_VISION_API_KEY: [...]
        QUOTA_PROJECT_ID: [...]
@@ -67,17 +67,17 @@
      ```python
      mkdir checkpoints  
      cd ./checkpoints
-
+     
      #download the pretrained model for action recognition
      wget https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/uniformerv2/k400/k400_k710_uniformerv2_b16_8x224.pyth
-
+     
      ```
    - **download the pretrained model for yolo-tracking**
      ```python
      #download the pretrained model for object detection and tracking
      wget https://objects.githubusercontent.com/github-production-release-asset-2e65be/521807533/0c7608ab-094c-4c63-8c0c-3e7623db6114?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20240612%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240612T083947Z&X-Amz-Expires=300&X-Amz-Signature=7b6688c64e3d3f1eb54a0eca30ca99e140bed9f886d4c8a084bec389046ecda8&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=521807533&response-content-disposition=attachment%3B%20filename%3Dyolov8n-seg.pt&response-content-type=application%2Foctet-stream
      wget https://objects.githubusercontent.com/github-production-release-asset-2e65be/521807533/67360104-677c-457e-95a6-856f07ba3f2e?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20240612%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240612T083803Z&X-Amz-Expires=300&X-Amz-Signature=8bd5d0f9ef518ee1a84783203b2d0a6c285a703dace053ae30596c68f2428599&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=521807533&response-content-disposition=attachment%3B%20filename%3Dyolov8n.pt&response-content-type=application%2Foctet-stream
-
+     
      ```
    - **download the pretrained model for dense captioning**
      ```python
@@ -105,7 +105,7 @@
      # dowlond the chekpoints from below 
      [[Google Drive](https://drive.google.com/file/d/1QoChMkTVxdYZ_eBlZhK2acq9KMQZccPJ/view)]
      cd ..
-
+     
      mkdir GroundedSAM
      cd ./GroundedSAM
      wget https://objects.githubusercontent.com/github-production-release-asset-2e65be/611591640/c4c55fde-97e5-47d9-a2c5-b169832a2fa9?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20240623%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240623T053405Z&X-Amz-Expires=300&X-Amz-Signature=369fd1d480eb018f7b3a31e960835ae77ae5bb9b1d0dcc5415751811daf4e325&X-Amz-SignedHeaders=host&actor_id=97865789&key_id=0&repo_id=611591640&response-content-disposition=attachment%3B%20filename%3Dgroundingdino_swinb_cogcoor.pth&response-content-type=application%2Foctet-stream
@@ -180,7 +180,29 @@ Thanks to the authors of these open source projects for providing excellent proj
 
 ***
 
+## Run in Mac
+
+创建环境：
+
+```
+cd dgpt
+python3 -m venv dgpt
+```
+
+ 激活环境：
+
+```
+source dgpt/bin/activate
+```
+
+运行脚本：
+
+```
+python ./scripts/demo_test_1.py --config config/demo_1.yaml 
+```
+
 ## Citations
+
 Please consider citing the related paper(s) in your publications if it helps your research.
 ```
 @inproceedings{yang2024doraemongpt,
