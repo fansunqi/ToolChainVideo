@@ -3,6 +3,7 @@ import sys
 sys.path.append(f"./")
 sys.path.append(f"../")
 
+import inspect
 import argparse
 from omegaconf import OmegaConf
 
@@ -10,6 +11,10 @@ import langchain
 import sqlite3
 langchain.debug = True
 from langchain.prompts import PromptTemplate
+from langchain.agents.initialize import initialize_agent
+from langchain.agents.tools import Tool
+from langchain.chains.conversation.memory import ConversationBufferMemory
+from langchain.llms.openai import OpenAI
 
 from project.ExampleSelector import CustomExampleSelector
 from project.TreeSearch import ReThinking
@@ -388,7 +393,7 @@ class DefaultTool:
         )
         return result
     
-    
+
 class MemeryBuilder:
     def __init__(self, load_dict, config):
         print(f"Initializing DoraemonGPT, load_dict={load_dict}")
@@ -400,7 +405,117 @@ class MemeryBuilder:
         for class_name, device in load_dict.items():
             self.models[class_name] = globals()[class_name](device=device,config=self.config)
 
-        pdb.set_trace()
+        # Load Template Foundation Models
+        for class_name, module in globals().items():
+            if getattr(module, "template_model", False):
+                template_required_names = {
+                    k
+                    for k in inspect.signature(module.__init__).parameters.keys()
+                    if k != "self"
+                }
+                loaded_names = set([type(e).__name__ for e in self.models.values()])
+                if template_required_names.issubset(loaded_names):
+                    self.models[class_name] = globals()[class_name](
+                        **{name: self.models[name] for name in template_required_names}
+                    )
+        print(f"All the Available Functions: {self.models}")
+
+        self.tools = []
+        for instance in self.models.values():
+            for e in dir(instance):
+                if e.startswith("inference"):
+                    func = getattr(instance, e)
+                    self.tools.append(
+                        Tool(name=func.name, description=func.description, func=func)
+                    )
+
+        self.llm = OpenAI(
+            openai_api_key = self.config.openai.GPT_API_KEY, 
+            model_name = self.config.openai.AGENT_GPT_MODEL_NAME, 
+            base_url=self.config.openai.PROXY,
+            temperature = 0
+        )
+
+        self.memory = ConversationBufferMemory(memory_key="chat_history")
+
+    def init_db_agent(self):
+        tools = []
+        self.db_model_list = []
+
+        memory_load_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in conf.memory.memory_list}
+        for class_name, device in memory_load_dict.items():
+            self.db_model_list.append(globals()[class_name](device=device,config=self.config))
+        
+        for instance in self.db_model_list:
+            for e in dir(instance):
+                if e.startswith("inference"):
+                    func = getattr(instance, e)
+                    tools.append(
+                        Tool(name=func.name, description=func.description, func=func)
+                    )
+
+        llm = OpenAI(
+            openai_api_key=self.config.openai.GPT_API_KEY, 
+            model_name=self.config.openai.GPT_MODEL_NAME, 
+            temperature=0
+        )
+
+        memory = ConversationBufferMemory(memory_key="chat_history")
+        self.db_agent = initialize_agent(
+            tools,
+            llm,
+            agent="conversational-react-description",
+            verbose=True,
+            memory=memory,
+        )
+
+    def run_db_agent(self, video_path, question,with_two_mem):
+        video_dir = os.path.dirname(video_path)
+        video_name = os.path.basename(video_path).split(".")[0]
+        sql_path = os.path.join(video_dir, video_name + ".db")
+
+        if os.path.exists(sql_path):
+            os.remove(sql_path)
+
+        if with_two_mem:
+            self.db_model_list[0].inference(video_path + "#"+ question)
+            self.db_model_list[1].inference(video_path + "#"+ question)
+        else:
+            Human_prompt = f"provide a video from {video_path}. You must use at least one tool to finish following tasks, rather than directly imagine from my description. If you understand, say 'Received'."
+            AI_prompt = f"Received."
+            self.db_agent.memory.save_context(
+                {"input": Human_prompt}, {"output": AI_prompt}
+            )
+
+            self.db_agent.run(input=question.strip())
+
+            video_dir = os.path.dirname(video_path)
+            video_name = os.path.basename(video_path).split(".")[0]
+            self.sql_path = os.path.join(video_dir, video_name + ".db")
+            conn = sqlite3.connect(self.sql_path)
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='instancedb';"
+            )
+            rows_1 = cursor.fetchall()
+            cursor.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='temporaldb';"
+            )
+            rows_2 = cursor.fetchall()
+            if len(rows_1) == 0 and len(rows_2) == 0:
+                self.db_model_list[0].inference(video_path + "#"+ question)
+                self.db_model_list[1].inference(video_path + "#"+ question)
+
+    def run_example(self, example):
+        input = example["Input"]
+        output = example["Output"]
+        Human_prompt = f"Here is an example. The question is: {input}; The chain is:{output}; If you understand, say 'Received'."
+        AI_prompt = f"Received."
+
+        self.agent.memory.save_context({"input": Human_prompt}, {"output": AI_prompt})
+
+        print(f" Current Memory: {self.agent.memory.load_memory_variables({})}")
+
 
 def run_a_video(
     MemoryBuilder,
@@ -419,6 +534,8 @@ def run_a_video(
     ):  # if you have built the memory, you can skip this step by setting build_mem=False
         MemoryBuilder.init_db_agent()
         MemoryBuilder.run_db_agent(video_name, question,with_two_mem)
+    
+    pdb.set_trace()
 
     anwsers = Planner.run(
         video_name,
