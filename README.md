@@ -1,33 +1,7 @@
-<h1>DoraemonGPT<img style="width:3%" src="https://raw.githubusercontent.com/z-x-yang/DoraemonGPT/main/sources/logo.png">: Toward Understanding Dynamic Scenes with Large Language Models </br>(Exemplified as A Video Agent)</h1>
+# DGPT-Reproduce
 
-<div>
-    <a href="https://z-x-yang.github.io/" target="_blank">Zongxin Yang</a>&emsp;
-    <a href="https://scholar.google.com/citations?user=I1TOdpkAAAAJ&hl=en" target="_blank">Guikun Chen</a>&emsp;
-    <a href="https://scholar.google.com/citations?user=B-o8eCwAAAAJ" target="_blank">Xiaodi Li</a>&emsp;
-    <a href="https://sites.google.com/view/wenguanwang" target="_blank">Wenguan Wang</a>&emsp;
-    <a href="https://scholar.google.com/citations?user=RMSuNFwAAAAJ&hl=zh-CN&oi=ao" target="_blank">Yi Yang✉</a>&emsp;
-</div>
-<div>
-    ReLER, CCAI, Zhejiang University
-</div>
-<div>
-     <sup>✉</sup>Corresponding Author
-</div>
-<div>
-    <a href="https://arxiv.org/abs/2401.08392" target="_blank">ICML 2024 (arXiv Preprint)</a>
-</div>
-<div>
-    <a href="https://z-x-yang.github.io/doraemon-gpt/" target="_blank">Project Page</a>
-</div>
-
-<div style="width: 80%; text-align: center; margin:auto;">
-    <img style="width:100%" src="https://raw.githubusercontent.com/z-x-yang/DoraemonGPT/main/sources/overview.png">
-    <em>Overview. Given a video with a question/task, DoraemonGPT first extracts a Task-related Symbolic Memory, which has two types of memory for selection: space-dominant memory based on instances and time-dominant memory based on time frames/clips. The memory can be queried by sub-task tools, which are driven by LLMs with different prompts and generate symbolic language (i.e., SQL sentences) to do different reasoning. Also, other tools for querying external knowledge or utility tools are supported. For planning, DoraemonGPT employs the MCTS Planner to decompose the question into an action sequence by exploring multiple feasible N solutions, which can be further summarized into an informative answer.</em>
-</div>
 
 ## Setup and Configuration 🛠️
-
-***
 
 - **Python Version**: Python 3.9 or newer installed on your system.
 - **API Keys**: Obtain API keys from one or more of the following services:
@@ -201,19 +175,13 @@ source dgpt/bin/activate
 python ./scripts/demo_test_1.py --config config/demo_1.yaml 
 ```
 
-## Citations
+## NExT-QA 试验
 
-Please consider citing the related paper(s) in your publications if it helps your research.
+运行指令：
+
 ```
-@inproceedings{yang2024doraemongpt,
-  title={Doraemongpt: Toward understanding dynamic scenes with large language models (exemplified as a video agent)},
-  author={Yang, Zongxin and Chen, Guikun and Li, Xiaodi and Wang, Wenguan and Yang, Yi},
-  booktitle={Forty-first International Conference on Machine Learning}
-}
+python ./scripts/main_batch.py
 ```
 
-
-## License 🏷️
-
-This project is all yours under the [MIT License](https://vscode-remote+ssh-002dremote-002bkegong188.vscode-resource.vscode-cdn.net/data02/lxd/py_project/open_gpt/videogpt/LICENSE "MIT License").
+使用的 config 是 `config/nextqa.yaml`
 
