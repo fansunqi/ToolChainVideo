@@ -1,9 +1,11 @@
 inference_config_path: "config/inference/inference.yaml"
-video_path: "videos/demo1.mp4"
-question: "Where are the people cycling?  Choose your answer from below selections: A.road, B.beach, C.auditorium, D.bus, E.living room."
-possible_anwsers: [A.road, B.beach, C.auditorium, D.bus, E.living room]
+dataset: "nextqa"
+video_path_base: "/hf_home/hub/spaces/next-qa/NExTVideo"
+anno_path: "/hf_home/hub/spaces/next-qa/NExT-QA/dataset/nextqa/train.csv"
 skip_mem_build: False
 with_two_mem: True
 seed: 12345
 max_answer: 3
 max_try: 7
+output_file: "output/nextqa/nextqa_output.json"
+num_examples_to_run: 5

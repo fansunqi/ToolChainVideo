@@ -44,6 +44,11 @@ from langchain.llms.openai import OpenAI
 from langchain_experimental.sql import SQLDatabaseChain
 from langchain import OpenAI, SQLDatabase
 
+import datetime
+from tqdm import tqdm
+from dataset import get_dataset
+from util import save_to_json
+
 import pdb
 
 def seed_everything(seed: int):
@@ -681,8 +686,6 @@ if __name__ == "__main__":
     vq_conf = OmegaConf.load(opt.config)
     conf = OmegaConf.load(vq_conf.inference_config_path)
 
-    pdb.set_trace()
-
     seed_everything(vq_conf.seed) 
 
     load_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in conf.tool.tool_list}
@@ -696,16 +699,48 @@ if __name__ == "__main__":
         decay_rate = conf.mcts_planner.decay_rate,
     )
 
-    run_a_video(
-        bot,
-        planner,
-        vq_conf.video_path,
-        vq_conf.question,
-        skip_mem_build = vq_conf.skip_mem_build,
-        with_two_mem = vq_conf.with_two_mem,
-        max_try = vq_conf.max_try,
-        max_answer = vq_conf.max_answer,
-    ) 
+    quids_to_exclude = vq_conf["quids_to_exclude"] if "quids_to_exclude" in vq_conf else None
+    num_examples_to_run = vq_conf["num_examples_to_run"] if "num_examples_to_run" in vq_conf else -1
+    dataset = get_dataset(vq_conf, quids_to_exclude, num_examples_to_run)
+    all_results = []
+
+    for data in tqdm(dataset):
+
+        video_path = data["video_path"]
+        question = data["question"].capitalize()  # 首字母大写
+        options = [data['optionA'], data['optionB'], data['optionC'], data['optionD'], data['optionE']]
+        formatted_question = f"{question}? Choose your answer from below selections: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
+
+        answers = run_a_video(
+            bot,
+            planner,
+            video_path,
+            formatted_question,
+            skip_mem_build = vq_conf.skip_mem_build,
+            with_two_mem = vq_conf.with_two_mem,
+            max_try = vq_conf.max_try,
+            max_answer = vq_conf.max_answer,
+        ) 
+
+        # TODO
+        # 如何去解析这个 answer ?
+        # Input question:  How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.
+        # The anwsers are: {'good_anwsers': ['There are 29 children in the video.', 'D. two', '29 children'], 'bad_anwsers': []}
+
+        result_dict = data
+        result_dict["formatted_question"] = formatted_question
+        result_dict["answers"] = answers
+        all_results.append(result_dict)
+
+    # 获取当前时间戳
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_file = f"{vq_conf.output_file}_{timestamp}.json"
+
+    save_to_json(all_results, output_file)
+
+
+# TODO: log，哪些东西可以放到 log 里面
+# TODO: LLM cache
     
     
     

@@ -145,6 +145,7 @@ class ReThinking(object):
         max_try=8,
         use_example=False,
     ):
+        # NOTE 最后输出答案的部分
         self.use_example = use_example
         self.init_new_tree(video_name, question, possible_anwsers=possible_anwsers)
         anwsers = {"good_anwsers": [], "bad_anwsers": []}

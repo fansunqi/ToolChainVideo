@@ -99,16 +99,6 @@
   python ./scripts/demo_test.py --config config/demo_2.yaml  
   ```
 
-***
-
-## News and Todo🗓️
-
-- [x] Release Code for Demo
-- [ ] Release Code for Benchmarks
-- [ ] Release Code with Video-LLaVA
-
-***
-
 ## Overview 📜
 
 Thanks to the authors of these open source projects for providing excellent projects.
@@ -180,7 +170,7 @@ python ./scripts/demo_test_1.py --config config/demo_1.yaml
 运行指令：
 
 ```
-python ./scripts/main_batch.py
+python ./scripts/main.py
 ```
 
 使用的 config 是 `config/nextqa.yaml`
