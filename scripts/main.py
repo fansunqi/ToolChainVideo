@@ -734,7 +734,7 @@ if __name__ == "__main__":
 
     # 获取当前时间戳
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_file = f"{vq_conf.output_file}_{timestamp}.json"
+    output_file = f"{vq_conf.output_file[:-5]}_{timestamp}.json"
 
     save_to_json(all_results, output_file)
 
