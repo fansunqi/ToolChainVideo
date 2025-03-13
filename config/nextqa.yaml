@@ -8,4 +8,4 @@ seed: 12345
 max_answer: 3
 max_try: 7
 output_file: "output/nextqa/nextqa_output.json"
-num_examples_to_run: 5
+num_examples_to_run: 1

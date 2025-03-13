@@ -15,7 +15,7 @@ from langchain import OpenAI
 from project.ExampleSelector import CustomExampleSelector
 
 from project.PromptTemplate import general_template
-
+from pprint import pprint
 
 def softmax(x):
     if isinstance(x, list):
@@ -30,11 +30,11 @@ class SafeDict(dict):
     def __missing__(self, key):
         return "{" + key + "}"
 
-
+# 工具节点类
 class Node(object):
     def __init__(self, value, father=None):
         self.father = father
-        self.value = value
+        self.value = value        # 这个 value 值是 Node 的本体
         self.children = []
 
     def add_child(self, node):
@@ -68,7 +68,7 @@ class Node(object):
             descendants.extend(child.get_descendants(remove_leaf=remove_leaf))
         return descendants
 
-
+# 工具树类
 class MCSearchTree(object):
     def __init__(self, value):
         self.root = Node(value)
@@ -145,7 +145,9 @@ class ReThinking(object):
         max_try=8,
         use_example=False,
     ):
-        # NOTE 最后输出答案的部分
+        # NOTE 
+        # 最后输出答案的部分
+        
         self.use_example = use_example
         self.init_new_tree(video_name, question, possible_anwsers=possible_anwsers)
         anwsers = {"good_anwsers": [], "bad_anwsers": []}
@@ -154,8 +156,14 @@ class ReThinking(object):
             len(anwsers["good_anwsers"]) + len(anwsers["bad_anwsers"]) < max_answer
             and num_try < max_try
         ):
+
+            print(f"\n\nTree {num_try}:\n\n")  
+            self.tree.traverse()
+
+
             num_try += 1
             num_anwser = len(anwsers["good_anwsers"]) + len(anwsers["bad_anwsers"]) + 1
+            
             print(f"\n\nAnswer {num_anwser} - Try {num_try}:\n\n")
             observation, is_good_result = self.expansion()  # 1-step expansion
             if is_good_result:
@@ -173,6 +181,8 @@ class ReThinking(object):
 
     def get_new_agent(self, chain_history="", thought_prompt=""):
         template = self.template
+
+        # 这里是送到 agent 里面的指令
         prefix, instruction, suffix = (
             template["prefix"].format(video_filename=self.video_name),
             template["format_instructions"],
@@ -189,6 +199,9 @@ class ReThinking(object):
                 template["examples"].format_map(SafeDict(examples=self.examples))
                 + suffix
             )
+
+        # pprint(self.tools)
+        # pdb.set_trace()
 
         agent = initialize_agent(
             self.tools,
@@ -320,37 +333,42 @@ class ReThinking(object):
         step_distance = 0.0
         for node in ancestors:
             step_distance += 1.0
-            node.value["reward"] += base_reward * math.exp(
+            node.value["reward"] += base_reward * math.exp(         # MCTS 的奖励函数
                 -self.decay_rate * (step_distance - 1.0)
             )
 
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 
-#     llm = OpenAI(
-#         openai_api_key=GPT_API_KEY, model_name="text-davinci-003", temperature=0
-#     )
+    GPT_API_KEY = "sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra"
+    PROXY = "https://api.juheai.top/v1"
+    llm = OpenAI(
+        openai_api_key=GPT_API_KEY, model_name="text-davinci-003", temperature=0, base_url=PROXY
+    )
 
-#     from KnowledgeBase import GoogleSearching
+    # from project.KnowledgeBase import GoogleSearching
 
-#     google_searching = GoogleSearching()
-#     tools = [
-#         Tool(
-#             name=google_searching.inference.name,
-#             description=google_searching.inference.description,
-#             func=google_searching.inference,
-#         )
-#     ]
+    # google_searching = GoogleSearching()
+    # tools = [
+    #     Tool(
+    #         name=google_searching.inference.name,
+    #         description=google_searching.inference.description,
+    #         func=google_searching.inference,
+    #     )
+    # ]
+    tools = []
 
-#     video_filename = f"./demo/nextqa_demo/ch_1.mp4"
-#     txt = "How is the baby held by?"
-#     possible_anwsers = [
-#         "A. The baby is held by the mother.",
-#         "B. The baby is held by the father.",
-#     ]
+    video_filename = f"./demo/nextqa_demo/ch_1.mp4"
+    txt = "How is the baby held by?"
+    possible_anwsers = [
+        "A. The baby is held by the mother.",
+        "B. The baby is held by the father.",
+    ]
 
-#     planner = ReThinking(llm, tools)
-#     anwsers = planner.run(
-#         video_filename, txt, possible_anwsers=possible_anwsers, max_answer=3, max_try=8
-#     )
-#     print("The anwsers are:", anwsers)
+    planner = ReThinking(llm, tools)
+
+    pdb.set_trace()
+    anwsers = planner.run(
+        video_filename, txt, possible_anwsers=possible_anwsers, max_answer=3, max_try=8
+    )
+    print("The anwsers are:", anwsers)

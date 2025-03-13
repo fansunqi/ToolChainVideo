@@ -83,7 +83,7 @@ class TemporalTool:
         )
         self.sql_prompt = PromptTemplate(
             input_variables = ["input", "table_info", "top_k"],
-            template = _sqlite_prompt + TEMPORAL_EXAMPLE_PROMPT + PROMPT_SUFFIX,
+            template = _sqlite_prompt + TEMPORAL_EXAMPLE_PROMPT + PROMPT_SUFFIX,     # 关键就在于这里的 prompt 模块不同
         )
 
     @prompts(
@@ -117,7 +117,7 @@ class TemporalTool:
         )
 
         try:
-            result = db_chain.run(question)
+            result = db_chain.run(question)   # 自然语言自动化查询数据库
         except:
             result ="There is an error. Try to ask the question in a different way."
 
