@@ -15,7 +15,11 @@ from langchain import OpenAI
 from project.ExampleSelector import CustomExampleSelector
 
 from project.PromptTemplate import general_template
+
 from pprint import pprint
+# from graphviz import Digraph
+import networkx as nx
+import matplotlib.pyplot as plt
 
 def softmax(x):
     if isinstance(x, list):
@@ -98,6 +102,44 @@ class MCSearchTree(object):
 
     def is_root(self):
         return self.current == self.root
+    
+    # def visualize(self, filename="tree"):
+    #     dot = Digraph()
+    #     self._visualize_helper(self.root, dot)
+    #     dot.render(filename, format='png', view=True)
+
+    # def _visualize_helper(self, node, dot, parent_id=None):
+    #     node_id = str(id(node))
+    #     dot.node(node_id, str(node.value))
+    #     if parent_id:
+    #         dot.edge(parent_id, node_id)
+    #     for child in node.children:
+    #         self._visualize_helper(child, dot, node_id)
+
+    def visualize(self, filename="tree"):
+        plt.clf()
+        graph = nx.DiGraph()
+        self._visualize_helper(self.root, graph)
+        pos = nx.spring_layout(graph)
+        labels = {node: data['label'] for node, data in graph.nodes(data=True)}
+        nx.draw(graph, pos, labels=labels, with_labels=True, node_size=3000, node_color="skyblue", font_size=10, font_weight="bold", arrows=True)
+        plt.savefig(f"{filename}.png")
+
+    def _visualize_helper(self, node, graph, parent_id=None):
+        node_id = str(id(node))
+
+        # 这里指明可视化的信息
+        action = str(node.value["action"])[18:40] if node.value["action"] else ""
+        observation = str(node.value["observation"])[:40] if node.value["observation"] else ""
+        reward = str(node.value["reward"]) if node.value["reward"] else ""
+        label = f"{action}\n{observation}\n{reward}"
+        
+        graph.add_node(node_id, label=label)
+
+        if parent_id:
+            graph.add_edge(parent_id, node_id)
+        for child in node.children:
+            self._visualize_helper(child, graph, node_id)
 
 
 class ReThinking(object):
@@ -159,7 +201,8 @@ class ReThinking(object):
 
             print(f"\n\nTree {num_try}:\n\n")  
             self.tree.traverse()
-
+            tree_filename = f"tree_{num_try}"
+            self.tree.visualize(filename=tree_filename)
 
             num_try += 1
             num_anwser = len(anwsers["good_anwsers"]) + len(anwsers["bad_anwsers"]) + 1
