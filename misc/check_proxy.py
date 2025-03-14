@@ -1,8 +1,9 @@
-from langchain.llms.openai import OpenAI
-from langchain.chat_models import ChatOpenAI
-from langchain.schema import ChatMessage, HumanMessage
+# from langchain_community.llms import OpenAI
+# from langchain.chat_models import ChatOpenAI
+# from langchain.schema import ChatMessage, HumanMessage
+from langchain_community.chat_models import ChatOpenAI
 
-llm = OpenAI(
+llm = ChatOpenAI(
     openai_api_key = "sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra", 
     model_name = "gpt-3.5-turbo", 
     openai_api_base = "https://api.juheai.top/v1", 
