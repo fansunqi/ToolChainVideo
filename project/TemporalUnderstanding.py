@@ -26,15 +26,15 @@ from google.cloud import vision
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-
-def has_audio(video_path):
-    try:
-        video_clip = VideoFileClip(video_path)
-        audio = video_clip.audio
-        return audio is not None
-    except Exception as e:
-        print(f"Error: {e}")
-        return False
+# 检查是否有音频
+# def has_audio(video_path):
+#     try:
+#         video_clip = VideoFileClip(video_path)
+#         audio = video_clip.audio
+#         return audio is not None
+#     except Exception as e:
+#         print(f"Error: {e}")
+#         return False
 
 
 def format_seconds_to_time(seconds):
@@ -193,8 +193,8 @@ class TemporalBase(object):
         if len(rows) == 0:
             self.build_database(video_path)
             self.run_VideoCaption()
-            self.run_OpticalCharacterRecognition()
-            self.run_AudioToText(video_path)
+            # self.run_OpticalCharacterRecognition()
+            # self.run_AudioToText(video_path)
 
         ####visual
         conn = sqlite3.connect(self.sql_path)
@@ -236,91 +236,93 @@ class TemporalBase(object):
 
         conn.close()
 
-    def run_OpticalCharacterRecognition(self):
-        conn = sqlite3.connect(self.sql_path)
-        cursor = conn.cursor()
+    # 这个功能暂时缺失了
+    # def run_OpticalCharacterRecognition(self):
+    #     conn = sqlite3.connect(self.sql_path)
+    #     cursor = conn.cursor()
 
-        for id_i in range(0, len(self.sub_frames)):
-            frame_id_i = id_i * self.step
-            ocr_text, _ = self.detect_text_by_img(self.sub_frames[id_i])
-            if ocr_text is None:
-                continue
-            else:
-                cursor.execute(
-                    "UPDATE temporaldb SET subtitles = ? WHERE frame_id = ?;",
-                    (ocr_text, frame_id_i),
-                )
-                conn.commit()
+    #     for id_i in range(0, len(self.sub_frames)):
+    #         frame_id_i = id_i * self.step
+    #         ocr_text, _ = self.detect_text_by_img(self.sub_frames[id_i])
+    #         if ocr_text is None:
+    #             continue
+    #         else:
+    #             cursor.execute(
+    #                 "UPDATE temporaldb SET subtitles = ? WHERE frame_id = ?;",
+    #                 (ocr_text, frame_id_i),
+    #             )
+    #             conn.commit()
 
-        conn.close()
+    #     conn.close()
 
-    def run_AudioToText(self, video_path):
-        conn = sqlite3.connect(self.sql_path)
-        cursor = conn.cursor()
+    # def run_AudioToText(self, video_path):
+    #     conn = sqlite3.connect(self.sql_path)
+    #     cursor = conn.cursor()
 
-        if not has_audio(video_path):
-            print("### No audio")
-        else:
-            _, audio_segments = self.audio_to_text_by_path(video_path)
+    #     if not has_audio(video_path):
+    #         print("### No audio")
+    #     else:
+    #         _, audio_segments = self.audio_to_text_by_path(video_path)
 
-            for seg_i in audio_segments:
-                start_frame = math.floor(seg_i["start"] * self.fps)
-                end_frame = math.floor(seg_i["end"] * self.fps)
+    #         for seg_i in audio_segments:
+    #             start_frame = math.floor(seg_i["start"] * self.fps)
+    #             end_frame = math.floor(seg_i["end"] * self.fps)
 
-                cursor.execute(
-                    "SELECT * FROM temporaldb WHERE frame_id >= ? AND frame_id < ?;",
-                    (start_frame, end_frame),
-                )
+    #             cursor.execute(
+    #                 "SELECT * FROM temporaldb WHERE frame_id >= ? AND frame_id < ?;",
+    #                 (start_frame, end_frame),
+    #             )
 
-                # Fetch the row that matches the time condition
-                rows = cursor.fetchall()
+    #             # Fetch the row that matches the time condition
+    #             rows = cursor.fetchall()
 
-                if rows:
-                    for row in rows:
-                        # If a matching row is found, update its value to 10
-                        row_id = row[
-                            0
-                        ]  # Assuming the first column is the ID column (replace with your actual column index)
-                        new_value = seg_i["text"]
+    #             if rows:
+    #                 for row in rows:
+    #                     # If a matching row is found, update its value to 10
+    #                     row_id = row[
+    #                         0
+    #                     ]  # Assuming the first column is the ID column (replace with your actual column index)
+    #                     new_value = seg_i["text"]
 
-                        # SQL query to update the value for the matching row
-                        cursor.execute(
-                            "UPDATE temporaldb SET audio_content = ? WHERE frame_id = ?;",
-                            (new_value, row_id),
-                        )
-                        conn.commit()
-                else:
-                    print("### No row found that matches the time condition.")
+    #                     # SQL query to update the value for the matching row
+    #                     cursor.execute(
+    #                         "UPDATE temporaldb SET audio_content = ? WHERE frame_id = ?;",
+    #                         (new_value, row_id),
+    #                     )
+    #                     conn.commit()
+    #             else:
+    #                 print("### No row found that matches the time condition.")
 
-            conn.close()
+    #         conn.close()
 
-    def detect_text_by_img(self, image):
-        """Detects text in the file."""
-        if self.client is None:
-            return None, None
-        else:
-            success, content = cv2.imencode(".jpg", image)
-            content = content.tobytes()
+    # 这个功能也没实现
+    # def detect_text_by_img(self, image):
+    #     """Detects text in the file."""
+    #     if self.client is None:
+    #         return None, None
+    #     else:
+    #         success, content = cv2.imencode(".jpg", image)
+    #         content = content.tobytes()
 
-            image = vision.Image(content=content)
-            response = self.client.text_detection(image=image)
-            texts = response.text_annotations
+    #         image = vision.Image(content=content)
+    #         response = self.client.text_detection(image=image)
+    #         texts = response.text_annotations
 
-            if len(texts) == 0:
-                return None, None
-            else:
-                descriptions = texts[0].description
-                vertices = [
-                    f"({vertex.x},{vertex.y})"
-                    for vertex in texts[0].bounding_poly.vertices
-                ]
+    #         if len(texts) == 0:
+    #             return None, None
+    #         else:
+    #             descriptions = texts[0].description
+    #             vertices = [
+    #                 f"({vertex.x},{vertex.y})"
+    #                 for vertex in texts[0].bounding_poly.vertices
+    #             ]
 
-                if response.error.message:
-                    raise Exception(
-                        "{}\nFor more info on error messages, check: "
-                        "https://cloud.google.com/apis/design/errors".format(
-                            response.error.message))
-            return descriptions, vertices
+    #             if response.error.message:
+    #                 raise Exception(
+    #                     "{}\nFor more info on error messages, check: "
+    #                     "https://cloud.google.com/apis/design/errors".format(
+    #                         response.error.message))
+    #         return descriptions, vertices
 
     def caption_by_img(self, image):
         rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -332,12 +334,12 @@ class TemporalBase(object):
         answer = self.processor.decode(out[0], skip_special_tokens=True)
         return answer
 
-    def audio_to_text_by_path(self, video_path):
-        audio = self.whisper_model.transcribe(video_path,language="english")
-        text = audio["text"]
-        audio_text_with_time = [
-            {"start": seg["start"], "end": seg["end"], "text": seg["text"]}
-            for seg in audio["segments"]
-        ]
+    # def audio_to_text_by_path(self, video_path):
+    #     audio = self.whisper_model.transcribe(video_path,language="english")
+    #     text = audio["text"]
+    #     audio_text_with_time = [
+    #         {"start": seg["start"], "end": seg["end"], "text": seg["text"]}
+    #         for seg in audio["segments"]
+    #     ]
 
-        return text, audio_text_with_time
+    #     return text, audio_text_with_time

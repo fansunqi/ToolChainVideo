@@ -356,6 +356,9 @@ class InstanceBase(object):
         # conn.commit()
 
     def run_on_video(self, video_path, question, step=10):
+
+        # pdb.set_trace()
+
         self.video_path = video_path
         cap = cv2.VideoCapture(self.video_path)
         self.fps = cap.get(cv2.CAP_PROP_FPS)

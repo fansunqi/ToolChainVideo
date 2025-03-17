@@ -549,7 +549,6 @@ class MemeryBuilder:
                     )
 
         print(f"All the Available Functions: {self.models}")
-        pdb.set_trace()
 
         self.tools = []
         for instance in self.models.values():
@@ -585,6 +584,7 @@ class MemeryBuilder:
                     tools.append(
                         Tool(name=func.name, description=func.description, func=func)
                     )
+        # VideoInstanceUnderstanding, VideoTemporalUnderstanding 在上面定义
 
         llm = OpenAI(
             openai_api_key=self.config.openai.GPT_API_KEY, 
@@ -604,17 +604,22 @@ class MemeryBuilder:
     def run_db_agent(self, video_path, question,with_two_mem):
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
-        sql_path = os.path.join(video_dir, video_name + ".db")
+        sql_path = os.path.join(video_dir, video_name + ".db")  # sqlite 数据库的路径
 
-        if os.path.exists(sql_path):
+        # pdb.set_trace()
+
+        if os.path.exists(sql_path):  # 如果数据库已经预先建好,就移除数据库
             os.remove(sql_path)
 
         if with_two_mem:
             self.db_model_list[0].inference(video_path + "#"+ question)
             self.db_model_list[1].inference(video_path + "#"+ question)
         else:
+            # 自己编造之前的对话
             Human_prompt = f"provide a video from {video_path}. You must use at least one tool to finish following tasks, rather than directly imagine from my description. If you understand, say 'Received'."
             AI_prompt = f"Received."
+
+            # 存入对话 buffer
             self.db_agent.memory.save_context(
                 {"input": Human_prompt}, {"output": AI_prompt}
             )

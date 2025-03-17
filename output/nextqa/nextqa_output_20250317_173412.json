@@ -1,0 +1,25 @@
+[
+    {
+        "quid": "3238737531_2",
+        "uid": "3238737531",
+        "qid": 2,
+        "q_type": "DC",
+        "question": "how many children are in the video",
+        "optionA": "one",
+        "optionB": "three",
+        "optionC": "seven",
+        "optionD": "two",
+        "optionE": "five",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1164/3238737531.mp4",
+        "formatted_question": "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.",
+        "answers": {
+            "good_anwsers": [
+                "There are two children in the video.",
+                "D. two",
+                "E. twenty-nine"
+            ],
+            "bad_anwsers": []
+        }
+    }
+]
