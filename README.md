@@ -109,12 +109,12 @@ Thanks to the authors of these open source projects for providing excellent proj
     - InternVideo
       - [https://github.com/OpenGVLab/InternVideo](https://github.com/OpenGVLab/InternVideo "https://github.com/OpenGVLab/InternVideo")
 
-#### Tool Usage
+#### Other Tools
 
-- **GoogleSearch**
+- **GoogleSearch** (TODO)
   - langchain - google
     - &#x20;[Google Search | 🦜️🔗 Langchain](https://python.langchain.com/docs/integrations/tools/google_search "Google Search | 🦜️🔗 Langchain")
-- **VideoInpainting**
+- **VideoInpainting** (TODO)
   - E2FGVI &#x20;
     - [MCG-NKU/E2FGVI: Official code for "Towards An End-to-End Framework for Flow-Guided Video Inpainting" (CVPR2022) (github.com)](https://github.com/MCG-NKU/E2FGVI "MCG-NKU/E2FGVI: Official code for \"Towards An End-to-End Framework for Flow-Guided Video Inpainting\" (CVPR2022) (github.com)")
 
