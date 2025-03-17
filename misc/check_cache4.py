@@ -1,6 +1,6 @@
 # pip install -U langchain langchain-openai langchain_community
 import langchain
-from langchain.cache import SQLiteCache
+from langchain_community.cache import SQLiteCache
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
 
@@ -16,15 +16,20 @@ chat = ChatOpenAI(
 )
 
 # 定义对话消息
-messages = [
-    SystemMessage(content="You are a friendly chatbot."),
-    HumanMessage(content="hello, can you chat with me?")
-]
+# messages = [
+#     SystemMessage(content="You are a friendly chatbot."),
+#     HumanMessage(content="hello, can you chat with me?")
+# ]
 
-# 进行对话
-response = chat.invoke(messages)
-print(response.content)
+# # 进行对话
+# response = chat.invoke(messages)
+# print(response.content)
 
-# 再次进行对话
-response = chat.invoke(messages)
-print(response.content)
+# # 再次进行对话
+# response = chat.invoke(messages)
+# print(response.content)
+
+a = chat("hello, i am a human")
+print(a)
+b = chat("hello, i am a human")
+print(b)
