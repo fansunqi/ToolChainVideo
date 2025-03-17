@@ -7,10 +7,7 @@ import numpy as np
 import datetime
 import re
 import torch
-import ffmpeg
 import sqlite3
-import whisper
-import openai
 from torch.cuda.amp import autocast as autocast
 from transformers import (
     pipeline,
@@ -25,15 +22,11 @@ from langchain_experimental.sql import SQLDatabaseChain
 from langchain import SQLDatabase
 
 import sys
-
 sys.path.append("./project")
 sys.path.append("./project/Grounded-Segment-Anything")
 from MultiTracking import detect_by_path
 import torchvision.transforms as transforms
 from load_internvideo import *
-import decord
-from decord import VideoReader
-from decord import cpu
 from project.GrondedSamtrack import GrandedSamTracker
 
 import pdb
@@ -51,14 +44,6 @@ def format_seconds_to_time(seconds):
     formatted_time = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
 
     return formatted_time
-
-
-def get_files(path):
-    files = [p for p in path.glob("*") if p.is_file()]
-    dirs = [p for p in path.glob("*/") if p.is_dir()]
-    for d in dirs:
-        files.extend(get_files(d))
-    return files
 
 
 class InstanceBase(object):
@@ -252,25 +237,7 @@ class InstanceBase(object):
         frame_sample_rate=2,
         num_segment=1,
     ):
-        # sample = self.img_to_video(sample)
-
-        # fname = sample
-        # vr = VideoReader(fname, num_threads=1, ctx=cpu(0))
-        # # handle temporal segments
-        # converted_len = int(clip_len * frame_sample_rate)
-        # seg_len = len(vr) // num_segment
-        # duration = max(len(vr) // vr.get_avg_fps(), 8)
-
-        # all_index = []
-        # for i in range(num_segment):
-        #     index = np.linspace(0, seg_len, num=int(duration))
-        #     index = np.clip(index, 0, seg_len - 1).astype(np.int64)
-        #     index = index + i * seg_len
-        #     all_index.extend(list(index))
-        # all_index = all_index[:: int(sample_rate_scale)]
-        # vr.seek(0)
-        # buffer = vr.get_batch(all_index).asnumpy()
-        # return buffer
+        # 把许多图片文件转换为一个视频
         image_folder = sample
         image_files = [os.path.join(image_folder, f) for f in os.listdir(image_folder) if f.endswith(".jpg") or f.endswith(".png")]
         image_files.sort()
@@ -339,7 +306,6 @@ class InstanceBase(object):
             return prediction
 
     def ref_vos(self, video_path, question):
-        # pdb.set_trace()
         flag_ref_vos = self.llm(f"Please determine if this task is related to inpaint, generally referring to the word inpaint in the task. Reply 0 if it is related and 1 if it is not. The task is as follows:{question}.")
         if int(flag_ref_vos) == 0:
             try:

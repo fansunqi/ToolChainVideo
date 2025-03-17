@@ -9,7 +9,7 @@
    ```
 2. Opt for a virtual environment 🧹 and install the dependencies 🧑‍🍳:
    ```python
-   pip install -r requirements.txt
+   pip install -r requirements/requirements.txt
    ```
 3. Set up your API key 🗝️:
    - Fill in config/inference/inference.yaml with your keys:
