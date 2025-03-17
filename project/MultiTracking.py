@@ -4,8 +4,7 @@ from pathlib import Path
 import cv2, pdb
 import torch
 import sys
-sys.path.append('/home/fsq/ToolChainVideo/src/')
-sys.path.append('/home/fsq/ToolChainVideo/yolo_tracking-master')
+sys.path.append('./project/yolo_tracking-master')
 from boxmot.tracker_zoo import create_tracker
 from boxmot.utils import ROOT, WEIGHTS
 from boxmot.utils import logger as LOGGER
