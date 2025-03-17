@@ -3,17 +3,6 @@
 
 ## Setup and Configuration 🛠️
 
-- **Python Version**: Python 3.9 or newer installed on your system.
-- **API Keys**: Obtain API keys from one or more of the following services:
-  - OpenAI (for access to models like GPT-3.5)
-- **Python Dependencies**: Install all necessary Python libraries as specified in the `requirements.txt` file. You can install these dependencies using the following command:
-  ```python
-  pip install -r requirements.txt
-  ```
-- **Other Model Choice**: You have the option to use models from Hugging Face's Transformers library. Ensure you have the necessary credentials to use and download the model.
-
-### Installation Steps
-
 1. Clone the repository 📦:
    ```python
    git clone https://github.com/z-x-yang/DoraemonGPT.git
@@ -82,7 +71,6 @@
      cd ../..
      ```
 
-***
 
 ## QuickStart 🚀
 
