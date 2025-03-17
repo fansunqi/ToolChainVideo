@@ -523,16 +523,18 @@ class VideoInstanceUnderstanding:
 
 class MemeryBuilder:
     def __init__(self, load_dict, config):
-        print(f"Initializing DoraemonGPT, load_dict={load_dict}")
+        print(f"Initializing MemoryBuilder, load_dict={load_dict}")
 
         self.config = config
         self.models = {}
         self.examplesel = CustomExampleSelector()
 
+        # 根据 load_dict 动态选择, 加载模型
         for class_name, device in load_dict.items():
             self.models[class_name] = globals()[class_name](device=device,config=self.config)
 
         # Load Template Foundation Models
+        # TODO 没懂这段代码是什么意思
         for class_name, module in globals().items():
             if getattr(module, "template_model", False):
                 template_required_names = {
@@ -547,6 +549,7 @@ class MemeryBuilder:
                     )
 
         print(f"All the Available Functions: {self.models}")
+        pdb.set_trace()
 
         self.tools = []
         for instance in self.models.values():
@@ -566,6 +569,7 @@ class MemeryBuilder:
 
         self.memory = ConversationBufferMemory(memory_key="chat_history")
 
+    # db_agent 从 tool 中被分了出来
     def init_db_agent(self):
         tools = []
         self.db_model_list = []
@@ -689,8 +693,10 @@ if __name__ == "__main__":
     seed_everything(vq_conf.seed) 
 
     load_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in conf.tool.tool_list}
+    # {'TemporalTool': 'cpu', 'CountingTool': 'cpu', 'ReasonFinder': 'cpu', 'HowSeeker': 'cpu', 'DescriptionTool': 'cpu', 'DefaultTool': 'cpu', 'InpaintingTool': 'cuda:0'}
 
     bot = MemeryBuilder(load_dict=load_dict, config=conf)
+
     planner = ReThinking(
         bot.llm, 
         bot.tools, 

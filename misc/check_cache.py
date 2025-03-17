@@ -1,3 +1,4 @@
+# pip install -U langchain langchain-openai langchain_community
 import langchain
 from langchain_community.cache import SQLiteCache
 from langchain_openai import ChatOpenAI
