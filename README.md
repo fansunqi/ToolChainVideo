@@ -1,4 +1,4 @@
-# DGPT-Reproduce
+# ToolChainVideo
 
 
 ## Setup and Configuration 🛠️
@@ -6,8 +6,6 @@
 - **Python Version**: Python 3.9 or newer installed on your system.
 - **API Keys**: Obtain API keys from one or more of the following services:
   - OpenAI (for access to models like GPT-3.5)
-  - Google Cloud (for access to models like OCR)
-  - Google Search (for access to search online)
 - **Python Dependencies**: Install all necessary Python libraries as specified in the `requirements.txt` file. You can install these dependencies using the following command:
   ```python
   pip install -r requirements.txt
@@ -29,10 +27,6 @@
      ```python
      openai:
        GPT_API_KEY: ["put your openai key here", ...]
-     
-     google_cloud:
-       CLOUD_VISION_API_KEY: [...]
-       QUOTA_PROJECT_ID: [...]
      ```
 4. Download the checkpoints  and bulid related project🧩:
 
@@ -106,17 +100,11 @@ Thanks to the authors of these open source projects for providing excellent proj
 #### Memory Construction
 
 - **Time-dominant Memory** ⏱️
-  - **Audio content**
-    - Whisper
-      - [https://github.com/openai/whisper](https://github.com/openai/whisper "https://github.com/openai/whisper")
   - **Captioning**
     - BLIP/ BLIP2/ InstructBLIP
       - [https://huggingface.co/Salesforce/blip-image-captioning-large](https://huggingface.co/Salesforce/blip-image-captioning-large "https://huggingface.co/Salesforce/blip-image-captioning-large")
       - [https://huggingface.co/Salesforce/blip2-opt-2.7b](https://huggingface.co/Salesforce/blip2-opt-2.7b "https://huggingface.co/Salesforce/blip2-opt-2.7b")
       - [https://huggingface.co/docs/transformers/model\_doc/instructblip](https://huggingface.co/docs/transformers/model_doc/instructblip "https://huggingface.co/docs/transformers/model_doc/instructblip")
-  - **Optical content**
-    - Google cloud
-      - [https://cloud.google.com/vision/docs/ocr?hl=zh-cn#vision\_text\_detection-python](https://cloud.google.com/vision/docs/ocr?hl=zh-cn#vision_text_detection-python "https://cloud.google.com/vision/docs/ocr?hl=zh-cn#vision_text_detection-python")
 - **Space-dominant Memory** 🌐
   - **Category & Trajectory & Segmentation**
     - BOXMOT(yolo-tracking)+yolov8-seg
