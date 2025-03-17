@@ -11,6 +11,13 @@
    ```python
    pip install -r requirements/requirements.txt
    ```
+   Install Segment Anything and Grounding DINO in Grounded-Segment-Anything as in https://github.com/IDEA-Research/Grounded-Segment-Anything:
+   ```python
+   cd project/Grounded-Segment-Anything
+   python -m pip install -e segment_anything
+   pip install --no-build-isolation -e GroundingDINO
+   ```
+
 3. Set up your API key 🗝️:
    - Fill in config/inference/inference.yaml with your keys:
      ```python
