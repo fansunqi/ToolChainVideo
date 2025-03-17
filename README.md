@@ -5,7 +5,7 @@
 
 1. Clone the repository 📦:
    ```python
-   git clone https://github.com/z-x-yang/DoraemonGPT.git
+   git clone git@github.com:fansunqi/ToolChainVideo.git
    ```
 2. Opt for a virtual environment 🧹 and install the dependencies 🧑‍🍳:
    ```python
