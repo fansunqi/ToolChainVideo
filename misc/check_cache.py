@@ -18,7 +18,7 @@ chat = ChatOpenAI(
 # 定义对话消息
 messages = [
     SystemMessage(content="You are a friendly chatbot."),
-    HumanMessage(content="hello, can you chat with me?")
+    HumanMessage(content="hello, can you chat with me? I am sunqi")
 ]
 
 # 进行对话

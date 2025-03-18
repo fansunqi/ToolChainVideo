@@ -18,4 +18,5 @@ demo/rvos_res/
 .DS_Store
 dgpt/
 project/__MACOSX
-project/__pycache__
+*__pycache__
+
