@@ -1,25 +1,15 @@
 import pdb
-import os
-from langchain.prompts import PromptTemplate
-
 import math
 import numpy as np
 
-# langchain.debug = True
+
 from langchain.agents.initialize import initialize_agent
-# from langchain.agents.tools import Tool
-# from langchain.tools import tool
-# from langchain.llms.openai import OpenAI
-# from langchain.llms.openai import OpenAI
-# from langchain import OpenAI
-# from langchain_community.llms import OpenAI
+
 
 from project.ExampleSelector import CustomExampleSelector
-
 from project.PromptTemplate import general_template
 
 from pprint import pprint
-# from graphviz import Digraph
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -104,19 +94,6 @@ class MCSearchTree(object):
 
     def is_root(self):
         return self.current == self.root
-    
-    # def visualize(self, filename="tree"):
-    #     dot = Digraph()
-    #     self._visualize_helper(self.root, dot)
-    #     dot.render(filename, format='png', view=True)
-
-    # def _visualize_helper(self, node, dot, parent_id=None):
-    #     node_id = str(id(node))
-    #     dot.node(node_id, str(node.value))
-    #     if parent_id:
-    #         dot.edge(parent_id, node_id)
-    #     for child in node.children:
-    #         self._visualize_helper(child, dot, node_id)
 
     def visualize(self, filename="tree"):
         plt.clf()
@@ -341,7 +318,7 @@ class ReThinking(object):
         for step in agent_iterator:
             print(f"agent_iterator step: {step}")
             # if output := step.get("intermediate_step"):
-            inter_step = step.get("intermediate_step")
+            inter_step = step.get("intermediate_step")  # NOTE 这个 intermediate_step 是什么意思
             final_answer = step.get('output')
             if inter_step:
                 self.total_step += 1
