@@ -2,10 +2,10 @@ inference_config_path: "config/inference/inference.yaml"
 dataset: "nextqa"
 video_path_base: "/hf_home/hub/spaces/next-qa/NExTVideo"
 anno_path: "/hf_home/hub/spaces/next-qa/NExT-QA/dataset/nextqa/train.csv"
-skip_mem_build: False
+skip_mem_build: True
 with_two_mem: True
 seed: 12345
 max_answer: 3
 max_try: 7
 output_file: "output/nextqa/nextqa_output.json"
-num_examples_to_run: 1
+num_examples_to_run: 14

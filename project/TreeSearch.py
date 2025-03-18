@@ -316,7 +316,7 @@ class ReThinking(object):
         inter_step = None
         final_answer = None
         for step in agent_iterator:
-            print(f"agent_iterator step: {step}")
+            print(f"\nagent_iterator step: {step}\n")
             # if output := step.get("intermediate_step"):
             inter_step = step.get("intermediate_step")  # NOTE 这个 intermediate_step 是什么意思
             final_answer = step.get('output')
