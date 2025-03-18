@@ -13,17 +13,20 @@ import numpy as np
 import argparse
 from omegaconf import OmegaConf
 
-import openai
-import langchain
+# import openai
+# import langchain
 import sqlite3
 # langchain.debug = True
 from langchain.prompts import PromptTemplate
-from langchain.agents.initialize import initialize_agent
+# from langchain.agents.initialize import initialize_agent
+from langchain.agents import initialize_agent
 # from langchain.agents.tools import Tool
-from langchain.tools import tool
+# from langchain.tools import tool
+from langchain_core.tools import Tool
 from langchain.chains.conversation.memory import ConversationBufferMemory
 # from langchain.llms.openai import OpenAI
-from langchain_community.llms import OpenAI
+# from langchain_community.llms import OpenAI
+from langchain_openai import ChatOpenAI
 
 from project.TemporalUnderstanding import TemporalBase
 from project.InstanceUnderstanding import InstanceBase
@@ -45,6 +48,7 @@ from langchain.chains.conversation.memory import ConversationBufferMemory
 # from langchain.llms.openai import OpenAI
 from langchain_experimental.sql import SQLDatabaseChain
 # from langchain import OpenAI, SQLDatabase
+from langchain_community.utilities.sql_database import SQLDatabase
 
 import datetime
 from tqdm import tqdm
@@ -77,17 +81,24 @@ class TemporalTool:
     def __init__(self, device, config):
         self.device = device
         self.config = config
-        self.llm = OpenAI(
-            openai_api_key = self.config.openai.GPT_API_KEY,
-            model_name= self.config.openai.GPT_MODEL_NAME,
+        # self.llm = OpenAI(
+        #     openai_api_key = self.config.openai.GPT_API_KEY,
+        #     model_name= self.config.openai.GPT_MODEL_NAME,
+        #     temperature = 0,
+        #     base_url=self.config.openai.PROXY
+        # )
+        self.llm = ChatOpenAI(
+            api_key = self.config.openai.GPT_API_KEY,
+            model = self.config.openai.GPT_MODEL_NAME,
             temperature = 0,
-            base_url=self.config.openai.PROXY
+            base_url = self.config.openai.PROXY
         )
         self.sql_prompt = PromptTemplate(
             input_variables = ["input", "table_info", "top_k"],
             template = _sqlite_prompt + TEMPORAL_EXAMPLE_PROMPT + PROMPT_SUFFIX,     # 关键就在于这里的 prompt 模块不同
         )
 
+    # @tool
     @prompts(
         name = "TemporalTool",
         description = "Useful when you need to process temporal information in videos."
@@ -114,8 +125,11 @@ class TemporalTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain(
-            llm=self.llm, database=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # db_chain = SQLDatabaseChain(
+        #     llm=self.llm, database=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # )
+        db_chain = SQLDatabaseChain.from_llm(
+            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
         try:
@@ -134,17 +148,24 @@ class CountingTool:
     def __init__(self, device, config):
         self.device = device
         self.config = config
-        self.llm = OpenAI(
-            openai_api_key = self.config.openai.GPT_API_KEY,
-            model_name = self.config.openai.GPT_MODEL_NAME,
+        # self.llm = OpenAI(
+        #     openai_api_key = self.config.openai.GPT_API_KEY,
+        #     model_name = self.config.openai.GPT_MODEL_NAME,
+        #     temperature = 0,
+        #     base_url=self.config.openai.PROXY
+        # )
+        self.llm = ChatOpenAI(
+            api_key = self.config.openai.GPT_API_KEY,
+            model = self.config.openai.GPT_MODEL_NAME,
             temperature = 0,
-            base_url=self.config.openai.PROXY
+            base_url = self.config.openai.PROXY
         )
         self.sql_prompt = PromptTemplate(
             input_variables = ["input", "table_info", "top_k"],
             template = _sqlite_prompt + COUNTING_EXAMPLE_PROMPT+ PROMPT_SUFFIX,
         )
 
+    # @tool
     @prompts(
         name = "CountingTool",
         description = "Useful when you need to count object number."
@@ -171,8 +192,11 @@ class CountingTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain(
-            llm=self.llm, database=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # db_chain = SQLDatabaseChain(
+        #     llm=self.llm, database=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # )
+        db_chain = SQLDatabaseChain.from_llm(
+            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
         try:
@@ -191,17 +215,24 @@ class ReasonFinder:
     def __init__(self, device, config):
         self.device = device
         self.config = config
-        self.llm = OpenAI(
-            openai_api_key = self.config.openai.GPT_API_KEY,
-            model_name = self.config.openai.GPT_MODEL_NAME,
+        # self.llm = OpenAI(
+        #     openai_api_key = self.config.openai.GPT_API_KEY,
+        #     model_name = self.config.openai.GPT_MODEL_NAME,
+        #     temperature = 0,
+        #     base_url=self.config.openai.PROXY
+        # )
+        self.llm = ChatOpenAI(
+            api_key = self.config.openai.GPT_API_KEY,
+            model = self.config.openai.GPT_MODEL_NAME,
             temperature = 0,
-            base_url=self.config.openai.PROXY
+            base_url = self.config.openai.PROXY
         )
         self.sql_prompt = PromptTemplate(
             input_variables = ["input", "table_info", "top_k"],
             template = _sqlite_prompt + REASONFINDER_ADDITION_PROMPT + PROMPT_SUFFIX,
         )
 
+    # @tool
     @prompts(
         name="ReasonFinder",
         description="Useful when you need to find reasons or explanations."
@@ -228,8 +259,11 @@ class ReasonFinder:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain(
-            llm=self.llm, database=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # db_chain = SQLDatabaseChain(
+        #     llm=self.llm, database=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # )
+        db_chain = SQLDatabaseChain.from_llm(
+            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
         try:
@@ -248,17 +282,24 @@ class HowSeeker:
     def __init__(self, device, config):
         self.device = device
         self.config = config
-        self.llm = OpenAI(
-            openai_api_key = self.config.openai.GPT_API_KEY,
-            model_name = self.config.openai.GPT_MODEL_NAME,
+        # self.llm = OpenAI(
+        #     openai_api_key = self.config.openai.GPT_API_KEY,
+        #     model_name = self.config.openai.GPT_MODEL_NAME,
+        #     temperature = 0,
+        #     base_url=self.config.openai.PROXY
+        # )
+        self.llm = ChatOpenAI(
+            api_key = self.config.openai.GPT_API_KEY,
+            model = self.config.openai.GPT_MODEL_NAME,
             temperature = 0,
-            base_url=self.config.openai.PROXY
+            base_url = self.config.openai.PROXY
         )
         self.sql_prompt = PromptTemplate(
             input_variables = ["input", "table_info", "top_k"],
             template=_sqlite_prompt + HOWSEEKER_ADDITION_PROMPT + PROMPT_SUFFIX,
         )
 
+    # @tool
     @prompts(
         name = "HowSeeker",
         description = "useful when you need to find methods or steps to accomplish a task."
@@ -285,8 +326,11 @@ class HowSeeker:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain(
-            llm=self.llm, database=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # db_chain = SQLDatabaseChain(
+        #     llm=self.llm, database=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # )
+        db_chain = SQLDatabaseChain.from_llm(
+            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
         try:
@@ -305,17 +349,24 @@ class DescriptionTool:
     def __init__(self, device, config):
         self.device = device
         self.config = config
-        self.llm = OpenAI(
-            openai_api_key = self.config.openai.GPT_API_KEY,
-            model_name = self.config.openai.GPT_MODEL_NAME,
+        # self.llm = OpenAI(
+        #     openai_api_key = self.config.openai.GPT_API_KEY,
+        #     model_name = self.config.openai.GPT_MODEL_NAME,
+        #     temperature = 0,
+        #     base_url=self.config.openai.PROXY
+        # )
+        self.llm = ChatOpenAI(
+            api_key = self.config.openai.GPT_API_KEY,
+            model = self.config.openai.GPT_MODEL_NAME,
             temperature = 0,
-            base_url=self.config.openai.PROXY
+            base_url = self.config.openai.PROXY
         )
         self.sql_prompt = PromptTemplate(
             input_variables = ["input", "table_info", "top_k"],
             template=_sqlite_prompt + DESCRIP_ADDITION_PROMPT + DESCRIP_EXAMPLE_PROMPT + PROMPT_SUFFIX,
         )
 
+    # @tool
     @prompts(
         name = "DescriptionTool",
         description = "Useful when you need to describe the content of a video, e.g. the audio in the video, the subtitles, the on-screen content, etc."
@@ -342,8 +393,11 @@ class DescriptionTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain(
-            llm=self.llm, database=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # db_chain = SQLDatabaseChain(
+        #     llm=self.llm, database=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # )
+        db_chain = SQLDatabaseChain.from_llm(
+            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
         try:
             result = db_chain.run(question)
@@ -361,9 +415,15 @@ class DefaultTool:
     def __init__(self, device, config):
         self.device = device
         self.config = config
-        self.llm = OpenAI(
-            openai_api_key = self.config.openai.GPT_API_KEY,
-            model_name = self.config.openai.GPT_MODEL_NAME,
+        # self.llm = OpenAI(
+        #     openai_api_key = self.config.openai.GPT_API_KEY,
+        #     model_name = self.config.openai.GPT_MODEL_NAME,
+        #     temperature = 0,
+        #     base_url = self.config.openai.PROXY
+        # )
+        self.llm = ChatOpenAI(
+            api_key = self.config.openai.GPT_API_KEY,
+            model = self.config.openai.GPT_MODEL_NAME,
             temperature = 0,
             base_url = self.config.openai.PROXY
         )
@@ -372,6 +432,7 @@ class DefaultTool:
             template = _sqlite_prompt + PROMPT_SUFFIX,
         )
 
+    # @tool
     @prompts(
         name = "DefaultTool",
         description = "Useful when other tools can't solve the problem corresponding to the video."
@@ -398,8 +459,11 @@ class DefaultTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain(
-            llm=self.llm, database=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # db_chain = SQLDatabaseChain(
+        #     llm=self.llm, database=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # )
+        db_chain = SQLDatabaseChain.from_llm(
+            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
         try:
             result = db_chain.run(question)
@@ -417,6 +481,7 @@ class InpaintingTool:
         self.device = device
         self.inpainter = Inpainter(device=device)
 
+    # @tool
     @prompts(
         name = "InpaintingTool",
         description = "Useful when user want to inpaint something in the video."
@@ -460,6 +525,7 @@ class VideoTemporalUnderstanding:
         self.device = device
         self.basemodel = TemporalBase(device=self.device, config=self.config)
 
+    # @tool
     @prompts(
         name="VideoTemporalUnderstanding",
         description="useful when you need to process temporal information in videos."
@@ -494,6 +560,7 @@ class VideoInstanceUnderstanding:
         self.device = device
         self.basemodel = InstanceBase(device=self.device, config=self.config)
 
+    # @tool
     @prompts(
         name="VideoInstanceUnderstanding",
         description="useful when you need to understand the instance information in videos."
@@ -558,15 +625,22 @@ class MemeryBuilder:
                 if e.startswith("inference"):
                     func = getattr(instance, e)
                     self.tools.append(
-                        # Tool(name=func.name, description=func.description, func=func)
-                        tool(name=func.name, description=func.description, func=func)
+                        Tool(name=func.name, description=func.description, func=func)
+                        # tool(name=func.name, description=func.description, func=func)
+                        # func
                     )
 
-        self.llm = OpenAI(
-            openai_api_key = self.config.openai.GPT_API_KEY, 
-            model_name = self.config.openai.AGENT_GPT_MODEL_NAME, 
-            base_url=self.config.openai.PROXY,
-            temperature = 0
+        # self.llm = OpenAI(
+        #     openai_api_key = self.config.openai.GPT_API_KEY, 
+        #     model_name = self.config.openai.AGENT_GPT_MODEL_NAME, 
+        #     base_url=self.config.openai.PROXY,
+        #     temperature = 0
+        # )
+        self.llm = ChatOpenAI(
+            api_key = self.config.openai.GPT_API_KEY,
+            model = self.config.openai.GPT_MODEL_NAME,
+            temperature = 0,
+            base_url = self.config.openai.PROXY
         )
 
         self.memory = ConversationBufferMemory(memory_key="chat_history")
@@ -585,15 +659,22 @@ class MemeryBuilder:
                 if e.startswith("inference"):
                     func = getattr(instance, e)
                     tools.append(
-                        # Tool(name=func.name, description=func.description, func=func)
-                        tool(name=func.name, description=func.description, func=func)
+                        Tool(name=func.name, description=func.description, func=func)
+                        # tool(name=func.name, description=func.description, func=func)
+                        # func
                     )
         # VideoInstanceUnderstanding, VideoTemporalUnderstanding 在上面定义
 
-        llm = OpenAI(
-            openai_api_key=self.config.openai.GPT_API_KEY, 
-            model_name=self.config.openai.GPT_MODEL_NAME, 
-            temperature=0
+        # llm = OpenAI(
+        #     openai_api_key=self.config.openai.GPT_API_KEY, 
+        #     model_name=self.config.openai.GPT_MODEL_NAME, 
+        #     temperature=0
+        # )
+        llm = ChatOpenAI(
+            api_key = self.config.openai.GPT_API_KEY,
+            model = self.config.openai.GPT_MODEL_NAME,
+            temperature = 0,
+            base_url = self.config.openai.PROXY
         )
 
         memory = ConversationBufferMemory(memory_key="chat_history")
@@ -692,7 +773,6 @@ def run_a_video(
     return anwsers
 
 if __name__ == "__main__":
-    pdb.set_trace()
     parser = argparse.ArgumentParser(description="demo")               
     parser.add_argument('--config', default="config/nextqa.yaml",type=str)                           
     opt = parser.parse_args()

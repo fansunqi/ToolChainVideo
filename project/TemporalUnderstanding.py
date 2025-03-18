@@ -16,7 +16,8 @@ from transformers import (
 )
 from langchain.chains.conversation.memory import ConversationBufferMemory
 # from langchain.llms.openai import OpenAI
-from langchain_community.llms import OpenAI
+# from langchain_community.llms import OpenAI
+from langchain_openai import ChatOpenAI
 from langchain_experimental.sql import SQLDatabaseChain
 # from langchain import OpenAI, SQLDatabase
 
@@ -59,11 +60,17 @@ class TemporalBase(object):
             "./checkpoints/blip", torch_dtype=self.torch_dtype
         ).to(self.device)
 
-        self.llm = OpenAI(
-            openai_api_key = self.config.openai.GPT_API_KEY, 
-            model_name = self.config.openai.AGENT_GPT_MODEL_NAME, 
-            base_url=self.config.openai.PROXY,
-            temperature = 0
+        # self.llm = OpenAI(
+        #     openai_api_key = self.config.openai.GPT_API_KEY, 
+        #     model_name = self.config.openai.AGENT_GPT_MODEL_NAME, 
+        #     base_url=self.config.openai.PROXY,
+        #     temperature = 0
+        # )
+        self.llm = ChatOpenAI(
+            api_key = self.config.openai.GPT_API_KEY,
+            model = self.config.openai.GPT_MODEL_NAME,
+            temperature = 0,
+            base_url = self.config.openai.PROXY
         )
 
         ####other args

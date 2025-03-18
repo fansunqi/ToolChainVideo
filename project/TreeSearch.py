@@ -7,10 +7,12 @@ import numpy as np
 
 # langchain.debug = True
 from langchain.agents.initialize import initialize_agent
-from langchain.agents.tools import Tool
-from langchain.llms.openai import OpenAI
-from langchain.llms.openai import OpenAI
-from langchain import OpenAI
+# from langchain.agents.tools import Tool
+# from langchain.tools import tool
+# from langchain.llms.openai import OpenAI
+# from langchain.llms.openai import OpenAI
+# from langchain import OpenAI
+# from langchain_community.llms import OpenAI
 
 from project.ExampleSelector import CustomExampleSelector
 
@@ -331,13 +333,19 @@ class ReThinking(object):
     def simulation(self):
         ancestor_history = self.get_ancestor_history()
         agent = self.get_new_agent(chain_history=ancestor_history)
-        agent_iterator = agent.iter(self.question)
+        agent_iterator = agent.iter(self.question)  # TODO 这个不知道什么意思
 
         is_good_result = True
+        inter_step = None
+        final_answer = None
         for step in agent_iterator:
-            if output := step.get("intermediate_step"):
+            print(f"agent_iterator step: {step}")
+            # if output := step.get("intermediate_step"):
+            inter_step = step.get("intermediate_step")
+            final_answer = step.get('output')
+            if inter_step:
                 self.total_step += 1
-                action, observation = output[0]
+                action, observation = inter_step[0]
                 self.tree.add_child(
                     {"action": action, "observation": observation, "reward": 0.0}
                 )
@@ -347,7 +355,7 @@ class ReThinking(object):
         if not is_good_result:
             return observation, is_good_result
 
-        final_answer = agent_iterator.final_outputs["output"]
+        # final_answer = agent_iterator.final_outputs["output"]
         self.tree.current.value["final_anwser"] = final_answer
 
         if not self.is_good_final_result(final_answer):
