@@ -156,5 +156,11 @@ python ./scripts/demo_test_1.py --config config/demo_1.yaml
 python ./scripts/main.py
 ```
 
-使用的 config 是 `config/nextqa.yaml`
+默认使用的 config 是 `config/nextqa.yaml`
+
+评测指令：
+
+```
+python eval/eval_nextqa.py
+```
 
