@@ -15,9 +15,10 @@ from transformers import (
     BlipForQuestionAnswering,
 )
 from langchain.chains.conversation.memory import ConversationBufferMemory
-from langchain.llms.openai import OpenAI
+# from langchain.llms.openai import OpenAI
+from langchain_community.llms import OpenAI
 from langchain_experimental.sql import SQLDatabaseChain
-from langchain import OpenAI, SQLDatabase
+# from langchain import OpenAI, SQLDatabase
 
 
 def format_seconds_to_time(seconds):

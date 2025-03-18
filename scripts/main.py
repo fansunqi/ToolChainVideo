@@ -19,9 +19,11 @@ import sqlite3
 # langchain.debug = True
 from langchain.prompts import PromptTemplate
 from langchain.agents.initialize import initialize_agent
-from langchain.agents.tools import Tool
+# from langchain.agents.tools import Tool
+from langchain.tools import tool
 from langchain.chains.conversation.memory import ConversationBufferMemory
-from langchain.llms.openai import OpenAI
+# from langchain.llms.openai import OpenAI
+from langchain_community.llms import OpenAI
 
 from project.TemporalUnderstanding import TemporalBase
 from project.InstanceUnderstanding import InstanceBase
@@ -40,9 +42,9 @@ from project.sql_template import (
 from project.E2FGVI.Inpainter import Inpainter
 
 from langchain.chains.conversation.memory import ConversationBufferMemory
-from langchain.llms.openai import OpenAI
+# from langchain.llms.openai import OpenAI
 from langchain_experimental.sql import SQLDatabaseChain
-from langchain import OpenAI, SQLDatabase
+# from langchain import OpenAI, SQLDatabase
 
 import datetime
 from tqdm import tqdm
@@ -556,7 +558,8 @@ class MemeryBuilder:
                 if e.startswith("inference"):
                     func = getattr(instance, e)
                     self.tools.append(
-                        Tool(name=func.name, description=func.description, func=func)
+                        # Tool(name=func.name, description=func.description, func=func)
+                        tool(name=func.name, description=func.description, func=func)
                     )
 
         self.llm = OpenAI(
@@ -582,7 +585,8 @@ class MemeryBuilder:
                 if e.startswith("inference"):
                     func = getattr(instance, e)
                     tools.append(
-                        Tool(name=func.name, description=func.description, func=func)
+                        # Tool(name=func.name, description=func.description, func=func)
+                        tool(name=func.name, description=func.description, func=func)
                     )
         # VideoInstanceUnderstanding, VideoTemporalUnderstanding 在上面定义
 
@@ -688,6 +692,7 @@ def run_a_video(
     return anwsers
 
 if __name__ == "__main__":
+    pdb.set_trace()
     parser = argparse.ArgumentParser(description="demo")               
     parser.add_argument('--config', default="config/nextqa.yaml",type=str)                           
     opt = parser.parse_args()
