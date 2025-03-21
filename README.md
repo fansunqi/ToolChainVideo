@@ -56,7 +56,7 @@
    - **download the pretrained model for dense captioning**
    
       The code will automatically download BLIP model from huggingface (https://huggingface.co/Salesforce/blip-image-captioning-large/tree/main). You can also download mannully.
-    
+   
    - **download the pretrained model for inpainting**
      ```python
      #download the pretrained model for inpainting
@@ -83,22 +83,13 @@
      wget https://github.com/ChaoningZhang/MobileSAM/blob/master/weights/mobile_sam.pt
      cd ../..
      ```
-  The overall checkpoints file structure is as follows:
-  
-  ![](assets/ckpt_files.png)
+    The overall checkpoints file structure is as follows:
 
-## QuickStart 🚀
-
-- Fill in config/demo.yaml with your video and question:
-  ```python
-  # run
-  cd ..                  
-  python ./scripts/demo_test.py --config config/demo_2.yaml  
-  ```
+<img src="assets/ckpt_files.png" alt="ckpt_files" style="zoom: 67%;" />
 
 ## Overview 📜
 
-Thanks to the authors of these open source projects for providing excellent projects.
+Thanks to the authors of these open-source projects for providing excellent projects.
 
 #### Memory Construction
 
@@ -133,29 +124,6 @@ Thanks to the authors of these open source projects for providing excellent proj
   - E2FGVI &#x20;
     - [MCG-NKU/E2FGVI: Official code for "Towards An End-to-End Framework for Flow-Guided Video Inpainting" (CVPR2022) (github.com)](https://github.com/MCG-NKU/E2FGVI "MCG-NKU/E2FGVI: Official code for \"Towards An End-to-End Framework for Flow-Guided Video Inpainting\" (CVPR2022) (github.com)")
 
-***
-
-## Run in Mac
-
-创建环境：
-
-```
-cd dgpt
-python3 -m venv dgpt
-```
-
- 激活环境：
-
-```
-source dgpt/bin/activate
-```
-
-运行脚本：
-
-```
-python ./scripts/demo_test_1.py --config config/demo_1.yaml 
-```
-
 ## NExT-QA 试验
 
 下载 NeXT-QA 数据：
@@ -164,7 +132,6 @@ git clone git@github.com:doc-doc/NExT-QA.git
 ```
 specify your data path in ```config/nextqa.yaml```
 
-在青海服务器上 NeXT-QA 数据位于 /home/fsq/video_agent/NExT-QA
 运行指令：
 
 ```
