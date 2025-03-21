@@ -278,6 +278,7 @@ class LongShortTermTransformerBlock(nn.Module):
         # MultiheadLocalAttention = MultiheadLocalAttentionV2 if enable_corr else MultiheadLocalAttentionV3
         if enable_corr:
             try:
+                import torch
                 import spatial_correlation_sampler
                 MultiheadLocalAttention = MultiheadLocalAttentionV2
             except Exception as inst:

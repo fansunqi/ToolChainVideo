@@ -8,8 +8,6 @@
 *.bin
 *.gif
 checkpoints/AOT/
-checkpoints/bert/
-checkpoints/blip/
 checkpoints/E2FGVI/
 checkpoints/GroundedSAM/
 demo/track_res/

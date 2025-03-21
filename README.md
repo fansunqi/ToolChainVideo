@@ -13,6 +13,12 @@
    conda create -n tcv python=3.9
    conda activate tcv
    pip install -r requirements.txt
+   
+   # install spatial_correlation_sampler from source code:
+   git clone git@github.com:ClementPinard/Pytorch-Correlation-extension.git
+   cd Pytorch-Correlation-extension
+   python setup.py install
+   cd ..
    ```
    Install Segment Anything and Grounding DINO in Grounded-Segment-Anything as in https://github.com/IDEA-Research/Grounded-Segment-Anything:
    ```python
@@ -35,22 +41,23 @@
    ```
    cd checkpoints
    ```
+
    - **download the pretrained model for yolo-tracking**
      ```python
-     #download the pretrained model for object detection and tracking
-     wget https://objects.githubusercontent.com/github-production-release-asset-2e65be/521807533/0c7608ab-094c-4c63-8c0c-3e7623db6114?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20240612%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240612T083947Z&X-Amz-Expires=300&X-Amz-Signature=7b6688c64e3d3f1eb54a0eca30ca99e140bed9f886d4c8a084bec389046ecda8&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=521807533&response-content-disposition=attachment%3B%20filename%3Dyolov8n-seg.pt&response-content-type=application%2Foctet-stream
-     wget https://objects.githubusercontent.com/github-production-release-asset-2e65be/521807533/67360104-677c-457e-95a6-856f07ba3f2e?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20240612%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240612T083803Z&X-Amz-Expires=300&X-Amz-Signature=8bd5d0f9ef518ee1a84783203b2d0a6c285a703dace053ae30596c68f2428599&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=521807533&response-content-disposition=attachment%3B%20filename%3Dyolov8n.pt&response-content-type=application%2Foctet-stream
-     
+     # download the pretrained model for object detection and tracking
+     wget https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8n-seg.pt
+     # download yolov8n
+     wget https://huggingface.co/Ultralytics/YOLOv8/blob/main/yolov8n.pt
+     # download mobilenetv2_x1_4_dukemtmcreid.pt
+     wget https://drive.google.com/uc?id=12uD5FeVqLg9-AFDju2L7SQxjmPb4zpBN
      ```
+     Rename the mobilenet checkpoint to mobilenetv2_x1_4_dukemtmcreid.pt
+     Obtain the uniformerv2 checkpoint k400+k710_uniformerv2_b16_8x224.pyth from https://huggingface.co/Andy1621/uniformerv2/tree/main and place it under ```checkpoints/```. Rename it as ```k400+k710_uniformerv2_b16_8x224.pyth```
    - **download the pretrained model for dense captioning**
-     ```python
-     mkdir ./blip
-     cd ./blip
-     # dowlond the chekpoints from below 
-     [[Hugging Face](https://huggingface.co/Salesforce/blip-image-captioning-large/tree/main)]
-     cd ..
-     ```
-   - [] **download the pretrained model for inpainting**
+   
+      The code will automatically download BLIP model from huggingface (https://huggingface.co/Salesforce/blip-image-captioning-large/tree/main). You can also download mannully.
+    
+   - **download the pretrained model for inpainting**
      ```python
      #download the pretrained model for inpainting
      mkdir ./E2FGVI
@@ -60,6 +67,7 @@
      [[Baidu Disk](https://pan.baidu.com/s/1qXAErbilY_n_Fh9KB8UF7w?pwd=lsjw)]
      cd ..
      ```
+
    - **download the pretrained model for rvos**
      ```python
      #download the pretrained model for rvos
@@ -71,12 +79,12 @@
      
      mkdir GroundedSAM
      cd ./GroundedSAM
-     wget https://objects.githubusercontent.com/github-production-release-asset-2e65be/611591640/c4c55fde-97e5-47d9-a2c5-b169832a2fa9?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20240623%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240623T053405Z&X-Amz-Expires=300&X-Amz-Signature=369fd1d480eb018f7b3a31e960835ae77ae5bb9b1d0dcc5415751811daf4e325&X-Amz-SignedHeaders=host&actor_id=97865789&key_id=0&repo_id=611591640&response-content-disposition=attachment%3B%20filename%3Dgroundingdino_swinb_cogcoor.pth&response-content-type=application%2Foctet-stream
-     # dowlond the chekpoints from below 
-     [[Github](https://github.com/ChaoningZhang/MobileSAM/blob/master/weights/mobile_sam.pt)]
+     wget https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alpha2/groundingdino_swinb_cogcoor.pth
+     wget https://github.com/ChaoningZhang/MobileSAM/blob/master/weights/mobile_sam.pt
      cd ../..
      ```
-
+    The overall checkpoints file structure is as follows:
+    ![](assets/ckpt_files.png)
 
 ## QuickStart 🚀
 

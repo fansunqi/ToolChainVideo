@@ -1,8 +1,8 @@
 inference_config_path: "config/inference/inference.yaml"
 dataset: "nextqa"
-video_path_base: "/home/fsq/video_agent/NExT-QA/NExTVideo"
-anno_path: "/home/fsq/video_agent/NExT-QA/dataset/nextqa/train.csv"
-skip_mem_build: True
+video_path_base: "/share_data/NExT-QA/NExTVideo"
+anno_path: "/share_data/NExT-QA/dataset/nextqa/train.csv"
+skip_mem_build: False
 with_two_mem: True
 seed: 12345
 max_answer: 3
