@@ -4,29 +4,47 @@ from difflib import SequenceMatcher
 from transformers import pipeline
 from collections import Counter
 import argparse
+from tqdm import tqdm
 
 # 定义选项字母映射
 option_map = ["A", "B", "C", "D", "E"]
-# 初始化 LLM 判断模型
-llm = pipeline("text-classification", model="facebook/bart-large-mnli")
+llm = None  # LLM 先不初始化
+
+def load_llm():
+    """懒加载 LLM，只在需要时才初始化"""
+    global llm
+    if llm is None:
+        print("loading LLM to judge...")
+        llm = pipeline("text-classification", model="facebook/bart-large-mnli")
+        print("LLM loaded.")
 
 def get_predicted_option(answer, options):
+    """根据答案匹配正确选项"""
     # 字符匹配
+    # 字符匹配（确保只有一个选项字母出现在 answer 中）
     for i, option in enumerate(options):
-        if option_map[i] in answer:
+        if option_map[i] in answer and all(option_map[j] not in answer for j in range(len(options)) if j != i):
             return i, "character matching"
     
-    # 语义匹配
-    for i, option in enumerate(options):
-        similarity = SequenceMatcher(None, option.lower(), answer.lower()).ratio()
-        if similarity > 0.8:
-            return i, "semantic matching"
+    # 语义匹配 最长公共子序列
+    # 计算所有选项的相似度
+    similarities = [SequenceMatcher(None, option.lower(), answer.lower()).ratio() for option in options]
+    # 找到相似度大于 0.8 的选项索引
+    high_similarity_indices = [i for i, sim in enumerate(similarities) if sim > 0.8]
+    # 只有一个选项的相似度大于 0.8，才返回
+    if len(high_similarity_indices) == 1:
+        return high_similarity_indices[0], "semantic matching"
     
     # LLM 判断
+    load_llm()  # 只有在需要 LLM 判断时才加载
+    entailment_indices = []
     for i, option in enumerate(options):
         result = llm(f"Is the answer '{answer}' correct for the option '{option}'?")
         if result[0]['label'] == 'ENTAILMENT':
-            return i, "LLM matching"
+            entailment_indices.append(i)
+    # 只有一个选项是 'ENTAILMENT'，才返回
+    if len(entailment_indices) == 1:
+        return entailment_indices[0], "LLM matching"
     
     return None, "none"
 
@@ -40,15 +58,16 @@ def main(input_file, output_file):
     with open(input_file, 'r') as f:
         data = json.load(f)
 
-
     total_items = len(data)
+    have_ans_items = 0
     correct_items = 0
 
     # 评估每个数据项
-    for item in data:
+    for item in tqdm(data):
         truth = item['truth']
         options = [item['optionA'], item['optionB'], item['optionC'], item['optionD'], item['optionE']]
 
+        # 说明 answers 是 None, 暂时不处理
         if isinstance(item['answers'], str):
             continue
 
@@ -67,6 +86,7 @@ def main(input_file, output_file):
             option_counts = Counter(predicted_options)
             most_common_option, _ = option_counts.most_common(1)[0]
             final_predicted_option = most_common_option
+            have_ans_items += 1
         else:
             final_predicted_option = None
         
@@ -79,11 +99,15 @@ def main(input_file, output_file):
         item['is_correct'] = is_correct
         item['match_methods'] = match_methods
 
-    accuracy = correct_items / total_items
+    acc_include_no_ans = correct_items / total_items
+    acc_exclude_no_ans = correct_items / have_ans_items
 
     # 输出结果
     print(f"Total items: {total_items}")
-    print(f"Accuracy: {accuracy:.2%}")
+    print(f"Have ans items: {have_ans_items}")
+    print(f"Correct items: {correct_items}")
+    print(f"Acc include no ans: {acc_include_no_ans:.2%}")
+    print(f"Acc exclude no ans: {acc_exclude_no_ans:.2%}")
 
     # for item in data:
     #     print(f"QID: {item['qid']}, Predicted Option: {item['predicted_option']}, Correct: {item['is_correct']}, Match Methods: {item['match_methods']}")
@@ -105,3 +129,15 @@ if __name__ == "__main__":
         args.output_file = args.input_file.replace('.json', '_eval.json')
 
     main(args.input_file, args.output_file)
+
+
+
+'''
+只有字符匹配：
+Total items: 100
+Have ans items: 61
+Correct items: 27
+Acc include no ans: 27.00%
+Acc exclude no ans: 44.26%
+'''
+# 加了下面两种方式之后还是这样

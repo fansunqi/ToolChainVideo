@@ -1,0 +1,2795 @@
+[
+    {
+        "quid": "3238737531_2",
+        "uid": "3238737531",
+        "qid": 2,
+        "q_type": "DC",
+        "question": "how many children are in the video",
+        "optionA": "one",
+        "optionB": "three",
+        "optionC": "seven",
+        "optionD": "two",
+        "optionE": "five",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1164/3238737531.mp4",
+        "formatted_question": "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.",
+        "answers": {
+            "good_anwsers": [
+                "D. two",
+                "29"
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "D",
+        "is_correct": true,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "10521491465_4",
+        "uid": "10521491465",
+        "qid": 4,
+        "q_type": "CW",
+        "question": "why is the panda on the grass brown",
+        "optionA": "to sit up",
+        "optionB": "dirty",
+        "optionC": "prevent it from escaping",
+        "optionD": "get dirt off",
+        "optionE": "resting and eating",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1102/10521491465.mp4",
+        "formatted_question": "Why is the panda on the grass brown? Choose your answer from below selections: A.to sit up, B.dirty, C.prevent it from escaping, D.get dirt off, E.resting and eating.",
+        "answers": {
+            "good_anwsers": [
+                "The panda on the grass is brown because it is resting and eating.",
+                "E. resting and eating.",
+                "E. resting and eating."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "E",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "4177168857_1",
+        "uid": "4177168857",
+        "qid": 1,
+        "q_type": "CW",
+        "question": "why did the baby grab the man s ear and hair",
+        "optionA": "to sing",
+        "optionB": "play with the man",
+        "optionC": "stabilize the baby",
+        "optionD": "wave the horse",
+        "optionE": "want to play",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1009/4177168857.mp4",
+        "formatted_question": "Why did the baby grab the man s ear and hair? Choose your answer from below selections: A.to sing, B.play with the man, C.stabilize the baby, D.wave the horse, E.want to play.",
+        "answers": {
+            "good_anwsers": [
+                "The baby grabbed the man's ear and hair because the man was shaking his head.",
+                "E. want to play."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "E",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "3136982378_7",
+        "uid": "3136982378",
+        "qid": 7,
+        "q_type": "CW",
+        "question": "why are there people surrounding the two people fencing",
+        "optionA": "guide",
+        "optionB": "performing",
+        "optionC": "watching them",
+        "optionD": "play for fun",
+        "optionE": "to maintain the distance",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0042/3136982378.mp4",
+        "formatted_question": "Why are there people surrounding the two people fencing? Choose your answer from below selections: A.guide, B.performing, C.watching them, D.play for fun, E.to maintain the distance.",
+        "answers": {
+            "good_anwsers": [
+                "The people surrounding the two people fencing are guiding the fencing match.",
+                "C. watching them"
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "C",
+        "is_correct": true,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "4729027639_3",
+        "uid": "4729027639",
+        "qid": 3,
+        "q_type": "CW",
+        "question": "why did the lady in white approach the girls on stage in the middle of the video",
+        "optionA": "asked her to stand in position",
+        "optionB": "for fun",
+        "optionC": "holding dog leash",
+        "optionD": "point into the booklet",
+        "optionE": "talking about the white bottle",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1099/4729027639.mp4",
+        "formatted_question": "Why did the lady in white approach the girls on stage in the middle of the video? Choose your answer from below selections: A.asked her to stand in position, B.for fun, C.holding dog leash, D.point into the booklet, E.talking about the white bottle.",
+        "answers": {
+            "good_anwsers": [
+                "The lady in white approached the girls on stage in the middle of the video because she saw two girls standing in a classroom with paper hats on.",
+                "A.asked her to stand in position",
+                "D. point into the booklet"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "A",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "7093500213_6",
+        "uid": "7093500213",
+        "qid": 6,
+        "q_type": "TN",
+        "question": "what does the man in checkered do after walking onto the stage with microphone stands at the start",
+        "optionA": "bow to people",
+        "optionB": "set up the stand",
+        "optionC": "take away the stand",
+        "optionD": "takes out some paper",
+        "optionE": "hands him a bottle",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1099/7093500213.mp4",
+        "formatted_question": "What does the man in checkered do after walking onto the stage with microphone stands at the start? Choose your answer from below selections: A.bow to people, B.set up the stand, C.take away the stand, D.takes out some paper, E.hands him a bottle.",
+        "answers": {
+            "good_anwsers": [
+                "D. takes out some paper.",
+                "D. takes out some paper.",
+                "D. takes out some paper."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "D",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "6102982194_2",
+        "uid": "6102982194",
+        "qid": 2,
+        "q_type": "CW",
+        "question": "why does the man playing the white guitar go near the man playing the keytar",
+        "optionA": "want to talk to him",
+        "optionB": "make music",
+        "optionC": "to energise him",
+        "optionD": "want to hit him",
+        "optionE": "to annoy him",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1014/6102982194.mp4",
+        "formatted_question": "Why does the man playing the white guitar go near the man playing the keytar? Choose your answer from below selections: A.want to talk to him, B.make music, C.to energise him, D.want to hit him, E.to annoy him.",
+        "answers": {
+            "good_anwsers": [
+                "The man playing the white guitar goes near the man playing the keytar because they are both part of a band playing music together in a room. The proximity could be due to the need to coordinate their music or interact during the performance.",
+                "The man playing the white guitar goes near the man playing the keytar because they are both part of a band playing music together in a room. The proximity could be due to the need to coordinate their music or interact during the performance.",
+                "B. make music"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "B",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "7417682572_2",
+        "uid": "7417682572",
+        "qid": 2,
+        "q_type": "TC",
+        "question": "what does the man playing the drums do with his feet as he plays the drum",
+        "optionA": "look through the box",
+        "optionB": "moves his feet",
+        "optionC": "smoke",
+        "optionD": "walk around the hoop",
+        "optionE": "cap",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1122/7417682572.mp4",
+        "formatted_question": "What does the man playing the drums do with his feet as he plays the drum? Choose your answer from below selections: A.look through the box, B.moves his feet, C.smoke, D.walk around the hoop, E.cap.",
+        "answers": {
+            "good_anwsers": [
+                "B. moves his feet",
+                "The man playing the drums moves his feet as he plays the drum."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "B",
+        "is_correct": true,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "8364779007_7",
+        "uid": "8364779007",
+        "qid": 7,
+        "q_type": "CW",
+        "question": "why does the boy in red turn around after getting out on the grass at the start",
+        "optionA": "to see if there is anything",
+        "optionB": "to get onto table",
+        "optionC": "failed at goal keeping",
+        "optionD": "to look at camera",
+        "optionE": "wait for people behind",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1203/8364779007.mp4",
+        "formatted_question": "Why does the boy in red turn around after getting out on the grass at the start? Choose your answer from below selections: A.to see if there is anything, B.to get onto table, C.failed at goal keeping, D.to look at camera, E.wait for people behind.",
+        "answers": {
+            "good_anwsers": [
+                "The reason why the boy in red turned around after getting out on the grass at the start of the video is not clear based on the available tools and information.",
+                "The reason why the boy in red turned around after getting out on the grass at the start of the video remains unclear due to the lack of relevant visual content in the database.",
+                "The reason why the boy in red turns around after getting out on the grass at the start of the video is not clear based on the available visual content descriptions."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "5319843668_1",
+        "uid": "5319843668",
+        "qid": 1,
+        "q_type": "CW",
+        "question": "why are there flashes of light when the children are playing in the boxes",
+        "optionA": "camera taking photo",
+        "optionB": "guide the direction",
+        "optionC": "shine brightness",
+        "optionD": "start of the gane",
+        "optionE": "part of performance",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1019/5319843668.mp4",
+        "formatted_question": "Why are there flashes of light when the children are playing in the boxes? Choose your answer from below selections: A.camera taking photo, B.guide the direction, C.shine brightness, D.start of the gane, E.part of performance.",
+        "answers": {
+            "good_anwsers": [
+                "The reason for the flashes of light when the children are playing in the boxes is unclear, as there is no explicit mention or visual evidence of them in the video content.",
+                "The reason for the flashes of light when the children are playing in the boxes is not explicitly provided in the video content.",
+                "Based on the video content showing children playing in boxes and the presence of flashes of light, it is likely that the flashes of light are part of the performance or play scenario, possibly to add a magical or whimsical element to the scene."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "B",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "9177467036_2",
+        "uid": "9177467036",
+        "qid": 2,
+        "q_type": "CW",
+        "question": "why did the man wear hat while riding the horse",
+        "optionA": "conversing with them",
+        "optionB": "part of the outfit",
+        "optionC": "support woman",
+        "optionD": "to move it",
+        "optionE": "give good performance",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1102/9177467036.mp4",
+        "formatted_question": "Why did the man wear hat while riding the horse? Choose your answer from below selections: A.conversing with them, B.part of the outfit, C.support woman, D.to move it, E.give good performance.",
+        "answers": {
+            "good_anwsers": [
+                "B. part of the outfit",
+                "B. part of the outfit",
+                "B. part of the outfit or E. give good performance."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "B",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "10745999374_3",
+        "uid": "10745999374",
+        "qid": 3,
+        "q_type": "CW",
+        "question": "why does the toy sword start blinking in the middle of the video",
+        "optionA": "boy in red turn it on",
+        "optionB": "ball rolling away",
+        "optionC": "road bumpy",
+        "optionD": "get cat s attention",
+        "optionE": "finished playing till that page",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1025/10745999374.mp4",
+        "formatted_question": "Why does the toy sword start blinking in the middle of the video? Choose your answer from below selections: A.boy in red turn it on, B.ball rolling away, C.road bumpy, D.get cat s attention, E.finished playing till that page.",
+        "answers": {
+            "good_anwsers": [
+                "The toy sword starts blinking in the middle of the video because several children were playing with it.",
+                "The toy sword starts blinking in the middle of the video because several children are sitting on a couch playing with it.",
+                "The toy sword starts blinking in the middle of the video because several children were playing with it."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "8319941339_7",
+        "uid": "8319941339",
+        "qid": 7,
+        "q_type": "CW",
+        "question": "why does the boy cross his legs on the bed",
+        "optionA": "resting",
+        "optionB": "put keyboard on his lap",
+        "optionC": "wants to get on the bed",
+        "optionD": "point to the video recorder",
+        "optionE": "follow the instructions",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1005/8319941339.mp4",
+        "formatted_question": "Why does the boy cross his legs on the bed? Choose your answer from below selections: A.resting, B.put keyboard on his lap, C.wants to get on the bed, D.point to the video recorder, E.follow the instructions.",
+        "answers": {
+            "good_anwsers": [
+                "The boy crosses his legs on the bed while playing the keyboard. This action could be due to comfort, habit, or simply to maintain balance while sitting in that position. It may also be a sign of relaxation or concentration while engaging in the activity of playing the keyboard.",
+                "The boy crosses his legs on the bed while playing the keyboard. This action could be due to comfort, habit, or simply to maintain balance while sitting in that position. It may also be a sign of relaxation or concentration while engaging in the activity of playing the keyboard.",
+                "The boy crosses his legs on the bed because he is playing a keyboard."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "2400987326_5",
+        "uid": "2400987326",
+        "qid": 5,
+        "q_type": "TC",
+        "question": "how is the man in grey plaid shirt feeling while talking at the start",
+        "optionA": "worried",
+        "optionB": "terrible",
+        "optionC": "curious",
+        "optionD": "frightened",
+        "optionE": "happy",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1000/2400987326.mp4",
+        "formatted_question": "How is the man in grey plaid shirt feeling while talking at the start? Choose your answer from below selections: A.worried, B.terrible, C.curious, D.frightened, E.happy.",
+        "answers": {
+            "good_anwsers": [
+                "E. happy",
+                "E. happy"
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "E",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "6217597005_5",
+        "uid": "6217597005",
+        "qid": 5,
+        "q_type": "DL",
+        "question": "where is this video taken",
+        "optionA": "playground",
+        "optionB": "sea",
+        "optionC": "zoo",
+        "optionD": "boxing ring",
+        "optionE": "road",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1005/6217597005.mp4",
+        "formatted_question": "Where is this video taken? Choose your answer from below selections: A.playground, B.sea, C.zoo, D.boxing ring, E.road.",
+        "answers": {
+            "good_anwsers": [
+                "E. road",
+                "E. road"
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "E",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "2927552798_2",
+        "uid": "2927552798",
+        "qid": 2,
+        "q_type": "CW",
+        "question": "why did the man in stripes put on his jacket at the door",
+        "optionA": "look cool",
+        "optionB": "prevent it from falling",
+        "optionC": "for fashion",
+        "optionD": "protect from sun",
+        "optionE": "feeling hot",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1026/2927552798.mp4",
+        "formatted_question": "Why did the man in stripes put on his jacket at the door? Choose your answer from below selections: A.look cool, B.prevent it from falling, C.for fashion, D.protect from sun, E.feeling hot.",
+        "answers": {
+            "good_anwsers": [
+                "Unable to determine the reason why the man in stripes put on his jacket at the door based on the current tools available."
+            ],
+            "bad_anwsers": [
+                "Failed to parse",
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "6083954222_4",
+        "uid": "6083954222",
+        "qid": 4,
+        "q_type": "CW",
+        "question": "why did the boy in orange hold a ball on his head",
+        "optionA": "to aim at hoop",
+        "optionB": "want to throw the ball",
+        "optionC": "hitting the blocks",
+        "optionD": "part of performance",
+        "optionE": "pose for photos",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1010/6083954222.mp4",
+        "formatted_question": "Why did the boy in orange hold a ball on his head? Choose your answer from below selections: A.to aim at hoop, B.want to throw the ball, C.hitting the blocks, D.part of performance, E.pose for photos.",
+        "answers": {
+            "good_anwsers": [
+                "D. part of performance",
+                "D. part of performance",
+                "The reason why the boy in orange held a ball on his head is not explicitly stated in the video/audio content."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "D",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "8903248754_7",
+        "uid": "8903248754",
+        "qid": 7,
+        "q_type": "TC",
+        "question": "what is the other boy doing while the boy with green shorts jumped at the end of the video",
+        "optionA": "catches it back",
+        "optionB": "lean over to man",
+        "optionC": "throws the ball",
+        "optionD": "looking at the boy",
+        "optionE": "fold his arms",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1102/8903248754.mp4",
+        "formatted_question": "What is the other boy doing while the boy with green shorts jumped at the end of the video? Choose your answer from below selections: A.catches it back, B.lean over to man, C.throws the ball, D.looking at the boy, E.fold his arms.",
+        "answers": {
+            "good_anwsers": [
+                "A. catches it back",
+                "It is not possible to determine what the other boy is doing while the boy with green shorts jumped at the end of the video.",
+                "A. catches it back"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "A",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "2857624971_6",
+        "uid": "2857624971",
+        "qid": 6,
+        "q_type": "CW",
+        "question": "why are there bubbles coming from the divers mouth",
+        "optionA": "fell off their jetski",
+        "optionB": "resistance from water",
+        "optionC": "oxygen",
+        "optionD": "beach",
+        "optionE": "they are breathing",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0030/2857624971.mp4",
+        "formatted_question": "Why are there bubbles coming from the divers mouth? Choose your answer from below selections: A.fell off their jetski, B.resistance from water, C.oxygen, D.beach, E.they are breathing.",
+        "answers": {
+            "good_anwsers": [
+                "The bubbles are coming from the diver's mouth because they are breathing while scuba diving underwater.",
+                "The bubbles are coming from the diver's mouth.",
+                "There are bubbles coming from the diver's mouth because the diver is likely scuba diving underwater and exhaling air from their breathing equipment."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "2934685860_11",
+        "uid": "2934685860",
+        "qid": 11,
+        "q_type": "TN",
+        "question": "why did the woman walk back towards the stroller after the kid moved away from the fence at the end",
+        "optionA": "ignores",
+        "optionB": "follow girl in pink",
+        "optionC": "hold hands and move in circles together",
+        "optionD": "kiss the boy",
+        "optionE": "to push stroller",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1201/2934685860.mp4",
+        "formatted_question": "Why did the woman walk back towards the stroller after the kid moved away from the fence at the end? Choose your answer from below selections: A.ignores, B.follow girl in pink, C.hold hands and move in circles together, D.kiss the boy, E.to push stroller.",
+        "answers": {
+            "good_anwsers": [
+                "The woman walked back towards the stroller to push it.",
+                "The woman walked back towards the stroller after the kid moved away from the fence at the end because she wanted to check on the baby.",
+                "E. to push stroller."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "E",
+        "is_correct": true,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "5868055864_1",
+        "uid": "5868055864",
+        "qid": 1,
+        "q_type": "DO",
+        "question": "how is the baby positioned in the video",
+        "optionA": "in the man s arm",
+        "optionB": "sitting",
+        "optionC": "on baby seat",
+        "optionD": "standing",
+        "optionE": "in the cradle",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1019/5868055864.mp4",
+        "formatted_question": "How is the baby positioned in the video? Choose your answer from below selections: A.in the man s arm, B.sitting, C.on baby seat, D.standing, E.in the cradle.",
+        "answers": {
+            "good_anwsers": [
+                "A. in the man's arm",
+                "A. in the man's arm"
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "A",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "5858839474_9",
+        "uid": "5858839474",
+        "qid": 9,
+        "q_type": "CH",
+        "question": "how did the boy in stripped open the book to see its contents",
+        "optionA": "with a bookmark",
+        "optionB": "asked the girl for help",
+        "optionC": "observe the book",
+        "optionD": "flip the pages",
+        "optionE": "stare at the book",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1023/5858839474.mp4",
+        "formatted_question": "How did the boy in stripped open the book to see its contents? Choose your answer from below selections: A.with a bookmark, B.asked the girl for help, C.observe the book, D.flip the pages, E.stare at the book.",
+        "answers": {
+            "good_anwsers": [
+                "The boy in stripped did not open the book to see its contents.",
+                "The boy in stripped opened the book to see its contents by flipping the pages.",
+                "The boy in stripped opened the book to see its contents by flipping the pages."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "5721638917_9",
+        "uid": "5721638917",
+        "qid": 9,
+        "q_type": "CW",
+        "question": "why was the dog waiting at the other side of the room near the middle of the video",
+        "optionA": "looking for food",
+        "optionB": "waiting for frisbee game",
+        "optionC": "waiting to fetch ball",
+        "optionD": "waiting for sheeps",
+        "optionE": "waiting for another dog",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1017/5721638917.mp4",
+        "formatted_question": "Why was the dog waiting at the other side of the room near the middle of the video? Choose your answer from below selections: A.looking for food, B.waiting for frisbee game, C.waiting to fetch ball, D.waiting for sheeps, E.waiting for another dog.",
+        "answers": {
+            "good_anwsers": [
+                "The dog was running around in the living room.",
+                "Unable to determine why the dog was waiting at the other side of the room near the middle of the video."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "4567287291_2",
+        "uid": "4567287291",
+        "qid": 2,
+        "q_type": "TC",
+        "question": "what is the person on the bed doing as the baby plays",
+        "optionA": "lying",
+        "optionB": "standing and moving hands",
+        "optionC": "takes support",
+        "optionD": "happy",
+        "optionE": "sleeping",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1024/4567287291.mp4",
+        "formatted_question": "What is the person on the bed doing as the baby plays? Choose your answer from below selections: A.lying, B.standing and moving hands, C.takes support, D.happy, E.sleeping.",
+        "answers": {
+            "good_anwsers": [
+                "A. lying",
+                "A. lying.",
+                "A. lying"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "A",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "4400119620_5",
+        "uid": "4400119620",
+        "qid": 5,
+        "q_type": "TN",
+        "question": "what did the man in spectacles do after the couple linked arms",
+        "optionA": "start writing",
+        "optionB": "hands him a bottle",
+        "optionC": "gesture for them to move forward",
+        "optionD": "turn back",
+        "optionE": "start performing",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1021/4400119620.mp4",
+        "formatted_question": "What did the man in spectacles do after the couple linked arms? Choose your answer from below selections: A.start writing, B.hands him a bottle, C.gesture for them to move forward, D.turn back, E.start performing.",
+        "answers": {
+            "good_anwsers": [
+                "E. start performing.",
+                "D. turn back",
+                "E. start performing."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "E",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "9186559718_0",
+        "uid": "9186559718",
+        "qid": 0,
+        "q_type": "DO",
+        "question": "what are the colourful objects in the bathtub with the baby",
+        "optionA": "duck toy",
+        "optionB": "bathball",
+        "optionC": "bathtub",
+        "optionD": "toys",
+        "optionE": "bird",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1124/9186559718.mp4",
+        "formatted_question": "What are the colourful objects in the bathtub with the baby? Choose your answer from below selections: A.duck toy, B.bathball, C.bathtub, D.toys, E.bird.",
+        "answers": {
+            "good_anwsers": [
+                "D. toys",
+                "D. toys"
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "D",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "9337790459_4",
+        "uid": "9337790459",
+        "qid": 4,
+        "q_type": "DL",
+        "question": "where is this video taken",
+        "optionA": "garden",
+        "optionB": "field",
+        "optionC": "dinning table",
+        "optionD": "along the streets",
+        "optionE": "lake",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1024/9337790459.mp4",
+        "formatted_question": "Where is this video taken? Choose your answer from below selections: A.garden, B.field, C.dinning table, D.along the streets, E.lake.",
+        "answers": {
+            "good_anwsers": [
+                "The video is taken in a garden.",
+                "The video is taken in a garden.",
+                "The video was taken in a garden."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "5085607670_4",
+        "uid": "5085607670",
+        "qid": 4,
+        "q_type": "TC",
+        "question": "how do the people on stage react when the lady in green makes a dance move",
+        "optionA": "followed her dance steps",
+        "optionB": "smile",
+        "optionC": "touch their hair band",
+        "optionD": "lie on floor",
+        "optionE": "move away",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1201/5085607670.mp4",
+        "formatted_question": "How do the people on stage react when the lady in green makes a dance move? Choose your answer from below selections: A.followed her dance steps, B.smile, C.touch their hair band, D.lie on floor, E.move away.",
+        "answers": {
+            "good_anwsers": [
+                "The people on stage are performing when the lady in green makes a dance move.",
+                "The people on stage are performing when the lady in green makes a dance move."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "6096381083_1",
+        "uid": "6096381083",
+        "qid": 1,
+        "q_type": "CH",
+        "question": "how does the woman in spectacles project her voice",
+        "optionA": "use poles",
+        "optionB": "singing into toy mike",
+        "optionC": "use microphone",
+        "optionD": "doing show and tell",
+        "optionE": "strum the guitar",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1014/6096381083.mp4",
+        "formatted_question": "How does the woman in spectacles project her voice? Choose your answer from below selections: A.use poles, B.singing into toy mike, C.use microphone, D.doing show and tell, E.strum the guitar.",
+        "answers": {
+            "good_anwsers": [
+                "C. use microphone",
+                "B. singing into toy mike"
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "C",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "12031151404_2",
+        "uid": "12031151404",
+        "qid": 2,
+        "q_type": "CW",
+        "question": "why did the guy put his left leg on the steps",
+        "optionA": "play game",
+        "optionB": "as support",
+        "optionC": "posing",
+        "optionD": "try to kick her",
+        "optionE": "pedalling bicycle",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1022/12031151404.mp4",
+        "formatted_question": "Why did the guy put his left leg on the steps? Choose your answer from below selections: A.play game, B.as support, C.posing, D.try to kick her, E.pedalling bicycle.",
+        "answers": {
+            "good_anwsers": [
+                "B. as support",
+                "To determine why the guy put his left leg on the steps, I need to watch the video directly.",
+                "The reason why the guy put his left leg on the steps is not clear from the available information."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "B",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "5806747559_7",
+        "uid": "5806747559",
+        "qid": 7,
+        "q_type": "TN",
+        "question": "what does the woman do after opening the notes on her hands",
+        "optionA": "smile",
+        "optionB": "jump",
+        "optionC": "stood up",
+        "optionD": "walk to camera",
+        "optionE": "stands up",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1107/5806747559.mp4",
+        "formatted_question": "What does the woman do after opening the notes on her hands? Choose your answer from below selections: A.smile, B.jump, C.stood up, D.walk to camera, E.stands up.",
+        "answers": {
+            "good_anwsers": [
+                "E. stands up.",
+                "The woman likely stands up after opening the notes on her hands.",
+                "The woman likely stands up after opening the notes on her hands."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "E",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "2640440327_5",
+        "uid": "2640440327",
+        "qid": 5,
+        "q_type": "CW",
+        "question": "why did the lady on the right look away at the end",
+        "optionA": "speak to all audiences",
+        "optionB": "laugh",
+        "optionC": "watch for girl in pink",
+        "optionD": "play with things on floor",
+        "optionE": "looking at tickets",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1099/2640440327.mp4",
+        "formatted_question": "Why did the lady on the right look away at the end? Choose your answer from below selections: A.speak to all audiences, B.laugh, C.watch for girl in pink, D.play with things on floor, E.looking at tickets.",
+        "answers": {
+            "good_anwsers": [
+                "The lady on the right looked away at the end because she was looking at tickets.",
+                "E. looking at tickets."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "E",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "6595307655_4",
+        "uid": "6595307655",
+        "qid": 4,
+        "q_type": "CW",
+        "question": "why is the lighter brown dog lying on the floor at the start of the video",
+        "optionA": "imbalanced",
+        "optionB": "sniffing the ground",
+        "optionC": "playing",
+        "optionD": "waiting for treats",
+        "optionE": "playing with sheep",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1009/6595307655.mp4",
+        "formatted_question": "Why is the lighter brown dog lying on the floor at the start of the video? Choose your answer from below selections: A.imbalanced, B.sniffing the ground, C.playing, D.waiting for treats, E.playing with sheep.",
+        "answers": {
+            "good_anwsers": [
+                "Unable to determine why the lighter brown dog is lying on the floor at the start of the video.",
+                "Unable to determine why the lighter brown dog is lying on the floor at the start of the video.",
+                "The reason why the lighter brown dog is lying on the floor at the start of the video is not clear based on the available tools."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "3866633650_2",
+        "uid": "3866633650",
+        "qid": 2,
+        "q_type": "CW",
+        "question": "why did the boy in pink towel hit the sand on his leg with the spade after putting sand on top",
+        "optionA": "remove the sand",
+        "optionB": "moving with the rhythm",
+        "optionC": "to return ball to thrower",
+        "optionD": "stablize the sand",
+        "optionE": "makes boy happy",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0048/3866633650.mp4",
+        "formatted_question": "Why did the boy in pink towel hit the sand on his leg with the spade after putting sand on top? Choose your answer from below selections: A.remove the sand, B.moving with the rhythm, C.to return ball to thrower, D.stablize the sand, E.makes boy happy.",
+        "answers": {
+            "good_anwsers": [
+                "The reason why the boy in the pink towel hit the sand on his leg with the spade after putting sand on top is unclear based on the tools used.",
+                "The boy in pink towel hit the sand on his leg with the spade after putting sand on top because he was playing in the sand.",
+                "Unable to determine why the boy in pink towel hit the sand on his leg with the spade after putting sand on top from the given video."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "4136860893_0",
+        "uid": "4136860893",
+        "qid": 0,
+        "q_type": "CH",
+        "question": "how are the boys eating the ice cream",
+        "optionA": "turn and twist it",
+        "optionB": "lady feed",
+        "optionC": "left hand",
+        "optionD": "use fork",
+        "optionE": "with the spoon",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1203/4136860893.mp4",
+        "formatted_question": "How are the boys eating the ice cream? Choose your answer from below selections: A.turn and twist it, B.lady feed, C.left hand, D.use fork, E.with the spoon.",
+        "answers": {
+            "good_anwsers": [
+                "C. left hand",
+                "C. left hand, or E. with the spoon."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "C",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "9069281283_0",
+        "uid": "9069281283",
+        "qid": 0,
+        "q_type": "TN",
+        "question": "what does the man in the middle do after climbing up the stairs",
+        "optionA": "look at camera",
+        "optionB": "walked off",
+        "optionC": "walks in",
+        "optionD": "touched his shoulders",
+        "optionE": "look down",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1107/9069281283.mp4",
+        "formatted_question": "What does the man in the middle do after climbing up the stairs? Choose your answer from below selections: A.look at camera, B.walked off, C.walks in, D.touched his shoulders, E.look down.",
+        "answers": {
+            "good_anwsers": [
+                "The man in the middle opens a bottle after cleaning the windows.",
+                "D. touched his shoulders",
+                "The man in the middle cleans windows after climbing up the stairs."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "D",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "8997865396_7",
+        "uid": "8997865396",
+        "qid": 7,
+        "q_type": "TN",
+        "question": "how does the cat react after being tickled for a long time",
+        "optionA": "look at bird",
+        "optionB": "lift its head up",
+        "optionC": "climb up and touch the screen",
+        "optionD": "turns away",
+        "optionE": "distracted by something",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0036/8997865396.mp4",
+        "formatted_question": "How does the cat react after being tickled for a long time? Choose your answer from below selections: A.look at bird, B.lift its head up, C.climb up and touch the screen, D.turns away, E.distracted by something.",
+        "answers": {
+            "good_anwsers": [
+                "The cat reacts by being petted after being tickled for a long time.",
+                "The cat reacts by being petted after being tickled for a long time."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "5585306763_5",
+        "uid": "5585306763",
+        "qid": 5,
+        "q_type": "CW",
+        "question": "why was the bald headed man unable to catch the ball after the the boy with red pants threw ball",
+        "optionA": "throw too high up",
+        "optionB": "not ready for the game",
+        "optionC": "to defend his team",
+        "optionD": "ball was thrown to another side",
+        "optionE": "hands were occupied",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1008/5585306763.mp4",
+        "formatted_question": "Why was the bald headed man unable to catch the ball after the the boy with red pants threw ball? Choose your answer from below selections: A.throw too high up, B.not ready for the game, C.to defend his team, D.ball was thrown to another side, E.hands were occupied.",
+        "answers": {
+            "good_anwsers": [
+                "E. hands were occupied.",
+                "The reason why the bald headed man was unable to catch the ball after the boy with red pants threw it is not provided in the video.",
+                "B. not ready for the game"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "E",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "13559530235_4",
+        "uid": "13559530235",
+        "qid": 4,
+        "q_type": "CW",
+        "question": "why are there wires connected from the picture to the laptop",
+        "optionA": "focused on the game",
+        "optionB": "nobody using currently",
+        "optionC": "test duration of computer setting up",
+        "optionD": "show the picture from camera",
+        "optionE": "recording time",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1107/13559530235.mp4",
+        "formatted_question": "Why are there wires connected from the picture to the laptop? Choose your answer from below selections: A.focused on the game, B.nobody using currently, C.test duration of computer setting up, D.show the picture from camera, E.recording time.",
+        "answers": {
+            "good_anwsers": [
+                "There are no wires connected from the picture to the laptop in the video.",
+                "There are no wires connected from the picture to the laptop in the video.",
+                "There are no wires connected from the picture to the laptop in the video."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "5465138661_1",
+        "uid": "5465138661",
+        "qid": 1,
+        "q_type": "CW",
+        "question": "why does the girl in jeans bend down at the start of the video",
+        "optionA": "dance move",
+        "optionB": "prevent jeans from getting wet",
+        "optionC": "tired of bouncing",
+        "optionD": "play with baby",
+        "optionE": "pick up snow",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1014/5465138661.mp4",
+        "formatted_question": "Why does the girl in jeans bend down at the start of the video? Choose your answer from below selections: A.dance move, B.prevent jeans from getting wet, C.tired of bouncing, D.play with baby, E.pick up snow.",
+        "answers": {
+            "good_anwsers": [
+                "D. play with baby",
+                "The reason why the girl in jeans bends down at the start of the video is not clear, but it could be related to playing with toys or picking something up from the ground."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "D",
+        "is_correct": true,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "9583453634_1",
+        "uid": "9583453634",
+        "qid": 1,
+        "q_type": "TN",
+        "question": "how did the man react after the crocodile open its mouth near him",
+        "optionA": "ran behind",
+        "optionB": "excited",
+        "optionC": "make it do tricks",
+        "optionD": "lifts up his leg",
+        "optionE": "straighten up his legs",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1161/9583453634.mp4",
+        "formatted_question": "How did the man react after the crocodile open its mouth near him? Choose your answer from below selections: A.ran behind, B.excited, C.make it do tricks, D.lifts up his leg, E.straighten up his legs.",
+        "answers": {
+            "good_anwsers": [
+                "The man's reaction to the crocodile opening its mouth near him is not explicitly stated or available in the data provided.",
+                "The man did not react after the crocodile opened its mouth near him.",
+                "The man's reaction to the crocodile opening its mouth near him is not clear based on the available information."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "13312922233_7",
+        "uid": "13312922233",
+        "qid": 7,
+        "q_type": "TN",
+        "question": "what did the boy do after putting his finger to his mouth",
+        "optionA": "bend his back",
+        "optionB": "reach for the airconditioners",
+        "optionC": "move cameras",
+        "optionD": "touch the cat",
+        "optionE": "open his palm",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1008/13312922233.mp4",
+        "formatted_question": "What did the boy do after putting his finger to his mouth? Choose your answer from below selections: A.bend his back, B.reach for the airconditioners, C.move cameras, D.touch the cat, E.open his palm.",
+        "answers": {
+            "good_anwsers": [
+                "There is no audio or visual content available to determine what the boy did after putting his finger to his mouth.",
+                "D. touch the cat",
+                "Final answer here"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "D",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "4004287747_8",
+        "uid": "4004287747",
+        "qid": 8,
+        "q_type": "DO",
+        "question": "whose birthday are the people celebrating for",
+        "optionA": "lady in dotted shirt",
+        "optionB": "man in red pants",
+        "optionC": "rainforest rescue organization",
+        "optionD": "man in green",
+        "optionE": "the lady in black",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1160/4004287747.mp4",
+        "formatted_question": "Whose birthday are the people celebrating for? Choose your answer from below selections: A.lady in dotted shirt, B.man in red pants, C.rainforest rescue organization, D.man in green, E.the lady in black.",
+        "answers": {
+            "good_anwsers": [
+                "The people are celebrating the man in green's birthday.",
+                "The people are celebrating the man's birthday."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "7835628046_7",
+        "uid": "7835628046",
+        "qid": 7,
+        "q_type": "TN",
+        "question": "what does the boy do after bending down",
+        "optionA": "play with toy",
+        "optionB": "performing",
+        "optionC": "lean and look forward",
+        "optionD": "touch man s hoodie",
+        "optionE": "water ride",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1102/7835628046.mp4",
+        "formatted_question": "What does the boy do after bending down? Choose your answer from below selections: A.play with toy, B.performing, C.lean and look forward, D.touch man s hoodie, E.water ride.",
+        "answers": {
+            "good_anwsers": [
+                "The boy skips rope after bending down.",
+                "The boy skips rope after bending down.",
+                "The boy skips rope after bending down."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "3227968260_4",
+        "uid": "3227968260",
+        "qid": 4,
+        "q_type": "TN",
+        "question": "how did the two women react after the woman in stripes released their hand at the start of the video",
+        "optionA": "start pushing and wrestling",
+        "optionB": "touch her eyes",
+        "optionC": "roll on her back",
+        "optionD": "open her eyes",
+        "optionE": "tilt head forward",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0099/3227968260.mp4",
+        "formatted_question": "How did the two women react after the woman in stripes released their hand at the start of the video? Choose your answer from below selections: A.start pushing and wrestling, B.touch her eyes, C.roll on her back, D.open her eyes, E.tilt head forward.",
+        "answers": {
+            "good_anwsers": [
+                "The two women did not react in the ways listed in the answer choices.",
+                "A. start pushing and wrestling",
+                "None of the above."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "A",
+        "is_correct": true,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "3396663702_2",
+        "uid": "3396663702",
+        "qid": 2,
+        "q_type": "CW",
+        "question": "why does the baby keeps moving his hands and legs after falling",
+        "optionA": "move closer to him",
+        "optionB": "play with the toy",
+        "optionC": "fidgeting",
+        "optionD": "sleepy",
+        "optionE": "new to walking",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1019/3396663702.mp4",
+        "formatted_question": "Why does the baby keeps moving his hands and legs after falling? Choose your answer from below selections: A.move closer to him, B.play with the toy, C.fidgeting, D.sleepy, E.new to walking.",
+        "answers": {
+            "good_anwsers": [
+                "The baby keeps moving his hands and legs after falling because he is likely trying to regain balance or adjust his position.",
+                "The baby keeps moving his hands and legs after falling because he is likely trying to regain balance or adjust his position.",
+                "The baby keeps moving his hands and legs after falling because he is likely trying to regain balance or adjust his position. Babies often move their limbs to explore their surroundings or react to stimuli, so the movement could be a natural reflex in response to the fall."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "B",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "9338319433_0",
+        "uid": "9338319433",
+        "qid": 0,
+        "q_type": "CW",
+        "question": "why did the men wear helmets",
+        "optionA": "flying fox",
+        "optionB": "playing baseball",
+        "optionC": "skateboarding",
+        "optionD": "working",
+        "optionE": "cycling",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1025/9338319433.mp4",
+        "formatted_question": "Why did the men wear helmets? Choose your answer from below selections: A.flying fox, B.playing baseball, C.skateboarding, D.working, E.cycling.",
+        "answers": {
+            "good_anwsers": [
+                "D. working",
+                "D. working",
+                "The men wore helmets because they were engaged in rock climbing."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "D",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "4527426680_9",
+        "uid": "4527426680",
+        "qid": 9,
+        "q_type": "TC",
+        "question": "how does the girl react while watching the blanket",
+        "optionA": "walk away",
+        "optionB": "bend down",
+        "optionC": "show his bottle to camera",
+        "optionD": "relaxed",
+        "optionE": "laugh",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1028/4527426680.mp4",
+        "formatted_question": "How does the girl react while watching the blanket? Choose your answer from below selections: A.walk away, B.bend down, C.show his bottle to camera, D.relaxed, E.laugh.",
+        "answers": {
+            "good_anwsers": [
+                "The girl reacts by hugging while watching the blanket.",
+                "The girl reacts by being relaxed."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "3552516882_7",
+        "uid": "3552516882",
+        "qid": 7,
+        "q_type": "DL",
+        "question": "where is this place",
+        "optionA": "bus terminal",
+        "optionB": "outdoors",
+        "optionC": "kitchen",
+        "optionD": "house",
+        "optionE": "waterfall",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1014/3552516882.mp4",
+        "formatted_question": "Where is this place? Choose your answer from below selections: A.bus terminal, B.outdoors, C.kitchen, D.house, E.waterfall.",
+        "answers": {
+            "good_anwsers": [
+                "D. house",
+                "D. house",
+                "D. house"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "D",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "5176535833_1",
+        "uid": "5176535833",
+        "qid": 1,
+        "q_type": "CW",
+        "question": "why did the girls throw the crushed papers from the box around",
+        "optionA": "to clean the floor",
+        "optionB": "to draw on the paper",
+        "optionC": "paper blocking them",
+        "optionD": "to play with dog",
+        "optionE": "easier to put things in",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1023/5176535833.mp4",
+        "formatted_question": "Why did the girls throw the crushed papers from the box around? Choose your answer from below selections: A.to clean the floor, B.to draw on the paper, C.paper blocking them, D.to play with dog, E.easier to put things in.",
+        "answers": {
+            "good_anwsers": [
+                "The reason why the girls threw the crushed papers from the box around is not evident in the video.",
+                "The reason for the girls throwing the crushed papers from the box around is not provided in the video.",
+                "The reason why the girls threw the crushed papers from the box around is not clear from the available information."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "5436130345_2",
+        "uid": "5436130345",
+        "qid": 2,
+        "q_type": "CW",
+        "question": "why does the boy put his tongue out towards the end",
+        "optionA": "to throw out",
+        "optionB": "playful",
+        "optionC": "speak to someone",
+        "optionD": "finish singing",
+        "optionE": "show by man in black",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1160/5436130345.mp4",
+        "formatted_question": "Why does the boy put his tongue out towards the end? Choose your answer from below selections: A.to throw out, B.playful, C.speak to someone, D.finish singing, E.show by man in black.",
+        "answers": {
+            "good_anwsers": [
+                "B. playful",
+                "The boy puts his tongue out towards the end as a playful gesture or reaction to something happening in the video.",
+                "The boy puts his tongue out towards the end playfully."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "B",
+        "is_correct": true,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "6624894833_6",
+        "uid": "6624894833",
+        "qid": 6,
+        "q_type": "TN",
+        "question": "what does the white car in front do after driving in one lane for a while",
+        "optionA": "watching the other car",
+        "optionB": "stays still",
+        "optionC": "look at police car",
+        "optionD": "change lane",
+        "optionE": "watch jeep",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1008/6624894833.mp4",
+        "formatted_question": "What does the white car in front do after driving in one lane for a while? Choose your answer from below selections: A.watching the other car, B.stays still, C.look at police car, D.change lane, E.watch jeep.",
+        "answers": {
+            "good_anwsers": [
+                "D. change lane",
+                "The white car in front continues driving after driving in one lane for a while.",
+                "The white car in front continues driving after driving in one lane for a while."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "D",
+        "is_correct": true,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "3023021780_3",
+        "uid": "3023021780",
+        "qid": 3,
+        "q_type": "CW",
+        "question": "why does the girl raise her arm higher up at the end",
+        "optionA": "moving baby s hands",
+        "optionB": "playing",
+        "optionC": "holding the dog s collar",
+        "optionD": "adjusting self stick",
+        "optionE": "interacting with audience",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1164/3023021780.mp4",
+        "formatted_question": "Why does the girl raise her arm higher up at the end? Choose your answer from below selections: A.moving baby s hands, B.playing, C.holding the dog s collar, D.adjusting self stick, E.interacting with audience.",
+        "answers": {
+            "good_anwsers": [
+                "The reason why the girl raises her arm higher up at the end of the video is unknown based on the available tools.",
+                "The reason why the girl raises her arm higher up at the end of the video could not be determined through the tools provided.",
+                "I need to watch the video directly to understand why the girl raises her arm higher up at the end."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "12464813773_1",
+        "uid": "12464813773",
+        "qid": 1,
+        "q_type": "TC",
+        "question": "what is the pink colour board the pink girl is holding for",
+        "optionA": "swinging her arms",
+        "optionB": "sleigh",
+        "optionC": "smiling",
+        "optionD": "look back",
+        "optionE": "happy",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1102/12464813773.mp4",
+        "formatted_question": "What is the pink colour board the pink girl is holding for? Choose your answer from below selections: A.swinging her arms, B.sleigh, C.smiling, D.look back, E.happy.",
+        "answers": {
+            "good_anwsers": [
+                "B. sleigh",
+                "B.sleigh",
+                "B. sleigh"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "B",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "11396390844_4",
+        "uid": "11396390844",
+        "qid": 4,
+        "q_type": "CW",
+        "question": "why are the two men staring downwards",
+        "optionA": "look at the book",
+        "optionB": "adjust something",
+        "optionC": "taking photos",
+        "optionD": "looking at paper",
+        "optionE": "look at the cameraman",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1021/11396390844.mp4",
+        "formatted_question": "Why are the two men staring downwards? Choose your answer from below selections: A.look at the book, B.adjust something, C.taking photos, D.looking at paper, E.look at the cameraman.",
+        "answers": {
+            "good_anwsers": [
+                "D. looking at paper",
+                "D. looking at paper",
+                "B. adjust something."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "D",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "2408143908_4",
+        "uid": "2408143908",
+        "qid": 4,
+        "q_type": "CW",
+        "question": "why does the man in red helmet keep staring into the trees in the middle of the video",
+        "optionA": "to video him",
+        "optionB": "adjust screen",
+        "optionC": "adjust aim",
+        "optionD": "look at something",
+        "optionE": "look at man doing flying fox",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0019/2408143908.mp4",
+        "formatted_question": "Why does the man in red helmet keep staring into the trees in the middle of the video? Choose your answer from below selections: A.to video him, B.adjust screen, C.adjust aim, D.look at something, E.look at man doing flying fox.",
+        "answers": {
+            "good_anwsers": [
+                "The man in the red helmet keeps staring into the trees in the middle of the video because he is riding a zipline in the jungle, possibly to ensure his safety and navigate the course effectively.",
+                "The man in the red helmet keeps staring into the trees in the middle of the video because he is riding a zipline in the jungle.",
+                "The man in the red helmet keeps staring into the trees in the middle of the video because he is riding a zipline in the jungle."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "4704253964_3",
+        "uid": "4704253964",
+        "qid": 3,
+        "q_type": "CW",
+        "question": "why does the lady in white turns back near the end",
+        "optionA": "hold the bowl",
+        "optionB": "talking to cameraman",
+        "optionC": "engage the audience",
+        "optionD": "to get her glass refilled",
+        "optionE": "hold the bottle",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1019/4704253964.mp4",
+        "formatted_question": "Why does the lady in white turns back near the end? Choose your answer from below selections: A.hold the bowl, B.talking to cameraman, C.engage the audience, D.to get her glass refilled, E.hold the bottle.",
+        "answers": {
+            "good_anwsers": [
+                "The lady in white is cleaning windows when she turns back near the end.",
+                "The lady in white turns back near the end likely due to a reaction to something or someone behind her."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "5558701375_6",
+        "uid": "5558701375",
+        "qid": 6,
+        "q_type": "TN",
+        "question": "what does the lady in green do after the girl walks away at the start",
+        "optionA": "look at camera",
+        "optionB": "she bows twice",
+        "optionC": "push the board away",
+        "optionD": "lie on the ground",
+        "optionE": "follow girl",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1021/5558701375.mp4",
+        "formatted_question": "What does the lady in green do after the girl walks away at the start? Choose your answer from below selections: A.look at camera, B.she bows twice, C.push the board away, D.lie on the ground, E.follow girl.",
+        "answers": {
+            "good_anwsers": [
+                "The lady in green is standing in the woods after the girl walks away at the start.",
+                "None of the above",
+                "The lady in green is standing in the woods after the girl walks away at the start."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "11049178966_2",
+        "uid": "11049178966",
+        "qid": 2,
+        "q_type": "TN",
+        "question": "what does the man do after putting the cup of water down",
+        "optionA": "stops drinking",
+        "optionB": "start playing the instruments",
+        "optionC": "swirl the drink",
+        "optionD": "smile",
+        "optionE": "closes the tap",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1016/11049178966.mp4",
+        "formatted_question": "What does the man do after putting the cup of water down? Choose your answer from below selections: A.stops drinking, B.start playing the instruments, C.swirl the drink, D.smile, E.closes the tap.",
+        "answers": {
+            "good_anwsers": [
+                "The man is singing.",
+                "The man is singing after putting the cup of water down.",
+                "The man is singing."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "3537017298_6",
+        "uid": "3537017298",
+        "qid": 6,
+        "q_type": "TC",
+        "question": "what activity is being carried out",
+        "optionA": "fencing",
+        "optionB": "eating",
+        "optionC": "printing",
+        "optionD": "presentation",
+        "optionE": "woman talking to the crowd",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1052/3537017298.mp4",
+        "formatted_question": "What activity is being carried out? Choose your answer from below selections: A.fencing, B.eating, C.printing, D.presentation, E.woman talking to the crowd.",
+        "answers": {
+            "good_anwsers": [
+                "B. eating",
+                "B. eating",
+                "B. eating"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "B",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "5996570774_8",
+        "uid": "5996570774",
+        "qid": 8,
+        "q_type": "TC",
+        "question": "how is the woman feeling while playing with the girl in grey",
+        "optionA": "bored",
+        "optionB": "embarrassed",
+        "optionC": "scared",
+        "optionD": "enjoyable",
+        "optionE": "blessed",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1009/5996570774.mp4",
+        "formatted_question": "How is the woman feeling while playing with the girl in grey? Choose your answer from below selections: A.bored, B.embarrassed, C.scared, D.enjoyable, E.blessed.",
+        "answers": {
+            "good_anwsers": [
+                "The woman is feeling enjoyable while playing with the girl in grey.",
+                "B.embarrassed"
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "B",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "2407008208_4",
+        "uid": "2407008208",
+        "qid": 4,
+        "q_type": "CW",
+        "question": "why do the divers wear goggles",
+        "optionA": "to get onto the boat",
+        "optionB": "showering the dog",
+        "optionC": "cooling",
+        "optionD": "see better underwater",
+        "optionE": "oxygen",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0063/2407008208.mp4",
+        "formatted_question": "Why do the divers wear goggles? Choose your answer from below selections: A.to get onto the boat, B.showering the dog, C.cooling, D.see better underwater, E.oxygen.",
+        "answers": {
+            "good_anwsers": [
+                "D. to see better underwater",
+                "D. to see better underwater",
+                "D. see better underwater."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "D",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "6247230354_10",
+        "uid": "6247230354",
+        "qid": 10,
+        "q_type": "TC",
+        "question": "what are the people doing in the video",
+        "optionA": "paragliding",
+        "optionB": "playing guitars",
+        "optionC": "climbing tree",
+        "optionD": "trekking",
+        "optionE": "buying drink",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1019/6247230354.mp4",
+        "formatted_question": "What are the people doing in the video? Choose your answer from below selections: A.paragliding, B.playing guitars, C.climbing tree, D.trekking, E.buying drink.",
+        "answers": {
+            "good_anwsers": [
+                "A. paragliding",
+                "A. sled dog racing, E. feeding birds",
+                "A. sled dog racing, E. feeding birds"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "A",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "2413341572_4",
+        "uid": "2413341572",
+        "qid": 4,
+        "q_type": "CW",
+        "question": "why does the man in red hoodie put his both hands up nearing the end",
+        "optionA": "instructed by bespectacled man",
+        "optionB": "need to play the drum",
+        "optionC": "acknowledge",
+        "optionD": "on ship",
+        "optionE": "tourist",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0077/2413341572.mp4",
+        "formatted_question": "Why does the man in red hoodie put his both hands up nearing the end? Choose your answer from below selections: A.instructed by bespectacled man, B.need to play the drum, C.acknowledge, D.on ship, E.tourist.",
+        "answers": {
+            "good_anwsers": [
+                "The man in the red hoodie puts his both hands up nearing the end because the visual content at that time shows someone holding a cloth in their hand on the sidewalk.",
+                "The man in the red hoodie puts his both hands up nearing the end because he is surrendering.",
+                "None of the above choices; he put his hands up because he was holding a cloth in his hand on the sidewalk."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "9069281283_1",
+        "uid": "9069281283",
+        "qid": 1,
+        "q_type": "TC",
+        "question": "what did the man in black do as the man in brown walked up the stairs",
+        "optionA": "eat the jelly",
+        "optionB": "watch him",
+        "optionC": "camera",
+        "optionD": "happy",
+        "optionE": "look towards the man speaking",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1107/9069281283.mp4",
+        "formatted_question": "What did the man in black do as the man in brown walked up the stairs? Choose your answer from below selections: A.eat the jelly, B.watch him, C.camera, D.happy, E.look towards the man speaking.",
+        "answers": {
+            "good_anwsers": [
+                "A. eat the jelly",
+                "B. watch him",
+                "The information about what the man in black did as the man in brown walked up the stairs is not available in the video provided."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "A",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "10542271055_5",
+        "uid": "10542271055",
+        "qid": 5,
+        "q_type": "TN",
+        "question": "what did the girl in brown do after the girl in blue pointed at a direction in the middle of the video",
+        "optionA": "smiles at the baby",
+        "optionB": "run away",
+        "optionC": "pick up something",
+        "optionD": "swing her arms",
+        "optionE": "pick up leaves",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1025/10542271055.mp4",
+        "formatted_question": "What did the girl in brown do after the girl in blue pointed at a direction in the middle of the video? Choose your answer from below selections: A.smiles at the baby, B.run away, C.pick up something, D.swing her arms, E.pick up leaves.",
+        "answers": {
+            "good_anwsers": [
+                "The girl in brown kissed after the girl in blue pointed at a direction in the middle of the video.",
+                "The girl in brown kissed after the girl in blue pointed at a direction in the middle of the video.",
+                "The girl in brown kissed after the girl in blue pointed at a direction in the middle of the video."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "4154183202_8",
+        "uid": "4154183202",
+        "qid": 8,
+        "q_type": "CH",
+        "question": "how does the girl keep herself from falling down",
+        "optionA": "hold onto toy for support",
+        "optionB": "mask",
+        "optionC": "thick clothes",
+        "optionD": "hold her hand",
+        "optionE": "hold onto table",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1051/4154183202.mp4",
+        "formatted_question": "How does the girl keep herself from falling down? Choose your answer from below selections: A.hold onto toy for support, B.mask, C.thick clothes, D.hold her hand, E.hold onto table.",
+        "answers": {
+            "good_anwsers": [
+                "A. hold onto toy for support.",
+                "A. hold onto toy for support."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "A",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "4943421690_1",
+        "uid": "4943421690",
+        "qid": 1,
+        "q_type": "CH",
+        "question": "how does the girl control the direction of the toy vehicle at the start of the video",
+        "optionA": "pull the rope",
+        "optionB": "hold up string",
+        "optionC": "with support of the toy",
+        "optionD": "turn the handle bars",
+        "optionE": "using her toes",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1110/4943421690.mp4",
+        "formatted_question": "How does the girl control the direction of the toy vehicle at the start of the video? Choose your answer from below selections: A.pull the rope, B.hold up string, C.with support of the toy, D.turn the handle bars, E.using her toes.",
+        "answers": {
+            "good_anwsers": [
+                "D. turn the handle bars",
+                "D. turn the handle bars",
+                "D. turn the handle bars."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "D",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "4828801987_6",
+        "uid": "4828801987",
+        "qid": 6,
+        "q_type": "DO",
+        "question": "what occasion is going to happen",
+        "optionA": "music performance",
+        "optionB": "birthday",
+        "optionC": "prayer",
+        "optionD": "dance",
+        "optionE": "circus",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1009/4828801987.mp4",
+        "formatted_question": "What occasion is going to happen? Choose your answer from below selections: A.music performance, B.birthday, C.prayer, D.dance, E.circus.",
+        "answers": {
+            "good_anwsers": [
+                "A. music performance",
+                "A. music performance",
+                "A. music performance"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "A",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "7722027264_11",
+        "uid": "7722027264",
+        "qid": 11,
+        "q_type": "TC",
+        "question": "what was the groom doing when the bridge was giving her speech at the beginning of the video",
+        "optionA": "run",
+        "optionB": "pull skirt up",
+        "optionC": "looking at bride",
+        "optionD": "pretend to punch him",
+        "optionE": "get out of car",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0061/7722027264.mp4",
+        "formatted_question": "What was the groom doing when the bridge was giving her speech at the beginning of the video? Choose your answer from below selections: A.run, B.pull skirt up, C.looking at bride, D.pretend to punch him, E.get out of car.",
+        "answers": {
+            "good_anwsers": [
+                "C. looking at bride",
+                "C. looking at bride",
+                "C. looking at bride"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "C",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "4254574573_2",
+        "uid": "4254574573",
+        "qid": 2,
+        "q_type": "CW",
+        "question": "why does the user touch the screen",
+        "optionA": "it is a barrier",
+        "optionB": "hand gesture for bear",
+        "optionC": "typing",
+        "optionD": "live webcam",
+        "optionE": "to check the effects",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1155/4254574573.mp4",
+        "formatted_question": "Why does the user touch the screen? Choose your answer from below selections: A.it is a barrier, B.hand gesture for bear, C.typing, D.live webcam, E.to check the effects.",
+        "answers": {
+            "good_anwsers": [
+                "The user touches the screen to interact with the visual content displayed, which includes two cell phones, a cat, and a man on the phone.",
+                "E. to check the effects.",
+                "E. to check the effects."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "E",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "8655296645_8",
+        "uid": "8655296645",
+        "qid": 8,
+        "q_type": "TC",
+        "question": "what does the lady in brown skirt do while the lady in jeans disappears from the video for a while",
+        "optionA": "lean to the side",
+        "optionB": "claps",
+        "optionC": "look at ground",
+        "optionD": "get in the pool",
+        "optionE": "play with baby",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1110/8655296645.mp4",
+        "formatted_question": "What does the lady in brown skirt do while the lady in jeans disappears from the video for a while? Choose your answer from below selections: A.lean to the side, B.claps, C.look at ground, D.get in the pool, E.play with baby.",
+        "answers": {
+            "good_anwsers": [
+                "None of the above.",
+                "The lady in brown skirt is standing in the video while the lady in jeans disappears for a while."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "8260341634_5",
+        "uid": "8260341634",
+        "qid": 5,
+        "q_type": "CH",
+        "question": "how does the baby signal the woman to start moving at the start",
+        "optionA": "holds his hand",
+        "optionB": "jump",
+        "optionC": "bite it",
+        "optionD": "walk around",
+        "optionE": "tugs on her shirt",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1103/8260341634.mp4",
+        "formatted_question": "How does the baby signal the woman to start moving at the start? Choose your answer from below selections: A.holds his hand, B.jump, C.bite it, D.walk around, E.tugs on her shirt.",
+        "answers": {
+            "good_anwsers": [
+                "The baby signals the woman to start moving by playing with a laptop.",
+                "The baby does not signal the woman to start moving at the start.",
+                "A.holds his hand"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "A",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "13514394984_0",
+        "uid": "13514394984",
+        "qid": 0,
+        "q_type": "CW",
+        "question": "why did the short hair girl stand up on the piano chair after playing the piano for awhile",
+        "optionA": "even out cake",
+        "optionB": "to slide from left to right",
+        "optionC": "prevent her from eating",
+        "optionD": "get something from the piano top",
+        "optionE": "make musical sound",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1130/13514394984.mp4",
+        "formatted_question": "Why did the short hair girl stand up on the piano chair after playing the piano for awhile? Choose your answer from below selections: A.even out cake, B.to slide from left to right, C.prevent her from eating, D.get something from the piano top, E.make musical sound.",
+        "answers": {
+            "good_anwsers": [
+                "The short hair girl stood up on the piano chair after playing the piano for a while because she was hula hooping.",
+                "The short hair girl stood up on the piano chair after playing the piano for a while because she was hula hooping.",
+                "The short hair girl stood up on the piano chair after playing the piano for a while because she was playing with a dog."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "2399344595_11",
+        "uid": "2399344595",
+        "qid": 11,
+        "q_type": "DL",
+        "question": "where is this happening",
+        "optionA": "karaoke room",
+        "optionB": "hiking trail",
+        "optionC": "kitchen",
+        "optionD": "cycling trail",
+        "optionE": "room",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0046/2399344595.mp4",
+        "formatted_question": "Where is this happening? Choose your answer from below selections: A.karaoke room, B.hiking trail, C.kitchen, D.cycling trail, E.room.",
+        "answers": {
+            "good_anwsers": [
+                "Location in the video could not be determined.",
+                "Agent stopped due to iteration limit or time limit."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "A",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "4337269702_3",
+        "uid": "4337269702",
+        "qid": 3,
+        "q_type": "CW",
+        "question": "why does one of the small cat keep smelling the cushion in the middle of video",
+        "optionA": "paw got wet",
+        "optionB": "eating",
+        "optionC": "playing with it",
+        "optionD": "happy",
+        "optionE": "change sitting position",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1000/4337269702.mp4",
+        "formatted_question": "Why does one of the small cat keep smelling the cushion in the middle of video? Choose your answer from below selections: A.paw got wet, B.eating, C.playing with it, D.happy, E.change sitting position.",
+        "answers": {
+            "good_anwsers": [
+                "The reason why one of the small cats keeps smelling the cushion in the video is not definitively determined based on the available information.",
+                "The reason why one of the small cats keeps smelling the cushion in the middle of the video is not clear, as it may not be explicitly mentioned in the existing data sources.",
+                "The small cat is likely playing with the cushion in the middle of the video."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "2660007586_8",
+        "uid": "2660007586",
+        "qid": 8,
+        "q_type": "CW",
+        "question": "why is there no other vehicles around the area where the lady stops",
+        "optionA": "off road",
+        "optionB": "pavement to walk",
+        "optionC": "hot sun",
+        "optionD": "instructors",
+        "optionE": "do not want shoe to get wet",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1107/2660007586.mp4",
+        "formatted_question": "Why is there no other vehicles around the area where the lady stops? Choose your answer from below selections: A.off road, B.pavement to walk, C.hot sun, D.instructors, E.do not want shoe to get wet.",
+        "answers": {
+            "good_anwsers": [
+                "Unable to determine the reason for the absence of other vehicles in the video.",
+                "The reason for no other vehicles around the area where the lady stops in the video remains unclear."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "7835844714_11",
+        "uid": "7835844714",
+        "qid": 11,
+        "q_type": "TN",
+        "question": "what does the lady in purple do after the boy and the girl in colorful shirt starts running at the end",
+        "optionA": "dance",
+        "optionB": "walked to wards them",
+        "optionC": "runs with the fog",
+        "optionD": "touch and pat the dog",
+        "optionE": "touch the girl",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1100/7835844714.mp4",
+        "formatted_question": "What does the lady in purple do after the boy and the girl in colorful shirt starts running at the end? Choose your answer from below selections: A.dance, B.walked to wards them, C.runs with the fog, D.touch and pat the dog, E.touch the girl.",
+        "answers": {
+            "good_anwsers": [
+                "C. runs with the frog",
+                "C. runs with the fog.",
+                "C. runs with the fog"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "C",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "5493209281_1",
+        "uid": "5493209281",
+        "qid": 1,
+        "q_type": "CH",
+        "question": "how did the rear light of the car light up near the end of the video",
+        "optionA": "explode",
+        "optionB": "dance",
+        "optionC": "move to their positions",
+        "optionD": "lay on the slide",
+        "optionE": "blink",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1161/5493209281.mp4",
+        "formatted_question": "How did the rear light of the car light up near the end of the video? Choose your answer from below selections: A.explode, B.dance, C.move to their positions, D.lay on the slide, E.blink.",
+        "answers": {
+            "good_anwsers": [
+                "C. move to their positions",
+                "The rear light of the car lit up."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "C",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "5614883965_2",
+        "uid": "5614883965",
+        "qid": 2,
+        "q_type": "CW",
+        "question": "why did the adult touch the cabinet door after the baby sits down",
+        "optionA": "resting",
+        "optionB": "dance",
+        "optionC": "pick up the white thing",
+        "optionD": "prevent baby from bumping head",
+        "optionE": "trying to reach the height",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0048/5614883965.mp4",
+        "formatted_question": "Why did the adult touch the cabinet door after the baby sits down? Choose your answer from below selections: A.resting, B.dance, C.pick up the white thing, D.prevent baby from bumping head, E.trying to reach the height.",
+        "answers": {
+            "good_anwsers": [
+                "The reason for the adult touching the cabinet door after the baby sits down is unknown.",
+                "The reason why the adult touched the cabinet door after the baby sits down is not clear from the video."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "4438105322_8",
+        "uid": "4438105322",
+        "qid": 8,
+        "q_type": "CW",
+        "question": "why is the water white in the middle of the lake",
+        "optionA": "ready to go boating",
+        "optionB": "elephants are dirty",
+        "optionC": "taking photo",
+        "optionD": "prepare to jump into river",
+        "optionE": "waves",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0066/4438105322.mp4",
+        "formatted_question": "Why is the water white in the middle of the lake? Choose your answer from below selections: A.ready to go boating, B.elephants are dirty, C.taking photo, D.prepare to jump into river, E.waves.",
+        "answers": {
+            "good_anwsers": [
+                "The reason for the white water in the middle of the lake in the video is unknown.",
+                "Unable to determine the reason for the white water in the middle of the lake based on the available tools and questions asked.",
+                "Unable to determine the reason for the white water in the middle of the lake from the video."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "8692968296_5",
+        "uid": "8692968296",
+        "qid": 5,
+        "q_type": "TN",
+        "question": "how does the musician react to the crowd after his performance",
+        "optionA": "satisfactory",
+        "optionB": "moves away from the microphone",
+        "optionC": "engaged",
+        "optionD": "applaud them",
+        "optionE": "wave hand to the crowd",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1004/8692968296.mp4",
+        "formatted_question": "How does the musician react to the crowd after his performance? Choose your answer from below selections: A.satisfactory, B.moves away from the microphone, C.engaged, D.applaud them, E.wave hand to the crowd.",
+        "answers": {
+            "good_anwsers": [
+                "The musician applauds the crowd after his performance.",
+                "D. applaud them"
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "D",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "5384013796_1",
+        "uid": "5384013796",
+        "qid": 1,
+        "q_type": "DO",
+        "question": "how did the man protect his eyes",
+        "optionA": "blindfold",
+        "optionB": "cover with hands",
+        "optionC": "spectacles",
+        "optionD": "thick binoculars",
+        "optionE": "sunglasses",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0084/5384013796.mp4",
+        "formatted_question": "How did the man protect his eyes? Choose your answer from below selections: A.blindfold, B.cover with hands, C.spectacles, D.thick binoculars, E.sunglasses.",
+        "answers": {
+            "good_anwsers": [
+                "The man protected his eyes by wearing sunglasses.",
+                "The man protected his eyes by wearing sunglasses."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "6802113321_1",
+        "uid": "6802113321",
+        "qid": 1,
+        "q_type": "CW",
+        "question": "why did the book fall off the baby s hand in the middle of her reading the book",
+        "optionA": "boy hit book",
+        "optionB": "lost grip",
+        "optionC": "dog pull",
+        "optionD": "book tear",
+        "optionE": "book slippery",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0011/6802113321.mp4",
+        "formatted_question": "Why did the book fall off the baby s hand in the middle of her reading the book? Choose your answer from below selections: A.boy hit book, B.lost grip, C.dog pull, D.book tear, E.book slippery.",
+        "answers": {
+            "good_anwsers": [
+                "E. book slippery.",
+                "E. book slippery.",
+                "A. boy hit book"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "E",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "3091550860_7",
+        "uid": "3091550860",
+        "qid": 7,
+        "q_type": "CH",
+        "question": "how did the man in hat show the bottle to the camera",
+        "optionA": "take a drinlk",
+        "optionB": "handles on the machine",
+        "optionC": "riding the cycle",
+        "optionD": "hug the woman",
+        "optionE": "pick up bottle",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0067/3091550860.mp4",
+        "formatted_question": "How did the man in hat show the bottle to the camera? Choose your answer from below selections: A.take a drinlk, B.handles on the machine, C.riding the cycle, D.hug the woman, E.pick up bottle.",
+        "answers": {
+            "good_anwsers": [
+                "E. pick up bottle.",
+                "None of the above",
+                "E. pick up bottle"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "E",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "2738551693_7",
+        "uid": "2738551693",
+        "qid": 7,
+        "q_type": "CW",
+        "question": "why was the man in white standing behind the trolley in the video",
+        "optionA": "walk away",
+        "optionB": "making noodles",
+        "optionC": "pull the fish in",
+        "optionD": "protect against the chemicala",
+        "optionE": "play with the toys",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1005/2738551693.mp4",
+        "formatted_question": "Why was the man in white standing behind the trolley in the video? Choose your answer from below selections: A.walk away, B.making noodles, C.pull the fish in, D.protect against the chemicala, E.play with the toys.",
+        "answers": {
+            "good_anwsers": [
+                "The reason why the man in white was standing behind the trolley in the video is unclear without further information.",
+                "The reason why the man in white was standing behind the trolley in the video is unknown without further information.",
+                "Unable to determine the reason why the man in white was standing behind the trolley in the video."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "5461088507_3",
+        "uid": "5461088507",
+        "qid": 3,
+        "q_type": "TN",
+        "question": "what does the lady in black do after blowing a kiss to the camera at the end",
+        "optionA": "laugh and run forward",
+        "optionB": "clap",
+        "optionC": "lift up her leg",
+        "optionD": "touch baby s forehead",
+        "optionE": "move mic to white scarf woman",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1013/5461088507.mp4",
+        "formatted_question": "What does the lady in black do after blowing a kiss to the camera at the end? Choose your answer from below selections: A.laugh and run forward, B.clap, C.lift up her leg, D.touch baby s forehead, E.move mic to white scarf woman.",
+        "answers": {
+            "good_anwsers": [
+                "D. touch baby's forehead",
+                "D. touch baby's forehead",
+                "D. touch baby's forehead"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "D",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "2482994684_3",
+        "uid": "2482994684",
+        "qid": 3,
+        "q_type": "TC",
+        "question": "what does the boy do when he first stretched his hand forward to the table",
+        "optionA": "put the class down",
+        "optionB": "go behind the purple pillar",
+        "optionC": "look back",
+        "optionD": "talk to boy",
+        "optionE": "look at the laptop",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1007/2482994684.mp4",
+        "formatted_question": "What does the boy do when he first stretched his hand forward to the table? Choose your answer from below selections: A.put the class down, B.go behind the purple pillar, C.look back, D.talk to boy, E.look at the laptop.",
+        "answers": {
+            "good_anwsers": [
+                "Manual review of the video content is required to accurately determine what the boy does when he first stretches his hand forward to the table.",
+                "The specific action of the boy when he first stretches his hand forward to the table cannot be determined using the available tools.",
+                "Without the ability to view the video directly, I am unable to answer the question accurately."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "5309902755_6",
+        "uid": "5309902755",
+        "qid": 6,
+        "q_type": "TC",
+        "question": "what is the girl in white doing while the girl in black plays the violin",
+        "optionA": "dancing",
+        "optionB": "look down",
+        "optionC": "hit the drums",
+        "optionD": "sitting on sofa",
+        "optionE": "hula hoop acrobatics",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1103/5309902755.mp4",
+        "formatted_question": "What is the girl in white doing while the girl in black plays the violin? Choose your answer from below selections: A.dancing, B.look down, C.hit the drums, D.sitting on sofa, E.hula hoop acrobatics.",
+        "answers": {
+            "good_anwsers": [
+                "The girl in white is playing violin.",
+                "The girl in white is dancing while the girl in black plays the violin.",
+                "E. hula hoop acrobatics."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "E",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "3443791836_5",
+        "uid": "3443791836",
+        "qid": 5,
+        "q_type": "TN",
+        "question": "what does the dog do after the lady finished playing with it",
+        "optionA": "eat food",
+        "optionB": "happy",
+        "optionC": "raise her hands",
+        "optionD": "give food to girl",
+        "optionE": "follow the action",
+        "truth": 0,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1026/3443791836.mp4",
+        "formatted_question": "What does the dog do after the lady finished playing with it? Choose your answer from below selections: A.eat food, B.happy, C.raise her hands, D.give food to girl, E.follow the action.",
+        "answers": {
+            "good_anwsers": [
+                "E. follow the action.",
+                "E. follow the action"
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "E",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "3894379966_6",
+        "uid": "3894379966",
+        "qid": 6,
+        "q_type": "TN",
+        "question": "what does the boy do after looking down at the start",
+        "optionA": "walks away",
+        "optionB": "sing",
+        "optionC": "bend his back",
+        "optionD": "eating",
+        "optionE": "playing driving game",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1021/3894379966.mp4",
+        "formatted_question": "What does the boy do after looking down at the start? Choose your answer from below selections: A.walks away, B.sing, C.bend his back, D.eating, E.playing driving game.",
+        "answers": {
+            "good_anwsers": [
+                "None of the above choices.",
+                "D. eating",
+                "E. playing driving game"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "D",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "6037425775_2",
+        "uid": "6037425775",
+        "qid": 2,
+        "q_type": "CW",
+        "question": "why is the lady carrying flowers",
+        "optionA": "to dance with girl",
+        "optionB": "for sale",
+        "optionC": "she was asked to",
+        "optionD": "let the baby smell",
+        "optionE": "part of outfit",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/0011/6037425775.mp4",
+        "formatted_question": "Why is the lady carrying flowers? Choose your answer from below selections: A.to dance with girl, B.for sale, C.she was asked to, D.let the baby smell, E.part of outfit.",
+        "answers": {
+            "good_anwsers": [
+                "D. let the baby smell",
+                "The lady is carrying flowers to let the baby smell."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "D",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "6215878304_0",
+        "uid": "6215878304",
+        "qid": 0,
+        "q_type": "DO",
+        "question": "what is the animal",
+        "optionA": "elephant",
+        "optionB": "crocodile",
+        "optionC": "lion",
+        "optionD": "dog",
+        "optionE": "giraffe",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1007/6215878304.mp4",
+        "formatted_question": "What is the animal? Choose your answer from below selections: A.elephant, B.crocodile, C.lion, D.dog, E.giraffe.",
+        "answers": {
+            "good_anwsers": [
+                "The animal shown in the video is a dog.",
+                "The animal in the video is a dog.",
+                "The animal in the video is a dog."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "12754064355_6",
+        "uid": "12754064355",
+        "qid": 6,
+        "q_type": "TN",
+        "question": "what does the boy in stripes do after clapping in the middle",
+        "optionA": "tired",
+        "optionB": "turn around",
+        "optionC": "move his hands to other chair",
+        "optionD": "laughs back",
+        "optionE": "smiles",
+        "truth": 1,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1102/12754064355.mp4",
+        "formatted_question": "What does the boy in stripes do after clapping in the middle? Choose your answer from below selections: A.tired, B.turn around, C.move his hands to other chair, D.laughs back, E.smiles.",
+        "answers": {
+            "good_anwsers": [
+                "E. smiles.",
+                "E. smiles.",
+                "E. smiles."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "E",
+        "is_correct": false,
+        "match_methods": [
+            "character matching",
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "8630772610_4",
+        "uid": "8630772610",
+        "qid": 4,
+        "q_type": "CW",
+        "question": "why did one tiger get up the stone near the end of the video",
+        "optionA": "catch the chicken",
+        "optionB": "jump into water",
+        "optionC": "avoid getting hit",
+        "optionD": "sunbath",
+        "optionE": "escape from other tiger",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1025/8630772610.mp4",
+        "formatted_question": "Why did one tiger get up the stone near the end of the video? Choose your answer from below selections: A.catch the chicken, B.jump into water, C.avoid getting hit, D.sunbath, E.escape from other tiger.",
+        "answers": {
+            "good_anwsers": [
+                "The tiger got up on the stone near the end of the video to sunbathe.",
+                "D. sunbath"
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": "D",
+        "is_correct": false,
+        "match_methods": [
+            "character matching"
+        ]
+    },
+    {
+        "quid": "3954996353_0",
+        "uid": "3954996353",
+        "qid": 0,
+        "q_type": "TC",
+        "question": "what does the man in white do when he walks onto the stage",
+        "optionA": "sing",
+        "optionB": "stares",
+        "optionC": "pass paper to woman",
+        "optionD": "does hand gesture",
+        "optionE": "clap hands",
+        "truth": 4,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1011/3954996353.mp4",
+        "formatted_question": "What does the man in white do when he walks onto the stage? Choose your answer from below selections: A.sing, B.stares, C.pass paper to woman, D.does hand gesture, E.clap hands.",
+        "answers": {
+            "good_anwsers": [
+                "The actions of the man in white when he walks onto the stage are not definitively provided in the video.",
+                "The specific action of the man in white when he walks onto the stage cannot be determined from the given resources.",
+                "The actions of the man in white when he walks onto the stage are unclear based on the available tools and information."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "4435031690_1",
+        "uid": "4435031690",
+        "qid": 1,
+        "q_type": "TC",
+        "question": "what does the man with the camera wear on his head",
+        "optionA": "swimming cap",
+        "optionB": "singing",
+        "optionC": "helmet",
+        "optionD": "bandana",
+        "optionE": "sun glasses",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1000/4435031690.mp4",
+        "formatted_question": "What does the man with the camera wear on his head? Choose your answer from below selections: A.swimming cap, B.singing, C.helmet, D.bandana, E.sun glasses.",
+        "answers": "Error"
+    },
+    {
+        "quid": "3633333753_4",
+        "uid": "3633333753",
+        "qid": 4,
+        "q_type": "TC",
+        "question": "what does the man with a cap who is seated down do with his hands near the end",
+        "optionA": "talk",
+        "optionB": "hand gestures",
+        "optionC": "arm rest",
+        "optionD": "pointed to the sea",
+        "optionE": "looks upward in surprise",
+        "truth": 3,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1008/3633333753.mp4",
+        "formatted_question": "What does the man with a cap who is seated down do with his hands near the end? Choose your answer from below selections: A.talk, B.hand gestures, C.arm rest, D.pointed to the sea, E.looks upward in surprise.",
+        "answers": {
+            "good_anwsers": [
+                "The man with a cap who is seated down plays the trombone near the end of the video.",
+                "The tools and data available cannot provide a specific answer to what the man with a cap who is seated down does with his hands near the end of the video.",
+                "The man with a cap who is seated down is playing the trombone near the end of the video."
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    },
+    {
+        "quid": "4458207675_3",
+        "uid": "4458207675",
+        "qid": 3,
+        "q_type": "TN",
+        "question": "what did the black dog do after looking at the van for a while",
+        "optionA": "climb up metal step",
+        "optionB": "wag tail",
+        "optionC": "walked to its left",
+        "optionD": "shifted its body",
+        "optionE": "nod head",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1105/4458207675.mp4",
+        "formatted_question": "What did the black dog do after looking at the van for a while? Choose your answer from below selections: A.climb up metal step, B.wag tail, C.walked to its left, D.shifted its body, E.nod head.",
+        "answers": {
+            "good_anwsers": [
+                "C. walked to its left.",
+                "The black dog walked on a leash with two other dogs.",
+                "C. walked to its left"
+            ],
+            "bad_anwsers": []
+        },
+        "predicted_option": "C",
+        "is_correct": true,
+        "match_methods": [
+            "character matching",
+            "character matching"
+        ]
+    },
+    {
+        "quid": "4682821606_2",
+        "uid": "4682821606",
+        "qid": 2,
+        "q_type": "TC",
+        "question": "what roles do the man in the plan shirt and the man in green play in the activity",
+        "optionA": "stand there",
+        "optionB": "holding man in black",
+        "optionC": "guide the tractor",
+        "optionD": "swinging",
+        "optionE": "construct toy structure",
+        "truth": 2,
+        "video_path": "/hf_home/hub/spaces/next-qa/NExTVideo/1011/4682821606.mp4",
+        "formatted_question": "What roles do the man in the plan shirt and the man in green play in the activity? Choose your answer from below selections: A.stand there, B.holding man in black, C.guide the tractor, D.swinging, E.construct toy structure.",
+        "answers": {
+            "good_anwsers": [
+                "The man in the plaid shirt plays the role of garbage collecting, and the man in green plays the role of a robot dancing in the activity.",
+                "The roles of the man in the plaid shirt and the man in green in the activity cannot be accurately determined with the available tools."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        },
+        "predicted_option": null,
+        "is_correct": false,
+        "match_methods": []
+    }
+]
