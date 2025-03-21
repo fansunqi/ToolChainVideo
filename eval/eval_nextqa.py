@@ -123,7 +123,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if not args.input_file:
-        args.input_file = get_latest_file('/home/fsq/ToolChainVideo/output/nextqa')
+        args.input_file = get_latest_file('output/nextqa')
     
     if not args.output_file:
         args.output_file = args.input_file.replace('.json', '_eval.json')
