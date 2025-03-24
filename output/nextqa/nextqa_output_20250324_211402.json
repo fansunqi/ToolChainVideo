@@ -1,0 +1,26 @@
+[
+    {
+        "quid": "2549562657_5",
+        "uid": "2549562657",
+        "qid": 5,
+        "q_type": "TC",
+        "question": "how is the baby in blue shirt positioned",
+        "optionA": "heat up metal",
+        "optionB": "sitting",
+        "optionC": "standing",
+        "optionD": "sitting at the sofa",
+        "optionE": "throw away the blue toy",
+        "truth": 1,
+        "video_path": "/share_data/NExT-QA/NExTVideo/0023/2549562657.mp4",
+        "formatted_question": "How is the baby in blue shirt positioned? Choose your answer from below selections: A.heat up metal, B.sitting, C.standing, D.sitting at the sofa, E.throw away the blue toy.",
+        "answers": {
+            "good_anwsers": [
+                "The baby in the blue shirt is sitting.",
+                "The baby in the blue shirt is sitting."
+            ],
+            "bad_anwsers": [
+                "Failed to parse"
+            ]
+        }
+    }
+]

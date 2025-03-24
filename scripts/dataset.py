@@ -17,7 +17,7 @@ def find_mp4_files(directory):
 
 
 class BaseDataset(Dataset):
-    def __init__(self, args, quids_to_exclude=None, num_examples_to_run=-1, start_num=0):
+    def __init__(self, args, quids_to_exclude=None, num_examples_to_run=-1, start_num=0, specific_quids=None):
         '''
         num_examples_to_run < 0: run all
         '''
@@ -26,19 +26,21 @@ class BaseDataset(Dataset):
         self.anno = self.get_anno()
         # self.durations = load_json(args.duration_path)  # uid --> float
         data = self.build()
-        data = self.filter(data, quids_to_exclude, num_examples_to_run, start_num)
+        data = self.filter(data, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
         self.data = data
 
     def set_ukey(self, name):
         self.ukey = name
 
-    def filter(self, data, quids_to_exclude, num_examples_to_run, start_num):
+    def filter(self, data, quids_to_exclude, num_examples_to_run, start_num, specific_quids):
         if quids_to_exclude is not None:
             data = [el for el in data if el[self.ukey] not in quids_to_exclude]
         if start_num > 0:
             data = data[start_num:]
         if num_examples_to_run >= 0:
             data = data[:num_examples_to_run]
+        if specific_quids is not None:
+            data = [el for el in data if el[self.ukey] in specific_quids]
         return data
 
     def __len__(self):
@@ -93,9 +95,9 @@ class BaseDataset(Dataset):
 #         return data
 
 class NextDataset(BaseDataset):
-    def __init__(self, args, quids_to_exclude=None, num_examples_to_run=-1, start_num=0):
+    def __init__(self, args, quids_to_exclude=None, num_examples_to_run=-1, start_num=0, specific_quids=None):
         self.set_ukey('quid')
-        super().__init__(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run, start_num=start_num)
+        super().__init__(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run, start_num=start_num, specific_quids=specific_quids)
 
     # def get_descriptions(self):
     #     narrations = load_json(self.args.data_path)
@@ -166,11 +168,13 @@ class NextDataset(BaseDataset):
         return data
 
 
-def get_dataset(args, quids_to_exclude=None, num_examples_to_run=-1, start_num=0):
+def get_dataset(args, quids_to_exclude=None, num_examples_to_run=-1, start_num=0, specific_quids=None):
     # if args.dataset == 'egoschema':
     #     return EgoSchemaDataset(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run)
     if args.dataset == 'nextqa':
-        return NextDataset(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run, start_num=start_num)
+        return NextDataset(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run, start_num=start_num, specific_quids=specific_quids)
+    else:
+        raise ValueError(f"Dataset {args.dataset} not found")
 
 
 

@@ -669,7 +669,7 @@ def run_a_video(
         not skip_mem_build
     ):  # if you have built the memory, you can skip this step by setting build_mem=False
         MemoryBuilder.init_db_agent()
-        MemoryBuilder.run_db_agent(video_name, question,with_two_mem)
+        MemoryBuilder.run_db_agent(video_name, question, with_two_mem)
 
     anwsers = Planner.run(
         video_name,
@@ -711,7 +711,8 @@ if __name__ == "__main__":
     quids_to_exclude = vq_conf["quids_to_exclude"] if "quids_to_exclude" in vq_conf else None
     num_examples_to_run = vq_conf["num_examples_to_run"] if "num_examples_to_run" in vq_conf else -1
     start_num = vq_conf["start_num"] if "start_num" in vq_conf else 0
-    dataset = get_dataset(vq_conf, quids_to_exclude, num_examples_to_run, start_num)
+    specific_quids = vq_conf["specific_quids"] if "specific_quids" in vq_conf else None
+    dataset = get_dataset(vq_conf, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
     all_results = []
 
     for data in tqdm(dataset):
@@ -739,7 +740,9 @@ if __name__ == "__main__":
             # The anwsers are: {'good_anwsers': ['There are 29 children in the video.', 'D. two', '29 children'], 'bad_anwsers': []}
         except Exception as e:
             print(f"Error:{e}")
-            answers = "Error"
+            print(data["quid"])
+            # answers = "Error"
+            sys.exit(1)  # 终止程序并返回状态码 1
 
         result_dict = data
         result_dict["formatted_question"] = formatted_question

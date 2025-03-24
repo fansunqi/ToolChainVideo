@@ -96,13 +96,38 @@ class MCSearchTree(object):
         return self.current == self.root
 
     def visualize(self, filename="tree"):
+        # plt.clf()
+        # graph = nx.DiGraph()
+        # self._visualize_helper(self.root, graph)
+        # pos = nx.spring_layout(graph)
+        # labels = {node: data['label'] for node, data in graph.nodes(data=True)}
+        # nx.draw(graph, pos, labels=labels, with_labels=True, node_size=3000, node_color="skyblue", font_size=10, font_weight="bold", arrows=True)
+        # plt.savefig(f"{filename}.png")
+        
         plt.clf()
         graph = nx.DiGraph()
+
+        # 构建图
         self._visualize_helper(self.root, graph)
-        pos = nx.spring_layout(graph)
-        labels = {node: data['label'] for node, data in graph.nodes(data=True)}
-        nx.draw(graph, pos, labels=labels, with_labels=True, node_size=3000, node_color="skyblue", font_size=10, font_weight="bold", arrows=True)
-        plt.savefig(f"{filename}.png")
+
+        # 使用 Graphviz 的 dot 布局
+        pos = nx.nx_agraph.graphviz_layout(graph, prog="dot")
+
+        # 获取节点标签
+        labels = {node: data["label"] for node, data in graph.nodes(data=True)}
+
+        # 绘制图形
+        plt.figure(figsize=(12, 8))
+        nx.draw(
+            graph, pos, labels=labels, with_labels=True,
+            node_size=2000, node_color="skyblue",
+            font_size=8, font_weight="bold", arrows=True
+        )
+
+        # 适应图形，避免被裁剪
+        plt.tight_layout()
+        plt.savefig(f"{filename}.png", bbox_inches="tight")
+        plt.close()
 
     def _visualize_helper(self, node, graph, parent_id=None):
         node_id = str(id(node))
