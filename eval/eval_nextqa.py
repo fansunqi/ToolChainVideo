@@ -6,6 +6,8 @@ from collections import Counter
 import argparse
 from tqdm import tqdm
 
+SEMANTIC_THRESHOLD = 0.5
+
 # 定义选项字母映射
 option_map = ["A", "B", "C", "D", "E"]
 llm = None  # LLM 先不初始化
@@ -18,22 +20,62 @@ def load_llm():
         llm = pipeline("text-classification", model="facebook/bart-large-mnli")
         print("LLM loaded.")
 
-def get_predicted_option(answer, options):
-    """根据答案匹配正确选项"""
-    # 字符匹配
+def option_character_matching(answer, options):
     # 字符匹配（确保只有一个选项字母出现在 answer 中）
     for i, option in enumerate(options):
         if option_map[i] in answer and all(option_map[j] not in answer for j in range(len(options)) if j != i):
             return i, "character matching"
+    return -1, "none"
+
+def option_full_matching(answer, options):
+    answer = answer.lower()
+    options = [option.lower() for option in options]
+    # 完整匹配（确保只有一个选项完整出现在 answer 中）
+    for i, option in enumerate(options):
+        if option in answer and all(opt not in answer for j, opt in enumerate(options) if j != i):
+            return i, "full matching"
+    return -1, "none"
+
+def answer_full_matching(answer, options):
+    answer = answer.lower()
+    options = [option.lower() for option in options]
+    # 完整匹配（确保 answer 完整出现在一个选项中）
+    for i, option in enumerate(options):
+        if answer in option and all(answer not in opt for j, opt in enumerate(options) if j != i):
+            return i, "answer full matching"
+    return -1, "none"
+
     
+def get_predicted_option(answer, options):
+    """根据答案匹配正确选项"""
+    
+    predicted_option, match_method = option_character_matching(answer, options)
+    if predicted_option != -1:
+        return predicted_option, match_method
+    
+    predicted_option, match_method = option_full_matching(answer, options)
+    if predicted_option != -1:
+        return predicted_option, match_method
+    
+    predicted_option, match_method = answer_full_matching(answer, options)
+    if predicted_option != -1:
+        return predicted_option, match_method
+    
+    
+    '''
     # 语义匹配 最长公共子序列
     # 计算所有选项的相似度
     similarities = [SequenceMatcher(None, option.lower(), answer.lower()).ratio() for option in options]
-    # 找到相似度大于 0.8 的选项索引
-    high_similarity_indices = [i for i, sim in enumerate(similarities) if sim > 0.8]
-    # 只有一个选项的相似度大于 0.8，才返回
+    # 找到相似度大于 SEMANTIC_THRESHOLD 的选项索引
+    high_similarity_indices = [i for i, sim in enumerate(similarities) if sim > SEMANTIC_THRESHOLD]
+    # 只有一个选项的相似度大于 SEMANTIC_THRESHOLD，才返回
     if len(high_similarity_indices) == 1:
         return high_similarity_indices[0], "semantic matching"
+    
+    # # 找到相似度最高的选项索引
+    # max_similarity_index = similarities.index(max(similarities))
+    # # 返回相似度最高的选项索引
+    # return max_similarity_index, "semantic matching"
     
     # LLM 判断
     load_llm()  # 只有在需要 LLM 判断时才加载
@@ -45,7 +87,7 @@ def get_predicted_option(answer, options):
     # 只有一个选项是 'ENTAILMENT'，才返回
     if len(entailment_indices) == 1:
         return entailment_indices[0], "LLM matching"
-    
+    '''
     return -1, "none"
 
 def get_latest_file(directory):
@@ -61,14 +103,16 @@ def main(input_file, output_file):
     total_items = len(data)
     have_ans_items = 0
     correct_items = 0
+    error_items = 0
 
     # 评估每个数据项
     for item in tqdm(data):
         truth = item['truth']
         options = [item['optionA'], item['optionB'], item['optionC'], item['optionD'], item['optionE']]
 
-        # 说明 answers 是 None, 暂时不处理
+        # 说明 answers 是 "Error", 暂时不处理
         if isinstance(item['answers'], str):
+            error_items += 1
             continue
 
         good_answers = item['answers']['good_anwsers']
@@ -89,26 +133,26 @@ def main(input_file, output_file):
         
         # 投票确定最终预测答案
         # 多个选项个数一样，随机选一个
-        # if predicted_options:
-        #     option_counts = Counter(predicted_options)
-        #     most_common_option, _ = option_counts.most_common(1)[0]
-        #     final_predicted_option = most_common_option
-        #     have_ans_items += 1
-        # else:
-        #     final_predicted_option = None
-        
-        # 投票确定最终预测答案
         if predicted_options:
             option_counts = Counter(predicted_options)
-            most_common_options = option_counts.most_common()
-            max_count = most_common_options[0][1]
-            # 找到所有出现次数等于 max_count 的选项
-            candidates = [option for option, count in most_common_options if count == max_count]
-            # 选择索引最大的选项
-            final_predicted_option = max(candidates)
+            most_common_option, _ = option_counts.most_common(1)[0]
+            final_predicted_option = most_common_option
             have_ans_items += 1
         else:
             final_predicted_option = None
+        
+        # 投票确定最终预测答案
+        # if predicted_options:
+        #     option_counts = Counter(predicted_options)
+        #     most_common_options = option_counts.most_common()
+        #     max_count = most_common_options[0][1]
+        #     # 找到所有出现次数等于 max_count 的选项
+        #     candidates = [option for option, count in most_common_options if count == max_count]
+        #     # 选择索引最大的选项
+        #     final_predicted_option = max(candidates, key=lambda x: predicted_options.index(x))
+        #     have_ans_items += 1
+        # else:
+        #     final_predicted_option = None
         
         is_correct = (final_predicted_option == truth)
         
@@ -124,6 +168,7 @@ def main(input_file, output_file):
 
     # 输出结果
     print(f"Total items: {total_items}")
+    print(f"Not Error items: {total_items - error_items}")
     print(f"Have ans items: {have_ans_items}")
     print(f"Correct items: {correct_items}")
     print(f"Acc include no ans: {acc_include_no_ans:.2%}")

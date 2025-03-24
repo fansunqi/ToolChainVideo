@@ -100,8 +100,8 @@
             "none",
             "character matching"
         ],
-        "final_predicted_option": 0,
-        "is_correct": false
+        "final_predicted_option": 4,
+        "is_correct": true
     },
     {
         "quid": "2617504308_3",
@@ -255,8 +255,8 @@
             "character matching",
             "character matching"
         ],
-        "final_predicted_option": 3,
-        "is_correct": true
+        "final_predicted_option": 0,
+        "is_correct": false
     },
     {
         "quid": "7093500213_6",
@@ -490,12 +490,12 @@
         "predicted_options": [
             0,
             0,
-            0
+            -1
         ],
         "match_methods": [
             "character matching",
             "character matching",
-            "full matching"
+            "none"
         ],
         "final_predicted_option": 0,
         "is_correct": true
@@ -669,8 +669,8 @@
             "character matching",
             "character matching"
         ],
-        "final_predicted_option": 4,
-        "is_correct": true
+        "final_predicted_option": 0,
+        "is_correct": false
     },
     {
         "quid": "6217597005_5",
@@ -816,16 +816,16 @@
             "bad_anwsers": []
         },
         "predicted_options": [
-            4,
+            -1,
             -1,
             -1
         ],
         "match_methods": [
-            "full matching",
+            "none",
             "none",
             "none"
         ],
-        "final_predicted_option": 4,
+        "final_predicted_option": null,
         "is_correct": false
     },
     {
@@ -920,14 +920,14 @@
             "bad_anwsers": []
         },
         "predicted_options": [
+            -1,
             3,
-            3,
-            3
+            -1
         ],
         "match_methods": [
-            "full matching",
+            "none",
             "character matching",
-            "full matching"
+            "none"
         ],
         "final_predicted_option": 3,
         "is_correct": true
@@ -1162,15 +1162,15 @@
             ]
         },
         "predicted_options": [
-            0,
-            0
+            -1,
+            -1
         ],
         "match_methods": [
-            "full matching",
-            "full matching"
+            "none",
+            "none"
         ],
-        "final_predicted_option": 0,
-        "is_correct": true
+        "final_predicted_option": null,
+        "is_correct": false
     },
     {
         "quid": "5379354799_6",
@@ -1406,12 +1406,12 @@
         "predicted_options": [
             0,
             0,
-            4
+            -1
         ],
         "match_methods": [
             "character matching",
             "character matching",
-            "full matching"
+            "none"
         ],
         "final_predicted_option": 0,
         "is_correct": true
@@ -1631,15 +1631,15 @@
             ]
         },
         "predicted_options": [
-            1,
+            -1,
             -1
         ],
         "match_methods": [
-            "full matching",
+            "none",
             "none"
         ],
-        "final_predicted_option": 1,
-        "is_correct": true
+        "final_predicted_option": null,
+        "is_correct": false
     },
     {
         "quid": "5585306763_5",
@@ -1847,7 +1847,7 @@
             "character matching",
             "none"
         ],
-        "final_predicted_option": 1,
+        "final_predicted_option": 4,
         "is_correct": false
     },
     {
@@ -1875,11 +1875,11 @@
         },
         "predicted_options": [
             1,
-            3
+            -1
         ],
         "match_methods": [
             "character matching",
-            "full matching"
+            "none"
         ],
         "final_predicted_option": 1,
         "is_correct": false
@@ -1916,8 +1916,8 @@
             "none",
             "character matching"
         ],
-        "final_predicted_option": 0,
-        "is_correct": true
+        "final_predicted_option": 1,
+        "is_correct": false
     },
     {
         "quid": "3227968260_4",
@@ -2117,11 +2117,11 @@
         },
         "predicted_options": [
             3,
-            3
+            -1
         ],
         "match_methods": [
             "character matching",
-            "full matching"
+            "none"
         ],
         "final_predicted_option": 3,
         "is_correct": false
@@ -2254,12 +2254,12 @@
         },
         "predicted_options": [
             1,
-            1,
+            -1,
             1
         ],
         "match_methods": [
             "character matching",
-            "full matching",
+            "none",
             "character matching"
         ],
         "final_predicted_option": 1,
@@ -2290,12 +2290,12 @@
         "predicted_options": [
             3,
             1,
-            1
+            -1
         ],
         "match_methods": [
             "character matching",
             "character matching",
-            "full matching"
+            "none"
         ],
         "final_predicted_option": 1,
         "is_correct": false
@@ -2409,14 +2409,14 @@
             ]
         },
         "predicted_options": [
-            0,
+            -1,
             -1
         ],
         "match_methods": [
-            "full matching",
+            "none",
             "none"
         ],
-        "final_predicted_option": 0,
+        "final_predicted_option": null,
         "is_correct": false
     },
     {
@@ -2686,14 +2686,14 @@
             ]
         },
         "predicted_options": [
-            3,
-            3
+            -1,
+            -1
         ],
         "match_methods": [
-            "full matching",
-            "full matching"
+            "none",
+            "none"
         ],
-        "final_predicted_option": 3,
+        "final_predicted_option": null,
         "is_correct": false
     },
     {
@@ -2719,14 +2719,14 @@
             "bad_anwsers": []
         },
         "predicted_options": [
+            -1,
             3,
-            3,
-            3
+            -1
         ],
         "match_methods": [
-            "full matching",
+            "none",
             "character matching",
-            "full matching"
+            "none"
         ],
         "final_predicted_option": 3,
         "is_correct": true
