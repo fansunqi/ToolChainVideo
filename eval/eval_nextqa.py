@@ -46,11 +46,11 @@ def get_predicted_option(answer, options):
     if len(entailment_indices) == 1:
         return entailment_indices[0], "LLM matching"
     
-    return None, "none"
+    return -1, "none"
 
 def get_latest_file(directory):
     files = [os.path.join(directory, f) for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
-    latest_file = max(files, key=os.path.getctime)
+    latest_file = sorted(files)[-1] 
     return latest_file
 
 def main(input_file, output_file):
@@ -81,11 +81,31 @@ def main(input_file, output_file):
                 predicted_options.append(predicted_option)
                 match_methods.append(match_method)
         
+        item["predicted_options"] = predicted_options
+        item["match_methods"] = match_methods
+        
+        # 去除 -1
+        predicted_options = [option for option in predicted_options if option != -1]
+        
+        # 投票确定最终预测答案
+        # 多个选项个数一样，随机选一个
+        # if predicted_options:
+        #     option_counts = Counter(predicted_options)
+        #     most_common_option, _ = option_counts.most_common(1)[0]
+        #     final_predicted_option = most_common_option
+        #     have_ans_items += 1
+        # else:
+        #     final_predicted_option = None
+        
         # 投票确定最终预测答案
         if predicted_options:
             option_counts = Counter(predicted_options)
-            most_common_option, _ = option_counts.most_common(1)[0]
-            final_predicted_option = most_common_option
+            most_common_options = option_counts.most_common()
+            max_count = most_common_options[0][1]
+            # 找到所有出现次数等于 max_count 的选项
+            candidates = [option for option, count in most_common_options if count == max_count]
+            # 选择索引最大的选项
+            final_predicted_option = max(candidates)
             have_ans_items += 1
         else:
             final_predicted_option = None
@@ -95,7 +115,7 @@ def main(input_file, output_file):
         if is_correct:
             correct_items += 1
         
-        item['predicted_option'] = option_map[final_predicted_option] if final_predicted_option is not None else None
+        item['final_predicted_option'] = final_predicted_option if final_predicted_option is not None else None
         item['is_correct'] = is_correct
         item['match_methods'] = match_methods
 
@@ -126,7 +146,8 @@ if __name__ == "__main__":
         args.input_file = get_latest_file('output/nextqa')
     
     if not args.output_file:
-        args.output_file = args.input_file.replace('.json', '_eval.json')
+        # args.output_file = args.input_file.replace('.json', '_eval.json')
+        args.output_file = args.input_file.replace('output/nextqa', 'eval/nextqa')
 
     main(args.input_file, args.output_file)
 
