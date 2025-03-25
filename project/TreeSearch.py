@@ -3,9 +3,7 @@ import pdb
 import math
 import numpy as np
 
-
 from langchain.agents.initialize import initialize_agent
-
 
 from project.ExampleSelector import CustomExampleSelector
 from project.PromptTemplate import general_template
@@ -312,9 +310,13 @@ class ReThinking(object):
         else:
             ancestors = self.tree.get_ancestors(remove_root=False, child_first=False)
             nodes = ancestors
-        rewards = [node.value["reward"] for node in nodes]
-        prob = softmax(rewards)
-        node_sample = np.random.choice(nodes, p=prob)
+        
+        # rewards = [node.value["reward"] for node in nodes]
+        # # print(f"rewards:{rewards}")
+        # prob = softmax(rewards)
+        # node_sample = np.random.choice(nodes, p=prob)
+        
+        node_sample = np.random.choice(nodes)
         self.tree.set_current(node_sample)
 
     def expansion(self, max_step=1):
