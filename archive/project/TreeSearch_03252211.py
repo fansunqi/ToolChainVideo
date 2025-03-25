@@ -97,6 +97,13 @@ class MCSearchTree(object):
         return self.current == self.root
 
     def visualize(self, filename="tree"):
+        # plt.clf()
+        # graph = nx.DiGraph()
+        # self._visualize_helper(self.root, graph)
+        # pos = nx.spring_layout(graph)
+        # labels = {node: data['label'] for node, data in graph.nodes(data=True)}
+        # nx.draw(graph, pos, labels=labels, with_labels=True, node_size=3000, node_color="skyblue", font_size=10, font_weight="bold", arrows=True)
+        # plt.savefig(f"{filename}.png")
         
         plt.clf()
         graph = nx.DiGraph()
@@ -188,6 +195,8 @@ class ReThinking(object):
         use_example=False,
         quid=None,
     ):
+        # NOTE 
+        # 主循环
         
         self.use_example = use_example
         self.init_new_tree(video_name, question, possible_anwsers=possible_anwsers)
@@ -224,6 +233,8 @@ class ReThinking(object):
                 answer, is_good_result = self.simulation()
             else:
                 answer = observation
+                
+            # self.backpropagation(is_good_result)
             
             self.selection()
             
@@ -256,6 +267,8 @@ class ReThinking(object):
                 + suffix
             )
 
+        # pprint(self.tools)
+        # pdb.set_trace()
 
         agent = initialize_agent(
             self.tools,
@@ -304,7 +317,7 @@ class ReThinking(object):
         
         # 根据节点的奖励值（reward）来选择一个节点，并将其设置为当前节点
         
-        # TODO 可以改写一下这边的 selection 策略
+        # 可以改写一下这边的 selection 策略
         
         if sample_all_expandable_nodes:
             all_descendant = self.tree.root.get_descendants(remove_leaf=True)
@@ -402,4 +415,49 @@ class ReThinking(object):
                     return True
             return False
         return True
-    
+
+    def backpropagation(self, is_good_result=True):
+        ancestors = self.tree.get_ancestors(child_first=True)
+        base_reward = self.good_base_reward if is_good_result else -self.bad_base_reward
+        step_distance = 0.0
+        for node in ancestors:
+            step_distance += 1.0
+            node.value["reward"] += base_reward * math.exp(         # MCTS 的奖励函数
+                -self.decay_rate * (step_distance - 1.0)
+            )
+
+
+if __name__ == "__main__":
+
+    GPT_API_KEY = "sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra"
+    PROXY = "https://api.juheai.top/v1"
+    llm = OpenAI(
+        openai_api_key=GPT_API_KEY, model_name="text-davinci-003", temperature=0, base_url=PROXY
+    )
+
+    # from project.KnowledgeBase import GoogleSearching
+
+    # google_searching = GoogleSearching()
+    # tools = [
+    #     Tool(
+    #         name=google_searching.inference.name,
+    #         description=google_searching.inference.description,
+    #         func=google_searching.inference,
+    #     )
+    # ]
+    tools = []
+
+    video_filename = f"./demo/nextqa_demo/ch_1.mp4"
+    txt = "How is the baby held by?"
+    possible_anwsers = [
+        "A. The baby is held by the mother.",
+        "B. The baby is held by the father.",
+    ]
+
+    planner = ReThinking(llm, tools)
+
+    # pdb.set_trace()
+    anwsers = planner.run(
+        video_filename, txt, possible_anwsers=possible_anwsers, max_answer=3, max_try=8
+    )
+    print("The anwsers are:", anwsers)
