@@ -312,7 +312,8 @@ class ReThinking(object):
         action, observation = node.value["action"], node.value["observation"]
         return f"Thought: {action.log}\nObservation: {observation}"
 
-    def selection(self, sample_all_expandable_nodes=True):
+    # def selection(self, sample_all_expandable_nodes=True):
+    def selection(self, sample_all_expandable_nodes=False):
         
         # 根据节点的奖励值（reward）来选择一个节点，并将其设置为当前节点
         

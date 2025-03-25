@@ -706,28 +706,28 @@ if __name__ == "__main__":
         options = [data['optionA'], data['optionB'], data['optionC'], data['optionD'], data['optionE']]
         formatted_question = f"{question}? Choose your answer from below selections: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
 
-        try:
-            answers = run_a_video(
-                bot,
-                planner,
-                video_path,
-                formatted_question,
-                skip_mem_build = vq_conf.skip_mem_build,
-                with_two_mem = vq_conf.with_two_mem,
-                max_try = vq_conf.max_try,
-                max_answer = vq_conf.max_answer,
-                quid = data["quid"],
-            ) 
+        # try:
+        answers = run_a_video(
+            bot,
+            planner,
+            video_path,
+            formatted_question,
+            skip_mem_build = vq_conf.skip_mem_build,
+            with_two_mem = vq_conf.with_two_mem,
+            max_try = vq_conf.max_try,
+            max_answer = vq_conf.max_answer,
+            quid = data["quid"],
+        ) 
 
             # TODO
             # 如何去解析这个 answer ?
             # Input question:  How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.
             # The anwsers are: {'good_anwsers': ['There are 29 children in the video.', 'D. two', '29 children'], 'bad_anwsers': []}
-        except Exception as e:
-            print(f"Error:{e}")
-            print(data["quid"])
-            # answers = "Error"
-            sys.exit(1)  # 终止程序并返回状态码 1
+        # except Exception as e:
+        #     print(f"Error:{e}")
+        #     print(data["quid"])
+        #     # answers = "Error"
+        #     sys.exit(1)  # 终止程序并返回状态码 1
 
         result_dict = data
         result_dict["formatted_question"] = formatted_question
