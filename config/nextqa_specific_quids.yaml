@@ -8,5 +8,6 @@ seed: 12345
 max_answer: 3
 max_try: 7
 output_file: "output/nextqa/nextqa_output.json"
-num_examples_to_run: 10
+num_examples_to_run: 100
 start_num: 0
+specific_quids: ["2549562657_5"]

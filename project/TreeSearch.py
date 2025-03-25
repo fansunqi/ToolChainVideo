@@ -1,3 +1,4 @@
+import os
 import pdb
 import math
 import numpy as np
@@ -131,11 +132,13 @@ class MCSearchTree(object):
 
     def _visualize_helper(self, node, graph, parent_id=None):
         node_id = str(id(node))
-
+        
         # 这里指明可视化的信息
-        action = str(node.value["action"])[18:40] if node.value["action"] else ""
-        observation = str(node.value["observation"])[:40] if node.value["observation"] else ""
-        reward = str(node.value["reward"]) if node.value["reward"] else ""
+        action = str(node.value["action"].tool) if node.value["action"] else ""
+        observation = str(node.value["observation"])[:80] if node.value["observation"] else ""
+        # TODO 为什么有 There is an error....
+        
+        reward = f"{node.value['reward']:.3f}" if node.value["reward"] else ""
         label = f"{action}\n{observation}\n{reward}"
         
         graph.add_node(node_id, label=label)
@@ -190,36 +193,53 @@ class ReThinking(object):
         max_answer=3,
         max_try=8,
         use_example=False,
+        quid=None,
     ):
         # NOTE 
-        # 最后输出答案的部分
+        # 主循环
         
         self.use_example = use_example
         self.init_new_tree(video_name, question, possible_anwsers=possible_anwsers)
         anwsers = {"good_anwsers": [], "bad_anwsers": []}
         num_try = 0
+        
+        # 进入主循环的迭代
         while (
             len(anwsers["good_anwsers"]) + len(anwsers["bad_anwsers"]) < max_answer
             and num_try < max_try
         ):
 
-            print(f"\n\nTree {num_try}:\n\n")  
+            print(f"\n\nTree {num_try}:\n\n") 
+            
+            ### visualize tree 
+            # TODO 这里的文件名加上 q_uids
             self.tree.traverse()
-            tree_filename = f"tree_{num_try}"
+            tree_filepath = f"viz/{quid}"
+            if not os.path.exists(tree_filepath):
+                os.makedirs(tree_filepath)
+            tree_filename = f"viz/{quid}/tree_{num_try}"
             self.tree.visualize(filename=tree_filename)
 
             num_try += 1
             num_anwser = len(anwsers["good_anwsers"]) + len(anwsers["bad_anwsers"]) + 1
             
             print(f"\n\nAnswer {num_anwser} - Try {num_try}:\n\n")
+            
+            # TODO 理解下面这个的含义
             observation, is_good_result = self.expansion()  # 1-step expansion
+            
+            # 好观察才模拟, 坏观察不模拟
             if is_good_result:
                 answer, is_good_result = self.simulation()
             else:
                 answer = observation
+                
             self.backpropagation(is_good_result)
+            
             self.selection()
+            
             if is_good_result:
+                # 只有这里才会输出答案
                 anwsers["good_anwsers"].append(answer)
             else:
                 anwsers["bad_anwsers"].append(answer)
@@ -293,6 +313,9 @@ class ReThinking(object):
         return f"Thought: {action.log}\nObservation: {observation}"
 
     def selection(self, sample_all_expandable_nodes=True):
+        
+        # 根据节点的奖励值（reward）来选择一个节点，并将其设置为当前节点
+        
         if sample_all_expandable_nodes:
             all_descendant = self.tree.root.get_descendants(remove_leaf=True)
             nodes = all_descendant + [self.tree.root]
@@ -318,13 +341,17 @@ class ReThinking(object):
 
         observation = ""
         is_good_result = True
+        
+        
         for step_idx, step in enumerate(agent_iterator):
+            # pdb.set_trace()
             if output := step.get("intermediate_step"):
                 self.total_step += 1
                 action, observation = output[0]
                 self.tree.add_child(
                     {"action": action, "observation": observation, "reward": 0.0}
                 )
+                # 观察不好的话，就退出
                 if not self.is_good_observation(observation):
                     is_good_result = False
                     break
@@ -333,6 +360,9 @@ class ReThinking(object):
         return observation, is_good_result
 
     def simulation(self):
+        
+        # 用于模拟从当前节点到终止状态的过程，并评估该路径的结果。
+        
         ancestor_history = self.get_ancestor_history()
         agent = self.get_new_agent(chain_history=ancestor_history)
         agent_iterator = agent.iter(self.question)  # TODO 这个不知道什么意思
@@ -340,10 +370,13 @@ class ReThinking(object):
         is_good_result = True
         inter_step = None
         final_answer = None
+        
+        
         for step in agent_iterator:
             print(f"\nagent_iterator step: {step}\n")
+            # pdb.set_trace()
             # if output := step.get("intermediate_step"):
-            inter_step = step.get("intermediate_step")  # NOTE 这个 intermediate_step 是什么意思
+            inter_step = step.get("intermediate_step")  # TODO 这个 intermediate_step 是什么意思
             final_answer = step.get('output')
             if inter_step:
                 self.total_step += 1
@@ -420,7 +453,7 @@ if __name__ == "__main__":
 
     planner = ReThinking(llm, tools)
 
-    pdb.set_trace()
+    # pdb.set_trace()
     anwsers = planner.run(
         video_filename, txt, possible_anwsers=possible_anwsers, max_answer=3, max_try=8
     )

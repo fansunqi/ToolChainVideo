@@ -29,7 +29,6 @@ tool:
     - "HowSeeker_cpu"
     - "DescriptionTool_cpu"
     - "DefaultTool_cpu"
-    - "InpaintingTool_cuda:0"
 
 
 

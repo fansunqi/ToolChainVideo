@@ -174,6 +174,8 @@ class CountingTool:
 
         try:
             result = db_chain.run(question)
+        
+        # 报错返回
         except:
             result ="There is an error. Try to ask the question in a different way."
 
@@ -664,6 +666,7 @@ def run_a_video(
     use_example=False,
     max_answer=1,
     max_try=7,
+    quid=None,
 ):
     if (
         not skip_mem_build
@@ -678,6 +681,7 @@ def run_a_video(
         max_answer=max_answer,
         max_try=max_try,
         use_example=use_example,
+        quid=quid,
     )
     print("Input video: ", video_name)
     print("Input question: ", question)
@@ -732,6 +736,7 @@ if __name__ == "__main__":
                 with_two_mem = vq_conf.with_two_mem,
                 max_try = vq_conf.max_try,
                 max_answer = vq_conf.max_answer,
+                quid = data["quid"],
             ) 
 
             # TODO
