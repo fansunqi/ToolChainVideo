@@ -234,7 +234,7 @@ class ReThinking(object):
             else:
                 answer = observation
                 
-            self.backpropagation(is_good_result)
+            # self.backpropagation(is_good_result)
             
             self.selection()
             
@@ -315,6 +315,8 @@ class ReThinking(object):
     def selection(self, sample_all_expandable_nodes=True):
         
         # 根据节点的奖励值（reward）来选择一个节点，并将其设置为当前节点
+        
+        # 可以改写一下这边的 selection 策略
         
         if sample_all_expandable_nodes:
             all_descendant = self.tree.root.get_descendants(remove_leaf=True)

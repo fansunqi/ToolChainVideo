@@ -43,9 +43,6 @@ db = SQLDatabase.from_uri(
 question = "Why is the blue sweater guy looking at the shirtless men?"
 
 
-
-
-'''
 db_chain = SQLDatabaseChain.from_llm(
     llm=llm, db=db, top_k=TOP_K, verbose=True, prompt=sql_prompt
 )
@@ -54,15 +51,14 @@ db_chain = SQLDatabaseChain.from_llm(
 result = db_chain.run(question)
 # except:
 #     result ="There is an error. Try to ask the question in a different way."
+
+
+ 
 '''
-
-# 
-
 from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
 from langchain_community.agent_toolkits import create_sql_agent
 
 toolkit = SQLDatabaseToolkit(db=db, llm=llm)
-
 agent_executor = create_sql_agent(
     llm=llm,
     toolkit=toolkit,
@@ -71,3 +67,4 @@ agent_executor = create_sql_agent(
 res = agent_executor.run(question)
 print("SQL Query Result:")
 print(res)
+'''
