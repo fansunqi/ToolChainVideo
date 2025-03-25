@@ -15,4 +15,5 @@ demo/rvos_res/
 dgpt/
 project/__MACOSX
 *__pycache__
+viz/
 

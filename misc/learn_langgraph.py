@@ -41,7 +41,7 @@ ans = agent_executor.invoke({"input": query})
 print(ans)
 '''
 
-
+'''
 ### langgraph 省去了 scratchpad 的概念
 from langgraph.prebuilt import create_react_agent
 
@@ -63,3 +63,4 @@ messages = langgraph_agent_executor.invoke(
 )
 
 print(messages["messages"][-1].content)
+'''

@@ -10,3 +10,4 @@ max_try: 7
 output_file: "output/nextqa/nextqa_output.json"
 num_examples_to_run: 10
 start_num: 0
+quids_to_exclude: ["2617504308_3"]

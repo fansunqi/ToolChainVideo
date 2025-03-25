@@ -23,6 +23,8 @@ from langchain_openai import ChatOpenAI
 from langchain_experimental.sql import SQLDatabaseChain
 from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_community.cache import SQLiteCache
+from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
+from langchain_community.agent_toolkits import create_sql_agent
 
 # 启用缓存 (SQLite 方式), 可以去掉这行代码进行对比
 langchain.llm_cache = SQLiteCache(database_path="langchain_cache.db")
@@ -111,17 +113,19 @@ class TemporalTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+       
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
 
-        # try:
-        #     result = db_chain.run(question)   # 自然语言自动化查询数据库
-        # except:
-        #     result ="There is an error. Try to ask the question in a different way."
+        try:
+            result = agent_executor.run(question)
+        except:
+            result ="There is an error. Try to ask the question in a different way."
         
-        print(question)
-        result = db_chain.run(question)
 
         print(
             f"\nProcessed TemporalTool, Input Video: {video_path}, Input Question: {question}, "
@@ -171,17 +175,18 @@ class CountingTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
 
-        # try:
-        #     result = db_chain.run(question)
-        # except:
-        #     result ="There is an error. Try to ask the question in a different way."
-        
-        print(question)
-        result = db_chain.run(question)
+        try:
+            result = agent_executor.run(question)
+        except:
+            result ="There is an error. Try to ask the question in a different way."
 
         print(
             f"\nProcessed CountingTool, Input Video: {video_path}, Input Question: {question}, "
@@ -231,19 +236,18 @@ class ReasonFinder:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
 
-        # pdb.set_trace()
-        # try:
-        #     result = db_chain.run(question)
-        # except:
-        #     result ="There is an error. Try to ask the question in a different way."
-        
-        print(question)
-        # result = db_chain.run(question)
-        result = db_chain.invoke(question)
+        try:
+            result = agent_executor.run(question)
+        except:
+            result ="There is an error. Try to ask the question in a different way."
 
         print(
             f"\nProcessed ReasonFinder, Input Video: {video_path}, Input Question: {question}, "
@@ -293,17 +297,18 @@ class HowSeeker:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
 
-        # try:
-        #     result = db_chain.run(question)
-        # except:
-        #     result ="There is an error. Try to ask the question in a different way."
-        
-        print(question)
-        result = db_chain.run(question)
+        try:
+            result = agent_executor.run(question)
+        except:
+            result ="There is an error. Try to ask the question in a different way."
 
         print(
             f"\nProcessed HowSeeker, Input Video: {video_path}, Input Question: {question}, "
@@ -354,16 +359,18 @@ class DescriptionTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
-        )
-        # try:
-        #     result = db_chain.run(question)
-        # except:
-        #     result ="There is an error. Try to ask the question in a different way."
         
-        print(question)
-        result = db_chain.run(question)
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
+        )
+
+        try:
+            result = agent_executor.run(question)
+        except:
+            result ="There is an error. Try to ask the question in a different way."
 
         print(
             f"\nProcessed DescriptionTool, Input Video: {video_path}, Input Question: {question}, "
@@ -413,16 +420,18 @@ class DefaultTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
-        )
-        # try:
-        #     result = db_chain.run(question)
-        # except:
-        #     result ="There is an error. Try to ask the question in a different way."
         
-        print(question)
-        result = chain.run(question)
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
+        )
+
+        try:
+            result = agent_executor.run(question)
+        except:
+            result ="There is an error. Try to ask the question in a different way."
 
         print(
             f"\nProcessed DefaultTool, Input Video: {video_path}, Input Question: {question}, "
