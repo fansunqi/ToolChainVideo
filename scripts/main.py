@@ -1,4 +1,4 @@
-# Licensed under the MIT License.
+# Licensed under the BSD 3-Clause License.
 # -*- coding: utf-8 -*-
 
 import os
@@ -17,7 +17,7 @@ import sqlite3
 import langchain
 from langchain_community.cache import SQLiteCache
 from langchain.globals import set_llm_cache
-# 启用缓存 (SQLite 方式), 可以去掉这行代码进行对比
+
 langchain.llm_cache = SQLiteCache(database_path="langchain_cache.db")
 set_llm_cache(SQLiteCache(database_path="langchain_cache.db"))
 
@@ -34,8 +34,6 @@ from langchain_core.prompts import ChatPromptTemplate
 from project.TemporalUnderstanding import TemporalBase
 from project.InstanceUnderstanding import InstanceBase
 from project.ExampleSelector import CustomExampleSelector
-# from project.TreeSearch import ReThinking
-# from project.ChainSearch import ReThinking
 
 # TODO 没太懂这里 template 中的空缺如何填补
 from project.sql_template import (
@@ -699,24 +697,24 @@ if __name__ == "__main__":
         video_path = data["video_path"]
         question = data["question"].capitalize()  # 首字母大写
         options = [data['optionA'], data['optionB'], data['optionC'], data['optionD'], data['optionE']]
-        formatted_question = f"{question}? Choose your answer from below selections: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
+        question_w_options = f"{question}? Choose your answer from below selections: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
 
         if not vq_conf.skip_mem_build:  
             # if you have built the memory, you can skip this step by setting build_mem=False
             bot.init_db_agent()
-            bot.run_db_agent(video_path, question, vq_conf.with_two_mem)
+            bot.run_db_agent(video_path, question_w_options, vq_conf.with_two_mem)
         
         answers = {}
         answers["good_anwsers"] = []
         answers["bas_anwsers"] = []
         answer = use_tool_calling_agent(video_filename=video_path,
-                                        input_question=question,
+                                        input_question=question_w_options,
                                         llm=bot.llm,
                                         tools=bot.tools)
         answers["good_anwsers"].append(answer)
 
         result_dict = data
-        result_dict["formatted_question"] = formatted_question
+        result_dict["question_w_options"] = question_w_options
         result_dict["answers"] = answers
         all_results.append(result_dict)
 
@@ -728,8 +726,9 @@ if __name__ == "__main__":
     print(f"{str(len(all_results))}results saved")
 
 
-# TODO: log，哪些东西可以放到 log 里面
+
 # TODO: cache
+# TODO: log，哪些东西可以放到 log 里面
     
     
     
