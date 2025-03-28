@@ -12,14 +12,6 @@ from pprint import pprint
 import networkx as nx
 import matplotlib.pyplot as plt
 
-def softmax(x):
-    if isinstance(x, list):
-        x = np.array(x)
-    x -= np.max(x)
-    exp_x = np.exp(x)
-    softmax_x = exp_x / np.sum(exp_x)
-    return softmax_x
-
 
 class SafeDict(dict):
     def __missing__(self, key):
@@ -201,7 +193,6 @@ class ReThinking(object):
             print(f"\n\nTree {num_try}:\n\n") 
             
             ### visualize tree 
-            # TODO 这里的文件名加上 q_uids
             self.tree.traverse()
             tree_filepath = f"viz/{quid}"
             if not os.path.exists(tree_filepath):
@@ -214,7 +205,7 @@ class ReThinking(object):
             
             print(f"\n\nAnswer {num_anwser} - Try {num_try}:\n\n")
             
-            # TODO 理解下面这个的含义
+            # TODO 能不能整合简化一下 expansion 和 simulation
             observation, is_good_result = self.expansion()  # 1-step expansion
             
             # 好观察才模拟, 坏观察不模拟
@@ -297,7 +288,7 @@ class ReThinking(object):
         action, observation = node.value["action"], node.value["observation"]
         return f"Thought: {action.log}\nObservation: {observation}"
 
-    # def selection(self, sample_all_expandable_nodes=True):
+    # TODO 考察是否应该 sample_all_expandable_nodes:
     def selection(self, sample_all_expandable_nodes=False):
         
         # 根据节点的奖励值（reward）来选择一个节点，并将其设置为当前节点
@@ -311,12 +302,10 @@ class ReThinking(object):
             ancestors = self.tree.get_ancestors(remove_root=False, child_first=False)
             nodes = ancestors
         
-        # rewards = [node.value["reward"] for node in nodes]
-        # # print(f"rewards:{rewards}")
-        # prob = softmax(rewards)
-        # node_sample = np.random.choice(nodes, p=prob)
-        
+        # 随机选节点
+        # TODO 根据 RAG 选节点
         node_sample = np.random.choice(nodes)
+          
         self.tree.set_current(node_sample)
 
     def expansion(self, max_step=1):
@@ -354,10 +343,16 @@ class ReThinking(object):
     def simulation(self):
         
         # 用于模拟从当前节点到终止状态的过程，并评估该路径的结果。
-        
+        # TODO 比较 expansion 和 simulation 的区别, 例如 simulation 不考虑 child_history
         ancestor_history = self.get_ancestor_history()
+        
+        child_history = self.get_child_history()
+        print("simulation child_history:", child_history)
+        assert child_history == ""
+        print("simulation child_history done")
+             
         agent = self.get_new_agent(chain_history=ancestor_history)
-        agent_iterator = agent.iter(self.question)  # TODO 这个不知道什么意思
+        agent_iterator = agent.iter(self.question)
 
         is_good_result = True
         inter_step = None
