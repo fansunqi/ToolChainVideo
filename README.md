@@ -87,11 +87,9 @@
 
 <img src="assets/ckpt_files.png" alt="ckpt_files" style="zoom: 67%;" />
 
-## Overview 📜
+## Memory Construction
 
 Thanks to the authors of these open-source projects for providing excellent projects.
-
-#### Memory Construction
 
 - **Time-dominant Memory** ⏱️
   - **Captioning**
@@ -111,9 +109,6 @@ Thanks to the authors of these open-source projects for providing excellent proj
       - [https://huggingface.co/Salesforce/blip-image-captioning-large](https://huggingface.co/Salesforce/blip-image-captioning-large "https://huggingface.co/Salesforce/blip-image-captioning-large")
       - [https://huggingface.co/Salesforce/blip2-opt-2.7b](https://huggingface.co/Salesforce/blip2-opt-2.7b "https://huggingface.co/Salesforce/blip2-opt-2.7b")
       - [https://huggingface.co/docs/transformers/model\_doc/instructblip](https://huggingface.co/docs/transformers/model_doc/instructblip "https://huggingface.co/docs/transformers/model_doc/instructblip")
-  - **Action Recognition**
-    - InternVideo
-      - [https://github.com/OpenGVLab/InternVideo](https://github.com/OpenGVLab/InternVideo "https://github.com/OpenGVLab/InternVideo")
 
 ## NExT-QA 试验
 
