@@ -231,6 +231,7 @@ class ReThinking(object):
             ]
         )
         
+        # TODO 首先是看 agent 能否看到 tool 的描述
         agent = create_tool_calling_agent(self.llm, self.tools, prompt=prompt)
         agent_executor = AgentExecutor(agent=agent, tools=self.tools)
         
@@ -292,3 +293,5 @@ class ReThinking(object):
             return False
         return True
     
+
+# TODO 首先尝试链状最高能达到多少

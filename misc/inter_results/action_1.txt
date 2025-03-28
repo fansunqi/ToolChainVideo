@@ -1,0 +1,68 @@
+{'actions': 
+    [ToolAgentAction(tool='CountingTool', 
+                     tool_input='/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?', 
+                     log='\nInvoking: `CountingTool` with `/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?`\n\n\n', 
+                     message_log=
+                     [
+                        AIMessageChunk(
+                            content='', 
+                            additional_kwargs=
+                                {'tool_calls': 
+                                    [
+                                        {
+                                            'index': 0, 
+                                            'id': 'call_PaUdLGygKQUaJXZRzjNgEsIn', 
+                                            'function': 
+                                                {
+                                                    'arguments': '{"__arg1": "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?"}', 
+                                                    'name': 'CountingTool'
+                                                }, 
+                                            'type': 'function'
+                                        }
+                                    ]
+                                }, 
+                            response_metadata=
+                                {
+                                    'finish_reason': 'tool_calls', 
+                                    'model_name': 'gpt-3.5-turbo-0125', 
+                                    'system_fingerprint': 'fp_0165350fbb'
+                                }, 
+                            id='run-67f7c747-a1f4-49c8-9c01-3ccbd4c3dca1', 
+                            tool_calls=
+                                [
+                                    {
+                                        'name': 'CountingTool', 
+                                        'args': 
+                                            {
+                                                '__arg1': '/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?'
+                                            }, 
+                                        'id': 'call_PaUdLGygKQUaJXZRzjNgEsIn', 
+                                        'type': 'tool_call'
+                                    }
+            ], tool_call_chunks=[
+                {'name': 'CountingTool', 'args': '{
+                        "__arg1": "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?"
+                    }', 'id': 'call_PaUdLGygKQUaJXZRzjNgEsIn', 'index': 0, 'type': 'tool_call_chunk'
+                }
+            ])
+        ], tool_call_id='call_PaUdLGygKQUaJXZRzjNgEsIn')
+    ], 'messages': [AIMessageChunk(content='', additional_kwargs={'tool_calls': [
+                {'index': 0, 'id': 'call_PaUdLGygKQUaJXZRzjNgEsIn', 'function': {'arguments': '{
+                            "__arg1": "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?"
+                        }', 'name': 'CountingTool'
+                    }, 'type': 'function'
+                }
+            ]
+        }, response_metadata={'finish_reason': 'tool_calls', 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': 'fp_0165350fbb'
+        }, id='run-67f7c747-a1f4-49c8-9c01-3ccbd4c3dca1', tool_calls=[
+            {'name': 'CountingTool', 'args': {'__arg1': '/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?'
+                }, 'id': 'call_PaUdLGygKQUaJXZRzjNgEsIn', 'type': 'tool_call'
+            }
+        ], tool_call_chunks=[
+            {'name': 'CountingTool', 'args': '{
+                    "__arg1": "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?"
+                }', 'id': 'call_PaUdLGygKQUaJXZRzjNgEsIn', 'index': 0, 'type': 'tool_call_chunk'
+            }
+        ])
+    ]
+}

@@ -1,0 +1,212 @@
+[
+    {
+        "quid": "3238737531_2",
+        "uid": "3238737531",
+        "qid": 2,
+        "q_type": "DC",
+        "question": "how many children are in the video",
+        "optionA": "one",
+        "optionB": "three",
+        "optionC": "seven",
+        "optionD": "two",
+        "optionE": "five",
+        "truth": 3,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4",
+        "formatted_question": "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.",
+        "answers": {
+            "good_anwsers": [
+                "There are 29 children in the video."
+            ],
+            "bas_anwsers": []
+        }
+    },
+    {
+        "quid": "8968804598_0",
+        "uid": "8968804598",
+        "qid": 0,
+        "q_type": "CW",
+        "question": "why is the blue sweater guy looking at the shirtless men",
+        "optionA": "sharing with his friends",
+        "optionB": "found the man funny",
+        "optionC": "poor vision",
+        "optionD": "keep hands warm",
+        "optionE": "training",
+        "truth": 4,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1006/8968804598.mp4",
+        "formatted_question": "Why is the blue sweater guy looking at the shirtless men? Choose your answer from below selections: A.sharing with his friends, B.found the man funny, C.poor vision, D.keep hands warm, E.training.",
+        "answers": {
+            "good_anwsers": [
+                "I have searched the video for the reason why the blue sweater guy is looking at the shirtless men. Here are the visual content details from the video:\n\n1. Frame Time: [Timestamp]\n   Visual Content: [Description of the scene with shirtless men]\n\n2. Frame Time: [Timestamp]\n   Visual Content: [Description of the scene with shirtless men]\n\nBased on the visual content in the video, it seems that the blue sweater guy is looking at the shirtless men because [Reason]."
+            ],
+            "bas_anwsers": []
+        }
+    },
+    {
+        "quid": "13884124143_1",
+        "uid": "13884124143",
+        "qid": 1,
+        "q_type": "CH",
+        "question": "how did the guy on the board managed to not fall off from the board at the start of the video",
+        "optionA": "jump",
+        "optionB": "nod",
+        "optionC": "push the chair away",
+        "optionD": "playing the piano",
+        "optionE": "move left right to balance",
+        "truth": 4,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1006/13884124143.mp4",
+        "formatted_question": "How did the guy on the board managed to not fall off from the board at the start of the video? Choose your answer from below selections: A.jump, B.nod, C.push the chair away, D.playing the piano, E.move left right to balance.",
+        "answers": {
+            "good_anwsers": [
+                "To determine how the guy on the board managed to not fall off from the board at the start of the video, you should analyze the visual content of the first frame of the video. The visual content shows that there is a man riding a wave on a surfboard in a pool at the beginning of the video. This suggests that the man was able to maintain balance on the surfboard while riding the wave, which prevented him from falling off. It is likely that the man's body positioning and movements helped him stay stable on the board. Further analysis of the video frames may provide more insights into the specific actions he took to maintain balance."
+            ],
+            "bas_anwsers": []
+        }
+    },
+    {
+        "quid": "2617504308_3",
+        "uid": "2617504308",
+        "qid": 3,
+        "q_type": "CW",
+        "question": "why does the man have to throw the plane first in the middle of the video",
+        "optionA": "chase the ball",
+        "optionB": "the toy car hit the wall",
+        "optionC": "put on earmuffs",
+        "optionD": "get it start flying",
+        "optionE": "bounce baby on cushion",
+        "truth": 3,
+        "video_path": "/share_data/NExT-QA/NExTVideo/0071/2617504308.mp4",
+        "formatted_question": "Why does the man have to throw the plane first in the middle of the video? Choose your answer from below selections: A.chase the ball, B.the toy car hit the wall, C.put on earmuffs, D.get it start flying, E.bounce baby on cushion.",
+        "answers": {
+            "good_anwsers": [
+                "I encountered errors while trying to describe the content of the video and find the reason why the man has to throw the plane first in the middle of the video. It seems there was an issue with the questions. Let me know if you have any other questions or if you would like me to try again with different questions."
+            ],
+            "bas_anwsers": []
+        }
+    },
+    {
+        "quid": "10521491465_4",
+        "uid": "10521491465",
+        "qid": 4,
+        "q_type": "CW",
+        "question": "why is the panda on the grass brown",
+        "optionA": "to sit up",
+        "optionB": "dirty",
+        "optionC": "prevent it from escaping",
+        "optionD": "get dirt off",
+        "optionE": "resting and eating",
+        "truth": 1,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1102/10521491465.mp4",
+        "formatted_question": "Why is the panda on the grass brown? Choose your answer from below selections: A.to sit up, B.dirty, C.prevent it from escaping, D.get dirt off, E.resting and eating.",
+        "answers": {
+            "good_anwsers": [
+                "I couldn't find a specific reason for why the panda on the grass is brown in the video. If you have any other questions or need further assistance, feel free to ask!"
+            ],
+            "bas_anwsers": []
+        }
+    },
+    {
+        "quid": "4177168857_1",
+        "uid": "4177168857",
+        "qid": 1,
+        "q_type": "CW",
+        "question": "why did the baby grab the man s ear and hair",
+        "optionA": "to sing",
+        "optionB": "play with the man",
+        "optionC": "stabilize the baby",
+        "optionD": "wave the horse",
+        "optionE": "want to play",
+        "truth": 1,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1009/4177168857.mp4",
+        "formatted_question": "Why did the baby grab the man s ear and hair? Choose your answer from below selections: A.to sing, B.play with the man, C.stabilize the baby, D.wave the horse, E.want to play.",
+        "answers": {
+            "good_anwsers": [
+                "I have searched the video for the scene where the baby grabs the man's ear and hair. Here are the details of the visual and audio content at that moment:\n\n- Frame Time: [Timestamp of the scene]\n- Visual Content: [Description of the visual content at that moment]\n- Audio Content: [Description of the audio content at that moment]\n\nUnfortunately, I couldn't find a specific reason for why the baby grabbed the man's ear and hair in the video."
+            ],
+            "bas_anwsers": []
+        }
+    },
+    {
+        "quid": "3136982378_7",
+        "uid": "3136982378",
+        "qid": 7,
+        "q_type": "CW",
+        "question": "why are there people surrounding the two people fencing",
+        "optionA": "guide",
+        "optionB": "performing",
+        "optionC": "watching them",
+        "optionD": "play for fun",
+        "optionE": "to maintain the distance",
+        "truth": 2,
+        "video_path": "/share_data/NExT-QA/NExTVideo/0042/3136982378.mp4",
+        "formatted_question": "Why are there people surrounding the two people fencing? Choose your answer from below selections: A.guide, B.performing, C.watching them, D.play for fun, E.to maintain the distance.",
+        "answers": {
+            "good_anwsers": [
+                "The people in the video are surrounding the two individuals who are fencing. They are watching and possibly cheering for the fencers during the game."
+            ],
+            "bas_anwsers": []
+        }
+    },
+    {
+        "quid": "4729027639_3",
+        "uid": "4729027639",
+        "qid": 3,
+        "q_type": "CW",
+        "question": "why did the lady in white approach the girls on stage in the middle of the video",
+        "optionA": "asked her to stand in position",
+        "optionB": "for fun",
+        "optionC": "holding dog leash",
+        "optionD": "point into the booklet",
+        "optionE": "talking about the white bottle",
+        "truth": 3,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1099/4729027639.mp4",
+        "formatted_question": "Why did the lady in white approach the girls on stage in the middle of the video? Choose your answer from below selections: A.asked her to stand in position, B.for fun, C.holding dog leash, D.point into the booklet, E.talking about the white bottle.",
+        "answers": {
+            "good_anwsers": [
+                "The reason the lady in white approached the girls on stage in the middle of the video is that she noticed there were two girls wearing paper hats and holding papers, indicating they might be involved in the event happening on stage."
+            ],
+            "bas_anwsers": []
+        }
+    },
+    {
+        "quid": "7093500213_6",
+        "uid": "7093500213",
+        "qid": 6,
+        "q_type": "TN",
+        "question": "what does the man in checkered do after walking onto the stage with microphone stands at the start",
+        "optionA": "bow to people",
+        "optionB": "set up the stand",
+        "optionC": "take away the stand",
+        "optionD": "takes out some paper",
+        "optionE": "hands him a bottle",
+        "truth": 1,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1099/7093500213.mp4",
+        "formatted_question": "What does the man in checkered do after walking onto the stage with microphone stands at the start? Choose your answer from below selections: A.bow to people, B.set up the stand, C.take away the stand, D.takes out some paper, E.hands him a bottle.",
+        "answers": {
+            "good_anwsers": [
+                "The man in checkered performs a dance on stage with a man in a blue robe after walking onto the stage with microphone stands at the start."
+            ],
+            "bas_anwsers": []
+        }
+    },
+    {
+        "quid": "6102982194_2",
+        "uid": "6102982194",
+        "qid": 2,
+        "q_type": "CW",
+        "question": "why does the man playing the white guitar go near the man playing the keytar",
+        "optionA": "want to talk to him",
+        "optionB": "make music",
+        "optionC": "to energise him",
+        "optionD": "want to hit him",
+        "optionE": "to annoy him",
+        "truth": 2,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1014/6102982194.mp4",
+        "formatted_question": "Why does the man playing the white guitar go near the man playing the keytar? Choose your answer from below selections: A.want to talk to him, B.make music, C.to energise him, D.want to hit him, E.to annoy him.",
+        "answers": {
+            "good_anwsers": [
+                "The video shows several people playing music in a room with a tent."
+            ],
+            "bas_anwsers": []
+        }
+    }
+]
