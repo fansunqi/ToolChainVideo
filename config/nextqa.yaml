@@ -1,4 +1,4 @@
-inference_config_path: "config/inference/inference.yaml"
+inference_config_path: "config/inference/inference_gpt4.yaml"
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/train.csv"

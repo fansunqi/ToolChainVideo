@@ -1,0 +1,38 @@
+# config.yaml
+openai:
+  AGENT_GPT_MODEL_NAME : "gpt-4"
+  GPT_MODEL_NAME : "gpt-4"
+  GPT_API_KEY: "sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra"
+  PROXY: "https://api.juheai.top/v1"
+
+google_cloud:
+  CLOUD_VISION_API_KEY: null
+  QUOTA_PROJECT_ID: null
+
+mcts_planner:
+  good_base_reward: 1.0
+  bad_base_reward: -1.0
+  decay_rate: 0.5
+
+memory:
+  step: 30
+  memory_list:
+    - "VideoInstanceUnderstanding_cuda:0"
+    - "VideoTemporalUnderstanding_cuda:0"
+
+tool:
+  TOP_K: 2
+  tool_list:
+    - "TemporalTool_cpu"
+    - "CountingTool_cpu"
+    - "ReasonFinder_cpu"
+    - "HowSeeker_cpu"
+    - "DescriptionTool_cpu"
+    - "DefaultTool_cpu"
+
+cache:
+  mannual_cache_file: "gpt4_cache.pkl"
+
+
+
+

@@ -6,28 +6,24 @@ import sys
 sys.path.append(f"./")
 sys.path.append(f"../")
 
-import random, math, cv2, inspect, tempfile, csv
+import random, inspect
 import torch
-from PIL import Image, ImageDraw, ImageOps, ImageFont
 import numpy as np
 import argparse
 from omegaconf import OmegaConf
 import sqlite3
+import pickle
+import datetime
+from tqdm import tqdm
+from dataset import get_dataset
+from util import save_to_json
+import pdb
 
 import langchain
 from langchain_community.cache import SQLiteCache
 from langchain.globals import set_llm_cache
-
 langchain.llm_cache = SQLiteCache(database_path="langchain_cache.db")
 set_llm_cache(SQLiteCache(database_path="langchain_cache.db"))
-
-import pickle
-mannual_cache_file = "gpt35_cache.pkl"
-if os.path.exists(mannual_cache_file):
-    with open(mannual_cache_file, "rb") as f:
-        mannual_cache = pickle.load(f)
-else:
-    mannual_cache = {}
 
 from langchain.prompts import PromptTemplate
 from langchain.agents import initialize_agent, AgentExecutor, create_tool_calling_agent
@@ -55,13 +51,9 @@ from project.sql_template import (
     DESCRIP_ADDITION_PROMPT,
 )
 
-import datetime
-from tqdm import tqdm
-from dataset import get_dataset
-from util import save_to_json
 
-import pdb
-
+mannual_cache = None
+mannual_cache_file = None
 
 def seed_everything(seed: int):
     random.seed(seed)
@@ -646,6 +638,7 @@ class MemeryBuilder:
         print(f" Current Memory: {self.agent.memory.load_memory_variables({})}")
 
 
+
 def use_tool_calling_agent(video_filename, input_question, llm, tools, ancestor_history=None, children_history=None):
         # 先不考虑 ancestor_history 和 children_history 这两项
         
@@ -658,7 +651,6 @@ def use_tool_calling_agent(video_filename, input_question, llm, tools, ancestor_
             ]
         )
         
-        # TODO 首先是看 agent 能否看到 tool 的描述
         agent = create_tool_calling_agent(llm, tools, prompt=prompt)
         agent_executor = AgentExecutor(agent=agent, tools=tools)
         
@@ -672,12 +664,12 @@ def use_tool_calling_agent(video_filename, input_question, llm, tools, ancestor_
         
         if query in mannual_cache:
             # 缓存命中
-            print("Cache hit!")
+            print("\nCache hit!")
             steps = mannual_cache[query]
             output = steps[-1].get('output')
         else:
             # 缓存未命中
-            print("Cache miss. Calling API...")
+            print("\nCache miss. Calling API...")
             steps = []
             for step in agent_executor.stream({"input": query}):
                 step_idx += 1
@@ -688,6 +680,7 @@ def use_tool_calling_agent(video_filename, input_question, llm, tools, ancestor_
             
             mannual_cache[query] = steps
             # 保存缓存
+            print("\nSaving cache...")
             with open(mannual_cache_file, "wb") as f:
                 pickle.dump(mannual_cache, f)
             
@@ -703,6 +696,16 @@ if __name__ == "__main__":
     conf = OmegaConf.load(vq_conf.inference_config_path)
 
     seed_everything(vq_conf.seed) 
+    
+    # mannual_cache
+    print("\nloading mannual_cache...")
+    mannual_cache_file = conf.cache.mannual_cache_file
+    if os.path.exists(mannual_cache_file):
+        with open(mannual_cache_file, "rb") as f:
+            mannual_cache = pickle.load(f)
+    else:
+        mannual_cache = {}
+    
 
     load_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in conf.tool.tool_list}
     # {'TemporalTool': 'cpu', 'CountingTool': 'cpu', 'ReasonFinder': 'cpu', 'HowSeeker': 'cpu', 'DescriptionTool': 'cpu', 'DefaultTool': 'cpu', 'InpaintingTool': 'cuda:0'}
@@ -716,7 +719,7 @@ if __name__ == "__main__":
     dataset = get_dataset(vq_conf, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
     all_results = []
     
-    # 用于 planning 的 llm
+    # 用于 planning tools 的 llm
     llm = ChatOpenAI(
         api_key = conf.openai.GPT_API_KEY,
         model = conf.openai.GPT_MODEL_NAME,
@@ -758,8 +761,6 @@ if __name__ == "__main__":
     print(f"{str(len(all_results))}results saved")
 
 
-
-# TODO: cache
 # TODO: log，哪些东西可以放到 log 里面
     
     
