@@ -206,48 +206,14 @@ class ReThinking(object):
             print(f"\n\nAnswer {num_anwser} - Try {num_try}:\n\n")
             
             # TODO 能不能整合简化一下 expansion 和 simulation
-            # observation, is_good_result = self.expansion()  # 1-step expansion
+            observation, is_good_result = self.expansion()  # 1-step expansion
             
             # 好观察才模拟, 坏观察不模拟
-            # if is_good_result:
-            #     answer, is_good_result = self.simulation()
-            # else:
-            #     answer = observation
+            if is_good_result:
+                answer, is_good_result = self.simulation()
+            else:
+                answer = observation
             
-            observation = ""
-            answer = ""
-            is_good_result = True
-            
-            ### expansion
-            ancestor_history = self.get_ancestor_history()
-            child_history = self.get_child_history()
-            
-            agent = self.get_new_agent(chain_history=ancestor_history, thought_prompt=child_history)
-            agent_iterator = agent.iter(self.question)
-            
-            MAX_STEP = 10
-            for step_idx, step in enumerate(agent_iterator):
-                inter_step = step.get("intermediate_step")
-                final_answer = step.get('output')
-                
-                if inter_step:
-                    self.total_step += 1
-                    action, observation = inter_step[0]
-                    self.tree.add_child({"action": action, "observation": observation, "reward": 0.0})
-                    
-                    # if not self.is_good_observation(observation):
-                    #     is_good_result = False
-                    #     break
-                if step_idx + 1 >= MAX_STEP:
-                    break
-            
-            is_good_result = self.is_good_observation(observation)
-                
-            # 给叶节点设置 final_answer
-            self.tree.current.value["final_anwser"] = final_answer
-            
-            
-            # 为下一个循环挑选待扩展节点
             self.selection()
             
             if is_good_result:
