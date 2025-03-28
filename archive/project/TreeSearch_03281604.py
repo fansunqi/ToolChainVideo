@@ -4,10 +4,6 @@ import math
 import numpy as np
 
 from langchain.agents.initialize import initialize_agent
-from langchain.agents import AgentExecutor, create_tool_calling_agent
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.tools import tool
-from langchain_openai import ChatOpenAI
 
 from project.ExampleSelector import CustomExampleSelector
 from project.PromptTemplate import general_template
@@ -184,7 +180,7 @@ class ReThinking(object):
     ):
         
         self.use_example = use_example
-        # self.init_new_tree(video_name, question, possible_anwsers=possible_anwsers)
+        self.init_new_tree(video_name, question, possible_anwsers=possible_anwsers)
         anwsers = {"good_anwsers": [], "bad_anwsers": []}
         num_try = 0
         
@@ -197,12 +193,12 @@ class ReThinking(object):
             print(f"\n\nTree {num_try}:\n\n") 
             
             ### visualize tree 
-            # self.tree.traverse()
-            # tree_filepath = f"viz/{quid}"
-            # if not os.path.exists(tree_filepath):
-            #     os.makedirs(tree_filepath)
-            # tree_filename = f"viz/{quid}/tree_{num_try}"
-            # self.tree.visualize(filename=tree_filename)
+            self.tree.traverse()
+            tree_filepath = f"viz/{quid}"
+            if not os.path.exists(tree_filepath):
+                os.makedirs(tree_filepath)
+            tree_filename = f"viz/{quid}/tree_{num_try}"
+            self.tree.visualize(filename=tree_filename)
 
             num_try += 1
             num_anwser = len(anwsers["good_anwsers"]) + len(anwsers["bad_anwsers"]) + 1
@@ -222,7 +218,6 @@ class ReThinking(object):
             answer = ""
             is_good_result = True
             
-            '''
             ### expansion
             ancestor_history = self.get_ancestor_history()
             child_history = self.get_child_history()
@@ -248,24 +243,18 @@ class ReThinking(object):
             
             is_good_result = self.is_good_observation(observation)
                 
-            
-            '''
-            
-            final_answer = self.use_tool_calling_agent(video_filename=video_name,
-                                        input_question=question)
-            
             # 给叶节点设置 final_answer
-            # self.tree.current.value["final_anwser"] = final_answer
+            self.tree.current.value["final_anwser"] = final_answer
             
             
             # 为下一个循环挑选待扩展节点
-            # self.selection()
+            self.selection()
             
             if is_good_result:
                 # 只有这里才会输出答案
-                anwsers["good_anwsers"].append(final_answer)
+                anwsers["good_anwsers"].append(answer)
             else:
-                anwsers["bad_anwsers"].append(final_answer)
+                anwsers["bad_anwsers"].append(answer)
 
         return anwsers
 
@@ -289,8 +278,6 @@ class ReThinking(object):
                 template["examples"].format_map(SafeDict(examples=self.examples))
                 + suffix
             )
-            
-        pdb.set_trace()
 
         # 可能需要改成特殊的 tool calling agent
         agent = initialize_agent(
@@ -307,37 +294,6 @@ class ReThinking(object):
         )
 
         return agent
-    
-    def use_tool_calling_agent(self, video_filename, input_question, ancestor_history=None, children_history=None):
-        # 先不考虑 ancestor_history 和 children_history 这两项
-        
-        prompt = ChatPromptTemplate.from_messages(
-            [
-                ("system", "You are a helpful assistant."),
-                ("human", "{input}"),
-                # Placeholders fill up a **list** of messages
-                ("placeholder", "{agent_scratchpad}"),
-            ]
-        )
-        
-        agent = create_tool_calling_agent(self.llm, self.tools, prompt=prompt)
-        agent_executor = AgentExecutor(agent=agent, tools=self.tools)
-        
-        query = f"""
-        Regarding a given video from {video_filename}, use tools to answer the following questions as best you can.
-        Question: {input_question}
-        """
-        
-        step_idx = 0
-        output = None
-        for step in agent_executor.stream({"input": query}):
-            step_idx += 1
-            print(f"\nagent_iterator step: {step_idx}")
-            print(step)
-            output = step.get('output')
-        
-        return output
-        
 
     def get_ancestor_history(self):
         tree_history = ""
