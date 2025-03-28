@@ -93,7 +93,7 @@ class TemporalTool:
         name = "TemporalTool",
         description = "Useful when you need to process temporal information in videos."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is ./videos/xxx.mp4#What is he talking about when a girl is playing violin? ",
+        "For example: the input is /data/videos/xxx.mp4#What is he talking about when a girl is playing violin? ",
     )
     def inference(self, input):
         if "#" in input:
@@ -153,7 +153,7 @@ class CountingTool:
         name = "CountingTool",
         description = "Useful when you need to count object number."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is ./videos/xxx.mp4#How many fish are here? ",
+        "For example: the input is /data/videos/xxx.mp4#How many fish are here? ",
     )
     def inference(self, input):
         if "#" in input:
@@ -213,7 +213,7 @@ class ReasonFinder:
         name="ReasonFinder",
         description="Useful when you need to find reasons or explanations."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is ./videos/xxx.mp4#Why she is crying? ",
+        "For example: the input is /data/videos/xxx.mp4#Why she is crying? ",
     )
     def inference(self, input):
         if "#" in input:
@@ -275,7 +275,7 @@ class HowSeeker:
         name = "HowSeeker",
         description = "useful when you need to find methods or steps to accomplish a task."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is ./videos/xxx.mp4#How did the children eat food? ",
+        "For example: the input is /data/videos/xxx.mp4#How did the children eat food? ",
     )
     def inference(self, input):
         if "#" in input:
@@ -335,7 +335,7 @@ class DescriptionTool:
         name = "DescriptionTool",
         description = "Useful when you need to describe the content of a video, e.g. the audio in the video, the subtitles, the on-screen content, etc."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is ./videos/xxx.mp4#What's in the video?",
+        "For example: the input is /data/videos/xxx.mp4#What's in the video?",
     )
     def inference(self, input):
         # pdb.set_trace()
@@ -395,7 +395,7 @@ class DefaultTool:
         name = "DefaultTool",
         description = "Useful when other tools can't solve the problem corresponding to the video."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is ./videos/xxx.mp4#Are the men happy today?",
+        "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
     )
     def inference(self, input):
         if "#" in input:
@@ -446,7 +446,7 @@ class VideoTemporalUnderstanding:
         name="VideoTemporalUnderstanding",
         description="useful when you need to process temporal information in videos."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is ./videos/xxx.mp4#Are the men happy today?",
+        "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
     )
     def inference(self, input):
         if "#" in input:
@@ -480,7 +480,7 @@ class VideoInstanceUnderstanding:
         name="VideoInstanceUnderstanding",
         description="useful when you need to understand the instance information in videos."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is ./videos/xxx.mp4#Are the men happy today?",
+        "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
     )
     def inference(self, input):
         if "#" in input:
@@ -641,6 +641,13 @@ class MemeryBuilder:
 def use_tool_calling_agent(video_filename, input_question, llm, tools, ancestor_history=None, children_history=None):
         # 先不考虑 ancestor_history 和 children_history 这两项
         
+        llm = ChatOpenAI(
+            model="gpt-4",
+            temperature=0.0,
+            api_key='sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra',
+            base_url="https://api.juheai.top/v1",  # OpenAI 的基础 URL
+        )
+        
         prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", "You are a helpful assistant."),
@@ -691,6 +698,13 @@ if __name__ == "__main__":
     specific_quids = vq_conf["specific_quids"] if "specific_quids" in vq_conf else None
     dataset = get_dataset(vq_conf, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
     all_results = []
+    
+    llm = ChatOpenAI(
+        api_key = conf.openai.GPT_API_KEY,
+        model = conf.openai.GPT_MODEL_NAME,
+        temperature = 0,
+        base_url = conf.openai.PROXY
+    )
 
     for data in tqdm(dataset):
 
@@ -700,7 +714,7 @@ if __name__ == "__main__":
         question_w_options = f"{question}? Choose your answer from below selections: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
 
         if not vq_conf.skip_mem_build:  
-            # if you have built the memory, you can skip this step by setting build_mem=False
+            # if you have built the memory, you can skip this step by setting skip_mem_build=True
             bot.init_db_agent()
             bot.run_db_agent(video_path, question_w_options, vq_conf.with_two_mem)
         
@@ -709,7 +723,7 @@ if __name__ == "__main__":
         answers["bas_anwsers"] = []
         answer = use_tool_calling_agent(video_filename=video_path,
                                         input_question=question_w_options,
-                                        llm=bot.llm,
+                                        llm=llm,
                                         tools=bot.tools)
         answers["good_anwsers"].append(answer)
 
