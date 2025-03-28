@@ -671,39 +671,6 @@ def use_tool_calling_agent(video_filename, input_question, llm, tools, ancestor_
         
         return output
 
-# def run_a_video(
-#     MemoryBuilder,
-#     Planner,
-#     video_name,
-#     question,
-#     possible_anwsers=[],
-#     skip_mem_build=True,
-#     with_two_mem = True,
-#     use_example=False,
-#     max_answer=1,
-#     max_try=7,
-#     quid=None,
-# ):
-#     if (
-#         not skip_mem_build
-#     ):  # if you have built the memory, you can skip this step by setting build_mem=False
-#         MemoryBuilder.init_db_agent()
-#         MemoryBuilder.run_db_agent(video_name, question, with_two_mem)
-
-#     anwsers = Planner.run(
-#         video_name,
-#         question,
-#         possible_anwsers=possible_anwsers,
-#         max_answer=max_answer,
-#         max_try=max_try,
-#         use_example=use_example,
-#         quid=quid,
-#     )
-#     print("Input video: ", video_name)
-#     print("Input question: ", question)
-#     print("The anwsers are:", anwsers)
-#     print("Total action steps: ", Planner.total_step)
-#     return anwsers
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
@@ -719,14 +686,6 @@ if __name__ == "__main__":
     # {'TemporalTool': 'cpu', 'CountingTool': 'cpu', 'ReasonFinder': 'cpu', 'HowSeeker': 'cpu', 'DescriptionTool': 'cpu', 'DefaultTool': 'cpu', 'InpaintingTool': 'cuda:0'}
 
     bot = MemeryBuilder(load_dict=load_dict, config=conf)
-
-    # planner = ReThinking(
-    #     bot.llm, 
-    #     bot.tools, 
-    #     good_base_reward = conf.mcts_planner.good_base_reward, 
-    #     bad_base_reward = conf.mcts_planner.bad_base_reward, 
-    #     decay_rate = conf.mcts_planner.decay_rate,
-    # )
 
     quids_to_exclude = vq_conf["quids_to_exclude"] if "quids_to_exclude" in vq_conf else None
     num_examples_to_run = vq_conf["num_examples_to_run"] if "num_examples_to_run" in vq_conf else -1
@@ -755,28 +714,6 @@ if __name__ == "__main__":
                                         llm=bot.llm,
                                         tools=bot.tools)
         answers["good_anwsers"].append(answer)
-        # try:
-        # answers = run_a_video(
-        #     bot,
-        #     planner,
-        #     video_path,
-        #     formatted_question,
-        #     skip_mem_build = vq_conf.skip_mem_build,
-        #     with_two_mem = vq_conf.with_two_mem,
-        #     max_try = vq_conf.max_try,
-        #     max_answer = vq_conf.max_answer,
-        #     quid = data["quid"],
-        # ) 
-
-            # TODO
-            # 如何去解析这个 answer ?
-            # Input question:  How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.
-            # The anwsers are: {'good_anwsers': ['There are 29 children in the video.', 'D. two', '29 children'], 'bad_anwsers': []}
-        # except Exception as e:
-        #     print(f"Error:{e}")
-        #     print(data["quid"])
-        #     # answers = "Error"
-        #     sys.exit(1)  # 终止程序并返回状态码 1
 
         result_dict = data
         result_dict["formatted_question"] = formatted_question
@@ -792,7 +729,7 @@ if __name__ == "__main__":
 
 
 # TODO: log，哪些东西可以放到 log 里面
-# TODO: LLM cache
+# TODO: cache
     
     
     
