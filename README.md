@@ -83,9 +83,10 @@
      wget https://github.com/ChaoningZhang/MobileSAM/blob/master/weights/mobile_sam.pt
      cd ../..
      ```
-    The overall checkpoints file structure is as follows:
 
-<img src="assets/ckpt_files.png" alt="ckpt_files" style="zoom: 67%;" />
+The overall checkpoints file structure is as follows:
+
+<img src="assets/ckpt_files.png" alt="ckpt_files" style="zoom: 33%;" />
 
 ## Memory Construction
 
