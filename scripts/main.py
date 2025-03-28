@@ -21,6 +21,14 @@ from langchain.globals import set_llm_cache
 langchain.llm_cache = SQLiteCache(database_path="langchain_cache.db")
 set_llm_cache(SQLiteCache(database_path="langchain_cache.db"))
 
+import pickle
+mannual_cache_file = "gpt35_cache.pkl"
+if os.path.exists(mannual_cache_file):
+    with open(mannual_cache_file, "rb") as f:
+        mannual_cache = pickle.load(f)
+else:
+    mannual_cache = {}
+
 from langchain.prompts import PromptTemplate
 from langchain.agents import initialize_agent, AgentExecutor, create_tool_calling_agent
 from langchain_core.tools import Tool
@@ -641,13 +649,6 @@ class MemeryBuilder:
 def use_tool_calling_agent(video_filename, input_question, llm, tools, ancestor_history=None, children_history=None):
         # 先不考虑 ancestor_history 和 children_history 这两项
         
-        llm = ChatOpenAI(
-            model="gpt-4",
-            temperature=0.0,
-            api_key='sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra',
-            base_url="https://api.juheai.top/v1",  # OpenAI 的基础 URL
-        )
-        
         prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", "You are a helpful assistant."),
@@ -668,12 +669,28 @@ def use_tool_calling_agent(video_filename, input_question, llm, tools, ancestor_
         
         step_idx = 0
         output = None
-        for step in agent_executor.stream({"input": query}):
-            step_idx += 1
-            print(f"\nagent_iterator step: {step_idx}")
-            print(step)
-            output = step.get('output')
         
+        if query in mannual_cache:
+            # 缓存命中
+            print("Cache hit!")
+            steps = mannual_cache[query]
+            output = steps[-1].get('output')
+        else:
+            # 缓存未命中
+            print("Cache miss. Calling API...")
+            steps = []
+            for step in agent_executor.stream({"input": query}):
+                step_idx += 1
+                print(f"\nagent_iterator step: {step_idx}")
+                print(step)
+                steps.append(step)
+                output = step.get('output')
+            
+            mannual_cache[query] = steps
+            # 保存缓存
+            with open(mannual_cache_file, "wb") as f:
+                pickle.dump(mannual_cache, f)
+            
         return output
 
 
@@ -699,6 +716,7 @@ if __name__ == "__main__":
     dataset = get_dataset(vq_conf, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
     all_results = []
     
+    # 用于 planning 的 llm
     llm = ChatOpenAI(
         api_key = conf.openai.GPT_API_KEY,
         model = conf.openai.GPT_MODEL_NAME,

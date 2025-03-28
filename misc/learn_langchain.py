@@ -1,8 +1,17 @@
+import langchain
+from langchain_community.cache import SQLiteCache
+from langchain.globals import set_llm_cache
+
+langchain.llm_cache = SQLiteCache(database_path="langchain_cache.db")
+set_llm_cache(SQLiteCache(database_path="langchain_cache.db"))
+
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
 from pprint import pprint
+
+
 
 model = ChatOpenAI(
     api_key="sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra",
