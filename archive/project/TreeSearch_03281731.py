@@ -16,6 +16,11 @@ from pprint import pprint
 import networkx as nx
 import matplotlib.pyplot as plt
 
+
+class SafeDict(dict):
+    def __missing__(self, key):
+        return "{" + key + "}"
+
 # 工具节点类
 class Node(object):
     def __init__(self, value, father=None):
