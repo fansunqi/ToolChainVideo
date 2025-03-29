@@ -122,7 +122,8 @@ class TemporalTool:
         )
 
         try:
-            result = db_chain.run(question)   # 自然语言自动化查询数据库
+            # result = db_chain.run(question)
+            result = db_chain.invoke(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
         
@@ -182,7 +183,8 @@ class CountingTool:
         )
 
         try:
-            result = db_chain.run(question)
+            # result = db_chain.run(question)
+            result = db_chain.invoke(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
         
@@ -245,8 +247,8 @@ class ReasonFinder:
 
         # pdb.set_trace()
         try:
-            result = db_chain.run(question)
-            # result = db_chain.invoke(question)
+            # result = db_chain.run(question)
+            result = db_chain.invoke(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
         
@@ -303,7 +305,8 @@ class HowSeeker:
         )
 
         try:
-            result = db_chain.run(question)
+            # result = db_chain.run(question)
+            result = db_chain.invoke(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
         
@@ -363,7 +366,8 @@ class DescriptionTool:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
         try:
-            result = db_chain.run(question)
+            # result = db_chain.run(question)
+            result = db_chain.invoke(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
         
@@ -422,7 +426,8 @@ class DefaultTool:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
         try:
-            result = db_chain.run(question)
+            # result = db_chain.run(question)
+            result = db_chain.invoke(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
         
