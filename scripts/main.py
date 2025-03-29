@@ -121,14 +121,12 @@ class TemporalTool:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
-        try:
-            # result = db_chain.run(question)
-            result = db_chain.invoke(question)
-        except:
-            result ="There is an error. Try to ask the question in a different way."
+        # try:
+        #     result = db_chain.invoke(question)
+        # except:
+        #     result ="There is an error. Try to ask the question in a different way."
         
-        # print(question)
-        # result = db_chain.run(question)
+        result = db_chain.invoke(question)
 
         print(
             f"\nProcessed TemporalTool, Input Video: {video_path}, Input Question: {question}, "
@@ -182,14 +180,12 @@ class CountingTool:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
-        try:
-            # result = db_chain.run(question)
-            result = db_chain.invoke(question)
-        except:
-            result ="There is an error. Try to ask the question in a different way."
+        # try:
+        #     result = db_chain.invoke(question)
+        # except:
+        #     result ="There is an error. Try to ask the question in a different way."
         
-        # print(question)
-        # result = db_chain.run(question)
+        result = db_chain.invoke(question)
 
         print(
             f"\nProcessed CountingTool, Input Video: {video_path}, Input Question: {question}, "
@@ -245,12 +241,12 @@ class ReasonFinder:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
-        # pdb.set_trace()
-        try:
-            # result = db_chain.run(question)
-            result = db_chain.invoke(question)
-        except:
-            result ="There is an error. Try to ask the question in a different way."
+        # try:
+        #     result = db_chain.invoke(question)
+        # except:
+        #     result ="There is an error. Try to ask the question in a different way."
+        
+        result = db_chain.invoke(question)
         
         print(
             f"\nProcessed ReasonFinder, Input Video: {video_path}, Input Question: {question}, "
@@ -304,14 +300,12 @@ class HowSeeker:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
-        try:
-            # result = db_chain.run(question)
-            result = db_chain.invoke(question)
-        except:
-            result ="There is an error. Try to ask the question in a different way."
+        # try:
+        #     result = db_chain.invoke(question)
+        # except:
+        #     result ="There is an error. Try to ask the question in a different way."
         
-        # print(question)
-        # result = db_chain.run(question)
+        result = db_chain.invoke(question)
 
         print(
             f"\nProcessed HowSeeker, Input Video: {video_path}, Input Question: {question}, "
@@ -365,14 +359,13 @@ class DescriptionTool:
         db_chain = SQLDatabaseChain.from_llm(
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
-        try:
-            # result = db_chain.run(question)
-            result = db_chain.invoke(question)
-        except:
-            result ="There is an error. Try to ask the question in a different way."
         
-        # print(question)
-        # result = db_chain.run(question)
+        # try:
+        #     result = db_chain.invoke(question)
+        # except:
+        #     result ="There is an error. Try to ask the question in a different way."
+        
+        result = db_chain.invoke(question)
 
         print(
             f"\nProcessed DescriptionTool, Input Video: {video_path}, Input Question: {question}, "
@@ -425,14 +418,13 @@ class DefaultTool:
         db_chain = SQLDatabaseChain.from_llm(
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
-        try:
-            # result = db_chain.run(question)
-            result = db_chain.invoke(question)
-        except:
-            result ="There is an error. Try to ask the question in a different way."
         
-        # print(question)
-        # result = chain.run(question)
+        # try:
+        #     result = db_chain.invoke(question)
+        # except:
+        #     result ="There is an error. Try to ask the question in a different way."
+        
+        result = db_chain.invoke(question)
 
         print(
             f"\nProcessed DefaultTool, Input Video: {video_path}, Input Question: {question}, "
@@ -753,15 +745,19 @@ if __name__ == "__main__":
             bot.init_db_agent()
             bot.run_db_agent(video_path, question_w_options, vq_conf.with_two_mem)
         
-        answers = {}
-        answers["good_anwsers"] = []
-        answers["bas_anwsers"] = []
-        answer = use_tool_calling_agent(video_filename=video_path,
-                                        input_question=question_w_options,
-                                        llm=llm,
-                                        tools=bot.tools,
-                                        use_cache=vq_conf.use_cache)
-        answers["good_anwsers"].append(answer)
+        try:
+            answers = {}
+            answers["good_anwsers"] = []
+            answers["bas_anwsers"] = []
+            answer = use_tool_calling_agent(video_filename=video_path,
+                                            input_question=question_w_options,
+                                            llm=llm,
+                                            tools=bot.tools,
+                                            use_cache=vq_conf.use_cache)
+            answers["good_anwsers"].append(answer)
+        except Exception as e:
+            print(e)
+            answers = "Error"
 
         result_dict = data
         result_dict["question_w_options"] = question_w_options
