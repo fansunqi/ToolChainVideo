@@ -1,4 +1,4 @@
-# Licensed under the BSD 3-Clause License.
+# Licensed under the MIT License.
 # -*- coding: utf-8 -*-
 
 import os
@@ -6,42 +6,33 @@ import sys
 sys.path.append(f"./")
 sys.path.append(f"../")
 
-import random, inspect
+import random, math, cv2, inspect, tempfile, csv
 import torch
+from PIL import Image, ImageDraw, ImageOps, ImageFont
 import numpy as np
 import argparse
 from omegaconf import OmegaConf
 import sqlite3
-import pickle
-import datetime
-from tqdm import tqdm
-from dataset import get_dataset
-from util import save_to_json
-import pdb
 
 import langchain
-from langchain_community.cache import SQLiteCache
-from langchain.globals import set_llm_cache
-langchain.llm_cache = SQLiteCache(database_path="langchain_cache.db")
-set_llm_cache(SQLiteCache(database_path="langchain_cache.db"))
-
 from langchain.prompts import PromptTemplate
-from langchain.agents import initialize_agent, AgentExecutor, create_tool_calling_agent
+from langchain.agents import initialize_agent
 from langchain_core.tools import Tool
 from langchain.chains.conversation.memory import ConversationBufferMemory
 from langchain_openai import ChatOpenAI
 from langchain_experimental.sql import SQLDatabaseChain
 from langchain_community.utilities.sql_database import SQLDatabase
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_community.cache import SQLiteCache
 from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
 from langchain_community.agent_toolkits import create_sql_agent
 
+# 启用缓存 (SQLite 方式), 可以去掉这行代码进行对比
+langchain.llm_cache = SQLiteCache(database_path="langchain_cache.db")
 
 from project.TemporalUnderstanding import TemporalBase
 from project.InstanceUnderstanding import InstanceBase
 from project.ExampleSelector import CustomExampleSelector
-
-# TODO 没太懂这里 template 中的空缺如何填补
+from project.TreeSearch import ReThinking
 from project.sql_template import (
     _sqlite_prompt,
     COUNTING_EXAMPLE_PROMPT,
@@ -52,10 +43,15 @@ from project.sql_template import (
     DESCRIP_EXAMPLE_PROMPT,
     DESCRIP_ADDITION_PROMPT,
 )
+from project.E2FGVI.Inpainter import Inpainter
 
+import datetime
+from tqdm import tqdm
+from dataset import get_dataset
+from util import save_to_json
 
-mannual_cache = None
-mannual_cache_file = None
+import pdb
+
 
 def seed_everything(seed: int):
     random.seed(seed)
@@ -95,7 +91,7 @@ class TemporalTool:
         name = "TemporalTool",
         description = "Useful when you need to process temporal information in videos."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#What is he talking about when a girl is playing violin? ",
+        "For example: the input is ./videos/xxx.mp4#What is he talking about when a girl is playing violin? ",
     )
     def inference(self, input):
         if "#" in input:
@@ -117,17 +113,19 @@ class TemporalTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+       
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
 
         try:
-            result = db_chain.run(question)   # 自然语言自动化查询数据库
+            result = agent_executor.run(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
         
-        # print(question)
-        # result = db_chain.run(question)
 
         print(
             f"\nProcessed TemporalTool, Input Video: {video_path}, Input Question: {question}, "
@@ -155,7 +153,7 @@ class CountingTool:
         name = "CountingTool",
         description = "Useful when you need to count object number."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#How many fish are here? ",
+        "For example: the input is ./videos/xxx.mp4#How many fish are here? ",
     )
     def inference(self, input):
         if "#" in input:
@@ -177,17 +175,18 @@ class CountingTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
 
         try:
-            result = db_chain.run(question)
+            result = agent_executor.run(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
-        
-        # print(question)
-        # result = db_chain.run(question)
 
         print(
             f"\nProcessed CountingTool, Input Video: {video_path}, Input Question: {question}, "
@@ -215,7 +214,7 @@ class ReasonFinder:
         name="ReasonFinder",
         description="Useful when you need to find reasons or explanations."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#Why she is crying? ",
+        "For example: the input is ./videos/xxx.mp4#Why she is crying? ",
     )
     def inference(self, input):
         if "#" in input:
@@ -238,18 +237,18 @@ class ReasonFinder:
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
         
-        # TODO 了解一下下面这几行是如何运作的
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
 
-        pdb.set_trace()
         try:
-            result = db_chain.run(question)
-            # result = db_chain.invoke(question)
+            result = agent_executor.run(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
-        
+
         print(
             f"\nProcessed ReasonFinder, Input Video: {video_path}, Input Question: {question}, "
             f"Output Answer: {result}"
@@ -276,7 +275,7 @@ class HowSeeker:
         name = "HowSeeker",
         description = "useful when you need to find methods or steps to accomplish a task."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#How did the children eat food? ",
+        "For example: the input is ./videos/xxx.mp4#How did the children eat food? ",
     )
     def inference(self, input):
         if "#" in input:
@@ -298,17 +297,18 @@ class HowSeeker:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
 
         try:
-            result = db_chain.run(question)
+            result = agent_executor.run(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
-        
-        # print(question)
-        # result = db_chain.run(question)
 
         print(
             f"\nProcessed HowSeeker, Input Video: {video_path}, Input Question: {question}, "
@@ -336,7 +336,7 @@ class DescriptionTool:
         name = "DescriptionTool",
         description = "Useful when you need to describe the content of a video, e.g. the audio in the video, the subtitles, the on-screen content, etc."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#What's in the video?",
+        "For example: the input is ./videos/xxx.mp4#What's in the video?",
     )
     def inference(self, input):
         # pdb.set_trace()
@@ -359,16 +359,18 @@ class DescriptionTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
+
         try:
-            result = db_chain.run(question)
+            result = agent_executor.run(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
-        
-        # print(question)
-        # result = db_chain.run(question)
 
         print(
             f"\nProcessed DescriptionTool, Input Video: {video_path}, Input Question: {question}, "
@@ -396,7 +398,7 @@ class DefaultTool:
         name = "DefaultTool",
         description = "Useful when other tools can't solve the problem corresponding to the video."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
+        "For example: the input is ./videos/xxx.mp4#Are the men happy today?",
     )
     def inference(self, input):
         if "#" in input:
@@ -418,16 +420,18 @@ class DefaultTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
+
         try:
-            result = db_chain.run(question)
+            result = agent_executor.run(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
-        
-        # print(question)
-        # result = chain.run(question)
 
         print(
             f"\nProcessed DefaultTool, Input Video: {video_path}, Input Question: {question}, "
@@ -447,7 +451,7 @@ class VideoTemporalUnderstanding:
         name="VideoTemporalUnderstanding",
         description="useful when you need to process temporal information in videos."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
+        "For example: the input is ./videos/xxx.mp4#Are the men happy today?",
     )
     def inference(self, input):
         if "#" in input:
@@ -481,7 +485,7 @@ class VideoInstanceUnderstanding:
         name="VideoInstanceUnderstanding",
         description="useful when you need to understand the instance information in videos."
         "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
+        "For example: the input is ./videos/xxx.mp4#Are the men happy today?",
     )
     def inference(self, input):
         if "#" in input:
@@ -589,13 +593,12 @@ class MemeryBuilder:
     def run_db_agent(self, video_path, question, with_two_mem):
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
-        sql_path = os.path.join(video_dir, video_name + ".db")
+        sql_path = os.path.join(video_dir, video_name + ".db")  # sqlite 数据库的路径
 
-        # 移除之前的数据库
-        if os.path.exists(sql_path):  
+
+        if os.path.exists(sql_path):  # 如果数据库已经预先建好,就移除数据库
             os.remove(sql_path)
 
-        # TODO 这个分支有什么不同
         if with_two_mem:
             self.db_model_list[0].inference(video_path + "#"+ question)
             self.db_model_list[1].inference(video_path + "#"+ question)
@@ -640,61 +643,39 @@ class MemeryBuilder:
 
 
 
-def use_tool_calling_agent(
-    video_filename, 
-    input_question, 
-    llm, 
-    tools, 
-    use_cache=True,
+def run_a_video(
+    MemoryBuilder,
+    Planner,
+    video_name,
+    question,
+    possible_anwsers=[],
+    skip_mem_build=True,
+    with_two_mem = True,
+    use_example=False,
+    max_answer=1,
+    max_try=7,
+    quid=None,
 ):
-    # TODO 考虑之前选择工具的历史
-    
-    prompt = ChatPromptTemplate.from_messages(
-        [
-            ("system", "You are a helpful assistant."),
-            ("human", "{input}"),
-            # Placeholders fill up a **list** of messages
-            ("placeholder", "{agent_scratchpad}"),
-        ]
-    )
-    
-    # TODO 详细查阅文档的其它功能
-    agent = create_tool_calling_agent(llm, tools, prompt=prompt)
-    agent_executor = AgentExecutor(agent=agent, tools=tools)
-    
-    query = f"""
-    Regarding a given video from {video_filename}, use tools to answer the following questions as best you can.
-    Question: {input_question}
-    """
-    
-    step_idx = 0
-    output = None
-    
-    if use_cache and (query in mannual_cache):
-        # 缓存命中
-        print("\nCache hit!")
-        steps = mannual_cache[query]
-        output = steps[-1].get('output')
-    else:
-        # 缓存未命中
-        print("\nCache miss. Calling API...")
-        steps = []
-        for step in agent_executor.stream({"input": query}):
-            step_idx += 1
-            print(f"\nagent_iterator step: {step_idx}")
-            print(step)
-            steps.append(step)
-            output = step.get('output')
-            pdb.set_trace()
-        
-        mannual_cache[query] = steps
-        # 保存缓存
-        print("\nSaving cache...")
-        with open(mannual_cache_file, "wb") as f:
-            pickle.dump(mannual_cache, f)
-        
-    return output
+    if (
+        not skip_mem_build
+    ):  # if you have built the memory, you can skip this step by setting build_mem=False
+        MemoryBuilder.init_db_agent()
+        MemoryBuilder.run_db_agent(video_name, question, with_two_mem)
 
+    anwsers = Planner.run(
+        video_name,
+        question,
+        possible_anwsers=possible_anwsers,
+        max_answer=max_answer,
+        max_try=max_try,
+        use_example=use_example,
+        quid=quid,
+    )
+    print("Input video: ", video_name)
+    print("Input question: ", question)
+    print("The anwsers are:", anwsers)
+    print("Total action steps: ", Planner.total_step)
+    return anwsers
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
@@ -705,21 +686,19 @@ if __name__ == "__main__":
     conf = OmegaConf.load(vq_conf.inference_config_path)
 
     seed_everything(vq_conf.seed) 
-    
-    # mannual_cache
-    print("\nloading mannual_cache...")
-    mannual_cache_file = conf.cache.mannual_cache_file
-    if os.path.exists(mannual_cache_file):
-        with open(mannual_cache_file, "rb") as f:
-            mannual_cache = pickle.load(f)
-    else:
-        mannual_cache = {}
-    
 
     load_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in conf.tool.tool_list}
-    # {'TemporalTool': 'cpu', 'CountingTool': 'cpu', 'ReasonFinder': 'cpu', 'HowSeeker': 'cpu', 'DescriptionTool': 'cpu', 'DefaultTool': 'cpu'}
+    # {'TemporalTool': 'cpu', 'CountingTool': 'cpu', 'ReasonFinder': 'cpu', 'HowSeeker': 'cpu', 'DescriptionTool': 'cpu', 'DefaultTool': 'cpu', 'InpaintingTool': 'cuda:0'}
 
     bot = MemeryBuilder(load_dict=load_dict, config=conf)
+
+    planner = ReThinking(
+        bot.llm, 
+        bot.tools, 
+        good_base_reward = conf.mcts_planner.good_base_reward, 
+        bad_base_reward = conf.mcts_planner.bad_base_reward, 
+        decay_rate = conf.mcts_planner.decay_rate,
+    )
 
     quids_to_exclude = vq_conf["quids_to_exclude"] if "quids_to_exclude" in vq_conf else None
     num_examples_to_run = vq_conf["num_examples_to_run"] if "num_examples_to_run" in vq_conf else -1
@@ -727,39 +706,39 @@ if __name__ == "__main__":
     specific_quids = vq_conf["specific_quids"] if "specific_quids" in vq_conf else None
     dataset = get_dataset(vq_conf, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
     all_results = []
-    
-    # 用于 planning tools 的 llm
-    llm = ChatOpenAI(
-        api_key = conf.openai.GPT_API_KEY,
-        model = conf.openai.GPT_MODEL_NAME,
-        temperature = 0,
-        base_url = conf.openai.PROXY
-    )
 
     for data in tqdm(dataset):
 
         video_path = data["video_path"]
         question = data["question"].capitalize()  # 首字母大写
         options = [data['optionA'], data['optionB'], data['optionC'], data['optionD'], data['optionE']]
-        question_w_options = f"{question}? Choose your answer from below selections: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
+        formatted_question = f"{question}? Choose your answer from below selections: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
 
-        if not vq_conf.skip_mem_build:  
-            # if you have built the memory, you can skip this step by setting skip_mem_build=True
-            bot.init_db_agent()
-            bot.run_db_agent(video_path, question_w_options, vq_conf.with_two_mem)
-        
-        answers = {}
-        answers["good_anwsers"] = []
-        answers["bas_anwsers"] = []
-        answer = use_tool_calling_agent(video_filename=video_path,
-                                        input_question=question_w_options,
-                                        llm=llm,
-                                        tools=bot.tools,
-                                        use_cache=vq_conf.use_cache)
-        answers["good_anwsers"].append(answer)
+        try:
+            answers = run_a_video(
+                bot,
+                planner,
+                video_path,
+                formatted_question,
+                skip_mem_build = vq_conf.skip_mem_build,
+                with_two_mem = vq_conf.with_two_mem,
+                max_try = vq_conf.max_try,
+                max_answer = vq_conf.max_answer,
+                quid = data["quid"],
+            ) 
+
+            # TODO
+            # 如何去解析这个 answer ?
+            # Input question:  How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.
+            # The anwsers are: {'good_anwsers': ['There are 29 children in the video.', 'D. two', '29 children'], 'bad_anwsers': []}
+        except Exception as e:
+            print(f"Error:{e}")
+            print(data["quid"])
+            # answers = "Error"
+            sys.exit(1)  # 终止程序并返回状态码 1
 
         result_dict = data
-        result_dict["question_w_options"] = question_w_options
+        result_dict["formatted_question"] = formatted_question
         result_dict["answers"] = answers
         all_results.append(result_dict)
 
@@ -771,8 +750,8 @@ if __name__ == "__main__":
     print(f"{str(len(all_results))}results saved")
 
 
-
 # TODO: log，哪些东西可以放到 log 里面
+# TODO: LLM cache
     
     
     

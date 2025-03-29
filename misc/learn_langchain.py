@@ -17,7 +17,7 @@ model = ChatOpenAI(
     api_key="sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra",
     model="gpt-4o",
     base_url="https://api.juheai.top/v1",
-    )
+)
 
 
 query = "what is the value of magic_function(3)?"

@@ -1,0 +1,77 @@
+{
+    'steps': 
+        [
+            AgentStep
+                (
+                    action=ToolAgentAction
+                        (
+                            tool='CountingTool', 
+                            tool_input='/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?', 
+                            log='\nInvoking: `CountingTool` with `/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?`\n\n\n', 
+                            message_log=
+                                [
+                                    AIMessageChunk
+                                        (
+                                            content='', 
+                                            additional_kwargs=
+                                                {
+                                                    'tool_calls': 
+                                                        [
+                                                            {
+                                                                'index': 0, 
+                                                                'id': 'call_XrNgpoTPfp5TV4R3JSwN7btv', 
+                                                                'function': 
+                                                                    {
+                                                                        'arguments': '{"__arg1":"/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?"}', 
+                                                                        'name': 'CountingTool'
+                                                                    }, 
+                                                                'type': 'function'
+                                                            }
+                                                        ]
+                                                },
+                                            response_metadata=
+                                                {
+                                                    'finish_reason': 'tool_calls', 
+                                                    'model_name': 'gpt-3.5-turbo-0125'
+                                                }, 
+                                            id='run-21a86681-246e-44fe-b21f-80957cf285a0',
+                                            tool_calls=
+                                                [
+                                                    {
+                                                        'name': 'CountingTool', 
+                                                        'args': 
+                                                            {
+                                                                '__arg1': '/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?'
+                                                            }, 
+                                                        'id': 'call_XrNgpoTPfp5TV4R3JSwN7btv', 
+                                                        'type': 'tool_call'
+                                                    }
+                                                ], 
+                                            tool_call_chunks=
+                                                [
+                                                    {
+                                                        'name': 'CountingTool', 
+                                                        'args': '{"__arg1":"/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4#How many children are in the video?"}', 
+                                                        'id': 'call_XrNgpoTPfp5TV4R3JSwN7btv', 
+                                                        'index': 0, 
+                                                        'type': 'tool_call_chunk'
+                                                    }
+                                                ]
+                                        )
+                                ], 
+                            tool_call_id='call_XrNgpoTPfp5TV4R3JSwN7btv'
+                        ), 
+                    observation='There are 29 children in the video.'
+                )
+        ], 
+    'messages': 
+        [
+            FunctionMessage
+                (
+                    content='There are 29 children in the video.', 
+                    additional_kwargs={}, 
+                    response_metadata={}, 
+                    name='CountingTool'
+                )
+        ]
+}
