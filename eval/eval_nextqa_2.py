@@ -1,5 +1,7 @@
 import json
 import os
+from difflib import SequenceMatcher
+from transformers import pipeline
 from collections import Counter
 import argparse
 from tqdm import tqdm
@@ -31,6 +33,14 @@ if use_cache and os.path.exists(cache_file):
 else:
     llm_cache = {}
     
+
+def load_llm():
+    """懒加载 LLM，只在需要时才初始化"""
+    global llm
+    if llm is None:
+        print("loading LLM to judge...")
+        llm = pipeline("text-classification", model="facebook/bart-large-mnli")
+        print("LLM loaded.")
 
 def option_character_matching(answer, options):
     # 字符匹配（确保只有一个选项字母出现在 answer 中）
@@ -98,6 +108,8 @@ def LLM_rephrase(answer, options, question):
     return answer_rephrase
     
     
+
+    
 def get_predicted_option(answer, options):
     """根据答案匹配正确选项"""
     
@@ -113,14 +125,39 @@ def get_predicted_option(answer, options):
     if predicted_option != -1:
         return predicted_option, match_method
     
+    
+    '''
+    # 语义匹配 最长公共子序列
+    # 计算所有选项的相似度
+    similarities = [SequenceMatcher(None, option.lower(), answer.lower()).ratio() for option in options]
+    # 找到相似度大于 SEMANTIC_THRESHOLD 的选项索引
+    high_similarity_indices = [i for i, sim in enumerate(similarities) if sim > SEMANTIC_THRESHOLD]
+    # 只有一个选项的相似度大于 SEMANTIC_THRESHOLD，才返回
+    if len(high_similarity_indices) == 1:
+        return high_similarity_indices[0], "semantic matching"
+    
+    # # 找到相似度最高的选项索引
+    # max_similarity_index = similarities.index(max(similarities))
+    # # 返回相似度最高的选项索引
+    # return max_similarity_index, "semantic matching"
+    
+    # LLM 判断
+    load_llm()  # 只有在需要 LLM 判断时才加载
+    entailment_indices = []
+    for i, option in enumerate(options):
+        result = llm(f"Is the answer '{answer}' correct for the option '{option}'?")
+        if result[0]['label'] == 'ENTAILMENT':
+            entailment_indices.append(i)
+    # 只有一个选项是 'ENTAILMENT'，才返回
+    if len(entailment_indices) == 1:
+        return entailment_indices[0], "LLM matching"
+    '''
     return -1, "none"
-
 
 def get_latest_file(directory):
     files = [os.path.join(directory, f) for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
     latest_file = sorted(files)[-1] 
     return latest_file
-
 
 def main(input_file, output_file):
     # 加载 JSON 文件
@@ -174,6 +211,19 @@ def main(input_file, output_file):
         else:
             final_predicted_option = None
         
+        # 投票确定最终预测答案
+        # if predicted_options:
+        #     option_counts = Counter(predicted_options)
+        #     most_common_options = option_counts.most_common()
+        #     max_count = most_common_options[0][1]
+        #     # 找到所有出现次数等于 max_count 的选项
+        #     candidates = [option for option, count in most_common_options if count == max_count]
+        #     # 选择索引最大的选项
+        #     final_predicted_option = max(candidates, key=lambda x: predicted_options.index(x))
+        #     have_ans_items += 1
+        # else:
+        #     final_predicted_option = None
+        
         is_correct = (final_predicted_option == truth)
         
         if is_correct:
@@ -194,6 +244,9 @@ def main(input_file, output_file):
     print(f"Acc include no ans: {acc_include_no_ans:.2%}")
     print(f"Acc exclude no ans: {acc_exclude_no_ans:.2%}")
 
+    # for item in data:
+    #     print(f"QID: {item['qid']}, Predicted Option: {item['predicted_option']}, Correct: {item['is_correct']}, Match Methods: {item['match_methods']}")
+
     # 保存评估结果到文件
     with open(output_file, 'w') as f:
         json.dump(data, f, indent=4)
@@ -213,3 +266,14 @@ if __name__ == "__main__":
 
     main(args.input_file, args.output_file)
 
+
+
+'''
+只有字符匹配：
+Total items: 100
+Have ans items: 61
+Correct items: 27
+Acc include no ans: 27.00%
+Acc exclude no ans: 44.26%
+'''
+# 加了下面两种方式之后还是这样

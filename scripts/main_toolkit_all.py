@@ -117,16 +117,26 @@ class TemporalTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # db_chain = SQLDatabaseChain.from_llm(
+        #     llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # )
+
+        # try:
+        #     result = db_chain.run(question)   # 自然语言自动化查询数据库
+        # except:
+        #     result ="There is an error. Try to ask the question in a different way."
+
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
 
         try:
-            result = db_chain.invoke(question)
+            result = agent_executor.run(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
-        
-        # result = db_chain.invoke(question)
 
         print(
             f"\nProcessed TemporalTool, Input Video: {video_path}, Input Question: {question}, "
@@ -176,16 +186,29 @@ class CountingTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # db_chain = SQLDatabaseChain.from_llm(
+        #     llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # )
+
+        # try:
+        #     result = db_chain.run(question)
+        # except:
+        #     result ="There is an error. Try to ask the question in a different way."
+        
+        # print(question)
+        # result = db_chain.run(question)
+
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
 
         try:
-            result = db_chain.invoke(question)
+            result = agent_executor.run(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
-        
-        # result = db_chain.invoke(question)
 
         print(
             f"\nProcessed CountingTool, Input Video: {video_path}, Input Question: {question}, "
@@ -236,18 +259,33 @@ class ReasonFinder:
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
         
+        '''
         # TODO 了解一下下面这几行是如何运作的
         db_chain = SQLDatabaseChain.from_llm(
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
+        pdb.set_trace()
         try:
-            result = db_chain.invoke(question)
+            result = db_chain.run(question)
+            # result = db_chain.invoke(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
+        '''
         
-        # result = db_chain.invoke(question)
-        
+        # toolkit 方式
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
+        )
+
+        try:
+            result = agent_executor.run(question)
+        except:
+            result ="There is an error. Try to ask the question in a different way."
+
         print(
             f"\nProcessed ReasonFinder, Input Video: {video_path}, Input Question: {question}, "
             f"Output Answer: {result}"
@@ -296,20 +334,29 @@ class HowSeeker:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
+        # db_chain = SQLDatabaseChain.from_llm(
+        #     llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # )
+
+        # try:
+        #     result = db_chain.run(question)
+        # except:
+        #     result ="There is an error. Try to ask the question in a different way."
         
-        # sample_rows_in_table_info 的主要作用是控制在生成数据库表的元信息（table_info）时，是否包含表中的示例数据行。
-        # 如果设置了该参数，langchain 会从每个表中抽取指定数量的行，并将这些行作为表信息的一部分，提供给语言模型（LLM）进行推理。
-        
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # print(question)
+        # result = db_chain.run(question)
+
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
         )
 
         try:
-            result = db_chain.invoke(question)
+            result = agent_executor.run(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
-        
-        # result = db_chain.invoke(question)
 
         print(
             f"\nProcessed HowSeeker, Input Video: {video_path}, Input Question: {question}, "
@@ -360,16 +407,28 @@ class DescriptionTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
-        )
+        # db_chain = SQLDatabaseChain.from_llm(
+        #     llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # )
+        # try:
+        #     result = db_chain.run(question)
+        # except:
+        #     result ="There is an error. Try to ask the question in a different way."
         
+        # print(question)
+        # result = db_chain.run(question)
+
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
+        )
+
         try:
-            result = db_chain.invoke(question)
+            result = agent_executor.run(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
-        
-        # result = db_chain.invoke(question)
 
         print(
             f"\nProcessed DescriptionTool, Input Video: {video_path}, Input Question: {question}, "
@@ -419,16 +478,28 @@ class DefaultTool:
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        db_chain = SQLDatabaseChain.from_llm(
-            llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
-        )
+        # db_chain = SQLDatabaseChain.from_llm(
+        #     llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
+        # )
+        # try:
+        #     result = db_chain.run(question)
+        # except:
+        #     result ="There is an error. Try to ask the question in a different way."
         
+        # print(question)
+        # result = chain.run(question)
+
+        toolkit = SQLDatabaseToolkit(db=db, llm=self.llm)
+        agent_executor = create_sql_agent(
+            llm=self.llm,
+            toolkit=toolkit,
+            verbose=True
+        )
+
         try:
-            result = db_chain.invoke(question)
+            result = agent_executor.run(question)
         except:
             result ="There is an error. Try to ask the question in a different way."
-        
-        # result = db_chain.invoke(question)
 
         print(
             f"\nProcessed DefaultTool, Input Video: {video_path}, Input Question: {question}, "
@@ -663,7 +734,6 @@ def use_tool_calling_agent(
     agent = create_tool_calling_agent(llm, tools, prompt=prompt)
     agent_executor = AgentExecutor(agent=agent, tools=tools)
     
-    # TODO 更改 prompt
     query = f"""
     Regarding a given video from {video_filename}, use tools to answer the following questions as best you can.
     Question: {input_question}
@@ -739,8 +809,6 @@ if __name__ == "__main__":
     )
 
     for data in tqdm(dataset):
-        
-        print(f"\nProcessing: {data['quid']}")
 
         video_path = data["video_path"]
         question = data["question"].capitalize()  # 首字母大写
@@ -752,20 +820,41 @@ if __name__ == "__main__":
             bot.init_db_agent()
             bot.run_db_agent(video_path, question_w_options, vq_conf.with_two_mem)
         
-        # try:
         answers = {}
         answers["good_anwsers"] = []
         answers["bas_anwsers"] = []
-        answer = use_tool_calling_agent(video_filename=video_path,
-                                        input_question=question_w_options,
-                                        llm=llm,
-                                        tools=bot.tools,
-                                        use_cache=vq_conf.use_cache)
-        answers["good_anwsers"].append(answer)
-        # except Exception as e:
-        #     print(f"Error:{e}")
-        #     answers = "Error"
+        
+        # answer = use_tool_calling_agent(video_filename=video_path,
+        #                                 input_question=question_w_options,
+        #                                 llm=llm,
+        #                                 tools=bot.tools,
+        #                                 use_cache=vq_conf.use_cache)
+        
+        video_dir = os.path.dirname(video_path)
+        video_name = os.path.basename(video_path).split(".")[0]
+        sql_path = os.path.join(video_dir, video_name + ".db")
 
+        db = SQLDatabase.from_uri(
+            "sqlite:///" + sql_path, sample_rows_in_table_info=2
+        )
+
+        toolkit = SQLDatabaseToolkit(db=db, llm=llm)
+        
+        pdb.set_trace()
+        
+        agent_executor = create_sql_agent(
+            llm=llm,
+            toolkit=toolkit,
+            verbose=True
+        )
+        
+        try:
+            answer = agent_executor.run(question)
+            answers["good_anwsers"].append(answer)
+        except Exception as e:
+            print(f"Error:{e}")
+            answers = "Error"
+        
         result_dict = data
         result_dict["question_w_options"] = question_w_options
         result_dict["answers"] = answers
@@ -779,9 +868,8 @@ if __name__ == "__main__":
     print(f"{str(len(all_results))}results saved")
 
 
-
+# TODO: claude 看一下上限
 # TODO: log，哪些东西可以放到 log 里面
-# TODO: 深入看一下 memory, 优化 memory
     
     
     
