@@ -243,7 +243,7 @@ class ReasonFinder:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
-        pdb.set_trace()
+        # pdb.set_trace()
         try:
             result = db_chain.run(question)
             # result = db_chain.invoke(question)
@@ -681,11 +681,11 @@ def use_tool_calling_agent(
         steps = []
         for step in agent_executor.stream({"input": query}):
             step_idx += 1
-            print(f"\nagent_iterator step: {step_idx}")
-            print(step)
+            # print(f"\nagent_iterator step: {step_idx}")
+            # print(step)
             steps.append(step)
             output = step.get('output')
-            pdb.set_trace()
+            # pdb.set_trace()
         
         mannual_cache[query] = steps
         # 保存缓存
