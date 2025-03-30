@@ -62,6 +62,11 @@ from project.sql_template import (
 mannual_cache = None
 mannual_cache_file = None
 
+
+TOOL_INPUT_ERROR = "There is an error in the input of the tool, please check the input and try again."
+TOOL_PROCESS_ERROR = "There is an error. Try to ask the question in a different way."
+
+
 def seed_everything(seed: int):
     random.seed(seed)
     np.random.seed(seed)
@@ -81,6 +86,16 @@ def prompts(name, description):
     return decorator
 
 
+def parse_tool_input(input):
+    if "#" in input:
+        tmp = input.split("#")
+        if len(tmp) == 2:
+            video_path = tmp[0]
+            question = tmp[1]
+            return video_path, question
+    return None, None
+
+    
 class TemporalTool:
     def __init__(self, device, config):
         self.device = device
@@ -107,17 +122,10 @@ class TemporalTool:
         # TODO 在这里直接检查工具的输入
         # pdb.set_trace()
         
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
         
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
@@ -136,8 +144,8 @@ class TemporalTool:
             result = db_chain_output['result']
             input_question = db_chain_output['query']
         except:
-            print("Tool error")
-            result ="There is an error. Try to ask the question in a different way."
+            print(TOOL_PROCESS_ERROR)
+            return TOOL_PROCESS_ERROR
         
         # result = db_chain.invoke(question)
 
@@ -148,6 +156,7 @@ class TemporalTool:
         print(f"Output Answer: {result}")
         
         # TODO assert 检查返回的是字符串
+        # TODO 查看返回下面哪个比较好？
         # return result
         return db_chain_output
 
@@ -174,18 +183,12 @@ class CountingTool:
         "For example: the input is /data/videos/xxx.mp4#How many fish are here? ",
     )
     def inference(self, input):
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
-
+        
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
+        
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
         self.sql_path = os.path.join(video_dir, video_name + ".db")
@@ -203,8 +206,8 @@ class CountingTool:
             result = db_chain_output['result']
             input_question = db_chain_output['query']
         except:
-            print("Tool error")
-            result ="There is an error. Try to ask the question in a different way."
+            print(TOOL_PROCESS_ERROR)
+            return TOOL_PROCESS_ERROR
         
         # result = db_chain.invoke(question)
 
@@ -240,17 +243,11 @@ class ReasonFinder:
         "For example: the input is /data/videos/xxx.mp4#Why she is crying? ",
     )
     def inference(self, input):
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
+        
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
 
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
@@ -271,8 +268,8 @@ class ReasonFinder:
             result = db_chain_output['result']
             input_question = db_chain_output['query']
         except:
-            print("Tool error")
-            result ="There is an error. Try to ask the question in a different way."
+            print(TOOL_PROCESS_ERROR)
+            return TOOL_PROCESS_ERROR
         
         # result = db_chain.invoke(question)
         
@@ -308,17 +305,11 @@ class HowSeeker:
         "For example: the input is /data/videos/xxx.mp4#How did the children eat food? ",
     )
     def inference(self, input):
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
+        
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
 
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
@@ -341,8 +332,8 @@ class HowSeeker:
             result = db_chain_output['result']
             input_question = db_chain_output['query']
         except:
-            print("Tool error")
-            result ="There is an error. Try to ask the question in a different way."
+            print(TOOL_PROCESS_ERROR)
+            return TOOL_PROCESS_ERROR
         
         # result = db_chain.invoke(question)
 
@@ -378,18 +369,11 @@ class DescriptionTool:
         "For example: the input is /data/videos/xxx.mp4#What's in the video?",
     )
     def inference(self, input):
-        # pdb.set_trace()
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
+        
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
 
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
@@ -408,8 +392,8 @@ class DescriptionTool:
             result = db_chain_output['result']
             input_question = db_chain_output['query']
         except:
-            print("Tool error")
-            result ="There is an error. Try to ask the question in a different way."
+            print(TOOL_PROCESS_ERROR)
+            return TOOL_PROCESS_ERROR
         
         # result = db_chain.invoke(question)
 
@@ -445,17 +429,11 @@ class DefaultTool:
         "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
     )
     def inference(self, input):
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
+        
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
 
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
@@ -474,8 +452,8 @@ class DefaultTool:
             result = db_chain_output['result']
             input_question = db_chain_output['query']
         except:
-            print("Tool error")
-            result ="There is an error. Try to ask the question in a different way."
+            print(TOOL_PROCESS_ERROR)
+            return TOOL_PROCESS_ERROR
         
         # result = db_chain.invoke(question)
 
@@ -489,6 +467,7 @@ class DefaultTool:
         return db_chain_output
 
 
+# TODO 查看 memory
 ############Memory Bulider#########
 class VideoTemporalUnderstanding:
     def __init__(self, device, config):
@@ -693,7 +672,7 @@ class MemeryBuilder:
 
 
 
-def use_tool_calling_agent(
+def ToolChainReasoning(
     video_filename, 
     input_question, 
     llm, 
@@ -813,7 +792,7 @@ if __name__ == "__main__":
             answers = {}
             answers["good_anwsers"] = []
             answers["bas_anwsers"] = []
-            answer = use_tool_calling_agent(video_filename=video_path,
+            answer = ToolChainReasoning(video_filename=video_path,
                                             input_question=question_w_options,
                                             llm=llm,
                                             tools=bot.tools,
