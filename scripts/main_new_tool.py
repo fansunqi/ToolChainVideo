@@ -36,12 +36,11 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
 from langchain_community.agent_toolkits import create_sql_agent
 
-
 from project.TemporalUnderstanding import TemporalBase
 from project.InstanceUnderstanding import InstanceBase
 from project.ExampleSelector import CustomExampleSelector
 
-# TODO 没太懂这里 template 中的空缺如何填补
+
 from project.sql_template import (
     _sqlite_prompt,
     COUNTING_EXAMPLE_PROMPT,
@@ -56,6 +55,10 @@ from project.sql_template import (
 
 mannual_cache = None
 mannual_cache_file = None
+
+current_video_dir = None
+current_video_name = None
+
 
 def seed_everything(seed: int):
     random.seed(seed)
@@ -94,29 +97,12 @@ class TemporalTool:
     @prompts(
         name = "TemporalTool",
         description = "Useful when you need to process temporal information in videos."
-        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#What is he talking about when a girl is playing violin? ",
+        "The input to this tool must be a question. For example, the input is 'what is he talking about when a girl is playing violin?'",
     )
     def inference(self, input):
-        
-        # TODO 在这里直接检查工具的输入
-        # pdb.set_trace()
-        
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
-        
-        video_dir = os.path.dirname(video_path)
-        video_name = os.path.basename(video_path).split(".")[0]
-        self.sql_path = os.path.join(video_dir, video_name + ".db")
+       
+        self.sql_path = os.path.join(current_video_dir, current_video_name + ".db") 
+        question = input
 
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
@@ -157,25 +143,12 @@ class CountingTool:
     @prompts(
         name = "CountingTool",
         description = "Useful when you need to count object number."
-        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#How many fish are here? ",
+        "The input to this tool must be a question. For example, the input is 'How many fish are here?'",
     )
     def inference(self, input):
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
 
-        video_dir = os.path.dirname(video_path)
-        video_name = os.path.basename(video_path).split(".")[0]
-        self.sql_path = os.path.join(video_dir, video_name + ".db")
+        self.sql_path = os.path.join(current_video_dir, current_video_name + ".db")
+        question = input
 
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
@@ -216,25 +189,12 @@ class ReasonFinder:
     @prompts(
         name="ReasonFinder",
         description="Useful when you need to find reasons or explanations."
-        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#Why she is crying? ",
+        "The input to this tool must be a question. For example, the input is 'Why she is crying?'",
     )
     def inference(self, input):
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
-
-        video_dir = os.path.dirname(video_path)
-        video_name = os.path.basename(video_path).split(".")[0]
-        self.sql_path = os.path.join(video_dir, video_name + ".db")
+        
+        self.sql_path = os.path.join(current_video_dir, current_video_name + ".db")
+        question = input
 
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
@@ -277,25 +237,11 @@ class HowSeeker:
     @prompts(
         name = "HowSeeker",
         description = "useful when you need to find methods or steps to accomplish a task."
-        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#How did the children eat food? ",
+        "The input to this tool must be a question. For example, the input is 'How did the children eat food?'",
     )
     def inference(self, input):
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
-
-        video_dir = os.path.dirname(video_path)
-        video_name = os.path.basename(video_path).split(".")[0]
-        self.sql_path = os.path.join(video_dir, video_name + ".db")
+        self.sql_path = os.path.join(current_video_dir, current_video_name + ".db")
+        question = input
 
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
@@ -340,22 +286,11 @@ class DescriptionTool:
     @prompts(
         name = "DescriptionTool",
         description = "Useful when you need to describe the content of a video, e.g. the audio in the video, the subtitles, the on-screen content, etc."
-        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#What's in the video?",
+        "The input to this tool must be a question. For example, the input is 'What's in the video?'",
     )
     def inference(self, input):
-        # pdb.set_trace()
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
+        self.sql_path = os.path.join(current_video_dir, current_video_name + ".db")
+        question = input
 
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
@@ -400,25 +335,11 @@ class DefaultTool:
     @prompts(
         name = "DefaultTool",
         description = "Useful when other tools can't solve the problem corresponding to the video."
-        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
-        "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
+        "The input to this tool must be a question. For example, the input is 'Are the men happy today?'",
     )
     def inference(self, input):
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
-
-        video_dir = os.path.dirname(video_path)
-        video_name = os.path.basename(video_path).split(".")[0]
-        self.sql_path = os.path.join(video_dir, video_name + ".db")
+        self.sql_path = os.path.join(current_video_dir, current_video_name + ".db")
+        question = input
 
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
@@ -665,7 +586,7 @@ def use_tool_calling_agent(
     
     # TODO 详细查阅文档的其它功能
     agent = create_tool_calling_agent(llm, tools, prompt=prompt)
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+    agent_executor = AgentExecutor(agent=agent, tools=tools)
     
     # TODO 更改 prompt
     # TODO 1 加上 tool descriptions, 能不能用到内部 format
@@ -705,7 +626,7 @@ def use_tool_calling_agent(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/nextqa.yaml",type=str)                           
+    parser.add_argument('--config', default="config/nextqa_new_tool.yaml",type=str)                           
     opt = parser.parse_args()
 
     vq_conf = OmegaConf.load(opt.config)
@@ -757,6 +678,9 @@ if __name__ == "__main__":
             bot.init_db_agent()
             bot.run_db_agent(video_path, question_w_options, vq_conf.with_two_mem)
         
+        current_video_dir = os.path.dirname(video_path)
+        current_video_name = os.path.basename(video_path).split(".")[0]
+        
         # try:
         answers = {}
         answers["good_anwsers"] = []
@@ -768,7 +692,7 @@ if __name__ == "__main__":
                                         use_cache=vq_conf.use_cache)
         answers["good_anwsers"].append(answer)
         # except Exception as e:
-        #     print(f"\nError:{e}")
+        #     print(f"Error:{e}")
         #     answers = "Error"
 
         result_dict = data

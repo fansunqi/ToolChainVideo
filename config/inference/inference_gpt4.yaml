@@ -30,9 +30,6 @@ tool:
     - "DescriptionTool_cpu"
     - "DefaultTool_cpu"
 
-cache:
-  mannual_cache_file: "gpt4_cache.pkl"
-
 
 
 

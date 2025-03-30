@@ -8,7 +8,6 @@ from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
 import pickle
 
-SEMANTIC_THRESHOLD = 0.5
 
 # 定义选项字母映射
 option_map = ["A", "B", "C", "D", "E"]
@@ -33,6 +32,7 @@ else:
     
 
 def option_character_matching(answer, options):
+    
     # 字符匹配（确保只有一个选项字母出现在 answer 中）
     for i, option in enumerate(options):
         if option_map[i] in answer and all(option_map[j] not in answer for j in range(len(options)) if j != i):

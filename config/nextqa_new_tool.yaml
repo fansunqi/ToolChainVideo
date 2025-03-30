@@ -1,5 +1,5 @@
 inference_config_path: "config/inference/inference_gpt35.yaml"
-mannual_cache_file: "gpt35_cache.pkl"
+mannual_cache_file: "gpt35_cache_new_tool.pkl"
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/train.csv"
@@ -12,3 +12,4 @@ output_file: "output/nextqa/nextqa_output.json"
 num_examples_to_run: 100
 start_num: 0
 use_cache: False
+

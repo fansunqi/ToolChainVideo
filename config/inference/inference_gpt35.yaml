@@ -30,6 +30,3 @@ tool:
     - "DescriptionTool_cpu"
     - "DefaultTool_cpu"
 
-cache:
-  mannual_cache_file: "gpt35_cache.pkl"
-
