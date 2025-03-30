@@ -755,14 +755,14 @@ if __name__ == "__main__":
 
     seed_everything(vq_conf.seed) 
     
-    # mannual_cache
+    # mannual LLM cache
     mannual_cache_file = vq_conf.mannual_cache_file
     if os.path.exists(mannual_cache_file):
         print(f"\nLoading LLM cache from {mannual_cache_file}...")
         with open(mannual_cache_file, "rb") as f:
             mannual_cache = pickle.load(f)
     else:
-        print("Creating LLM cache...")
+        print(f"Creating LLM cache: {mannual_cache_file}...")
         mannual_cache = {}
     
 
