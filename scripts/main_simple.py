@@ -140,8 +140,8 @@ class TemporalTool:
         print(f"Output Answer: {result}")
         
         # TODO assert 检查返回的是字符串
-        # return result
-        return db_chain_output
+        return result
+        # return db_chain_output
 
 
 class CountingTool:
@@ -197,8 +197,8 @@ class CountingTool:
         print(f"Input Question: {input_question}")
         print(f"Output Answer: {result}")
         
-        # return result
-        return db_chain_output
+        return result
+        # return db_chain_output
 
 
 class ReasonFinder:
@@ -256,8 +256,8 @@ class ReasonFinder:
         print(f"Input Question: {input_question}")
         print(f"Output Answer: {result}")
         
-        # return result
-        return db_chain_output
+        return result
+        # return db_chain_output
 
 
 class HowSeeker:
@@ -317,8 +317,8 @@ class HowSeeker:
         print(f"Input Question: {input_question}")
         print(f"Output Answer: {result}")
         
-        # return result
-        return db_chain_output
+        return result
+        # return db_chain_output
 
 
 class DescriptionTool:
@@ -376,8 +376,8 @@ class DescriptionTool:
         print(f"Input Question: {input_question}")
         print(f"Output Answer: {result}")
         
-        # return result
-        return db_chain_output
+        return result
+        # return db_chain_output
 
 # TODO 可以把 DefaultTool 换成 SQLDatabase toolkit
 class DefaultTool:
@@ -431,8 +431,8 @@ class DefaultTool:
         print(f"Input Question: {input_question}")
         print(f"Output Answer: {result}")
         
-        # return result
-        return db_chain_output
+        return result
+        # return db_chain_output
 
 
 ############Memory Bulider#########
