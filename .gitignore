@@ -17,4 +17,5 @@ project/__MACOSX
 *__pycache__
 viz/
 scripts/__pycache__
+langchain_cache.db
 
