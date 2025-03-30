@@ -750,7 +750,7 @@ if __name__ == "__main__":
         with open(mannual_cache_file, "rb") as f:
             mannual_cache = pickle.load(f)
     else:
-        print(f"Creating LLM cache: {mannual_cache_file}...")
+        print(f"\nCreating LLM cache: {mannual_cache_file}...")
         mannual_cache = {}
     
 
