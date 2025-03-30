@@ -16,4 +16,5 @@ dgpt/
 project/__MACOSX
 *__pycache__
 viz/
+scripts/__pycache__
 

@@ -36,6 +36,11 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
 from langchain_community.agent_toolkits import create_sql_agent
 
+### For langgraph iteration
+from langgraph.prebuilt import create_react_agent
+from langgraph.prebuilt.chat_agent_executor import AgentState
+from langchain_core.prompts import ChatPromptTemplate
+
 
 from project.TemporalUnderstanding import TemporalBase
 from project.InstanceUnderstanding import InstanceBase
@@ -125,18 +130,25 @@ class TemporalTool:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
+        input_question = None
         try:
-            result = db_chain.invoke(question)
+            db_chain_output = db_chain.invoke(question)
+            result = db_chain_output['result']
+            input_question = db_chain_output['query']
         except:
             result ="There is an error. Try to ask the question in a different way."
         
         # result = db_chain.invoke(question)
 
-        print(
-            f"\nProcessed TemporalTool, Input Video: {video_path}, Input Question: {question}, "
-            f"Output Answer: {result}"
-        )
-        return result
+        print("\nProcessed TemporalTool.")
+        print(f"Input Video: {video_path}")
+        print(f"Original Question: {question}")
+        print(f"Input Question: {input_question}")
+        print(f"Output Answer: {result}")
+        
+        # TODO assert 检查返回的是字符串
+        # return result
+        return db_chain_output
 
 
 class CountingTool:
@@ -184,18 +196,24 @@ class CountingTool:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
+        input_question = None
         try:
-            result = db_chain.invoke(question)
+            db_chain_output = db_chain.invoke(question)
+            result = db_chain_output['result']
+            input_question = db_chain_output['query']
         except:
             result ="There is an error. Try to ask the question in a different way."
         
         # result = db_chain.invoke(question)
 
-        print(
-            f"\nProcessed CountingTool, Input Video: {video_path}, Input Question: {question}, "
-            f"Output Answer: {result}"
-        )
-        return result
+        print("\nProcessed CountingTool.")
+        print(f"Input Video: {video_path}")
+        print(f"Original Question: {question}")
+        print(f"Input Question: {input_question}")
+        print(f"Output Answer: {result}")
+        
+        # return result
+        return db_chain_output
 
 
 class ReasonFinder:
@@ -245,18 +263,24 @@ class ReasonFinder:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
+        input_question = None
         try:
-            result = db_chain.invoke(question)
+            db_chain_output = db_chain.invoke(question)
+            result = db_chain_output['result']
+            input_question = db_chain_output['query']
         except:
             result ="There is an error. Try to ask the question in a different way."
         
         # result = db_chain.invoke(question)
         
-        print(
-            f"\nProcessed ReasonFinder, Input Video: {video_path}, Input Question: {question}, "
-            f"Output Answer: {result}"
-        )
-        return result
+        print("\nProcessed ReasonFinder.")
+        print(f"Input Video: {video_path}")
+        print(f"Original Question: {question}")
+        print(f"Input Question: {input_question}")
+        print(f"Output Answer: {result}")
+        
+        # return result
+        return db_chain_output
 
 
 class HowSeeker:
@@ -308,18 +332,24 @@ class HowSeeker:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
+        input_question = None
         try:
-            result = db_chain.invoke(question)
+            db_chain_output = db_chain.invoke(question)
+            result = db_chain_output['result']
+            input_question = db_chain_output['query']
         except:
             result ="There is an error. Try to ask the question in a different way."
         
         # result = db_chain.invoke(question)
 
-        print(
-            f"\nProcessed HowSeeker, Input Video: {video_path}, Input Question: {question}, "
-            f"Output Answer: {result}"
-        )
-        return result
+        print("\nProcessed HowSeeker.")
+        print(f"Input Video: {video_path}")
+        print(f"Original Question: {question}")
+        print(f"Input Question: {input_question}")
+        print(f"Output Answer: {result}")
+        
+        # return result
+        return db_chain_output
 
 
 class DescriptionTool:
@@ -368,20 +398,26 @@ class DescriptionTool:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
         
+        input_question = None
         try:
-            result = db_chain.invoke(question)
+            db_chain_output = db_chain.invoke(question)
+            result = db_chain_output['result']
+            input_question = db_chain_output['query']
         except:
             result ="There is an error. Try to ask the question in a different way."
         
         # result = db_chain.invoke(question)
 
-        print(
-            f"\nProcessed DescriptionTool, Input Video: {video_path}, Input Question: {question}, "
-            f"Output Answer: {result}"
-        )
-        return result
+        print("\nProcessed DescriptionTool.")
+        print(f"Input Video: {video_path}")
+        print(f"Original Question: {question}")
+        print(f"Input Question: {input_question}")
+        print(f"Output Answer: {result}")
+        
+        # return result
+        return db_chain_output
 
-
+# TODO 可以把 DefaultTool 换成 SQLDatabase toolkit
 class DefaultTool:
     def __init__(self, device, config):
         self.device = device
@@ -427,18 +463,24 @@ class DefaultTool:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
         
+        input_question = None
         try:
-            result = db_chain.invoke(question)
+            db_chain_output = db_chain.invoke(question)
+            result = db_chain_output['result']
+            input_question = db_chain_output['query']
         except:
             result ="There is an error. Try to ask the question in a different way."
         
         # result = db_chain.invoke(question)
 
-        print(
-            f"\nProcessed DefaultTool, Input Video: {video_path}, Input Question: {question}, "
-            f"Output Answer: {result}"
-        )
-        return result
+        print("\nProcessed DefaultTool.")
+        print(f"Input Video: {video_path}")
+        print(f"Original Question: {question}")
+        print(f"Input Question: {input_question}")
+        print(f"Output Answer: {result}")
+        
+        # return result
+        return db_chain_output
 
 
 ############Memory Bulider#########
@@ -644,7 +686,6 @@ class MemeryBuilder:
         print(f" Current Memory: {self.agent.memory.load_memory_variables({})}")
 
 
-
 def use_tool_calling_agent(
     video_filename, 
     input_question, 
@@ -657,15 +698,16 @@ def use_tool_calling_agent(
     prompt = ChatPromptTemplate.from_messages(
         [
             ("system", "You are a helpful assistant."),
-            ("human", "{input}"),
+            ("placeholder", "{messages}"),
             # Placeholders fill up a **list** of messages
             ("placeholder", "{agent_scratchpad}"),
         ]
     )
     
-    # TODO 详细查阅文档的其它功能
-    agent = create_tool_calling_agent(llm, tools, prompt=prompt)
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+    def _modify_state_messages(state: AgentState):
+        return prompt.invoke({"messages": state["messages"]}).to_messages()
+    
+    app = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
     
     # TODO 更改 prompt
     # TODO 1 加上 tool descriptions, 能不能用到内部 format
@@ -681,19 +723,19 @@ def use_tool_calling_agent(
         # 缓存命中
         print("\nCache hit!")
         steps = mannual_cache[query]
-        output = steps[-1].get('output')
     else:
         # 缓存未命中
         print("\nCache miss. Calling API...")
         steps = []
-        for step in agent_executor.stream({"input": query}):
+        for step in app.stream({"messages": [("human", query)]}, stream_mode="updates"):
             step_idx += 1
-            # print(f"\nagent_iterator step: {step_idx}")
-            # print(step)
             steps.append(step)
-            output = step.get('output')
-            # pdb.set_trace()
-        
+            
+        try:
+            output = steps[-1]['agent']['messages'][0].content
+        except:
+            output = None
+                
         mannual_cache[query] = steps
         # 保存缓存
         print("\nSaving cache...")
@@ -705,7 +747,7 @@ def use_tool_calling_agent(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/nextqa.yaml",type=str)                           
+    parser.add_argument('--config', default="config/nextqa_langgraph.yaml",type=str)                           
     opt = parser.parse_args()
 
     vq_conf = OmegaConf.load(opt.config)
@@ -713,13 +755,14 @@ if __name__ == "__main__":
 
     seed_everything(vq_conf.seed) 
     
-    # mannual_cache
-    print("\nloading mannual_cache...")
+    # mannual LLM cache
     mannual_cache_file = vq_conf.mannual_cache_file
     if os.path.exists(mannual_cache_file):
+        print(f"\nLoading LLM cache from {mannual_cache_file}...")
         with open(mannual_cache_file, "rb") as f:
             mannual_cache = pickle.load(f)
     else:
+        print(f"Creating LLM cache: {mannual_cache_file}...")
         mannual_cache = {}
     
 
@@ -757,19 +800,19 @@ if __name__ == "__main__":
             bot.init_db_agent()
             bot.run_db_agent(video_path, question_w_options, vq_conf.with_two_mem)
         
-        # try:
-        answers = {}
-        answers["good_anwsers"] = []
-        answers["bas_anwsers"] = []
-        answer = use_tool_calling_agent(video_filename=video_path,
-                                        input_question=question_w_options,
-                                        llm=llm,
-                                        tools=bot.tools,
-                                        use_cache=vq_conf.use_cache)
-        answers["good_anwsers"].append(answer)
-        # except Exception as e:
-        #     print(f"\nError:{e}")
-        #     answers = "Error"
+        try:
+            answers = {}
+            answers["good_anwsers"] = []
+            answers["bas_anwsers"] = []
+            answer = use_tool_calling_agent(video_filename=video_path,
+                                            input_question=question_w_options,
+                                            llm=llm,
+                                            tools=bot.tools,
+                                            use_cache=vq_conf.use_cache)
+            answers["good_anwsers"].append(answer)
+        except Exception as e:
+            print(f"\nError:{e}")
+            answers = "Error"
 
         result_dict = data
         result_dict["question_w_options"] = question_w_options
