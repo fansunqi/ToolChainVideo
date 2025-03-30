@@ -46,7 +46,7 @@ from project.TemporalUnderstanding import TemporalBase
 from project.InstanceUnderstanding import InstanceBase
 from project.ExampleSelector import CustomExampleSelector
 
-# TODO 没太懂这里 template 中的空缺如何填补
+
 from project.sql_template import (
     _sqlite_prompt,
     COUNTING_EXAMPLE_PROMPT,
@@ -136,6 +136,7 @@ class TemporalTool:
             result = db_chain_output['result']
             input_question = db_chain_output['query']
         except:
+            print("Tool error")
             result ="There is an error. Try to ask the question in a different way."
         
         # result = db_chain.invoke(question)
@@ -202,6 +203,7 @@ class CountingTool:
             result = db_chain_output['result']
             input_question = db_chain_output['query']
         except:
+            print("Tool error")
             result ="There is an error. Try to ask the question in a different way."
         
         # result = db_chain.invoke(question)
@@ -269,6 +271,7 @@ class ReasonFinder:
             result = db_chain_output['result']
             input_question = db_chain_output['query']
         except:
+            print("Tool error")
             result ="There is an error. Try to ask the question in a different way."
         
         # result = db_chain.invoke(question)
@@ -338,6 +341,7 @@ class HowSeeker:
             result = db_chain_output['result']
             input_question = db_chain_output['query']
         except:
+            print("Tool error")
             result ="There is an error. Try to ask the question in a different way."
         
         # result = db_chain.invoke(question)
@@ -404,6 +408,7 @@ class DescriptionTool:
             result = db_chain_output['result']
             input_question = db_chain_output['query']
         except:
+            print("Tool error")
             result ="There is an error. Try to ask the question in a different way."
         
         # result = db_chain.invoke(question)
@@ -469,6 +474,7 @@ class DefaultTool:
             result = db_chain_output['result']
             input_question = db_chain_output['query']
         except:
+            print("Tool error")
             result ="There is an error. Try to ask the question in a different way."
         
         # result = db_chain.invoke(question)
@@ -686,6 +692,7 @@ class MemeryBuilder:
         print(f" Current Memory: {self.agent.memory.load_memory_variables({})}")
 
 
+
 def use_tool_calling_agent(
     video_filename, 
     input_question, 
@@ -730,18 +737,20 @@ def use_tool_calling_agent(
         for step in app.stream({"messages": [("human", query)]}, stream_mode="updates"):
             step_idx += 1
             steps.append(step)
-            
-        try:
-            output = steps[-1]['agent']['messages'][0].content
-        except:
-            output = None
                 
         mannual_cache[query] = steps
         # 保存缓存
         print("\nSaving cache...")
         with open(mannual_cache_file, "wb") as f:
             pickle.dump(mannual_cache, f)
-        
+    
+    # 从 steps 中解析 output, 无论是否命中缓存都要走这一分支         
+    try:
+        output = steps[-1]['agent']['messages'][0].content
+    except:
+        output = None
+    
+    print(f"\nToolChainOutput: {output}") 
     return output
 
 

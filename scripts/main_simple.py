@@ -683,17 +683,18 @@ def use_tool_calling_agent(
         for step in app.stream({"messages": [("human", query)]}, stream_mode="updates"):
             step_idx += 1
             steps.append(step)
-            
-        try:
-            output = steps[-1]['agent']['messages'][0].content
-        except:
-            output = None
                 
         mannual_cache[query] = steps
         # 保存缓存
         print("\nSaving cache...")
         with open(mannual_cache_file, "wb") as f:
             pickle.dump(mannual_cache, f)
+    
+    # 从 steps 中解析 output, 无论是否命中缓存都要走这一分支         
+    try:
+        output = steps[-1]['agent']['messages'][0].content
+    except:
+        output = None
         
     return output
 
