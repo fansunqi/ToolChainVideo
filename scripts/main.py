@@ -612,58 +612,9 @@ class MemeryBuilder:
             memory=memory,
         )
 
-    def run_db_agent(self, video_path, question, with_two_mem):
-        video_dir = os.path.dirname(video_path)
-        video_name = os.path.basename(video_path).split(".")[0]
-        sql_path = os.path.join(video_dir, video_name + ".db")
-
-
-        # TODO 这个分支有什么不同
-        if with_two_mem:
-            self.db_model_list[0].inference(video_path + "#"+ question)
-            self.db_model_list[1].inference(video_path + "#"+ question)
-        else:
-            # 相当于是用 langchain agent 来驾驭 memory building tool
-            
-            # 自己编造之前的对话
-            Human_prompt = f"provide a video from {video_path}. You must use at least one tool to finish following tasks, rather than directly imagine from my description. If you understand, say 'Received'."
-            AI_prompt = f"Received."
-
-            # 存入对话 buffer
-            self.db_agent.memory.save_context(
-                {"input": Human_prompt}, {"output": AI_prompt}
-            )
-
-            self.db_agent.run(input=question.strip())
-
-            video_dir = os.path.dirname(video_path)
-            video_name = os.path.basename(video_path).split(".")[0]
-            self.sql_path = os.path.join(video_dir, video_name + ".db")
-            conn = sqlite3.connect(self.sql_path)
-            cursor = conn.cursor()
-            cursor.execute(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='instancedb';"
-            )
-            rows_1 = cursor.fetchall()
-            cursor.execute(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='temporaldb';"
-            )
-            rows_2 = cursor.fetchall()
-            if len(rows_1) == 0 and len(rows_2) == 0:  # 注意这里是且
-                pdb.set_trace()
-                self.db_model_list[0].inference(video_path + "#"+ question)
-                self.db_model_list[1].inference(video_path + "#"+ question)
-
-    # def run_example(self, example):
-    #     input = example["Input"]
-    #     output = example["Output"]
-    #     Human_prompt = f"Here is an example. The question is: {input}; The chain is:{output}; If you understand, say 'Received'."
-    #     AI_prompt = f"Received."
-
-    #     self.agent.memory.save_context({"input": Human_prompt}, {"output": AI_prompt})
-
-    #     print(f" Current Memory: {self.agent.memory.load_memory_variables({})}")
-
+    def run_db_agent(self, video_path, question):
+        self.db_model_list[0].inference(video_path + "#"+ question)
+        self.db_model_list[1].inference(video_path + "#"+ question)
 
 
 def ToolChainReasoning(
