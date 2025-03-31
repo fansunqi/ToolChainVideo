@@ -540,33 +540,19 @@ class VideoInstanceUnderstanding:
 
 class MemeryBuilder:
     def __init__(self, load_dict, config):
-        print(f"Initializing MemoryBuilder, load_dict={load_dict}")
+        print(f"\nInitializing MemoryBuilder, load_dict={load_dict}")
 
         self.config = config
         self.models = {}
-        self.examplesel = CustomExampleSelector()
+        # self.examplesel = CustomExampleSelector()
 
         # 根据 load_dict 动态选择, 加载模型
         for class_name, device in load_dict.items():
             self.models[class_name] = globals()[class_name](device=device,config=self.config)
 
-        # Load Template Foundation Models
-        # TODO 没懂这段代码是什么意思
-        for class_name, module in globals().items():
-            if getattr(module, "template_model", False):
-                template_required_names = {
-                    k
-                    for k in inspect.signature(module.__init__).parameters.keys()
-                    if k != "self"
-                }
-                loaded_names = set([type(e).__name__ for e in self.models.values()])
-                if template_required_names.issubset(loaded_names):
-                    self.models[class_name] = globals()[class_name](
-                        **{name: self.models[name] for name in template_required_names}
-                    )
+        print(f"\nAll the Available Functions: {self.models}")
 
-        print(f"All the Available Functions: {self.models}")
-
+        # 把模型的 inference 方法加到 tools 中去
         self.tools = []
         for instance in self.models.values():
             for e in dir(instance):
@@ -589,8 +575,12 @@ class MemeryBuilder:
     def init_db_agent(self):
         tools = []
         self.db_model_list = []
+        
+        # memory_load_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in conf.memory.memory_list}
+        memory_load_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in self.config.memory.memory_list}
+        # ['VideoInstanceUnderstanding_cuda:0', 'VideoTemporalUnderstanding_cuda:0']
 
-        memory_load_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in conf.memory.memory_list}
+        # memory tools
         for class_name, device in memory_load_dict.items():
             self.db_model_list.append(globals()[class_name](device=device,config=self.config))
         
@@ -609,6 +599,7 @@ class MemeryBuilder:
             base_url = self.config.openai.PROXY
         )
 
+        # TODO 解决下面的 deprecation
         memory = ConversationBufferMemory(memory_key="chat_history")
         self.db_agent = initialize_agent(
             tools,
@@ -759,6 +750,7 @@ if __name__ == "__main__":
 
     bot = MemeryBuilder(load_dict=load_dict, config=conf)
 
+    # 数据集
     quids_to_exclude = vq_conf["quids_to_exclude"] if "quids_to_exclude" in vq_conf else None
     num_examples_to_run = vq_conf["num_examples_to_run"] if "num_examples_to_run" in vq_conf else -1
     start_num = vq_conf["start_num"] if "start_num" in vq_conf else 0

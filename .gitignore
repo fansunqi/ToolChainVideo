@@ -18,4 +18,5 @@ project/__MACOSX
 viz/
 scripts/__pycache__
 langchain_cache.db
+intermediate_res/
 

@@ -8,33 +8,42 @@ sys.path.append('./project/yolo_tracking-master')
 from boxmot.tracker_zoo import create_tracker
 from boxmot.utils import ROOT, WEIGHTS
 from boxmot.utils import logger as LOGGER
-from boxmot.utils.checks import TestRequirements
+# from boxmot.utils.checks import TestRequirements
 from boxmot.utils.torch_utils import select_device
 
-__tr = TestRequirements()
-__tr.check_packages(("ultralytics==8.0.124",))  # install
+# __tr = TestRequirements()
+# __tr.check_packages(("ultralytics==8.0.124",))  # install
 
-# from detectors import get_yolo_inferer
-from ultralytics.yolo.data.utils import VID_FORMATS
-from ultralytics.yolo.engine.model import TASK_MAP, YOLO
-from ultralytics.yolo.utils import IterableSimpleNamespace, colorstr, ops
-from ultralytics.yolo.utils.checks import check_imgsz
+from detectors import get_yolo_inferer
+# from ultralytics.yolo.data.utils import VID_FORMATS
+# from ultralytics.yolo.engine.model import TASK_MAP, YOLO
+# from ultralytics.yolo.utils import IterableSimpleNamespace, colorstr, ops
+# from ultralytics.yolo.utils.checks import check_imgsz
+
+from ultralytics.data.utils import VID_FORMATS
+from ultralytics import YOLO
+from ultralytics.engine.model import Model
+# TASK_MAP = Model.task_map
+from ultralytics.utils import IterableSimpleNamespace, colorstr, ops
+from ultralytics.utils.checks import check_imgsz
 
 # from ultralytics.yolo.utils.files import increment_path
-# from ultralytics.yolo.utils.plotting import save_one_box
+# from ultralytics.yolo.utils.plotting mport save_one_box
 # from utils import write_MOT_results
 from PIL import Image, ImageDraw, ImageFont
 from boxmot.utils import EXAMPLES
 import os
-from ultralytics.yolo.engine.results import Boxes, Results
+# from ultralytics.yolo.engine.results import Boxes, Results
+from ultralytics.engine.results import Boxes, Results
 import numpy as np
 import torch
-from ultralytics.yolo.utils import ops
+# from ultralytics.yolo.utils import ops
 
 # os.environ["http_proxy"] = "http://127.0.0.1:7890"
 # os.environ["https_proxy"] = "http://127.0.0.1:7890"
 
-from ultralytics.yolo.utils.ops import clip_boxes, xywh2xyxy, xyxy2xywh
+# from ultralytics.yolo.utils.ops import clip_boxes, xywh2xyxy, xyxy2xywh
+from ultralytics.utils.ops import clip_boxes, xywh2xyxy, xyxy2xywh
 import shutil
 
 import pdb
@@ -327,14 +336,23 @@ def detect_by_path(checkpoint_dir, video_path, save_dir, device="0", step=1):
     track_args = inital_args(checkpoint_dir, video_path, save_dir, device, step)
     model = YOLO(track_args["yolo_model"] if "v8" in str(track_args["yolo_model"]) else "yolov8n")
     overrides = model.overrides.copy()
-    model.predictor = TASK_MAP[model.task][3](
+    
+    pdb.set_trace()
+    
+    # model.predictor = TASK_MAP[model.task][3](
+    #     overrides=overrides, _callbacks=model.callbacks
+    # )
+    
+    model.predictor = Model.task_map[model.task][3](
         overrides=overrides, _callbacks=model.callbacks
     )
+    
 
     # extract task predictor
-    predictor = model.predictor
+    # predictor = model.predictor
+    predictor = model.task_map[model.task]["predictor"]
 
-    # pdb.set_trace()
+    pdb.set_trace()
     # predictor.dataset = None
     
     # combine default predictor args with custom, preferring custom
@@ -404,12 +422,12 @@ def detect_by_path(checkpoint_dir, video_path, save_dir, device="0", step=1):
         args=predictor.args,
     )
 
-    # pdb.set_trace()
+    pdb.set_trace()
     
     # 一帧一帧处理
     for frame_idx, batch in enumerate(predictor.dataset):   # 这一句话会报 Slice parameter 错误
         
-        # pdb.set_trace()
+        pdb.set_trace()
         
         predictor.run_callbacks("on_predict_batch_start")
         predictor.batch = batch
@@ -618,10 +636,6 @@ def detect_by_path(checkpoint_dir, video_path, save_dir, device="0", step=1):
 # detect_by_path 单元测试
 # python ./project/MultiTracking.py
 if __name__ == "__main__":
-    
-    
-    # cap = cv2.VideoCapture(path)
-    
     checkpoint_dir = "/home/fsq/video_agent/ToolChainVideo/checkpoints"
     video_path = "/share_data/NExT-QA/NExTVideo/0071/2617504308.mp4"
     save_dir = "/home/fsq/video_agent/ToolChainVideo/intermediate_res/track_res"

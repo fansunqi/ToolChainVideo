@@ -15,12 +15,8 @@ from transformers import (
     BlipForConditionalGeneration,
     BlipForQuestionAnswering,
 )
-from langchain.chains.conversation.memory import ConversationBufferMemory
-# from langchain.llms.openai import OpenAI
-# from langchain_community.llms import OpenAI
 from langchain_openai import ChatOpenAI
 from langchain_experimental.sql import SQLDatabaseChain
-# from langchain import SQLDatabase
 from langchain_community.utilities.sql_database import SQLDatabase
 
 import sys
@@ -65,28 +61,10 @@ class InstanceBase(object):
         self.config = config
         self.device = device
         self.torch_dtype = torch.float16 if "cuda" in device else torch.float32
-        # self.processor = BlipProcessor.from_pretrained("./checkpoints/blip")
         self.processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
-        # self.model = BlipForConditionalGeneration.from_pretrained(
-        #     "./checkpoints/blip", torch_dtype=self.torch_dtype
-        # ).to(self.device)
         self.model = BlipForConditionalGeneration.from_pretrained(
             "Salesforce/blip-image-captioning-large", torch_dtype=self.torch_dtype
         ).to(self.device)
-
-        # pdb.set_trace()
-        # self.llm = OpenAI(
-        #     openai_api_key = self.config.openai.GPT_API_KEY, 
-        #     model_name = self.config.openai.AGENT_GPT_MODEL_NAME, 
-        #     openai_api_base = self.config.openai.PROXY,
-        #     temperature = 0
-        # )
-        self.llm = ChatOpenAI(
-            api_key = self.config.openai.GPT_API_KEY,
-            model = self.config.openai.GPT_MODEL_NAME,
-            temperature = 0,
-            base_url = self.config.openai.PROXY
-        )
         self.tracker = GrandedSamTracker()
 
         self.fps = None
@@ -96,7 +74,7 @@ class InstanceBase(object):
 
         self.pro_dir_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.checkpoint_dir = self.pro_dir_path + "/" + "checkpoints"
-        self.save_dir = self.pro_dir_path + "/" + "demo" + "/" + "track_res"
+        self.save_dir = self.pro_dir_path + "/" + "intermediate_res" + "/" + "track_res"
         self.res_dir = None
 
     def reset_video(self):
@@ -108,16 +86,22 @@ class InstanceBase(object):
         self.sub_frames = None
 
     def inital_database(self):
+        
+        # res_dir 是 YOLO tracking 的结果
         res_dir_labels = self.res_dir / "labels"
         sorted_paths = sorted(res_dir_labels.iterdir(), key=lambda p: p.name)
         res_label_txt = sorted_paths[0]
         coco_txt = self.checkpoint_dir + "/" + "coco.txt"
 
+        # TODO 检查一下这个 coco_list 到底是干啥的 
         coco_list = []
         with open(coco_txt, "r") as f:
             for line in f.readlines():
                 cat_i = line.strip()
                 coco_list.append(cat_i)
+                
+        # (Pdb) p coco_list
+        # ['person', 'bicycle', 'car', 'motorbike', 'aeroplane', 'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'sofa', 'pottedplant', 'bed', 'diningtable', 'toilet', 'tvmonitor', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']
 
         result_list = []
         with open(res_label_txt, "r") as f:
@@ -132,10 +116,17 @@ class InstanceBase(object):
                 dict_i["category"] = value_i[-2]
                 dict_i["position"] = list(map(int, value_i[2:6]))
                 result_list.append(dict_i)
+        
+        # (Pdb) p result_list
+        # [{'frame_idx': 29, 'time_idx': '00:00:00', 'id': '1', 'category': '0', 'position': [165, 156, 104, 253]}, {'frame_idx': 29, 'time_idx': '00:00:00', 'id': '2', 'category': '0', 'position': [257, 51, 120, 399]}, {'frame_idx': 29, 'time_idx': '00:00:00', 'id': '3', 'category': '45', 'position': [449, 399, 108, 79]},...
 
         id_set = set()
         for d in result_list:
             id_set = id_set.union(set(d.get("id")))
+        
+        # (Pdb) p id_set
+        # {'3', '8', '0', '6', '5', '4', '2', '1', '9', '7'}    
+        
 
         video_dir = os.path.dirname(self.video_path)
         video_name = os.path.basename(self.video_path).split(".")[0]
@@ -317,32 +308,14 @@ class InstanceBase(object):
             prediction = kinetics_classnames[str(int(prediction.argmax()))]
             return prediction
 
-    def ref_vos(self, video_path, question):
-        # flag_ref_vos = self.llm(f"Please determine if this task is related to inpaint, generally referring to the word inpaint in the task. Reply 0 if it is related and 1 if it is not. The task is as follows:{question}.")
-        flag_ref_vos_response = self.llm(f"Please determine if this task is related to inpaint, generally referring to the word inpaint in the task. Reply 0 if it is related and 1 if it is not. The task is as follows:{question}.")
-        flag_ref_vos = flag_ref_vos_response.content
-        if int(flag_ref_vos) == 0:
-            try:
-                exp = self.llm(f"Extract the most important part of the subject from the sentence {question}, returning only one phrase, which is required to be a noun, or a noun with an attributive.")
-                print(f"### Start rvos, ###exp:{exp}")
-                self.tracker.get_tracking_res(exp,video_path )
-            except:
-                print(f"### Error in rvos.")
-        else:
-            print(f"### No need for rvos.")
-        # conn = sqlite3.connect(self.sql_path)
-        # cursor = conn.cursor()
-        # cursor.execute("INSERT INTO instancedb (obj_id, category, identification, trajectory, action) VALUES (?, ?, ?, ?, ?)",(-1,exp,exp,None,None,),)
-        # conn.commit()
-
     def run_on_video(self, video_path, question, step=10):
-
-        # pdb.set_trace()
 
         self.video_path = video_path
         cap = cv2.VideoCapture(self.video_path)
         self.fps = cap.get(cv2.CAP_PROP_FPS)
         self.step = step
+        
+        ### YOLO tracking, 得到 intermediate_res/track_res
         self.res_dir = detect_by_path(
             self.checkpoint_dir,
             self.video_path,
@@ -356,14 +329,17 @@ class InstanceBase(object):
         self.sql_path = os.path.join(video_dir, video_name + ".db")
         conn = sqlite3.connect(self.sql_path)
         cursor = conn.cursor()
+        
+        # 检查是否有叫 instancedb 的表，如果没有，则初始化数据库
         cursor.execute(
             "SELECT name FROM sqlite_master WHERE type='table' AND name='instancedb';"
         )
         rows = cursor.fetchall()
-
         if len(rows) == 0:
             self.inital_database()
-            self.ref_vos(video_path,question)
+            
+            # ref_vos 是专门做 inpainting 任务的，在这里省去了
+            # self.ref_vos(video_path,question)
 
         ####visual
         conn = sqlite3.connect(self.sql_path)
@@ -377,6 +353,7 @@ class InstanceBase(object):
 
     def run_on_question(self, question):
         ####visual
+        # 相当于是使用工具的接口，之后好像没有用到
         conn = sqlite3.connect(self.sql_path)
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM instancedb")
