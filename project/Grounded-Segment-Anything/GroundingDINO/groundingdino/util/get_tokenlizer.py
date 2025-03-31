@@ -18,7 +18,7 @@ def get_tokenlizer(text_encoder_type, bert_base_uncased_path=None):
         print("use local bert model path: {}".format(bert_base_uncased_path))
         return AutoTokenizer.from_pretrained(bert_base_uncased_path)
 
-    print("final text_encoder_type: {}".format(text_encoder_type))
+    # print("final text_encoder_type: {}".format(text_encoder_type))
 
     tokenizer = AutoTokenizer.from_pretrained(text_encoder_type)
     return tokenizer

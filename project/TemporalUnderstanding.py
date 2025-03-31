@@ -20,6 +20,7 @@ from langchain.chains.conversation.memory import ConversationBufferMemory
 from langchain_openai import ChatOpenAI
 from langchain_experimental.sql import SQLDatabaseChain
 # from langchain import OpenAI, SQLDatabase
+from langchain_community.utilities.sql_database import SQLDatabase
 
 
 def format_seconds_to_time(seconds):
@@ -55,21 +56,11 @@ class TemporalBase(object):
         self.config = config
         self.device = device
         self.torch_dtype = torch.float16 if "cuda" in device else torch.float32
-        # self.processor = BlipProcessor.from_pretrained("./checkpoints/blip")
         self.processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
-        # self.model = BlipForConditionalGeneration.from_pretrained(
-        #     "./checkpoints/blip", torch_dtype=self.torch_dtype
-        # ).to(self.device)
         self.model = BlipForConditionalGeneration.from_pretrained(
             "Salesforce/blip-image-captioning-large", torch_dtype=self.torch_dtype
         ).to(self.device)
 
-        # self.llm = OpenAI(
-        #     openai_api_key = self.config.openai.GPT_API_KEY, 
-        #     model_name = self.config.openai.AGENT_GPT_MODEL_NAME, 
-        #     base_url=self.config.openai.PROXY,
-        #     temperature = 0
-        # )
         self.llm = ChatOpenAI(
             api_key = self.config.openai.GPT_API_KEY,
             model = self.config.openai.GPT_MODEL_NAME,
@@ -183,6 +174,7 @@ class TemporalBase(object):
 
         return rows[0]
 
+    # 下面这个函数并没有实际用处
     def run_on_question(self, question):
         ####visual
         conn = sqlite3.connect(self.sql_path)
