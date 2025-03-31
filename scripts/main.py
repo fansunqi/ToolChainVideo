@@ -467,8 +467,6 @@ class DefaultTool:
         # return db_chain_output
 
 
-# TODO 查看 memory
-############Memory Bulider#########
 class VideoTemporalUnderstanding:
     def __init__(self, device, config):
         self.config = config
@@ -732,20 +730,29 @@ if __name__ == "__main__":
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
         sql_path = os.path.join(video_dir, video_name + ".db")
+        track_res_base = "intermediate_res/track_res"
+        track_res_path = os.path.join(track_res_base, video_name, video_name + ".avi")
  
         #### trim
         adjust_video_resolution(video_path)
         
-        if os.path.exists(sql_path): 
+        #### Building memory
+        if os.path.exists(sql_path) and os.path.exists(track_res_path): 
             if vq_conf.overwrite_mem:
+                os.remove(sql_path)
                 print("\nOverwrite memory...")
                 bot.init_db_agent()
-                bot.run_db_agent(video_path, question_w_options, vq_conf.with_two_mem)
+                bot.run_db_agent(video_path, question_w_options)
+            else:
+                print("\nMemory exists; skip building memory")
         else:
+            if os.path.exists(sql_path):
+                os.remove(sql_path)
             print("\nBuilding memory...")
             bot.init_db_agent()
-            bot.run_db_agent(video_path, question_w_options, vq_conf.with_two_mem)
-             
+            bot.run_db_agent(video_path, question_w_options)
+        
+        #### ToolChainReasoning   
         try:
             answers = {}
             answers["good_anwsers"] = []
@@ -770,7 +777,7 @@ if __name__ == "__main__":
     output_file = f"{vq_conf.output_file[:-5]}_{timestamp}.json"
 
     save_to_json(all_results, output_file)
-    print(f"{str(len(all_results))}results saved")
+    print(f"{str(len(all_results))} results saved")
 
 
 
@@ -778,6 +785,7 @@ if __name__ == "__main__":
 # TODO: 深入看一下 memory, 优化 memory
 # TODO: PromptTemplate 和 ChatPromptTemplate 的内部格式化
 
+# TODO 看一下 coco.txt 到底是怎么样的
 # TODO: 修复下面这个 error:
 '''
 Traceback (most recent call last):

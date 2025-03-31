@@ -10,5 +10,5 @@ max_try: 7
 output_file: "output/nextqa/nextqa_output.json"
 num_examples_to_run: 100
 start_num: 0
-use_cache: True
+use_cache: False
 quids_to_exclude: ["6595307655_4"]
