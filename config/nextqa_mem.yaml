@@ -1,9 +1,9 @@
 inference_config_path: "config/inference/inference_gpt35.yaml"
-mannual_cache_file: "cache/gpt35_cache_mem_2.pkl"
+mannual_cache_file: "cache/gpt35_cache_mem_3.pkl"
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/train.csv"
-overwrite_mem: True
+overwrite_mem: False
 seed: 12345
 max_answer: 3
 max_try: 7

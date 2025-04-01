@@ -536,7 +536,7 @@ class MemeryBuilder:
         for class_name, device in load_dict.items():
             self.models[class_name] = globals()[class_name](device=device,config=self.config)
 
-        print(f"\nAll the Available Functions: {self.models}")
+        # print(f"\nAll the Available Functions: {self.models}")
 
         # 把模型的 inference 方法加到 tools 中去
         self.tools = []
@@ -628,10 +628,12 @@ def ToolChainReasoning(
     
     # TODO 更改 prompt
     # TODO 1 加上 tool descriptions, 能不能用到内部 format
-    query = f"""
-    Regarding a given video from {video_filename}, use tools to answer the following questions as best you can.
-    Question: {input_question}
-    """
+    # query = f"""
+    # Regarding a given video from {video_filename}, use tools to answer the following questions as best you can.
+    # Question: {input_question}
+    # """
+    query = f"""Regarding a given video from {video_filename}, use tools to answer the following questions as best you can.
+Question: {input_question}"""
     
     step_idx = 0
     output = None
@@ -645,6 +647,9 @@ def ToolChainReasoning(
         print("\nCache miss. Calling API...")
         steps = []
         for step in app.stream({"messages": [("human", query)]}, stream_mode="updates"):
+            
+            # pdb.set_trace()
+            
             step_idx += 1
             steps.append(step)
                 

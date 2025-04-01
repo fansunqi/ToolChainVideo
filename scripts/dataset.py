@@ -25,7 +25,8 @@ class BaseDataset(Dataset):
         # self.narrations = self.get_descriptions()  # uid --> list of str  or  uid --> str
         self.anno = self.get_anno()
         # self.durations = load_json(args.duration_path)  # uid --> float
-        data = self.build()
+        end_num = start_num + num_examples_to_run
+        data = self.build(end_num)
         data = self.filter(data, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
         self.data = data
 
@@ -117,14 +118,14 @@ class NextDataset(BaseDataset):
         video_path = find_mp4_files(video_path_base)
         return video_path
   
-    def build(self):
+    def build(self, end_num):
         print("\nBuilding dataset...")
         data = []
         video_path = self.get_video_path()
         # print(len(video_path))
         # print(video_path[0:10])
         # pdb.set_trace()
-
+        
         for row in self.anno.iterrows():
             if isinstance(row, tuple):
                 row = row[-1]  # remove table index
@@ -170,6 +171,10 @@ class NextDataset(BaseDataset):
                 # 'duration': duration,
                 'video_path': matching_path,
             })
+            
+            if len(data) >= end_num:
+                break
+            
         return data
 
 
