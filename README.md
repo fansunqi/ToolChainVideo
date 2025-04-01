@@ -57,18 +57,8 @@
    
       The code will automatically download BLIP model from huggingface (https://huggingface.co/Salesforce/blip-image-captioning-large/tree/main). You can also download mannully.
    
-   - **download the pretrained model for inpainting**
-     ```python
-     #download the pretrained model for inpainting
-     mkdir ./E2FGVI
-     cd ./E2FGVI
-     # dowlond the chekpoints from below 
-     [[Google Drive](https://drive.google.com/file/d/1tNJMTJ2gmWdIXJoHVi5-H504uImUiJW9/view?usp=sharing)] 
-     [[Baidu Disk](https://pan.baidu.com/s/1qXAErbilY_n_Fh9KB8UF7w?pwd=lsjw)]
-     cd ..
-     ```
 
-   - **download the pretrained model for rvos**
+   - **(TODO) download the pretrained model for rvos**
      ```python
      #download the pretrained model for rvos
      mkdir AOT 
@@ -84,7 +74,7 @@
      cd ../..
      ```
 
-The overall checkpoints file structure is as follows:
+The overall checkpoints file structure is as follows (TODO):
 
 <img src="assets/ckpt_files.png" alt="ckpt_files" style="zoom: 33%;" />
 
@@ -110,6 +100,9 @@ Thanks to the authors of these open-source projects for providing excellent proj
       - [https://huggingface.co/Salesforce/blip-image-captioning-large](https://huggingface.co/Salesforce/blip-image-captioning-large "https://huggingface.co/Salesforce/blip-image-captioning-large")
       - [https://huggingface.co/Salesforce/blip2-opt-2.7b](https://huggingface.co/Salesforce/blip2-opt-2.7b "https://huggingface.co/Salesforce/blip2-opt-2.7b")
       - [https://huggingface.co/docs/transformers/model\_doc/instructblip](https://huggingface.co/docs/transformers/model_doc/instructblip "https://huggingface.co/docs/transformers/model_doc/instructblip")
+  - **Action Recognition**
+    - UniFormerV2
+      - [https://github.com/OpenGVLab/UniFormerV2](https://github.com/OpenGVLab/UniFormerV2"https://github.com/OpenGVLab/UniFormerV2")
 
 ## NExT-QA 试验
 
