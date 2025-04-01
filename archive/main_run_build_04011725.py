@@ -63,8 +63,6 @@ from project.sql_template import (
 mannual_cache = None
 mannual_cache_file = None
 
-current_video_dir = None
-current_video_name = None
 
 # 获取当前时间戳
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")

@@ -102,8 +102,6 @@ class InstanceBase(object):
                 
         # (Pdb) p coco_list
         # ['person', 'bicycle', 'car', 'motorbike', 'aeroplane', 'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'sofa', 'pottedplant', 'bed', 'diningtable', 'toilet', 'tvmonitor', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush']
-
-        # pdb.set_trace()
         
         result_list = []
         with open(res_label_txt, "r") as f:
@@ -128,11 +126,6 @@ class InstanceBase(object):
         
         # (Pdb) p id_set
         # {'3', '8', '0', '6', '5', '4', '2', '1', '9', '7'}    
-        
-
-        video_dir = os.path.dirname(self.video_path)
-        video_name = os.path.basename(self.video_path).split(".")[0]
-        self.sql_path = os.path.join(video_dir, video_name + ".db")
 
         conn = sqlite3.connect(self.sql_path)
         cursor = conn.cursor()
@@ -337,11 +330,12 @@ class InstanceBase(object):
             "SELECT name FROM sqlite_master WHERE type='table' AND name='instancedb';"
         )
         rows = cursor.fetchall()
-        if len(rows) == 0:
+        if len(rows) == 0:    
             self.inital_database()
             
             # ref_vos 是专门做 inpainting 任务的，在这里省去了
-            # self.ref_vos(video_path,question)
+            # 注意这里 question 是 None
+            # self.ref_vos(video_path, question)
 
         ####visual
         conn = sqlite3.connect(self.sql_path)

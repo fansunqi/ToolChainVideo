@@ -92,5 +92,9 @@ SQLResult: [('a couple of people that are walking in the snow',), ('a couple of 
 Answer:The guy in the video was standing in the snow.
 """
 
-TOOLS_RULE = """Before using other tools to access the instancedb SQLite database, you must first call the VideoInstanceUnderstanding tool to construct the instancedb database.
-Before using other tools to access the temporaldb SQLite database, you must first call the VideoTemporalUnderstanding tool to construct the temporaldb database."""
+QUERY_PREFIX = """Regarding a given video, use tools to answer the following questions as best you can.
+Questions: """
+
+TOOLS_RULE = """Before using other tools to access the instancedb SQLite database, you must first call the 'VideoInstanceUnderstanding' tool to construct the instancedb database.
+Before using other tools to access the temporaldb SQLite database, you must first call the 'VideoTemporalUnderstanding' tool to construct the temporaldb database.
+Therefore, your first step must be to call either the 'VideoInstanceUnderstanding' tool or the 'VideoTemporalUnderstanding' tool."""
