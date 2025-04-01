@@ -33,12 +33,12 @@ class BaseDataset(Dataset):
         self.ukey = name
 
     def filter(self, data, quids_to_exclude, num_examples_to_run, start_num, specific_quids):
-        if quids_to_exclude is not None:
-            data = [el for el in data if el[self.ukey] not in quids_to_exclude]
         if start_num > 0:
             data = data[start_num:]
         if num_examples_to_run >= 0:
             data = data[:num_examples_to_run]
+        if quids_to_exclude is not None:
+            data = [el for el in data if el[self.ukey] not in quids_to_exclude]
         if specific_quids is not None:
             data = [el for el in data if el[self.ukey] in specific_quids]
         return data
@@ -118,6 +118,7 @@ class NextDataset(BaseDataset):
         return video_path
   
     def build(self):
+        print("\Building dataset...")
         data = []
         video_path = self.get_video_path()
         # print(len(video_path))
@@ -133,9 +134,13 @@ class NextDataset(BaseDataset):
             #     continue
 
             # 检查 uid 是否在 video_path 列表中的任何一个字符串中，并找出对应的 path
-            matching_path = None
+            matching_path = None    
             for path in video_path:
-                if uid in path:
+                # 获取文件名（包括扩展名）
+                filename_with_ext = os.path.basename(path)
+                # 去掉扩展名
+                filename = os.path.splitext(filename_with_ext)[0]
+                if uid == filename:
                     matching_path = path
                     break
 

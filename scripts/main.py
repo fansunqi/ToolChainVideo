@@ -678,7 +678,7 @@ def ToolChainReasoning(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/nextqa_langgraph.yaml",type=str)                           
+    parser.add_argument('--config', default="config/nextqa_mem.yaml",type=str)                           
     opt = parser.parse_args()
 
     vq_conf = OmegaConf.load(opt.config)
@@ -720,7 +720,7 @@ if __name__ == "__main__":
 
     for data in tqdm(dataset):
         
-        print(f"\nProcessing: {data['quid']}")
+        print(f"\n\nProcessing: {data['quid']}")
 
         video_path = data["video_path"]
         question = data["question"].capitalize()  # 首字母大写
@@ -737,6 +737,7 @@ if __name__ == "__main__":
         adjust_video_resolution(video_path)
         
         #### Building memory
+        # TODO remove sqlite 数据库之前可以先备份
         if os.path.exists(sql_path) and os.path.exists(track_res_path): 
             if vq_conf.overwrite_mem:
                 os.remove(sql_path)
@@ -777,7 +778,7 @@ if __name__ == "__main__":
     output_file = f"{vq_conf.output_file[:-5]}_{timestamp}.json"
 
     save_to_json(all_results, output_file)
-    print(f"{str(len(all_results))} results saved")
+    print(f"\n{str(len(all_results))} results saved")
 
 
 
@@ -785,6 +786,7 @@ if __name__ == "__main__":
 # TODO: 深入看一下 memory, 优化 memory
 # TODO: PromptTemplate 和 ChatPromptTemplate 的内部格式化
 
+# TODO 为啥会有 org mem 存下来
 # TODO 看一下 coco.txt 到底是怎么样的
 # TODO: 修复下面这个 error:
 '''
