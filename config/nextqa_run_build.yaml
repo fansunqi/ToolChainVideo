@@ -1,5 +1,5 @@
 inference_config_path: "config/inference/inference_gpt35.yaml"
-mannual_cache_file: "cache/gpt35_cache_mem_3.pkl"
+mannual_cache_file: "cache/gpt35_cache_run_build.pkl"
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/train.csv"
@@ -8,7 +8,7 @@ seed: 12345
 max_answer: 3
 max_try: 7
 output_file: "output/nextqa/nextqa_output.json"
-num_examples_to_run: 100
+num_examples_to_run: 1
 start_num: 0
 use_cache: False
 quids_to_exclude: ["6595307655_4"]

@@ -148,12 +148,12 @@ class TemporalBase(object):
 
         conn.close()
 
-    def run_on_video(self, video_path, step=30):
+    def run_on_video(self, video_path, step=30, db_version=0):
         self.inital_video(video_path, step)
 
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
-        self.sql_path = os.path.join(video_dir, video_name + ".db")
+        self.sql_path = os.path.join(video_dir, video_name + "_" + str(db_version) + ".db")
         conn = sqlite3.connect(self.sql_path)
         cursor = conn.cursor()
         cursor.execute(

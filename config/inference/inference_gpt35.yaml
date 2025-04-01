@@ -5,17 +5,9 @@ openai:
   GPT_API_KEY: "sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra"
   PROXY: "https://api.juheai.top/v1"
 
-google_cloud:
-  CLOUD_VISION_API_KEY: null
-  QUOTA_PROJECT_ID: null
-
-mcts_planner:
-  good_base_reward: 1.0
-  bad_base_reward: -1.0
-  decay_rate: 0.5
-
 memory:
-  step: 30
+  db_version: 1
+  step: 30  # 这个应该是 video stride
   memory_list:
     - "VideoInstanceUnderstanding_cuda:0"
     - "VideoTemporalUnderstanding_cuda:0"

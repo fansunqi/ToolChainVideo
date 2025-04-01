@@ -310,7 +310,7 @@ class InstanceBase(object):
             prediction = kinetics_classnames[str(int(prediction.argmax()))]
             return prediction
 
-    def run_on_video(self, video_path, question, step=10):
+    def run_on_video(self, video_path, question, step=10, db_version=0):
 
         self.video_path = video_path
         cap = cv2.VideoCapture(self.video_path)
@@ -328,7 +328,7 @@ class InstanceBase(object):
 
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
-        self.sql_path = os.path.join(video_dir, video_name + ".db")
+        self.sql_path = os.path.join(video_dir, video_name + "_" + str(db_version) + ".db")
         conn = sqlite3.connect(self.sql_path)
         cursor = conn.cursor()
         
