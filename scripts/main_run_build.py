@@ -60,6 +60,7 @@ from project.sql_template import (
     QUERY_PREFIX
 )
 
+DEBUG_MODE = False
 
 mannual_cache = None
 mannual_cache_file = None
@@ -70,6 +71,8 @@ current_video_name = None
 # 获取当前时间戳
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
+# 记录调用工具的步数
+step_idx = None
 
 TOOL_INPUT_ERROR = "There is an error in the input of the tool, please check the input and try again."
 TOOL_PROCESS_ERROR = "There is an error. Try to ask the question in a different way."
@@ -115,7 +118,11 @@ class TemporalTool:
         "The input to this tool must be a question. For example, the input is 'what is he talking about when a girl is playing violin?'",
     )
     def inference(self, question):
-        print("\nCall TemporalTool")
+        global step_idx
+        print(f"\nStep {step_idx}: Call TemporalTool")
+        
+        if DEBUG_MODE:
+            pdb.set_trace()
 
         db_version = self.config.memory.db_version
         self.sql_path = os.path.join(current_video_dir, current_video_name + "_" + str(db_version) + ".db")
@@ -171,7 +178,11 @@ class CountingTool:
         "The input to this tool must be a question. For example, the input is 'How many fish are here?'",
     )
     def inference(self, question):
-        print("\nCall CountingTool")
+        global step_idx
+        print(f"\nStep {step_idx}: Call CountingTool")
+        
+        if DEBUG_MODE:
+            pdb.set_trace()
         
         db_version = self.config.memory.db_version
         self.sql_path = os.path.join(current_video_dir, current_video_name + "_" + str(db_version) + ".db")
@@ -221,7 +232,11 @@ class ReasonFinder:
         "The input to this tool must be a question. For example, the input is 'Why she is crying?'",
     )
     def inference(self, question):
-        print("\nCall ReasonFinder")
+        global step_idx
+        print(f"\nStep {step_idx}: Call ReasonFinder")
+        
+        if DEBUG_MODE:
+            pdb.set_trace()
 
         db_version = self.config.memory.db_version
         self.sql_path = os.path.join(current_video_dir, current_video_name + "_" + str(db_version) + ".db")
@@ -271,7 +286,11 @@ class HowSeeker:
         "The input to this tool must be a question. For example, the input is 'How did the children eat food?'",
     )
     def inference(self, question):
-        print("\nCall HowSeeker")
+        global step_idx
+        print(f"\nStep {step_idx}: Call HowSeeker")
+        
+        if DEBUG_MODE:
+            pdb.set_trace()
 
         db_version = self.config.memory.db_version
         self.sql_path = os.path.join(current_video_dir, current_video_name + "_" + str(db_version) + ".db")
@@ -321,7 +340,11 @@ class DescriptionTool:
         "The input to this tool must be a question. For example, the input is 'What's in the video?'",
     )
     def inference(self, question):
-        print("\nCall DescriptionTool")
+        global step_idx
+        print(f"\nStep {step_idx}: Call DescriptionTool")
+        
+        if DEBUG_MODE:
+            pdb.set_trace()
         
         db_version = self.config.memory.db_version
         self.sql_path = os.path.join(current_video_dir, current_video_name + "_" + str(db_version) + ".db")
@@ -371,7 +394,11 @@ class DefaultTool:
         "The input to this tool must be a question. For example, the input is 'Are the men happy today?'",
     )
     def inference(self, question):
-        print("\nCall DefaultTool")
+        global step_idx
+        print(f"\nStep {step_idx}: Call DefaultTool")
+        
+        if DEBUG_MODE:
+            pdb.set_trace()
 
         db_version = self.config.memory.db_version
         self.sql_path = os.path.join(current_video_dir, current_video_name + "_" + str(db_version) + ".db")
@@ -411,7 +438,11 @@ class VideoTemporalUnderstanding:
         description="Useful when you need to process temporal information in videos. Must be called before access to temporaldb database."
     )
     def inference(self, input):
-        print("\nCall VideoTemporalUnderstanding")
+        global step_idx
+        print(f"\nStep {step_idx}: Call VideoTemporalUnderstanding")
+        
+        if DEBUG_MODE:
+            pdb.set_trace()
         
         step = self.config.memory.step
         db_version = self.config.memory.db_version
@@ -435,7 +466,11 @@ class VideoInstanceUnderstanding:
         description="Useful when you need to understand the instance information in videos. Must be called before access to instancedb database."
     )
     def inference(self, input):
-        print("\nCall VideoInstanceUnderstanding")
+        global step_idx
+        print(f"\nStep {step_idx}: Call VideoInstanceUnderstanding")
+        
+        if DEBUG_MODE:
+            pdb.set_trace()
         
         step = self.config.memory.step
         db_version = self.config.memory.db_version
@@ -451,11 +486,13 @@ def ToolChainReasoning(
     video_filename, 
     input_question, 
     llm, 
-    tools, 
+    tools,
+    recursion_limit,  
     use_cache=True,
 ):
     # TODO 考虑之前选择工具的历史
     
+    # TODO 研究这个 prompt
     prompt = ChatPromptTemplate.from_messages(
         [
             ("system", "You are a helpful assistant."),
@@ -465,10 +502,11 @@ def ToolChainReasoning(
         ]
     )
     
+    # TODO 能否去除下面这个函数
     def _modify_state_messages(state: AgentState):
         return prompt.invoke({"messages": state["messages"]}).to_messages()
     
-    app = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
+    tool_planner = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
     
     # TODO 更改 prompt
     query = QUERY_PREFIX + input_question + '\n' + TOOLS_RULE
@@ -480,8 +518,14 @@ def ToolChainReasoning(
     else:
         print("\nCache miss. Calling API...")
         steps = []
+        global step_idx
         step_idx = 0
-        for step in app.stream({"messages": [("human", query)]}, stream_mode="updates"):
+        
+        # TODO 研究一下这里的 stream_mode
+        for step in tool_planner.stream(
+            {"messages": [("human", query)]}, 
+            {"recursion_limit": recursion_limit},
+            stream_mode="updates"):
             
             # pdb.set_trace()
             
@@ -583,6 +627,7 @@ if __name__ == "__main__":
                                     input_question=question_w_options,
                                     llm=llm,
                                     tools=tools,
+                                    recursion_limit=vq_conf.recursion_limit,
                                     use_cache=vq_conf.use_cache)
         answers["good_anwsers"].append(answer)
         # except Exception as e:
@@ -600,6 +645,8 @@ if __name__ == "__main__":
     print(f"\n{str(len(all_results))} results saved")
 
 
+# TODO 从 sql prompt 中去除掉 audio 的部分
+# TODO 可视化工具调用的过程
 
 # TODO: log，哪些东西可以放到 log 里面
 # TODO: 深入看一下 memory, 优化 memory

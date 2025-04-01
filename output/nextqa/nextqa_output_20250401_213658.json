@@ -1,0 +1,23 @@
+[
+    {
+        "quid": "2400987326_5",
+        "uid": "2400987326",
+        "qid": 5,
+        "q_type": "TC",
+        "question": "how is the man in grey plaid shirt feeling while talking at the start",
+        "optionA": "worried",
+        "optionB": "terrible",
+        "optionC": "curious",
+        "optionD": "frightened",
+        "optionE": "happy",
+        "truth": 4,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1000/2400987326.mp4",
+        "question_w_options": "How is the man in grey plaid shirt feeling while talking at the start? Choose your answer from below selections: A.worried, B.terrible, C.curious, D.frightened, E.happy.",
+        "answers": {
+            "good_anwsers": [
+                "I'm unable to access the temporaldb database to answer the question about the man in the video. If you have any other questions or need assistance with something else, feel free to ask."
+            ],
+            "bas_anwsers": []
+        }
+    }
+]

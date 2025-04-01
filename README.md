@@ -115,7 +115,7 @@ specify your data path in ```config/nextqa.yaml```
 运行指令：
 
 ```
-python ./scripts/main.py
+python scripts/main.py
 ```
 
 默认使用的 config 是 `config/nextqa.yaml`
