@@ -118,7 +118,7 @@ class NextDataset(BaseDataset):
         return video_path
   
     def build(self):
-        print("\Building dataset...")
+        print("\nBuilding dataset...")
         data = []
         video_path = self.get_video_path()
         # print(len(video_path))

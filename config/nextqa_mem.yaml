@@ -3,12 +3,12 @@ mannual_cache_file: "cache/gpt35_cache_mem_2.pkl"
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/train.csv"
-overwrite_mem: False
+overwrite_mem: True
 seed: 12345
 max_answer: 3
 max_try: 7
 output_file: "output/nextqa/nextqa_output.json"
 num_examples_to_run: 100
 start_num: 0
-use_cache: False
+use_cache: True
 quids_to_exclude: ["6595307655_4"]

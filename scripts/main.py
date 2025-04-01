@@ -62,6 +62,9 @@ from project.sql_template import (
 mannual_cache = None
 mannual_cache_file = None
 
+# 获取当前时间戳
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+
 
 TOOL_INPUT_ERROR = "There is an error in the input of the tool, please check the input and try again."
 TOOL_PROCESS_ERROR = "There is an error. Try to ask the question in a different way."
@@ -118,10 +121,7 @@ class TemporalTool:
         "For example: the input is /data/videos/xxx.mp4#What is he talking about when a girl is playing violin? ",
     )
     def inference(self, input):
-        
-        # TODO 在这里直接检查工具的输入
-        # pdb.set_trace()
-        
+  
         video_path, question = parse_tool_input(input)
         if video_path == None and question == None:
             print(TOOL_INPUT_ERROR)
@@ -480,17 +480,11 @@ class VideoTemporalUnderstanding:
         "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
     )
     def inference(self, input):
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
+        
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
         
         step = self.config.memory.step
         self.basemodel.run_on_video(video_path, step)
@@ -514,17 +508,11 @@ class VideoInstanceUnderstanding:
         "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
     )
     def inference(self, input):
-        if "#" in input:
-            tmp = input.split("#")
-            if len(tmp) == 2:
-                video_path = tmp[0]
-                question = tmp[1]
-            else: 
-                result = "There is an error in the input of the tool, please check the input and try again."
-                return result
-        else:
-            result = "There is an error in the input of the tool, please check the input and try again."
-            return result
+        
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
         
         step = self.config.memory.step
         self.basemodel.run_on_video(video_path,question,step)
@@ -740,7 +728,8 @@ if __name__ == "__main__":
         # TODO remove sqlite 数据库之前可以先备份
         if os.path.exists(sql_path) and os.path.exists(track_res_path): 
             if vq_conf.overwrite_mem:
-                os.remove(sql_path)
+                new_sql_path = sql_path.replace(".db", f"_{timestamp}.db")
+                os.rename(sql_path, new_sql_path)
                 print("\nOverwrite memory...")
                 bot.init_db_agent()
                 bot.run_db_agent(video_path, question_w_options)
@@ -748,7 +737,8 @@ if __name__ == "__main__":
                 print("\nMemory exists; skip building memory")
         else:
             if os.path.exists(sql_path):
-                os.remove(sql_path)
+                new_sql_path = sql_path.replace(".db", f"_{timestamp}.db")
+                os.rename(sql_path, new_sql_path)
             print("\nBuilding memory...")
             bot.init_db_agent()
             bot.run_db_agent(video_path, question_w_options)
@@ -773,10 +763,8 @@ if __name__ == "__main__":
         result_dict["answers"] = answers
         all_results.append(result_dict)
 
-    # 获取当前时间戳
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    
     output_file = f"{vq_conf.output_file[:-5]}_{timestamp}.json"
-
     save_to_json(all_results, output_file)
     print(f"\n{str(len(all_results))} results saved")
 
@@ -786,7 +774,6 @@ if __name__ == "__main__":
 # TODO: 深入看一下 memory, 优化 memory
 # TODO: PromptTemplate 和 ChatPromptTemplate 的内部格式化
 
-# TODO 为啥会有 org mem 存下来
 # TODO 看一下 coco.txt 到底是怎么样的
 # TODO: 修复下面这个 error:
 '''
