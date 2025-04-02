@@ -47,7 +47,7 @@ from project.InstanceUnderstanding import InstanceBase
 from project.ExampleSelector import CustomExampleSelector
 
 
-from project.prompt_template import (
+from project.sql_template import (
     _sqlite_prompt,
     COUNTING_EXAMPLE_PROMPT,
     PROMPT_SUFFIX,
@@ -56,23 +56,15 @@ from project.prompt_template import (
     HOWSEEKER_ADDITION_PROMPT,
     DESCRIP_EXAMPLE_PROMPT,
     DESCRIP_ADDITION_PROMPT,
-    TOOLS_RULE,
-    QUERY_PREFIX
 )
 
-DEBUG_MODE = False
 
 mannual_cache = None
 mannual_cache_file = None
 
-current_video_dir = None
-current_video_name = None
-
 # 获取当前时间戳
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
-# 记录调用工具的步数
-step_idx = None
 
 TOOL_INPUT_ERROR = "There is an error in the input of the tool, please check the input and try again."
 TOOL_PROCESS_ERROR = "There is an error. Try to ask the question in a different way."
@@ -96,6 +88,16 @@ def prompts(name, description):
 
     return decorator
 
+
+def parse_tool_input(input):
+    if "#" in input:
+        tmp = input.split("#")
+        if len(tmp) == 2:
+            video_path = tmp[0]
+            question = tmp[1]
+            return video_path, question
+    return None, None
+
     
 class TemporalTool:
     def __init__(self, device, config):
@@ -115,35 +117,37 @@ class TemporalTool:
     @prompts(
         name = "TemporalTool",
         description = "Useful when you need to process temporal information in videos."
-        "The input to this tool must be a question. For example, the input is 'what is he talking about when a girl is playing violin?'",
+        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
+        "For example: the input is /data/videos/xxx.mp4#What is he talking about when a girl is playing violin? ",
     )
-    def inference(self, question):
-        global step_idx
-        print(f"\nStep {step_idx}: Call TemporalTool")
+    def inference(self, input):
+  
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
         
-        if DEBUG_MODE:
-            pdb.set_trace()
+        video_dir = os.path.dirname(video_path)
+        video_name = os.path.basename(video_path).split(".")[0]
+        self.sql_path = os.path.join(video_dir, video_name + ".db")
 
-        db_version = self.config.memory.db_version
-        self.sql_path = os.path.join(current_video_dir, current_video_name + "_" + str(db_version) + ".db")
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
-        
-        # TODO 进一步了解 prompt 格式化的过程      
-        # sample_rows_in_table_info 的主要作用是控制在生成数据库表的元信息（table_info）时，是否包含表中的示例数据行。
-        # 如果设置了该参数，langchain 会从每个表中抽取指定数量的行，并将这些行作为表信息的一部分，提供给语言模型（LLM）进行推理。
         db_chain = SQLDatabaseChain.from_llm(
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
+
+        input_question = None
+        try:
+            db_chain_output = db_chain.invoke(question)
+            result = db_chain_output['result']
+            input_question = db_chain_output['query']
+        except:
+            print(TOOL_PROCESS_ERROR)
+            return TOOL_PROCESS_ERROR
         
-        # try:
-        db_chain_output = db_chain.invoke(question)
-        result = db_chain_output['result']
-        input_question = db_chain_output['query']
-        # except:
-        #     print(TOOL_PROCESS_ERROR)
-        #     return TOOL_PROCESS_ERROR
+        # result = db_chain.invoke(question)
 
         print("\nProcessed TemporalTool.")
         print(f"Input Video: {video_path}")
@@ -175,17 +179,20 @@ class CountingTool:
     @prompts(
         name = "CountingTool",
         description = "Useful when you need to count object number."
-        "The input to this tool must be a question. For example, the input is 'How many fish are here?'",
+        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
+        "For example: the input is /data/videos/xxx.mp4#How many fish are here? ",
     )
-    def inference(self, question):
-        global step_idx
-        print(f"\nStep {step_idx}: Call CountingTool")
+    def inference(self, input):
         
-        if DEBUG_MODE:
-            pdb.set_trace()
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
         
-        db_version = self.config.memory.db_version
-        self.sql_path = os.path.join(current_video_dir, current_video_name + "_" + str(db_version) + ".db")
+        video_dir = os.path.dirname(video_path)
+        video_name = os.path.basename(video_path).split(".")[0]
+        self.sql_path = os.path.join(video_dir, video_name + ".db")
+
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
@@ -193,13 +200,16 @@ class CountingTool:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
-        # try:
-        db_chain_output = db_chain.invoke(question)
-        result = db_chain_output['result']
-        input_question = db_chain_output['query']
-        # except:
-        #     print(TOOL_PROCESS_ERROR)
-        #     return TOOL_PROCESS_ERROR
+        input_question = None
+        try:
+            db_chain_output = db_chain.invoke(question)
+            result = db_chain_output['result']
+            input_question = db_chain_output['query']
+        except:
+            print(TOOL_PROCESS_ERROR)
+            return TOOL_PROCESS_ERROR
+        
+        # result = db_chain.invoke(question)
 
         print("\nProcessed CountingTool.")
         print(f"Input Video: {video_path}")
@@ -229,31 +239,39 @@ class ReasonFinder:
     @prompts(
         name="ReasonFinder",
         description="Useful when you need to find reasons or explanations."
-        "The input to this tool must be a question. For example, the input is 'Why she is crying?'",
+        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
+        "For example: the input is /data/videos/xxx.mp4#Why she is crying? ",
     )
-    def inference(self, question):
-        global step_idx
-        print(f"\nStep {step_idx}: Call ReasonFinder")
+    def inference(self, input):
         
-        if DEBUG_MODE:
-            pdb.set_trace()
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
 
-        db_version = self.config.memory.db_version
-        self.sql_path = os.path.join(current_video_dir, current_video_name + "_" + str(db_version) + ".db")
+        video_dir = os.path.dirname(video_path)
+        video_name = os.path.basename(video_path).split(".")[0]
+        self.sql_path = os.path.join(video_dir, video_name + ".db")
+
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
+        
+        # TODO 了解一下下面这几行是如何运作的
         db_chain = SQLDatabaseChain.from_llm(
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
-        # try:
-        db_chain_output = db_chain.invoke(question)
-        result = db_chain_output['result']
-        input_question = db_chain_output['query']
-        # except:
-        #     print(TOOL_PROCESS_ERROR)
-        #     return TOOL_PROCESS_ERROR
+        input_question = None
+        try:
+            db_chain_output = db_chain.invoke(question)
+            result = db_chain_output['result']
+            input_question = db_chain_output['query']
+        except:
+            print(TOOL_PROCESS_ERROR)
+            return TOOL_PROCESS_ERROR
+        
+        # result = db_chain.invoke(question)
         
         print("\nProcessed ReasonFinder.")
         print(f"Input Video: {video_path}")
@@ -283,31 +301,41 @@ class HowSeeker:
     @prompts(
         name = "HowSeeker",
         description = "useful when you need to find methods or steps to accomplish a task."
-        "The input to this tool must be a question. For example, the input is 'How did the children eat food?'",
+        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
+        "For example: the input is /data/videos/xxx.mp4#How did the children eat food? ",
     )
-    def inference(self, question):
-        global step_idx
-        print(f"\nStep {step_idx}: Call HowSeeker")
+    def inference(self, input):
         
-        if DEBUG_MODE:
-            pdb.set_trace()
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
 
-        db_version = self.config.memory.db_version
-        self.sql_path = os.path.join(current_video_dir, current_video_name + "_" + str(db_version) + ".db")
+        video_dir = os.path.dirname(video_path)
+        video_name = os.path.basename(video_path).split(".")[0]
+        self.sql_path = os.path.join(video_dir, video_name + ".db")
+
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
-        )   
+        )
+        
+        # sample_rows_in_table_info 的主要作用是控制在生成数据库表的元信息（table_info）时，是否包含表中的示例数据行。
+        # 如果设置了该参数，langchain 会从每个表中抽取指定数量的行，并将这些行作为表信息的一部分，提供给语言模型（LLM）进行推理。
+        
         db_chain = SQLDatabaseChain.from_llm(
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
 
-        # try:
-        db_chain_output = db_chain.invoke(question)
-        result = db_chain_output['result']
-        input_question = db_chain_output['query']
-        # except:
-        #     print(TOOL_PROCESS_ERROR)
-        #     return TOOL_PROCESS_ERROR
+        input_question = None
+        try:
+            db_chain_output = db_chain.invoke(question)
+            result = db_chain_output['result']
+            input_question = db_chain_output['query']
+        except:
+            print(TOOL_PROCESS_ERROR)
+            return TOOL_PROCESS_ERROR
+        
+        # result = db_chain.invoke(question)
 
         print("\nProcessed HowSeeker.")
         print(f"Input Video: {video_path}")
@@ -337,17 +365,20 @@ class DescriptionTool:
     @prompts(
         name = "DescriptionTool",
         description = "Useful when you need to describe the content of a video, e.g. the audio in the video, the subtitles, the on-screen content, etc."
-        "The input to this tool must be a question. For example, the input is 'What's in the video?'",
+        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
+        "For example: the input is /data/videos/xxx.mp4#What's in the video?",
     )
-    def inference(self, question):
-        global step_idx
-        print(f"\nStep {step_idx}: Call DescriptionTool")
+    def inference(self, input):
         
-        if DEBUG_MODE:
-            pdb.set_trace()
-        
-        db_version = self.config.memory.db_version
-        self.sql_path = os.path.join(current_video_dir, current_video_name + "_" + str(db_version) + ".db")
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
+
+        video_dir = os.path.dirname(video_path)
+        video_name = os.path.basename(video_path).split(".")[0]
+        self.sql_path = os.path.join(video_dir, video_name + ".db")
+
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
@@ -355,13 +386,16 @@ class DescriptionTool:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
         
-        # try:
-        db_chain_output = db_chain.invoke(question)
-        result = db_chain_output['result']
-        input_question = db_chain_output['query']
-        # except:
-        #     print(TOOL_PROCESS_ERROR)
-        #     return TOOL_PROCESS_ERROR
+        input_question = None
+        try:
+            db_chain_output = db_chain.invoke(question)
+            result = db_chain_output['result']
+            input_question = db_chain_output['query']
+        except:
+            print(TOOL_PROCESS_ERROR)
+            return TOOL_PROCESS_ERROR
+        
+        # result = db_chain.invoke(question)
 
         print("\nProcessed DescriptionTool.")
         print(f"Input Video: {video_path}")
@@ -391,17 +425,20 @@ class DefaultTool:
     @prompts(
         name = "DefaultTool",
         description = "Useful when other tools can't solve the problem corresponding to the video."
-        "The input to this tool must be a question. For example, the input is 'Are the men happy today?'",
+        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
+        "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
     )
-    def inference(self, question):
-        global step_idx
-        print(f"\nStep {step_idx}: Call DefaultTool")
+    def inference(self, input):
         
-        if DEBUG_MODE:
-            pdb.set_trace()
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
 
-        db_version = self.config.memory.db_version
-        self.sql_path = os.path.join(current_video_dir, current_video_name + "_" + str(db_version) + ".db")
+        video_dir = os.path.dirname(video_path)
+        video_name = os.path.basename(video_path).split(".")[0]
+        self.sql_path = os.path.join(video_dir, video_name + ".db")
+
         db = SQLDatabase.from_uri(
             "sqlite:///" + self.sql_path, sample_rows_in_table_info=2
         )
@@ -409,13 +446,16 @@ class DefaultTool:
             llm=self.llm, db=db, top_k=self.config.tool.TOP_K, verbose=True, prompt=self.sql_prompt
         )
         
-        # try:
-        db_chain_output = db_chain.invoke(question)
-        result = db_chain_output['result']
-        input_question = db_chain_output['query']
-        # except:
-        #     print(TOOL_PROCESS_ERROR)
-        #     return TOOL_PROCESS_ERROR
+        input_question = None
+        try:
+            db_chain_output = db_chain.invoke(question)
+            result = db_chain_output['result']
+            input_question = db_chain_output['query']
+        except:
+            print(TOOL_PROCESS_ERROR)
+            return TOOL_PROCESS_ERROR
+        
+        # result = db_chain.invoke(question)
 
         print("\nProcessed DefaultTool.")
         print(f"Input Video: {video_path}")
@@ -435,23 +475,23 @@ class VideoTemporalUnderstanding:
 
     @prompts(
         name="VideoTemporalUnderstanding",
-        description="Useful when you need to process temporal information in videos. Must be called before access to temporaldb database."
+        description="useful when you need to process temporal information in videos."
+        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
+        "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
     )
     def inference(self, input):
-        global step_idx
-        print(f"\nStep {step_idx}: Call VideoTemporalUnderstanding")
         
-        if DEBUG_MODE:
-            pdb.set_trace()
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
         
         step = self.config.memory.step
-        db_version = self.config.memory.db_version
-        video_path = os.path.join(current_video_dir, current_video_name + ".mp4")
-        
-        self.basemodel.run_on_video(video_path, step, db_version)
-        
-        result = "Successfully built temporaldb database."
-        print(f"\nProcessed VideoTemporalUnderstanding, video_path = {video_path}")
+        self.basemodel.run_on_video(video_path, step)
+        result = "successfully built"
+        print(
+            f"\nProcessed VideoTemporalUnderstanding, Input Video: {video_path}, "
+        )
         return result
 
 
@@ -463,36 +503,115 @@ class VideoInstanceUnderstanding:
 
     @prompts(
         name="VideoInstanceUnderstanding",
-        description="Useful when you need to understand the instance information in videos. Must be called before access to instancedb database."
+        description="useful when you need to understand the instance information in videos."
+        "The input to this tool must be a string for the video path, and a string for the question. Concatenate them using # as the separator."
+        "For example: the input is /data/videos/xxx.mp4#Are the men happy today?",
     )
     def inference(self, input):
-        global step_idx
-        print(f"\nStep {step_idx}: Call VideoInstanceUnderstanding")
         
-        if DEBUG_MODE:
-            pdb.set_trace()
+        video_path, question = parse_tool_input(input)
+        if video_path == None and question == None:
+            print(TOOL_INPUT_ERROR)
+            return TOOL_INPUT_ERROR
         
         step = self.config.memory.step
-        db_version = self.config.memory.db_version
-        video_path = os.path.join(current_video_dir, current_video_name + ".mp4")
-        
-        self.basemodel.run_on_video(video_path, None, step, db_version)
-        result = "Successfully built instancedb database."
-        print(f"\nProcessed VideoInstanceUnderstanding, video_path = {video_path}")
+        self.basemodel.run_on_video(video_path,question,step)
+        result = "successfully built"
+        print(
+            f"\nProcessed VideoInstanceUnderstanding, Input Video: {video_path}, "
+        )
         return result
-    
-    
+
+
+
+class MemeryBuilder:
+    def __init__(self, load_dict, config):
+        print(f"\nInitializing MemoryBuilder, load_dict={load_dict}")
+
+        self.config = config
+        self.models = {}
+        # self.examplesel = CustomExampleSelector()
+
+        # 根据 load_dict 动态选择, 加载模型
+        for class_name, device in load_dict.items():
+            self.models[class_name] = globals()[class_name](device=device,config=self.config)
+
+        # print(f"\nAll the Available Functions: {self.models}")
+
+        # 把模型的 inference 方法加到 tools 中去
+        self.tools = []
+        for instance in self.models.values():
+            for e in dir(instance):
+                if e.startswith("inference"):
+                    func = getattr(instance, e)
+                    self.tools.append(
+                        Tool(name=func.name, description=func.description, func=func)
+                    )
+
+        self.llm = ChatOpenAI(
+            api_key = self.config.openai.GPT_API_KEY,
+            model = self.config.openai.GPT_MODEL_NAME,
+            temperature = 0,
+            base_url = self.config.openai.PROXY
+        )
+
+        # self.memory = ConversationBufferMemory(memory_key="chat_history")
+
+    # db_agent 从 tool 中被分了出来
+    def init_db_agent(self):
+        tools = []
+        self.db_model_list = []
+        
+        # memory_load_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in conf.memory.memory_list}
+        memory_load_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in self.config.memory.memory_list}
+        # ['VideoInstanceUnderstanding_cuda:0', 'VideoTemporalUnderstanding_cuda:0']
+
+        # memory tools
+        for class_name, device in memory_load_dict.items():
+            self.db_model_list.append(globals()[class_name](device=device,config=self.config))
+        # self.db_model_list
+        # [<__main__.VideoInstanceUnderstanding object at 0x7f59586b9c40>, <__main__.VideoTemporalUnderstanding object at 0x7f59586b9cd0>]
+        
+        # 该文件 main.py 上面的函数方法
+        for instance in self.db_model_list:
+            for e in dir(instance):
+                if e.startswith("inference"):
+                    func = getattr(instance, e)
+                    tools.append(
+                        Tool(name=func.name, description=func.description, func=func)
+                    )
+
+        llm = ChatOpenAI(
+            api_key = self.config.openai.GPT_API_KEY,
+            model = self.config.openai.GPT_MODEL_NAME,
+            temperature = 0,
+            base_url = self.config.openai.PROXY
+        )
+
+        # TODO 解决下面的 deprecation
+        memory = ConversationBufferMemory(memory_key="chat_history")
+        self.db_agent = initialize_agent(
+            tools,
+            llm,
+            agent="conversational-react-description",
+            verbose=True,
+            memory=memory,
+        )
+
+    def run_db_agent(self, video_path, question):
+        self.db_model_list[0].inference(video_path + "#"+ question)
+        self.db_model_list[1].inference(video_path + "#"+ question)
+
+
 def ToolChainReasoning(
     video_filename, 
     input_question, 
     llm, 
-    tools,
-    recursion_limit,  
+    tools, 
     use_cache=True,
 ):
     # TODO 考虑之前选择工具的历史
     
-    # TODO 研究这个 prompt
     prompt = ChatPromptTemplate.from_messages(
         [
             ("system", "You are a helpful assistant."),
@@ -502,30 +621,32 @@ def ToolChainReasoning(
         ]
     )
     
-    # TODO 能否去除下面这个函数
     def _modify_state_messages(state: AgentState):
         return prompt.invoke({"messages": state["messages"]}).to_messages()
     
-    tool_planner = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
+    app = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
     
     # TODO 更改 prompt
-    query = QUERY_PREFIX + input_question + '\n' + TOOLS_RULE
+    # TODO 1 加上 tool descriptions, 能不能用到内部 format
+    # query = f"""
+    # Regarding a given video from {video_filename}, use tools to answer the following questions as best you can.
+    # Question: {input_question}
+    # """
+    query = f"""Regarding a given video from {video_filename}, use tools to answer the following questions as best you can.
+Question: {input_question}"""
     
+    step_idx = 0
+    output = None
     
     if use_cache and (query in mannual_cache):
+        # 缓存命中
         print("\nCache hit!")
         steps = mannual_cache[query]
     else:
+        # 缓存未命中
         print("\nCache miss. Calling API...")
         steps = []
-        global step_idx
-        step_idx = 0
-        
-        # TODO 研究一下这里的 stream_mode
-        for step in tool_planner.stream(
-            {"messages": [("human", query)]}, 
-            {"recursion_limit": recursion_limit},
-            stream_mode="updates"):
+        for step in app.stream({"messages": [("human", query)]}, stream_mode="updates"):
             
             # pdb.set_trace()
             
@@ -533,10 +654,12 @@ def ToolChainReasoning(
             steps.append(step)
                 
         mannual_cache[query] = steps
+        # 保存缓存
         print("\nSaving cache...")
         with open(mannual_cache_file, "wb") as f:
             pickle.dump(mannual_cache, f)
-        
+    
+    # 从 steps 中解析 output, 无论是否命中缓存都要走这一分支         
     try:
         output = steps[-1]['agent']['messages'][0].content
     except:
@@ -548,7 +671,7 @@ def ToolChainReasoning(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/nextqa_run_build.yaml",type=str)                           
+    parser.add_argument('--config', default="config/nextqa_mem.yaml",type=str)                           
     opt = parser.parse_args()
 
     vq_conf = OmegaConf.load(opt.config)
@@ -566,24 +689,11 @@ if __name__ == "__main__":
         print(f"\nCreating LLM cache: {mannual_cache_file}...")
         mannual_cache = {}
     
-    
-    sql_tool_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in conf.tool.tool_list}
-    mem_tool_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in conf.memory.memory_list}
-    
-    # 根据 load_dict 动态选择, 加载模型
-    tool_instance = {}
-    for class_name, device in sql_tool_dict.items():
-        tool_instance[class_name] = globals()[class_name](device=device, config=conf)
-    for class_name, device in mem_tool_dict.items():
-        tool_instance[class_name] = globals()[class_name](device=device, config=conf)
 
-    # 把 tool_instance 的 inference 方法加到 tools 中去
-    tools = []
-    for instance in tool_instance.values():
-        for e in dir(instance):
-            if e.startswith("inference"):
-                func = getattr(instance, e)
-                tools.append(Tool(name=func.name, description=func.description, func=func))
+    load_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in conf.tool.tool_list}
+    # {'TemporalTool': 'cpu', 'CountingTool': 'cpu', 'ReasonFinder': 'cpu', 'HowSeeker': 'cpu', 'DescriptionTool': 'cpu', 'DefaultTool': 'cpu'}
+
+    bot = MemeryBuilder(load_dict=load_dict, config=conf)
 
     # 数据集
     quids_to_exclude = vq_conf["quids_to_exclude"] if "quids_to_exclude" in vq_conf else None
@@ -610,29 +720,48 @@ if __name__ == "__main__":
         options = [data['optionA'], data['optionB'], data['optionC'], data['optionD'], data['optionE']]
         question_w_options = f"{question}? Choose your answer from below selections: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
         
-        current_video_dir = os.path.dirname(video_path)
-        current_video_name = os.path.basename(video_path).split(".")[0]
+        video_dir = os.path.dirname(video_path)
+        video_name = os.path.basename(video_path).split(".")[0]
+        sql_path = os.path.join(video_dir, video_name + ".db")
         track_res_base = "intermediate_res/track_res"
-        track_res_path = os.path.join(track_res_base, current_video_name, current_video_name + ".avi")
+        track_res_path = os.path.join(track_res_base, video_name, video_name + ".avi")
  
         #### trim
         adjust_video_resolution(video_path)
         
+        #### Building memory
+        # TODO remove sqlite 数据库之前可以先备份
+        if os.path.exists(sql_path) and os.path.exists(track_res_path): 
+            if vq_conf.overwrite_mem:
+                new_sql_path = sql_path.replace(".db", f"_{timestamp}.db")
+                os.rename(sql_path, new_sql_path)
+                print("\nOverwrite memory...")
+                bot.init_db_agent()
+                bot.run_db_agent(video_path, question_w_options)
+            else:
+                print("\nMemory exists; skip building memory")
+        else:
+            if os.path.exists(sql_path):
+                new_sql_path = sql_path.replace(".db", f"_{timestamp}.db")
+                os.rename(sql_path, new_sql_path)
+            print("\nBuilding memory...")
+            bot.init_db_agent()
+            bot.run_db_agent(video_path, question_w_options)
+        
         #### ToolChainReasoning   
-        # try:
-        answers = {}
-        answers["good_anwsers"] = []
-        answers["bas_anwsers"] = []
-        answer = ToolChainReasoning(video_filename=video_path,
-                                    input_question=question_w_options,
-                                    llm=llm,
-                                    tools=tools,
-                                    recursion_limit=vq_conf.recursion_limit,
-                                    use_cache=vq_conf.use_cache)
-        answers["good_anwsers"].append(answer)
-        # except Exception as e:
-        #     print(f"\nError:{e}")
-        #     answers = "Error"
+        try:
+            answers = {}
+            answers["good_anwsers"] = []
+            answers["bas_anwsers"] = []
+            answer = ToolChainReasoning(video_filename=video_path,
+                                            input_question=question_w_options,
+                                            llm=llm,
+                                            tools=bot.tools,
+                                            use_cache=vq_conf.use_cache)
+            answers["good_anwsers"].append(answer)
+        except Exception as e:
+            print(f"\nError:{e}")
+            answers = "Error"
 
         result_dict = data
         result_dict["question_w_options"] = question_w_options
@@ -645,9 +774,6 @@ if __name__ == "__main__":
     print(f"\n{str(len(all_results))} results saved")
 
 
-# TODO 从 sql prompt 中去除掉 audio 的部分
-# TODO 调节 prompt template 中的 top_k
-# TODO 可视化工具调用的过程
 
 # TODO: log，哪些东西可以放到 log 里面
 # TODO: 深入看一下 memory, 优化 memory
