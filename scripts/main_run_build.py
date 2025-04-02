@@ -47,7 +47,7 @@ from project.InstanceUnderstanding import InstanceBase
 from project.ExampleSelector import CustomExampleSelector
 
 
-from project.sql_template import (
+from project.prompt_template import (
     _sqlite_prompt,
     COUNTING_EXAMPLE_PROMPT,
     PROMPT_SUFFIX,
@@ -646,6 +646,7 @@ if __name__ == "__main__":
 
 
 # TODO 从 sql prompt 中去除掉 audio 的部分
+# TODO 调节 prompt template 中的 top_k
 # TODO 可视化工具调用的过程
 
 # TODO: log，哪些东西可以放到 log 里面
