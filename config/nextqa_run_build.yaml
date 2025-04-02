@@ -1,5 +1,5 @@
 inference_config_path: "config/inference/inference_gpt35.yaml"
-mannual_cache_file: "cache/gpt35_cache_run_build_25.pkl"
+mannual_cache_file: "cache/gpt35_cache_run_build_24_2.pkl"
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/train.csv"
