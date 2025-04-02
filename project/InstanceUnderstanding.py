@@ -330,6 +330,8 @@ class InstanceBase(object):
             "SELECT name FROM sqlite_master WHERE type='table' AND name='instancedb';"
         )
         rows = cursor.fetchall()
+        
+        # instancedb 表为空才建表
         if len(rows) == 0:    
             self.inital_database()
             

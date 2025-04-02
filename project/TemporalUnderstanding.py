@@ -111,9 +111,6 @@ class TemporalBase(object):
         self.sub_frames = None
 
     def build_database(self, video_path):
-        video_dir = os.path.dirname(video_path)
-        video_name = os.path.basename(video_path).split(".")[0]
-        self.sql_path = os.path.join(video_dir, video_name + ".db")
 
         conn = sqlite3.connect(self.sql_path)
         cursor = conn.cursor()
@@ -160,6 +157,8 @@ class TemporalBase(object):
             "SELECT name FROM sqlite_master WHERE type='table' AND name='temporaldb';"
         )
         rows = cursor.fetchall()
+        
+        # temporaldb 表为空才建表
         if len(rows) == 0:
             self.build_database(video_path)
             self.run_VideoCaption()

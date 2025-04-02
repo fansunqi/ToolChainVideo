@@ -151,7 +151,6 @@ class TemporalTool:
         print(f"Input Question: {input_question}")
         print(f"Output Answer: {result}")
         
-        # TODO assert 检查返回的是字符串
         # TODO 查看返回下面哪个比较好？
         return result
         # return db_chain_output
@@ -502,15 +501,12 @@ def ToolChainReasoning(
         ]
     )
     
-    # TODO 能否去除下面这个函数
     def _modify_state_messages(state: AgentState):
         return prompt.invoke({"messages": state["messages"]}).to_messages()
     
     tool_planner = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
     
-    # TODO 更改 prompt
     query = QUERY_PREFIX + input_question + '\n' + TOOLS_RULE
-    
     
     if use_cache and (query in mannual_cache):
         print("\nCache hit!")
@@ -525,8 +521,15 @@ def ToolChainReasoning(
         for step in tool_planner.stream(
             {"messages": [("human", query)]}, 
             {"recursion_limit": recursion_limit},
-            stream_mode="updates"):
+             stream_mode="values"):
+            # stream_mode="updates"):
             
+            # pdb.set_trace()
+            step_message = step["messages"][-1]
+            if isinstance(step_message, tuple):
+                print(step_message)
+            else:
+                step_message.pretty_print()
             # pdb.set_trace()
             
             step_idx += 1
@@ -536,9 +539,12 @@ def ToolChainReasoning(
         print("\nSaving cache...")
         with open(mannual_cache_file, "wb") as f:
             pickle.dump(mannual_cache, f)
-        
+ 
     try:
-        output = steps[-1]['agent']['messages'][0].content
+        # updates mode
+        # output = steps[-1]['agent']['messages'][0].content
+        # value mode
+        output = steps[-1]["messages"][-1].content
     except:
         output = None
     
@@ -548,7 +554,7 @@ def ToolChainReasoning(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/nextqa_run_build.yaml",type=str)                           
+    parser.add_argument('--config', default="config/nextqa.yaml",type=str)                           
     opt = parser.parse_args()
 
     vq_conf = OmegaConf.load(opt.config)
@@ -645,7 +651,9 @@ if __name__ == "__main__":
     print(f"\n{str(len(all_results))} results saved")
 
 
-# TODO 从 sql prompt 中去除掉 audio 的部分
+# TODO "SQL": syntax error' 这个错误很频繁，可能是关键。
+# TODO LLM 挑出没有判断出来的
+
 # TODO 调节 prompt template 中的 top_k
 # TODO 可视化工具调用的过程
 
