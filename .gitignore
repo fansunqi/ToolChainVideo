@@ -19,4 +19,5 @@ viz/
 scripts/__pycache__
 langchain_cache.db
 intermediate_res*/
-
+archive/intermediate_res*/
+archive/demo/*

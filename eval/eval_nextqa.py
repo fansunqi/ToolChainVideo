@@ -117,7 +117,9 @@ def get_predicted_option(answer, options):
 
 
 def get_latest_file(directory):
-    files = [os.path.join(directory, f) for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
+    files = [os.path.join(directory, f) for f in os.listdir(directory) if 
+             (os.path.isfile(os.path.join(directory, f))
+              and f.endswith('.json'))]
     latest_file = sorted(files)[-1] 
     return latest_file
 

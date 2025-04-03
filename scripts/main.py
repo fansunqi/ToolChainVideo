@@ -18,6 +18,7 @@ from tqdm import tqdm
 from dataset import get_dataset
 from util import save_to_json, adjust_video_resolution
 import pdb
+import shutil
 
 import langchain
 from langchain_community.cache import SQLiteCache
@@ -570,6 +571,15 @@ if __name__ == "__main__":
 
     seed_everything(conf.seed) 
     
+    # 将 main.py 文件自身和 opt.config 文件复制一份存储至 conf.output_path
+    current_script_path = os.path.abspath(__file__)  # 获取当前脚本的绝对路径
+    shutil.copy(current_script_path, os.path.join(conf.output_path, f"main_{timestamp}.py"))
+    # 复制 opt.config 文件到输出目录
+    config_basename = os.path.basename(opt.config).split('.')[0]
+    shutil.copy(opt.config, os.path.join(conf.output_path, f"{config_basename}_{timestamp}.yaml"))
+    
+    pdb.set_trace()
+    
     # mannual LLM cache
     mannual_cache_file = conf.mannual_cache_file
     if os.path.exists(mannual_cache_file):
@@ -641,8 +651,8 @@ if __name__ == "__main__":
                                     input_question=question_w_options,
                                     llm=llm,
                                     tools=tools,
-                                    recursion_limit=vq_conf.recursion_limit,
-                                    use_cache=vq_conf.use_cache)
+                                    recursion_limit=conf.recursion_limit,
+                                    use_cache=conf.use_cache)
         answers["good_anwsers"].append(answer)
         # except Exception as e:
         #     print(f"\nError:{e}")
@@ -654,12 +664,15 @@ if __name__ == "__main__":
         all_results.append(result_dict)
 
     
-    output_file = f"{vq_conf.output_file[:-5]}_{timestamp}.json"
+    output_file = os.path.join(conf.output_path, f"results_{timestamp}.json")
     save_to_json(all_results, output_file)
     print(f"\n{str(len(all_results))} results saved")
 
 
-# TODO 每步的 time out
+# TODO 确认 sql 数据库的覆盖
+
+# TODO 输出保存
+# TODO 每步的 time 暂停
 
 # TODO 还是有很多没有数据库，却调用数据库的错误
 # TODO "SQL": syntax error' 这个错误很频繁，可能是关键。
