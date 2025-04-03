@@ -62,7 +62,6 @@ from project.prompt_template import (
 )
 
 DEBUG_MODE = False
-TO_TXT = True
 
 mannual_cache = None
 mannual_cache_file = None
@@ -579,10 +578,9 @@ if __name__ == "__main__":
     config_basename = os.path.basename(opt.config).split('.')[0]
     shutil.copy(opt.config, os.path.join(conf.output_path, f"{config_basename}_{timestamp}.yaml"))
     
-    if TO_TXT:
-        # 指定输出 log
-        log_path = os.path.join(conf.output_path, f"log_{timestamp}.txt")
-        f = open(log_path, "w")
+    # 指定输出 log
+    log_path = os.path.join(conf.output_path, f"log_{timestamp}.txt")
+    with open(log_path, "w") as f:
         # 重定向标准输出
         sys.stdout = f
     
@@ -673,16 +671,9 @@ if __name__ == "__main__":
     output_file = os.path.join(conf.output_path, f"results_{timestamp}.json")
     save_to_json(all_results, output_file)
     print(f"\n{str(len(all_results))} results saved")
-    
-    if TO_TXT:
-        # 恢复标准输出
-        sys.stdout = sys.__stdout__
-        f.close()
 
 
-
-
-
+# TODO 输出保存
 # TODO 每步的 time 暂停
 
 # TODO 还是有很多没有数据库，却调用数据库的错误
@@ -699,6 +690,7 @@ if __name__ == "__main__":
 # TODO 看一下 coco.txt 到底是怎么样的
 # TODO: 修复下面这个 error:
 
+# TODO 只用一个 config
 
 '''
 Traceback (most recent call last):

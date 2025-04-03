@@ -149,9 +149,6 @@ class TemporalBase(object):
 
     def run_on_video(self, video_path, step=30, db_version=0):
         
-        # pdb.set_trace()
-        self.inital_video(video_path, step)
-
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
         self.sql_path = os.path.join(video_dir, video_name + "_" + str(db_version) + ".db")
@@ -164,8 +161,16 @@ class TemporalBase(object):
         
         # temporaldb 表为空才建表
         if len(rows) == 0:
+            
+            print("\nTemporaldb is empty, begin to build...")
+            
+            self.inital_video(video_path, step)
+            
             self.build_database(video_path)
             self.run_VideoCaption()
+            print("\nTemporaldb is built.")
+        else:
+            print("\nTemporaldb already exists.")
 
         ####visual
         conn = sqlite3.connect(self.sql_path)

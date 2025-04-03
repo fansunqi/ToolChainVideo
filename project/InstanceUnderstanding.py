@@ -306,19 +306,6 @@ class InstanceBase(object):
     def run_on_video(self, video_path, question, step=10, db_version=0):
 
         self.video_path = video_path
-        cap = cv2.VideoCapture(self.video_path)
-        self.fps = cap.get(cv2.CAP_PROP_FPS)
-        self.step = step
-        
-        ### YOLO tracking, 得到 intermediate_res/track_res
-        self.res_dir = detect_by_path(
-            self.checkpoint_dir,
-            self.video_path,
-            self.save_dir,
-            device=self.device,
-            step=step,
-        )
-
         video_dir = os.path.dirname(video_path)
         video_name = os.path.basename(video_path).split(".")[0]
         self.sql_path = os.path.join(video_dir, video_name + "_" + str(db_version) + ".db")
@@ -332,14 +319,34 @@ class InstanceBase(object):
         rows = cursor.fetchall()
         
         # instancedb 表为空才建表
-        if len(rows) == 0:    
+        if len(rows) == 0:
+            
+            print("\nInstancedb is empty, begin to build...")
+            
+            cap = cv2.VideoCapture(self.video_path)
+            self.fps = cap.get(cv2.CAP_PROP_FPS)
+            self.step = step
+            
+            ### YOLO tracking, 得到 intermediate_res/track_res
+            self.res_dir = detect_by_path(
+                self.checkpoint_dir,
+                self.video_path,
+                self.save_dir,
+                device=self.device,
+                step=step,
+            )
+            
             self.inital_database()
             
             # ref_vos 是专门做 inpainting 任务的，在这里省去了
             # 注意这里 question 是 None
             # self.ref_vos(video_path, question)
 
-        ####visual
+            print("\nInstancedb is built.")
+        else:
+            print("\nInstancedb already exists.")
+        
+        # 输出 Instancedb 的内容
         conn = sqlite3.connect(self.sql_path)
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM instancedb")
@@ -364,6 +371,3 @@ class InstanceBase(object):
         result = db_chain.run(question)
 
         return result
-
-
-# TODO 为什么 intermediate_res 中有 __org
