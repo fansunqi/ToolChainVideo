@@ -504,6 +504,15 @@ def ToolChainReasoning(
     def _modify_state_messages(state: AgentState):
         return prompt.invoke({"messages": state["messages"]}).to_messages()
     
+    # tool_planner_prompt = ChatPromptTemplate.from_messages([
+    #     ("system", "You are a helpful video analysis assistant equipped with various tools"),
+    #     ("placeholder", "{messages}"),
+    #     ("user", "Remember, always be polite!"),
+    # ])
+    
+    tool_planner_prompt = "You are a helpful video analysis assistant equipped with various tools."
+    
+    # TODO 这里加上 system_prompt，告诉工具与使用工具的规则
     tool_planner = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
     
     query = QUERY_PREFIX + input_question + '\n\n' + TOOLS_RULE
@@ -652,6 +661,8 @@ if __name__ == "__main__":
     print(f"\n{str(len(all_results))} results saved")
 
 
+# TODO 每步的 time out
+
 # TODO 还是有很多没有数据库，却调用数据库的错误
 # TODO "SQL": syntax error' 这个错误很频繁，可能是关键。
 # TODO LLM 挑出没有判断出来的
@@ -665,6 +676,9 @@ if __name__ == "__main__":
 
 # TODO 看一下 coco.txt 到底是怎么样的
 # TODO: 修复下面这个 error:
+
+# TODO 只用一个 config
+
 '''
 Traceback (most recent call last):
   File "/home/fsq/video_agent/ToolChainVideo/./scripts/main.py", line 792, in <module>

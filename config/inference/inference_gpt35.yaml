@@ -6,7 +6,7 @@ openai:
   PROXY: "https://api.juheai.top/v1"
 
 memory:
-  db_version: 2
+  db_version: 3
   step: 30  # 这个应该是 video stride
   memory_list:
     - "VideoInstanceUnderstanding_cuda:0"
