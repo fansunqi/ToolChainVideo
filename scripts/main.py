@@ -566,14 +566,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
     parser.add_argument('--config', default="config/nextqa.yaml",type=str)                           
     opt = parser.parse_args()
+    conf = OmegaConf.load(opt.config)
 
-    vq_conf = OmegaConf.load(opt.config)
-    conf = OmegaConf.load(vq_conf.inference_config_path)
-
-    seed_everything(vq_conf.seed) 
+    seed_everything(conf.seed) 
     
     # mannual LLM cache
-    mannual_cache_file = vq_conf.mannual_cache_file
+    mannual_cache_file = conf.mannual_cache_file
     if os.path.exists(mannual_cache_file):
         print(f"\nLoading LLM cache from {mannual_cache_file}...")
         with open(mannual_cache_file, "rb") as f:
@@ -602,11 +600,11 @@ if __name__ == "__main__":
                 tools.append(Tool(name=func.name, description=func.description, func=func))
 
     # 数据集
-    quids_to_exclude = vq_conf["quids_to_exclude"] if "quids_to_exclude" in vq_conf else None
-    num_examples_to_run = vq_conf["num_examples_to_run"] if "num_examples_to_run" in vq_conf else -1
-    start_num = vq_conf["start_num"] if "start_num" in vq_conf else 0
-    specific_quids = vq_conf["specific_quids"] if "specific_quids" in vq_conf else None
-    dataset = get_dataset(vq_conf, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
+    quids_to_exclude = conf["quids_to_exclude"] if "quids_to_exclude" in conf else None
+    num_examples_to_run = conf["num_examples_to_run"] if "num_examples_to_run" in conf else -1
+    start_num = conf["start_num"] if "start_num" in conf else 0
+    specific_quids = conf["specific_quids"] if "specific_quids" in conf else None
+    dataset = get_dataset(conf, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
     all_results = []
     
     # 用于 planning tools 的 llm
