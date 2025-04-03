@@ -85,10 +85,12 @@ SQLResult:  "[('Two people are on a swing in the video.',), ('Two people are on 
 Answer: There's two guys on a swing.
 """
 
-QUERY_PREFIX = """Regarding a given video, use tools to answer the following questions as best you can.
+QUERY_PREFIX = """Regarding a given video, use tools to answer the following question as best you can.
+
 Questions: """
 
-TOOLS_RULE = """Before using other tools to access the instancedb SQLite database, you must first call the 'VideoInstanceUnderstanding' tool to construct the instancedb database.
-Before using other tools to access the temporaldb SQLite database, you must first call the 'VideoTemporalUnderstanding' tool to construct the temporaldb database.
-Therefore, your first step must be to call either the 'VideoInstanceUnderstanding' tool or the 'VideoTemporalUnderstanding' tool.
-The 'VideoInstanceUnderstanding' tool and the 'VideoTemporalUnderstanding' tool only need to be called once and do not need to be called repeatedly."""
+TOOLS_RULE = """Here are some rules of calling tools:
+- Before using other tools to access the instancedb SQLite database, you must first call the 'VideoInstanceUnderstanding' tool to construct the instancedb database.
+- Before using other tools to access the temporaldb SQLite database, you must first call the 'VideoTemporalUnderstanding' tool to construct the temporaldb database.
+- Therefore, your first step must be to call either the 'VideoInstanceUnderstanding' tool or the 'VideoTemporalUnderstanding' tool.
+- The 'VideoInstanceUnderstanding' tool and the 'VideoTemporalUnderstanding' tool only need to be called once and do not need to be called repeatedly."""

@@ -1,0 +1,23 @@
+[
+    {
+        "quid": "5806747559_7",
+        "uid": "5806747559",
+        "qid": 7,
+        "q_type": "TN",
+        "question": "what does the woman do after opening the notes on her hands",
+        "optionA": "smile",
+        "optionB": "jump",
+        "optionC": "stood up",
+        "optionD": "walk to camera",
+        "optionE": "stands up",
+        "truth": 0,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1107/5806747559.mp4",
+        "question_w_options": "What does the woman do after opening the notes on her hands? Choose your answer from below selections: A.smile, B.jump, C.stood up, D.walk to camera, E.stands up.",
+        "answers": {
+            "good_anwsers": [
+                "Based on the video content, the woman was giving or receiving an award after opening the notes on her hands."
+            ],
+            "bas_anwsers": []
+        }
+    }
+]

@@ -133,6 +133,8 @@ class TemporalBase(object):
         rows = cursor.fetchall()
         print("### Table temporaldb now is", rows)
         conn.commit()
+        
+        # pdb.set_trace()
 
         for id_i in range(0, len(self.sub_frames)):
             frame_id_i = id_i * self.step
@@ -146,6 +148,8 @@ class TemporalBase(object):
         conn.close()
 
     def run_on_video(self, video_path, step=30, db_version=0):
+        
+        # pdb.set_trace()
         self.inital_video(video_path, step)
 
         video_dir = os.path.dirname(video_path)

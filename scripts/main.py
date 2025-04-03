@@ -506,7 +506,7 @@ def ToolChainReasoning(
     
     tool_planner = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
     
-    query = QUERY_PREFIX + input_question + '\n' + TOOLS_RULE
+    query = QUERY_PREFIX + input_question + '\n\n' + TOOLS_RULE
     
     if use_cache and (query in mannual_cache):
         print("\nCache hit!")
@@ -526,6 +526,7 @@ def ToolChainReasoning(
             
             # pdb.set_trace()
             step_message = step["messages"][-1]
+            # 打印 step_message
             if isinstance(step_message, tuple):
                 print(step_message)
             else:
@@ -651,6 +652,7 @@ if __name__ == "__main__":
     print(f"\n{str(len(all_results))} results saved")
 
 
+# TODO 还是有很多没有数据库，却调用数据库的错误
 # TODO "SQL": syntax error' 这个错误很频繁，可能是关键。
 # TODO LLM 挑出没有判断出来的
 
