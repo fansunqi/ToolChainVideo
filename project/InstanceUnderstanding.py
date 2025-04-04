@@ -356,7 +356,7 @@ class InstanceBase(object):
 
         return rows[0]
 
-    def run_on_question(self, question):
+    def run_on_question(self, question, llm):
         ####visual
         # 相当于是使用工具的接口，之后好像没有用到
         conn = sqlite3.connect(self.sql_path)
@@ -367,7 +367,7 @@ class InstanceBase(object):
         conn.close()
 
         db = SQLDatabase.from_uri("sqlite:///" + self.sql_path)
-        db_chain = SQLDatabaseChain(llm=self.llm, database=db, verbose=True)
+        db_chain = SQLDatabaseChain(llm=llm, database=db, verbose=True)
         result = db_chain.run(question)
 
         return result
