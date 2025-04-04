@@ -9,7 +9,6 @@ memory:
   step: 30  # 这个应该是 video stride
   memory_list:
     - "VideoInstanceUnderstanding_cuda:0"
-    - "VideoTemporalUnderstanding_cuda:0"
 
 tool:
   TOP_K: 2
@@ -21,7 +20,7 @@ tool:
     - "DescriptionTool_cpu"
     - "DefaultTool_cpu"
 
-mannual_cache_file: "cache/gpt35_cache_one_time.pkl"
+mannual_cache_file: "cache/gpt35_cache_ablation_ins.pkl"
 use_cache: True
 
 dataset: "nextqa"
