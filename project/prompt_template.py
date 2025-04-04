@@ -4,7 +4,6 @@ Never query for all columns from a table. You must query only the columns that a
 Pay attention to use only the column names you can see in the tables below. Be careful to not query for columns that do not exist. Also, pay attention to which column is in which table.
 Must pay attention to whether the columns of the called table belong to this table or not. visual_content, frame_time belong to temporaldb. category and identification belong to instancedb.
 Must check that the columns are called correctly before answering.
-Must choose the temporaldb answer first, and try to call instancedb as little as possible.
 Must generate and execute only one SQL query at a time.
 
 Use the following format:
