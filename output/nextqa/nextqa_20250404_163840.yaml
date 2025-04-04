@@ -5,7 +5,7 @@ openai:
   PROXY: "https://api.juheai.top/v1"
 
 memory:
-  db_version: 4
+  db_version: 3
   step: 30  # 这个应该是 video stride
   memory_list:
     - "VideoTemporalUnderstanding_cuda:0"
@@ -20,7 +20,7 @@ tool:
     - "DescriptionTool_cpu"
     - "DefaultTool_cpu"
 
-mannual_cache_file: "cache/gpt35_cache_ablation_tem_1.pkl"
+mannual_cache_file: "cache/gpt35_cache_ablation_tem_3.pkl"
 use_cache: True
 
 dataset: "nextqa"
