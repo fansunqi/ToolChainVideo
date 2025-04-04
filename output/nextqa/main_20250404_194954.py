@@ -681,9 +681,8 @@ if __name__ == "__main__":
 
 
 
-
+# TODO 每步的 time 暂停
 # TODO 用 mem 的 run_on_question 进行测试
-# TODO instance understanding 具体的过程
 
 # TODO 还是有很多没有数据库，却调用数据库的错误
 # TODO "SQL": syntax error' 这个错误很频繁，可能是关键。
