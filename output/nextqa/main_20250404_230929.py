@@ -599,19 +599,22 @@ if __name__ == "__main__":
     mem_tool_dict = {e.split("_")[0].strip(): e.split("_")[1].strip() for e in conf.memory.memory_list}
     
     # 根据 load_dict 动态选择, 加载模型
-    tool_instance = {}
-    for class_name, device in sql_tool_dict.items():
-        tool_instance[class_name] = globals()[class_name](device=device, config=conf)
-    for class_name, device in mem_tool_dict.items():
-        tool_instance[class_name] = globals()[class_name](device=device, config=conf)
+    # tool_instance = {}
+    # for class_name, device in sql_tool_dict.items():
+    #     tool_instance[class_name] = globals()[class_name](device=device, config=conf)
+    # for class_name, device in mem_tool_dict.items():
+    #     tool_instance[class_name] = globals()[class_name](device=device, config=conf)
 
     # 把 tool_instance 的 inference 方法加到 tools 中去
-    tools = []
-    for instance in tool_instance.values():
-        for e in dir(instance):
-            if e.startswith("inference"):
-                func = getattr(instance, e)
-                tools.append(Tool(name=func.name, description=func.description, func=func))
+    # tools = []
+    # for instance in tool_instance.values():
+    #     for e in dir(instance):
+    #         if e.startswith("inference"):
+    #             func = getattr(instance, e)
+    #             tools.append(Tool(name=func.name, description=func.description, func=func))
+    
+    # video_instance_understanding = VideoInstanceUnderstanding(device="cuda:0", config=conf)
+    video_temporal_understanding = VideoTemporalUnderstanding(device="cuda:0", config=conf)
 
     # 数据集
     quids_to_exclude = conf["quids_to_exclude"] if "quids_to_exclude" in conf else None
@@ -651,12 +654,39 @@ if __name__ == "__main__":
         answers = {}
         answers["good_anwsers"] = []
         answers["bas_anwsers"] = []
-        answer = ToolChainReasoning(video_filename=video_path,
-                                    input_question=question_w_options,
-                                    llm=llm,
-                                    tools=tools,
-                                    recursion_limit=conf.recursion_limit,
-                                    use_cache=conf.use_cache)
+        
+        # answer = ToolChainReasoning(video_filename=video_path,
+        #                             input_question=question_w_options,
+        #                             llm=llm,
+        #                             tools=tools,
+        #                             recursion_limit=conf.recursion_limit,
+        #                             use_cache=conf.use_cache)
+        
+        # run_on_question instance version
+        # try:
+        #     video_instance_understanding.basemodel.run_on_video(video_path=video_path,
+        #                                                         question=question_w_options,
+        #                                                         step=conf.memory.step,
+        #                                                         db_version=conf.memory.db_version)
+        #     answer = video_instance_understanding.basemodel.run_on_question(question=question_w_options, 
+        #                                                                     llm=llm)
+        #     print("\nAnswer: ", answer)
+        # except Exception as e:
+        #     print(f"\nError:{e}")
+        #     answer = "Error"
+        
+        # run_on_question temporal version
+        try:
+            video_temporal_understanding.basemodel.run_on_video(video_path=video_path,
+                                                                step=conf.memory.step,
+                                                                db_version=conf.memory.db_version)
+            answer = video_temporal_understanding.basemodel.run_on_question(question=question_w_options, 
+                                                                            llm=llm)
+            print("\nAnswer: ", answer)
+        except Exception as e:
+            print(f"\nError:{e}")
+            answer = "Error"
+        
         answers["good_anwsers"].append(answer)
         # except Exception as e:
         #     print(f"\nError:{e}")
@@ -694,8 +724,6 @@ if __name__ == "__main__":
 
 # TODO: 深入看一下 memory, 优化 memory
 # TODO: PromptTemplate 和 ChatPromptTemplate 的内部格式化
-
-# TODO 用 stride 做一个时序上前松后紧的定位
 
 # TODO 看一下 coco.txt 到底是怎么样的
 # TODO: 修复下面这个 error:

@@ -614,6 +614,7 @@ if __name__ == "__main__":
     #             tools.append(Tool(name=func.name, description=func.description, func=func))
     
     video_instance_understanding = VideoInstanceUnderstanding(device="cuda:0", config=conf)
+    video_temporal_understanding = VideoTemporalUnderstanding(device="cuda:0", config=conf)
 
     # 数据集
     quids_to_exclude = conf["quids_to_exclude"] if "quids_to_exclude" in conf else None
@@ -661,13 +662,41 @@ if __name__ == "__main__":
         #                             recursion_limit=conf.recursion_limit,
         #                             use_cache=conf.use_cache)
         
-        # run_on_question version
+        # run_on_question instance version
+        # try:
+        #     video_instance_understanding.basemodel.run_on_video(video_path=video_path,
+        #                                                         question=question_w_options,
+        #                                                         step=conf.memory.step,
+        #                                                         db_version=conf.memory.db_version)
+        #     answer = video_instance_understanding.basemodel.run_on_question(question=question_w_options, 
+        #                                                                     llm=llm)
+        #     print("\nAnswer: ", answer)
+        # except Exception as e:
+        #     print(f"\nError:{e}")
+        #     answer = "Error"
+        
+        # run_on_question temporal version
+        # try:
+        #     video_temporal_understanding.basemodel.run_on_video(video_path=video_path,
+        #                                                         step=conf.memory.step,
+        #                                                         db_version=conf.memory.db_version)
+        #     answer = video_temporal_understanding.basemodel.run_on_question(question=question_w_options, 
+        #                                                                     llm=llm)
+        #     print("\nAnswer: ", answer)
+        # except Exception as e:
+        #     print(f"\nError:{e}")
+        #     answer = "Error"
+        
+        # run_on_question both version
         try:
             video_instance_understanding.basemodel.run_on_video(video_path=video_path,
                                                                 question=question_w_options,
                                                                 step=conf.memory.step,
                                                                 db_version=conf.memory.db_version)
-            answer = video_instance_understanding.basemodel.run_on_question(question=question_w_options, 
+            video_temporal_understanding.basemodel.run_on_video(video_path=video_path,
+                                                                step=conf.memory.step,
+                                                                db_version=conf.memory.db_version)
+            answer = video_temporal_understanding.basemodel.run_on_question(question=question_w_options, 
                                                                             llm=llm)
             print("\nAnswer: ", answer)
         except Exception as e:

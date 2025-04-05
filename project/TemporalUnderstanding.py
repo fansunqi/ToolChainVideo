@@ -61,13 +61,6 @@ class TemporalBase(object):
             "Salesforce/blip-image-captioning-large", torch_dtype=self.torch_dtype
         ).to(self.device)
 
-        self.llm = ChatOpenAI(
-            api_key = self.config.openai.GPT_API_KEY,
-            model = self.config.openai.GPT_MODEL_NAME,
-            temperature = 0,
-            base_url = self.config.openai.PROXY
-        )
-
         ####other args
         self.frames = None
         self.fps = None
@@ -183,7 +176,7 @@ class TemporalBase(object):
         return rows[0]
 
     # 下面这个函数并没有实际用处
-    def run_on_question(self, question):
+    def run_on_question(self, question, llm):
         ####visual
         conn = sqlite3.connect(self.sql_path)
         cursor = conn.cursor()
@@ -193,7 +186,7 @@ class TemporalBase(object):
         conn.close()
 
         db = SQLDatabase.from_uri("sqlite:///" + self.sql_path)
-        db_chain = SQLDatabaseChain(llm=self.llm, database=db, top_k=100, verbose=True)
+        db_chain = SQLDatabaseChain(llm=llm, database=db, top_k=100, verbose=True)
         result = db_chain.run(question)
 
         return result
