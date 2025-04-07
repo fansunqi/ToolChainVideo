@@ -60,7 +60,7 @@ from project.prompt_template import (
 )
 
 DEBUG_MODE = False
-TO_TXT = False
+TO_TXT = True
 
 mannual_cache = None
 mannual_cache_file = None
@@ -663,17 +663,17 @@ if __name__ == "__main__":
         #                             use_cache=conf.use_cache)
         
         # run_on_question instance version
-        try:
-            video_instance_understanding.basemodel.run_on_video(video_path=video_path,
-                                                                question=question_w_options,
-                                                                step=conf.memory.step,
-                                                                db_version=conf.memory.db_version)
-            answer = video_instance_understanding.basemodel.run_on_question(question=question_w_options, 
-                                                                            llm=llm)
-            print("\nAnswer: ", answer)
-        except Exception as e:
-            print(f"\nError:{e}")
-            answer = "Error"
+        # try:
+        #     video_instance_understanding.basemodel.run_on_video(video_path=video_path,
+        #                                                         question=question_w_options,
+        #                                                         step=conf.memory.step,
+        #                                                         db_version=conf.memory.db_version)
+        #     answer = video_instance_understanding.basemodel.run_on_question(question=question_w_options, 
+        #                                                                     llm=llm)
+        #     print("\nAnswer: ", answer)
+        # except Exception as e:
+        #     print(f"\nError:{e}")
+        #     answer = "Error"
         
         # run_on_question temporal version
         # try:
@@ -688,20 +688,20 @@ if __name__ == "__main__":
         #     answer = "Error"
         
         # run_on_question both version
-        # try:
-        #     video_instance_understanding.basemodel.run_on_video(video_path=video_path,
-        #                                                         question=question_w_options,
-        #                                                         step=conf.memory.step,
-        #                                                         db_version=conf.memory.db_version)
-        #     video_temporal_understanding.basemodel.run_on_video(video_path=video_path,
-        #                                                         step=conf.memory.step,
-        #                                                         db_version=conf.memory.db_version)
-        #     answer = video_temporal_understanding.basemodel.run_on_question(question=question_w_options, 
-        #                                                                     llm=llm)
-        #     print("\nAnswer: ", answer)
-        # except Exception as e:
-        #     print(f"\nError:{e}")
-        #     answer = "Error"
+        try:
+            video_instance_understanding.basemodel.run_on_video(video_path=video_path,
+                                                                question=question_w_options,
+                                                                step=conf.memory.step,
+                                                                db_version=conf.memory.db_version)
+            video_temporal_understanding.basemodel.run_on_video(video_path=video_path,
+                                                                step=conf.memory.step,
+                                                                db_version=conf.memory.db_version)
+            answer = video_temporal_understanding.basemodel.run_on_question(question=question_w_options, 
+                                                                            llm=llm)
+            print("\nAnswer: ", answer)
+        except Exception as e:
+            print(f"\nError:{e}")
+            answer = "Error"
         
         answers["good_anwsers"].append(answer)
         # except Exception as e:
@@ -740,8 +740,6 @@ if __name__ == "__main__":
 
 # TODO: 深入看一下 memory, 优化 memory
 # TODO: PromptTemplate 和 ChatPromptTemplate 的内部格式化
-
-# TODO 可以考虑一下 text prompt YOLOE Model，检测出固定目标
 
 # TODO 看一下 coco.txt 到底是怎么样的
 # TODO: 修复下面这个 error:

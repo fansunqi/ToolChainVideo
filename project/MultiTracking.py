@@ -325,6 +325,9 @@ def inital_args(checkpoint_dir, video_path, save_dir, device="0", step=1):
 @torch.no_grad()
 def detect_by_path(checkpoint_dir, video_path, save_dir, device="0", step=1):
     track_args = inital_args(checkpoint_dir, video_path, save_dir, device, step)
+    
+    pdb.set_trace()
+    
     model = YOLO(track_args["yolo_model"] if "v8" in str(track_args["yolo_model"]) else "yolov8n")
     overrides = model.overrides.copy()
     model.predictor = TASK_MAP[model.task][3](

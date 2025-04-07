@@ -1,0 +1,17 @@
+
+Creating LLM cache: cache/gpt35_cache_run_on_question.pkl...
+
+Building dataset...
+
+
+Processing: 3238737531_2
+
+Instancedb is empty, begin to build...
+> /home/fsq/video_agent/ToolChainVideo/project/MultiTracking.py(331)detect_by_path()
+-> model = YOLO(track_args["yolo_model"] if "v8" in str(track_args["yolo_model"]) else "yolov8n")
+(Pdb) (Pdb) (Pdb) (Pdb) (Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) 

@@ -60,7 +60,7 @@ from project.prompt_template import (
 )
 
 DEBUG_MODE = False
-TO_TXT = False
+TO_TXT = True
 
 mannual_cache = None
 mannual_cache_file = None
@@ -740,8 +740,6 @@ if __name__ == "__main__":
 
 # TODO: 深入看一下 memory, 优化 memory
 # TODO: PromptTemplate 和 ChatPromptTemplate 的内部格式化
-
-# TODO 可以考虑一下 text prompt YOLOE Model，检测出固定目标
 
 # TODO 看一下 coco.txt 到底是怎么样的
 # TODO: 修复下面这个 error:
