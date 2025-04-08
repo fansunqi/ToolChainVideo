@@ -65,18 +65,13 @@ def get_tools(conf):
     tool_instances = []
     for tool_name in tool_list:
         tool_instances.append(globals()[tool_name]())
-    print(f"tool_instances: {str(tool_instances)}")
-    
     tools = []
     for tool_instance in tool_instances:
         for e in dir(tool_instance):
             if e.startswith("inference"):
                 func = getattr(tool_instance, e)
                 tools.append(Tool(name=func.name, description=func.description, func=func))
-    print(f"tools: {str(tools)}")
-    
     return tool_instances, tools
-
 
 def tool_chain_reasoning( 
     input_question, 

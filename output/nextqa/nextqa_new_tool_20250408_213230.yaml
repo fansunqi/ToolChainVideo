@@ -6,7 +6,12 @@ openai:
 
 tool:
   tool_list:
-    - "ImageCaptioner"
+    - "TemporalTool_cpu"
+    - "CountingTool_cpu"
+    - "ReasonFinder_cpu"
+    - "HowSeeker_cpu"
+    - "DescriptionTool_cpu"
+    - "DefaultTool_cpu"
 
 mannual_cache_file: "cache/gpt35_cache_new_tool.pkl"
 use_cache: True
