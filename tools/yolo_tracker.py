@@ -81,16 +81,24 @@ class YOLOTrackerFrame:
         
         self.model.set_classes(open_vocabulary, self.model.get_text_pe(open_vocabulary))
         
-        results = self.model.track(frame, persist=persist)
+        results = self.model.track(frame, persist=persist, save=True)
 
-        assert len(results) == 1, "YOLO11 should only return one result for each frame."
-        
-        result = results[0]
-        result_message = "Here are the detection results:"
-        boxes = result.boxes.xyxy.cpu().tolist()
-        cls = result.boxes.cls.cpu().tolist()
-        for b, c in zip(boxes, cls):
-            result_message += f"\nbox: {b}, cls: {self.model.names[c]}"
+        # result 是单独一帧的结果
+        result_message = "Here are the detection results for the video clip:\n"
+        for frame_idx, result in enumerate(results):
+            cls = result.boxes.cls.cpu().numpy().astype(int)
+            try: 
+                ids = result.boxes.id.cpu().numpy().astype(int)
+            except AttributeError:
+                ids = [None] * len(cls)
+            print(cls)
+            print(ids)
+
+            result_message += f"Frame {frame_idx}: "
+            for id, c in zip(ids, cls):
+                c_name = open_vocabulary[c]
+                result_message += f"ID {id}, Class {c_name}; "
+            result_message += "\n"
         
         return result_message
     
@@ -155,31 +163,39 @@ if __name__ == "__main__":
     frame_count = 0  # 初始化帧计数器
     video_stride = 30  # 设置视频 stride，跳过的帧数
 
-    # 遍历视频帧
-    while cap.isOpened():
-        success, frame = cap.read()
+    from frame_selector import *
+    frames = select_frames(video_path=video_path, video_stride=video_stride)
+    result_message = yolo_tracker.inference(frames, 
+                                            open_vocabulary=open_vocabulary, 
+                                            persist=True)
+    print(result_message)
 
-        if success:
-            frame_count += 1  # 更新帧计数器
 
-            # 跳过不需要处理的帧
-            if frame_count % video_stride != 0:
-                continue
+    # # 遍历视频帧
+    # while cap.isOpened():
+    #     success, frame = cap.read()
 
-            print(f"Processing frame {frame_count}...")  # 打印当前帧数
+    #     if success:
+    #         frame_count += 1  # 更新帧计数器
 
-            result_message = yolo_tracker.inference(frame, 
-                                                    open_vocabulary=open_vocabulary, 
-                                                    persist=True)
+    #         # 跳过不需要处理的帧
+    #         if frame_count % video_stride != 0:
+    #             continue
+
+    #         print(f"Processing frame {frame_count}...")  # 打印当前帧数
+
+    #         result_message = yolo_tracker.inference(frame, 
+    #                                                 open_vocabulary=open_vocabulary, 
+    #                                                 persist=True)
             
-            print(result_message)
-            # break
+    #         print(result_message)
+    #         # break
                 
-        else:
-            break
+    #     else:
+    #         break
     
-    # 释放视频资源
-    cap.release()
+    # # 释放视频资源
+    # cap.release()
     
     
     # Video-level
