@@ -14,7 +14,8 @@ class YOLOTrackerFrame:
               open_vocabulary: List[str], 
               persist: bool = True, 
               stream: bool = True, 
-              save: bool = True):
+              save: bool = True, 
+              output_id = False):
         """
         对单帧图像进行目标跟踪。
         :param frame: 输入的图像帧列表。
@@ -40,12 +41,27 @@ class YOLOTrackerFrame:
                 ids = [None] * len(cls)
 
             result_message += f"Frame {frame_idx}: "
-            for id, c in zip(ids, cls):
-                c_name = open_vocabulary[c]
-                result_message += f"ID {id}, Class {c_name}; "
+
+            if output_id: 
+                # TODO 完善 output_id = True 的情况
+                for id, c in zip(ids, cls):
+                    c_name = open_vocabulary[c]
+                    result_message += f"ID {id}, Class {c_name}; "
+            else:
+                # 统计各类物体个数
+                frame_class_counts = {cls_name: 0 for cls_name in open_vocabulary}
+                for c in cls:
+                    c_name = open_vocabulary[c]
+                    frame_class_counts[c_name] += 1
+
+                # 输出个数
+                for cls_name, count in frame_class_counts.items():
+                    if count > 0:
+                        result_message += f"{count} {cls_name}"
+
             result_message += "\n"
         
-        # TODO 解决输出 ID 问题
+        # TODO ReID 
 
         return result_message
     
