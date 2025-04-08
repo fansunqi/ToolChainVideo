@@ -63,7 +63,7 @@ class YOLOTracker:
             except AttributeError:
                 ids = [None] * len(cls)
 
-            result_message += f"Frame {frame_idx}: "
+            result_message += f"Frame {frame_idx} has "
 
             if self.output_id: 
                 # TODO 完善 output_id = True 的情况
@@ -91,7 +91,7 @@ class YOLOTracker:
 
     @prompts(
         name = "object-tracking-tool",
-        description = "Useful when you need to detect and track objects in the video."
+        description = "Useful when you need to detect, count and track objects in the video."
         "The input to this tool must be an object to be tracked, for example, children, dog, apple.",
     )
     def inference(self, input: str):
@@ -103,7 +103,6 @@ class YOLOTracker:
 
 if __name__ == "__main__":
     # 初始化 YOLO 模型
-    open_vocabulary = ["children"]
     model_path = "checkpoints/yoloe-11l-seg.pt"
     
     # e.g.1
@@ -115,7 +114,6 @@ if __name__ == "__main__":
     yolo_tracker = YOLOTracker(model_path=model_path)
     
     video_stride = 30  # 设置视频 stride，跳过的帧数
-
     from frame_selector import *
     frames = select_frames(video_path=video_path, video_stride=video_stride)
     yolo_tracker.set_frames(frames)

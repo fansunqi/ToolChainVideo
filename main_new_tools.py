@@ -1,5 +1,23 @@
+import os
+import sys
+import datetime
+import shutil
+import pickle
 import argparse
 from omegaconf import OmegaConf
+
+seed = 12345
+import random
+random.seed(seed)
+
+import numpy as np
+np.random.seed(seed)
+
+import torch
+torch.manual_seed(seed)
+torch.cuda.manual_seed(seed)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 
 from prompts import (
     QUERY_PREFIX,
@@ -13,9 +31,22 @@ from langchain_openai import ChatOpenAI
 from langchain_core.tools import Tool
 
 from tools.yolo_tracker import YOLOTracker
+from tools.image_captioner import ImageCaptioner
 from tools.frame_selector import select_frames
 
 
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+TO_TXT = False
+
+
+def backup_file(opt, conf):
+    # 将 main.py 文件自身和 opt.config 文件复制一份存储至 conf.output_path
+    current_script_path = os.path.abspath(__file__)  # 获取当前脚本的绝对路径
+    shutil.copy(current_script_path, os.path.join(conf.output_path, f"main_{timestamp}.py"))
+    # 复制 opt.config 文件到输出目录
+    config_basename = os.path.basename(opt.config).split('.')[0]
+    shutil.copy(opt.config, os.path.join(conf.output_path, f"{config_basename}_{timestamp}.yaml"))   
+    
 
 
 def tool_chain_reasoning( 
@@ -68,11 +99,32 @@ def tool_chain_reasoning(
     return output
 
 
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/nextqa.yaml",type=str)                           
+    parser.add_argument('--config', default="config/nextqa_new_tool.yaml",type=str)                           
     opt = parser.parse_args()
     conf = OmegaConf.load(opt.config)
+
+    backup_file(opt, conf)
+
+    if TO_TXT:
+        # 指定输出 log
+        log_path = os.path.join(conf.output_path, f"log_{timestamp}.txt")
+        f = open(log_path, "w")
+        # 重定向标准输出
+        sys.stdout = f
+    
+    # mannual LLM cache
+    mannual_cache_file = conf.mannual_cache_file
+    if os.path.exists(mannual_cache_file):
+        print(f"\nLoading LLM cache from {mannual_cache_file}...")
+        with open(mannual_cache_file, "rb") as f:
+            mannual_cache = pickle.load(f)
+    else:
+        print(f"\nCreating LLM cache: {mannual_cache_file}...")
+        mannual_cache = {}
     
     # 视频路径
     video_path = "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4"
@@ -89,7 +141,10 @@ if __name__ == "__main__":
     yolo_model_path = "checkpoints/yoloe-11l-seg.pt"
     yolo_tracker = YOLOTracker(yolo_model_path)
 
-    tool_instances = [yolo_tracker]
+    image_captioner = ImageCaptioner()
+
+
+    tool_instances = [yolo_tracker, image_captioner]
 
     # 先搞一个 uniform frame selector
     video_stride = 30  # 设置视频 stride，跳过的帧数
@@ -108,10 +163,16 @@ if __name__ == "__main__":
     tool_chain_output = tool_chain_reasoning(
         input_question=question_w_options,
         llm=tool_planner_llm,
-        tools=tools
+        tools=tools,
+        recursion_limit=5,
     )
 
     print(tool_chain_output)
+
+    if TO_TXT:
+            # 恢复标准输出
+        sys.stdout = sys.__stdout__
+        f.close()
 
 
 
