@@ -14,6 +14,14 @@ results = model.track(video_path,
                        show=False,
                        save=True)
 
+for result in results:
+    try:
+        ids = result.boxes.id.cpu().numpy().astype(int)
+    except AttributeError:
+        pdb.set_trace()
+        ids = None
+    print(ids)
+
 # for r in results:
 #     print(r.names)
     # pdb.set_trace()

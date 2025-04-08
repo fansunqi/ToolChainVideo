@@ -38,7 +38,6 @@ from langchain_community.agent_toolkits import create_sql_agent
 ### For langgraph iteration
 from langgraph.prebuilt import create_react_agent
 from langgraph.prebuilt.chat_agent_executor import AgentState
-from langchain_core.prompts import ChatPromptTemplate
 
 
 from project.TemporalUnderstanding import TemporalBase
