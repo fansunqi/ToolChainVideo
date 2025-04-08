@@ -1,6 +1,5 @@
-
-
-import pickle
+import argparse
+from omegaconf import OmegaConf
 
 from prompts import (
     QUERY_PREFIX,
@@ -10,25 +9,26 @@ from prompts import (
 from langchain_core.prompts import ChatPromptTemplate
 from langgraph.prebuilt.chat_agent_executor import AgentState
 from langgraph.prebuilt import create_react_agent
+from langchain_openai import ChatOpenAI
+from langchain_core.tools import Tool
+
+from tools.yolo_tracker import YOLOTracker
+from tools.frame_selector import select_frames
 
 
 
 
-def ToolChainReasoning( 
+def tool_chain_reasoning( 
     input_question, 
     llm, 
     tools,
-    recursion_limit,  
+    recursion_limit=24,  
     use_cache=True,
 ):
-    # TODO 考虑之前选择工具的历史
-    
-    # TODO 研究这个 prompt
     prompt = ChatPromptTemplate.from_messages(
         [
             ("system", "You are a helpful assistant."),
             ("placeholder", "{messages}"),
-            # Placeholders fill up a **list** of messages
             ("placeholder", "{agent_scratchpad}"),
         ]
     )
@@ -40,7 +40,6 @@ def ToolChainReasoning(
     
     query = QUERY_PREFIX + input_question + '\n\n' + TOOLS_RULE
     
-
     steps = []
     step_idx = 0
     
@@ -70,7 +69,50 @@ def ToolChainReasoning(
 
 
 if __name__ == "__main__":
-
-    video_stride = 30
+    parser = argparse.ArgumentParser(description="demo")               
+    parser.add_argument('--config', default="config/nextqa.yaml",type=str)                           
+    opt = parser.parse_args()
+    conf = OmegaConf.load(opt.config)
     
+    # 视频路径
+    video_path = "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4"
+    question_w_options = "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five."
+    
+    tool_planner_llm = ChatOpenAI(
+        api_key = conf.openai.GPT_API_KEY,
+        model = conf.openai.GPT_MODEL_NAME,
+        temperature = 0,
+        base_url = conf.openai.PROXY
+    )
+
+    # 初始化 YOLO 模型
+    yolo_model_path = "checkpoints/yoloe-11l-seg.pt"
+    yolo_tracker = YOLOTracker(yolo_model_path)
+
+    tool_instances = [yolo_tracker]
+
+    # 先搞一个 uniform frame selector
+    video_stride = 30  # 设置视频 stride，跳过的帧数
+    frames = select_frames(video_path=video_path, video_stride=video_stride)
+    
+    for tool_instance in tool_instances:
+        tool_instance.set_frames(frames)
+
+    tools = []
+    for tool_instance in tool_instances:
+        for e in dir(tool_instance):
+            if e.startswith("inference"):
+                func = getattr(tool_instance, e)
+                tools.append(Tool(name=func.name, description=func.description, func=func))
+
+    tool_chain_output = tool_chain_reasoning(
+        input_question=question_w_options,
+        llm=tool_planner_llm,
+        tools=tools
+    )
+
+    print(tool_chain_output)
+
+
+
     
