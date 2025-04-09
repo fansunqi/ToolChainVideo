@@ -34,12 +34,10 @@ class ImageCaptioner:
             "Salesforce/blip-image-captioning-large", torch_dtype=self.torch_dtype
         ).to(self.device)
 
-        self.frames = None
-        self.visible_frames_info = None
+        self.visible_frames = None
 
-    def set_frames(self, frames: List[cv2.Mat], visible_frames_info):
-        self.frames = frames
-        self.visible_frames_info = visible_frames_info
+    def set_frames(self, visible_frames):
+        self.visible_frames = visible_frames
 
     def caption_image(
         self,
@@ -54,8 +52,6 @@ class ImageCaptioner:
         answer = self.processor.decode(out[0], skip_special_tokens=True)
         return answer
 
-
-
     @prompts(
         name = "image-caption-tool",
         description = "Useful when you need to caption the frames in the video."
@@ -63,31 +59,13 @@ class ImageCaptioner:
     )
     def inference(self, input):
         result = "Here are the captions of frames:"
-        for frame_idx, frame in enumerate(self.frames):
-            frame_caption = self.caption_image(frame)
+        for frame in self.visible_frames.frames:
+            frame_caption = self.caption_image(frame.image)
             
+            print(f"Cpationing... Frame {frame.index}: {frame_caption}")
+            result += f"\nFrame {frame.index}: {frame_caption}"
 
-            # 维护 visible_frames_info
+            frame.description += f"BLIP Caption: {frame_caption}\n"
 
-            print(f"Caption: {frame_caption}")
-            result += f"\nFrame {frame_idx}: {frame_caption}"
-
-        return result
-
-    
-
-if __name__ == "__main__":
-    # e.g.1
-    video_path = "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4"
-    question_w_options = "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five."
-
-    image_captioner = ImageCaptioner()
-    
-    video_stride = 30  # 设置视频 stride，跳过的帧数
-    from frame_selector import *
-    frames = select_frames(video_path=video_path, video_stride=video_stride)
-    image_captioner.set_frames(frames=frames)
-
-    result_message = image_captioner.inference(input=question_w_options)
-    print(result_message)          
+        return result       
 
