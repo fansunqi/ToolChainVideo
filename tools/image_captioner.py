@@ -34,9 +34,12 @@ class ImageCaptioner:
             "Salesforce/blip-image-captioning-large", torch_dtype=self.torch_dtype
         ).to(self.device)
 
-    def set_frames(self, frames: List[cv2.Mat]):
-        self.frames = frames
+        self.frames = None
+        self.visible_frames_info = None
 
+    def set_frames(self, frames: List[cv2.Mat], visible_frames_info):
+        self.frames = frames
+        self.visible_frames_info = visible_frames_info
 
     def caption_image(
         self,
@@ -62,6 +65,10 @@ class ImageCaptioner:
         result = "Here are the captions of frames:"
         for frame_idx, frame in enumerate(self.frames):
             frame_caption = self.caption_image(frame)
+            
+
+            # 维护 visible_frames_info
+
             print(f"Caption: {frame_caption}")
             result += f"\nFrame {frame_idx}: {frame_caption}"
 
