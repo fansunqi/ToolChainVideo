@@ -20,6 +20,6 @@ quids_to_exclude: ["6595307655_4"]
 
 output_path: "output/nextqa/"
 
-recursion_limit: 10
+recursion_limit: 24
 
 try_num: 1

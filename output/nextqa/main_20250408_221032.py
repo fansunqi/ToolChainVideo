@@ -205,18 +205,14 @@ if __name__ == "__main__":
             for tool_instance in tool_instances:
                 tool_instance.set_frames(frames)
 
-            try:
-                tool_chain_output = tool_chain_reasoning(
-                    input_question=question_w_options,
-                    llm=tool_planner_llm,
-                    tools=tools,
-                    recursion_limit=conf.recursion_limit,
-                    mannual_cache=mannual_cache,
-                    mannual_cache_file=mannual_cache_file
-                )
-            except Exception as e:
-                print(f"Error: {e}")
-                tool_chain_output = "Error"
+            tool_chain_output = tool_chain_reasoning(
+                input_question=question_w_options,
+                llm=tool_planner_llm,
+                tools=tools,
+                recursion_limit=conf.recursion_limit,
+                mannual_cache=mannual_cache,
+                mannual_cache_file=mannual_cache_file
+            )
 
             print(tool_chain_output)
             result["answers"].append(tool_chain_output)

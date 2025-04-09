@@ -56,6 +56,7 @@ class ImageCaptioner:
     @prompts(
         name = "image-caption-tool",
         description = "Useful when you need to caption the frames in the video."
+        "The input to this tool is a placeholder and does not affect the tool's output."
     )
     def inference(self, input):
         result = "Here are the captions of frames:"

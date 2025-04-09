@@ -4,7 +4,6 @@ import datetime
 import shutil
 import pickle
 import argparse
-from tqdm import tqdm
 from omegaconf import OmegaConf
 
 seed = 12345
@@ -24,10 +23,6 @@ from prompts import (
     QUERY_PREFIX,
     TOOLS_RULE,
 )
-
-from dataset import get_dataset
-
-from util import save_to_json
 
 from langchain_core.prompts import ChatPromptTemplate
 from langgraph.prebuilt.chat_agent_executor import AgentState
@@ -53,7 +48,8 @@ def backup_file(opt, conf):
     shutil.copy(opt.config, os.path.join(conf.output_path, f"{config_basename}_{timestamp}.yaml"))   
     
 
-def load_cache(mannual_cache_file):
+def load_cache(conf):
+    mannual_cache_file = conf.mannual_cache_file
     if os.path.exists(mannual_cache_file):
         print(f"\nLoading LLM cache from {mannual_cache_file}...")
         with open(mannual_cache_file, "rb") as f:
@@ -63,12 +59,6 @@ def load_cache(mannual_cache_file):
         mannual_cache = {}
     return mannual_cache
 
-
-def save_cache(mannual_cache, query, steps, mannual_cache_file):
-    mannual_cache[query] = steps
-    print("\nSaving cache...")
-    with open(mannual_cache_file, "wb") as f:
-        pickle.dump(mannual_cache, f)
 
 def get_tools(conf):
     tool_list = conf.tool.tool_list
@@ -94,8 +84,6 @@ def tool_chain_reasoning(
     tools,
     recursion_limit=24,  
     use_cache=True,
-    mannual_cache=None,
-    mannual_cache_file=None
 ):
     prompt = ChatPromptTemplate.from_messages(
         [
@@ -112,28 +100,24 @@ def tool_chain_reasoning(
     
     query = QUERY_PREFIX + input_question + '\n\n' + TOOLS_RULE
     
-    if use_cache and (query in mannual_cache):
-        print("\nCache hit!")
-        steps = mannual_cache[query]
-    else:
-        print("\nCache miss. Calling API...")
-        steps = []
+    steps = []
+    step_idx = 0
     
-        for step in tool_planner.stream(
-            {"messages": [("human", query)]}, 
-            {"recursion_limit": recursion_limit},
-                stream_mode="values"):
+    # TODO 研究一下这里的 stream_mode
+    for step in tool_planner.stream(
+        {"messages": [("human", query)]}, 
+        {"recursion_limit": recursion_limit},
+            stream_mode="values"):
 
-            step_message = step["messages"][-1]
+        step_message = step["messages"][-1]
 
-            if isinstance(step_message, tuple):
-                print(step_message)
-            else:
-                step_message.pretty_print()
+        if isinstance(step_message, tuple):
+            print(step_message)
+        else:
+            step_message.pretty_print()
         
-            steps.append(step)
-        
-        save_cache(mannual_cache, query, steps, mannual_cache_file)    
+        step_idx += 1
+        steps.append(step)
  
     try:
         output = steps[-1]["messages"][-1].content
@@ -162,10 +146,13 @@ if __name__ == "__main__":
         sys.stdout = f
     
     # mannual LLM cache
-    mannual_cache_file = conf.mannual_cache_file
-    mannual_cache = load_cache(mannual_cache_file)
+    mannual_cache = load_cache(conf)
 
     tool_instances, tools = get_tools(conf)
+    
+    # 视频路径
+    video_path = "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4"
+    question_w_options = "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five."
     
     tool_planner_llm = ChatOpenAI(
         api_key = conf.openai.GPT_API_KEY,
@@ -174,58 +161,21 @@ if __name__ == "__main__":
         base_url = conf.openai.PROXY
     )
 
-    # 数据集
-    quids_to_exclude = conf["quids_to_exclude"] if "quids_to_exclude" in conf else None
-    num_examples_to_run = conf["num_examples_to_run"] if "num_examples_to_run" in conf else -1
-    start_num = conf["start_num"] if "start_num" in conf else 0
-    specific_quids = conf["specific_quids"] if "specific_quids" in conf else None
-    dataset = get_dataset(conf, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
+    # 先搞一个 uniform frame selector
+    video_stride = 30  # 设置视频 stride，跳过的帧数
+    frames = select_frames(video_path=video_path, video_stride=video_stride)
     
-    try_num = conf.try_num
-    all_results = []
+    for tool_instance in tool_instances:
+        tool_instance.set_frames(frames)
 
-    for data in tqdm(dataset):
+    tool_chain_output = tool_chain_reasoning(
+        input_question=question_w_options,
+        llm=tool_planner_llm,
+        tools=tools,
+        recursion_limit=5,
+    )
 
-        print(f"\n\nProcessing: {data['quid']}")
-
-        video_path = data["video_path"]
-        question = data["question"].capitalize()  # 首字母大写
-        options = [data['optionA'], data['optionB'], data['optionC'], data['optionD'], data['optionE']]
-        question_w_options = f"{question}? Choose your answer from below options: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
-
-        result = data
-        result["answers"] = []
-        result["question_w_options"] = question_w_options
-
-        for try_count in range(try_num):
-            # 先搞一个 uniform frame selector
-            video_stride = 30  # 设置视频 stride，跳过的帧数
-            frames = select_frames(video_path=video_path, video_stride=video_stride)
-            
-            for tool_instance in tool_instances:
-                tool_instance.set_frames(frames)
-
-            try:
-                tool_chain_output = tool_chain_reasoning(
-                    input_question=question_w_options,
-                    llm=tool_planner_llm,
-                    tools=tools,
-                    recursion_limit=conf.recursion_limit,
-                    mannual_cache=mannual_cache,
-                    mannual_cache_file=mannual_cache_file
-                )
-            except Exception as e:
-                print(f"Error: {e}")
-                tool_chain_output = "Error"
-
-            print(tool_chain_output)
-            result["answers"].append(tool_chain_output)
-        
-        all_results.append(result)
-
-    output_file = os.path.join(conf.output_path, f"results_{timestamp}.json")
-    save_to_json(all_results, output_file)
-    print(f"\n{str(len(all_results))} results saved")   
+    print(tool_chain_output)
 
     if TO_TXT:
             # 恢复标准输出
