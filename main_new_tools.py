@@ -205,6 +205,8 @@ if __name__ == "__main__":
             for tool_instance in tool_instances:
                 tool_instance.set_frames(frames)
 
+            # TODO 各种工具也可以加上一个 set_question 功能
+            
             try:
                 tool_chain_output = tool_chain_reasoning(
                     input_question=question_w_options,

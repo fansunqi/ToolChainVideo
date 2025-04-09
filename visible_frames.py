@@ -144,6 +144,40 @@ class VisibleFrames:
             return (0, 0)
         return (self.frames[0].index, self.frames[-1].index)
 
+    def get_invisible_segments(self) -> List[tuple]:
+        if not self.frames or not self.video_info:
+            return []
+        
+        # 获取所有可见帧的索引并排序
+        visible_indices = sorted(frame.index for frame in self.frames)
+        total_frames = self.video_info['total_frames']
+        
+        invisible_segments = []
+        
+        # 1. 检查视频开始到第一个可见帧之间的片段
+        if visible_indices[0] > 0:
+            invisible_segments.append((0, visible_indices[0]))
+        
+        # 2. 检查相邻可见帧之间的片段
+        for i in range(len(visible_indices) - 1):
+            current_idx = visible_indices[i]
+            next_idx = visible_indices[i + 1]
+            if next_idx - current_idx > 1:  # 如果相邻可见帧之间有间隔
+                invisible_segments.append((current_idx + 1, next_idx))
+        
+        # 3. 检查最后一个可见帧到视频结束之间的片段
+        if visible_indices[-1] < total_frames - 1:
+            invisible_segments.append((visible_indices[-1] + 1, total_frames))
+        
+        return invisible_segments
+
+    def invisible_segments_to_description(self):
+        invisible_segments = self.get_invisible_segments()
+        segments_description = ""
+        # 从 1 开始进行枚举
+        for i, (start, end) in enumerate(invisible_segments):
+            segments_description += f"{i}: {start}-{end}\n"
+        return segments_description
 
 
 if __name__ == "__main__":
@@ -162,6 +196,9 @@ if __name__ == "__main__":
     print(f"帧索引范围: {start_idx} - {end_idx}")
     print("\n可见帧描述:")
     print(visible_frames.get_frame_descriptions())
+
+    segments_dict = visible_frames.invisible_segments_to_description()
+    print(segments_dict)
 
 
     

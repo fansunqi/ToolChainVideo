@@ -116,6 +116,8 @@ def tool_chain_reasoning(
         else:
             step_message.pretty_print()
         
+        # 是不是需要在每一步中手动调用 frame_selector
+        
         step_idx += 1
         steps.append(step)
  

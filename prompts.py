@@ -4,3 +4,30 @@ Questions: """
 
 
 TOOLS_RULE = ""
+
+
+SELECT_FRAMES_PROMPT = """Given a video that has {num_frames} frames, the frames are decoded at {fps} fps. 
+
+Given the following information of sampled frames in the video:
+```
+{visible_frames_info}
+```
+
+To answer the following question: 
+``` 
+{question}
+```
+
+However, the information in the initial sampled frames is not suffient. Our goal is to identify additional frames that contain crucial information necessary for answering the question. These frames should not only address the query directly but should also complement the insights gleaned from the descriptions of the initial frames.
+
+To achieve this, we will:
+
+1. List the uninformed video segments between sampled frames in the format 'segment_id': 'start_frame_index'-'end_frame_index': 
+```
+{candidate_segment}
+```
+
+2. Determine which segments are likely to contain frames that are most relevant to the question. These frames should capture key visual elements, such as objects, humans, interactions, actions, and scenes, that are supportive to answer the question.
+
+Return the selected video segments in the specified JSON format.
+"""
