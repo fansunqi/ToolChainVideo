@@ -2,6 +2,7 @@ import cv2
 from PIL import Image
 from typing import List
 import torch
+import re
 from transformers import (
     pipeline,
     BlipProcessor,
@@ -59,14 +60,17 @@ class ImageCaptioner:
         "The input to this tool is a placeholder and does not affect the tool's output."
     )
     def inference(self, input):
-        result = "Here are the captions of frames:"
+        result = "Here are the captions of sampled frames:"
         for frame in self.visible_frames.frames:
-            frame_caption = self.caption_image(frame.image)
-            
-            print(f"Cpationing... Frame {frame.index}: {frame_caption}")
-            result += f"\nFrame {frame.index}: {frame_caption}"
 
-            frame.description += f"BLIP Caption: {frame_caption}\n"
+            if "BLIP Caption" not in frame.description:
+                frame_caption = self.caption_image(frame.image)
+                frame.description += f"BLIP Caption: {frame_caption}\n"
+            else:
+                frame_caption = re.search(r"BLIP Caption: (.*?)\n", frame.description).group(1)
+            
+            # print(f"Captioning... Frame {frame.index}: {frame_caption}")
+            result += f"\nFrame {frame.index}: {frame_caption}"
 
         return result       
 

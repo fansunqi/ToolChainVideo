@@ -254,6 +254,8 @@ if __name__ == "__main__":
 
         
         all_results.append(result)
+        pdb.set_trace()
+
 
     output_file = os.path.join(conf.output_path, f"results_{timestamp}.json")
     save_to_json(all_results, output_file)
@@ -264,9 +266,6 @@ if __name__ == "__main__":
         sys.stdout = sys.__stdout__
         f.close()
 
-
-
-# TODO 可视化 langgraph 工具图
 
 
     

@@ -101,9 +101,9 @@ def LLM_rephrase(answer, options, question):
 def get_predicted_option(answer, options):
     """根据答案匹配正确选项"""
     
-    predicted_option, match_method = option_character_matching(answer, options)
-    if predicted_option != -1:
-        return predicted_option, match_method
+    # predicted_option, match_method = option_character_matching(answer, options)
+    # if predicted_option != -1:
+    #     return predicted_option, match_method
     
     predicted_option, match_method = option_full_matching(answer, options)
     if predicted_option != -1:
@@ -181,7 +181,7 @@ def main(input_file, output_file):
         if is_correct:
             correct_items += 1
         
-        item['final_predicted_option'] = final_predicted_option if final_predicted_option is not None else None
+        item['final_predicted_option'] = final_predicted_option
         item['is_correct'] = is_correct
         item['match_methods'] = match_methods
 

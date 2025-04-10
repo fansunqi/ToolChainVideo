@@ -1,10 +1,16 @@
-QUERY_PREFIX = """Regarding a given video, use tools to answer the following question as best you can.
+# QUERY_PREFIX = """Regarding a given video, use tools to answer the following question as best you can.
 
-Questions: """
+# Question: """
 
+QUERY_PREFIX = """Question: """
+
+ASSISTANT_ROLE = """You are an AI assistant for video analysis. Regarding a given video, you will receive information from sampled frames, use tools to extract additional information, and answer the following question as accurately as possible.
+"""
 
 TOOLS_RULE = """Please strictly follow the rules below while using the tools:
-Rule 1: Do not use the frame-extraction-tool as the first tool. You may use it only after other tools have been used and you determine that the information obtained is still insufficient to answer the question.
+Rule 1: Do not use the frame-extraction-tool as the first tool. 
+Rule 2: If, after using other tools, you still do not have enough information to provide a clear answer, you must use the frame-extraction-tool to extract more frames from the video.
+Rule 3: The same tool should not be invoked consecutively.
 """
 
 

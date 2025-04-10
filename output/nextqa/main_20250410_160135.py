@@ -24,7 +24,6 @@ torch.backends.cudnn.benchmark = False
 from prompts import (
     QUERY_PREFIX,
     TOOLS_RULE,
-    ASSISTANT_ROLE,
 )
 
 from dataset import get_dataset
@@ -102,17 +101,9 @@ def tool_chain_reasoning(
     mannual_cache=None,
     mannual_cache_file=None
 ):
-    # prompt = ChatPromptTemplate.from_messages(
-    #     [
-    #         ("system", "You are a helpful assistant."),
-    #         ("placeholder", "{messages}"),
-    #         ("placeholder", "{agent_scratchpad}"),
-    #     ]
-    # )
-
     prompt = ChatPromptTemplate.from_messages(
         [
-            ("system", ASSISTANT_ROLE),
+            ("system", "You are a helpful assistant."),
             ("placeholder", "{messages}"),
             ("placeholder", "{agent_scratchpad}"),
         ]
@@ -124,8 +115,6 @@ def tool_chain_reasoning(
     tool_planner = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
     
     query = QUERY_PREFIX + input_question + '\n\n' + TOOLS_RULE
-
-    # query = QUERY_PREFIX + input_question
     
     if use_cache and (query in mannual_cache):
         print("\nCache hit!")
@@ -254,6 +243,8 @@ if __name__ == "__main__":
 
         
         all_results.append(result)
+        pdb.set_trace()
+
 
     output_file = os.path.join(conf.output_path, f"results_{timestamp}.json")
     save_to_json(all_results, output_file)
@@ -264,9 +255,6 @@ if __name__ == "__main__":
         sys.stdout = sys.__stdout__
         f.close()
 
-
-
-# TODO 可视化 langgraph 工具图
 
 
     

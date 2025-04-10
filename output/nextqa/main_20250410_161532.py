@@ -112,7 +112,7 @@ def tool_chain_reasoning(
 
     prompt = ChatPromptTemplate.from_messages(
         [
-            ("system", ASSISTANT_ROLE),
+            ("system", ASSISTANT_ROLE + TOOLS_RULE),
             ("placeholder", "{messages}"),
             ("placeholder", "{agent_scratchpad}"),
         ]
@@ -123,9 +123,9 @@ def tool_chain_reasoning(
     
     tool_planner = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
     
-    query = QUERY_PREFIX + input_question + '\n\n' + TOOLS_RULE
+    # query = QUERY_PREFIX + input_question + '\n\n' + TOOLS_RULE
 
-    # query = QUERY_PREFIX + input_question
+    query = QUERY_PREFIX + input_question
     
     if use_cache and (query in mannual_cache):
         print("\nCache hit!")
@@ -254,6 +254,8 @@ if __name__ == "__main__":
 
         
         all_results.append(result)
+        pdb.set_trace()
+
 
     output_file = os.path.join(conf.output_path, f"results_{timestamp}.json")
     save_to_json(all_results, output_file)
@@ -264,9 +266,6 @@ if __name__ == "__main__":
         sys.stdout = sys.__stdout__
         f.close()
 
-
-
-# TODO 可视化 langgraph 工具图
 
 
     

@@ -10,13 +10,14 @@ tool:
     - "FrameSelector"
 
 mannual_cache_file: "cache/gpt35_cache_new_tool.pkl"
-use_cache: True
+use_cache: False
 
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/train.csv"
-num_examples_to_run: 100
+num_examples_to_run: 2
 start_num: 0
+quids_to_exclude: ["6595307655_4"]
 
 output_path: "output/nextqa/"
 
