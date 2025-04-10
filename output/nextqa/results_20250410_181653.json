@@ -1,0 +1,20 @@
+[
+    {
+        "quid": "13884124143_1",
+        "uid": "13884124143",
+        "qid": 1,
+        "q_type": "CH",
+        "question": "how did the guy on the board managed to not fall off from the board at the start of the video",
+        "optionA": "jump",
+        "optionB": "nod",
+        "optionC": "push the chair away",
+        "optionD": "playing the piano",
+        "optionE": "move left right to balance",
+        "truth": 4,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1006/13884124143.mp4",
+        "answers": [
+            "I have extracted more frames from the video to analyze how the guy on the board managed to not fall off. Let's proceed with analyzing these frames to determine the answer to the question."
+        ],
+        "question_w_options": "How did the guy on the board managed to not fall off from the board at the start of the video? Choose your answer from below options: A.jump, B.nod, C.push the chair away, D.playing the piano, E.move left right to balance."
+    }
+]

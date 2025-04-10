@@ -1,43 +1,13 @@
-import json
 import os
-from collections import Counter
+import pdb
+import json
+import pickle
 import argparse
 from tqdm import tqdm
-import pdb
+from collections import Counter
+from omegaconf import OmegaConf
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
-import pickle
-
-
-# 定义选项字母映射
-option_map = ["A", "B", "C", "D", "E"]
-
-# LLM for rephrase
-chat = ChatOpenAI(
-    model="gpt-3.5-turbo",  # 或其他您选择的模型
-    temperature=0.0,
-    api_key='sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra',
-    base_url="https://api.juheai.top/v1"  # OpenAI 的基础 URL
-)
-
-# cache
-cache_file = "judge_cache.pkl"
-use_cache = True
-if use_cache and os.path.exists(cache_file):
-    print("loading cache...")
-    with open(cache_file, "rb") as f:
-        llm_cache = pickle.load(f)
-else:
-    llm_cache = {}
-    
-
-def option_character_matching(answer, options):
-    
-    # 字符匹配（确保只有一个选项字母出现在 answer 中）
-    for i, option in enumerate(options):
-        if option_map[i] in answer and all(option_map[j] not in answer for j in range(len(options)) if j != i):
-            return i, "character matching"
-    return -1, "none"
 
 def option_full_matching(answer, options):
     answer = answer.lower()
@@ -57,9 +27,7 @@ def answer_full_matching(answer, options):
             return i, "answer full matching"
     return -1, "none"
 
-def LLM_rephrase(answer, options, question):
-    
-    # TODO 加上 cache
+def LLM_rephrase(answer, options, question, conf, eval_llm, llm_cache):
     
     # 首先构造选项的提示
     option_labels = ['A', 'B', 'C', 'D', 'E']
@@ -78,7 +46,7 @@ def LLM_rephrase(answer, options, question):
     The correct answer option is:
     """
     
-    if use_cache and (prompt in llm_cache):
+    if conf.eval.use_cache and (prompt in llm_cache):
         # 缓存命中
         print("Cache hit!")
         answer_rephrase = llm_cache[prompt]
@@ -87,12 +55,12 @@ def LLM_rephrase(answer, options, question):
         print("Cache miss. Calling API...")
         
         messages = [HumanMessage(content=prompt)]
-        answer_rephrase = chat.invoke(messages).content
+        answer_rephrase = eval_llm.invoke(messages).content
         
         # 保存缓存
         llm_cache[prompt] = answer_rephrase
         print("Saving cache...")
-        with open(cache_file, "wb") as f:
+        with open(conf.eval.eval_cache_file, "wb") as f:
             pickle.dump(llm_cache, f)
     
     return answer_rephrase
@@ -100,10 +68,6 @@ def LLM_rephrase(answer, options, question):
     
 def get_predicted_option(answer, options):
     """根据答案匹配正确选项"""
-    
-    # predicted_option, match_method = option_character_matching(answer, options)
-    # if predicted_option != -1:
-    #     return predicted_option, match_method
     
     predicted_option, match_method = option_full_matching(answer, options)
     if predicted_option != -1:
@@ -124,8 +88,8 @@ def get_latest_file(directory):
     return latest_file
 
 
-def main(input_file, output_file):
-    # 加载 JSON 文件
+def main(input_file, output_file, conf, eval_llm, llm_cache):
+
     with open(input_file, 'r') as f:
         data = json.load(f)
 
@@ -134,13 +98,11 @@ def main(input_file, output_file):
     correct_items = 0
     error_items = 0
 
-    # 评估每个数据项
     for item in tqdm(data):
         truth = item['truth']
         options = [item['optionA'], item['optionB'], item['optionC'], item['optionD'], item['optionE']]
         question = item['question']
         
-        # 说明 answers 是 "Error", 暂时不处理
         if isinstance(item['answers'], str):
             error_items += 1
             continue
@@ -155,10 +117,19 @@ def main(input_file, output_file):
                 predicted_options.append(predicted_option)
                 match_methods.append(match_method)
             else:
-                answer_rephrase = LLM_rephrase(answer, options, question)
+                answer_rephrase = LLM_rephrase(answer, options, question, conf, eval_llm, llm_cache)
                 predicted_option, match_method = get_predicted_option(answer_rephrase, options)
                 predicted_options.append(predicted_option)
-                match_methods.append(match_method)   
+                match_methods.append(match_method)
+
+            # rephase_max = 5
+            # rephase_count = 0
+            # while rephase_count <= rephase_max and predicted_option == -1:
+            #     answer_rephrase = LLM_rephrase(answer, options, question, conf)
+            #     predicted_option, match_method = get_predicted_option(answer_rephrase, options)
+            # predicted_options.append(predicted_option)
+            # match_methods.append(match_method)
+
         
         item["predicted_options"] = predicted_options
         item["match_methods"] = match_methods
@@ -204,14 +175,30 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Evaluate NextQA answers")
     parser.add_argument('--input_file', type=str, help="Path to the input JSON file")
     parser.add_argument('--output_file', type=str, help="Path to the output JSON file")
+    parser.add_argument('--config', default="config/nextqa_new_tool.yaml",type=str)
     args = parser.parse_args()
+    conf = OmegaConf.load(args.config)
 
     if not args.input_file:
         args.input_file = get_latest_file('output/nextqa')
     
     if not args.output_file:
-        # args.output_file = args.input_file.replace('.json', '_eval.json')
         args.output_file = args.input_file.replace('output/nextqa', 'eval/nextqa')
 
-    main(args.input_file, args.output_file)
+    # LLM for rephrase
+    eval_llm = ChatOpenAI(
+        model=conf.openai.EVAL_MODEL_NAME,
+        temperature=0.0,
+        api_key=conf.openai.GPT_API_KEY,
+        base_url=conf.openai.PROXY
+    )
+    # cache
+    if conf.eval.use_cache and os.path.exists(conf.eval.eval_cache_file):
+        print("loading cache...")
+        with open(conf.eval.eval_cache_file, "rb") as f:
+            llm_cache = pickle.load(f)
+    else:
+        llm_cache = {}
+
+    main(args.input_file, args.output_file, conf, eval_llm, llm_cache)
 

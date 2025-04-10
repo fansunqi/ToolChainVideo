@@ -45,8 +45,8 @@ from visible_frames import get_video_info, VisibleFrames
 
 
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-TO_TXT = True
-TRY_EXCEPT_MODE = True
+TO_TXT = False
+TRY_EXCEPT_MODE = False
 
 
 def backup_file(opt, conf):

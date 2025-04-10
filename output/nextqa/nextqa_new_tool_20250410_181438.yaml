@@ -17,6 +17,7 @@ video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/train.csv"
 num_examples_to_run: 100
 start_num: 0
+specific_quids: ["8968804598_0"]
 
 output_path: "output/nextqa/"
 

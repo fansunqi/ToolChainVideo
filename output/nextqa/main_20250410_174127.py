@@ -60,11 +60,11 @@ def backup_file(opt, conf):
 
 def load_cache(mannual_cache_file):
     if os.path.exists(mannual_cache_file):
-        print(f"Loading LLM cache from {mannual_cache_file}...\n")
+        print(f"\nLoading LLM cache from {mannual_cache_file}...")
         with open(mannual_cache_file, "rb") as f:
             mannual_cache = pickle.load(f)
     else:
-        print(f"Creating LLM cache: {mannual_cache_file}...\n")
+        print(f"\nCreating LLM cache: {mannual_cache_file}...")
         mannual_cache = {}
     return mannual_cache
 

@@ -10,7 +10,8 @@ ASSISTANT_ROLE = """You are an AI assistant for video analysis. Regarding a give
 TOOLS_RULE = """Please strictly follow the rules below while using the tools:
 Rule 1: Do not use the frame-extraction-tool as the first tool. 
 Rule 2: If, after using other tools, you still do not have enough information to provide a clear answer, you must use the frame-extraction-tool to extract more frames from the video.
-Rule 3: The same tool should not be invoked consecutively.
+Rule 3: After using the frame-extraction-tool, please continue with other tools to analyze the extracted frames."
+Rule 4: The same tool should not be invoked consecutively.
 """
 
 

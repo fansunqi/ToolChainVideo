@@ -39,7 +39,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1006/8968804598.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the blue sweater guy is looking at the shirtless men because they are sumo wrestlers in a ring in a gym. The most likely reason for his gaze is related to the wrestling activity happening in the ring."
+            "Based on the captions of the sampled frames, the blue sweater guy is looking at the shirtless men because they are sumo wrestlers in a ring in a gym. The most likely reason for his gaze is E. training."
         ],
         "question_w_options": "Why is the blue sweater guy looking at the shirtless men? Choose your answer from below options: A.sharing with his friends, B.found the man funny, C.poor vision, D.keep hands warm, E.training.",
         "predicted_options": [
@@ -65,7 +65,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1006/13884124143.mp4",
         "answers": [
-            "After analyzing the additional frames, it is evident that the guy on the board managed to not fall off by riding a wave on a surfboard in a pool. The most suitable option from the provided choices would be \"E. move left right to balance\" as balancing and adjusting left and right movements are crucial for maintaining stability on a surfboard while riding a wave."
+            "After analyzing the newly extracted frames, the captions indicate that the guy on the board was riding a wave on a surfboard in a pool. However, the specific action he took to not fall off from the board is not explicitly mentioned in the captions. To provide a clear answer to the question, further analysis or information may be required."
         ],
         "question_w_options": "How did the guy on the board managed to not fall off from the board at the start of the video? Choose your answer from below options: A.jump, B.nod, C.push the chair away, D.playing the piano, E.move left right to balance.",
         "predicted_options": [
@@ -91,17 +91,17 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/0071/2617504308.mp4",
         "answers": [
-            "Based on the newly extracted frames and their captions, it appears that the man has to throw the plane first in the middle of the video to get it to start flying. The frames show a young boy holding a remote control in a field and a man and a child playing with a frisbee in the park, indicating a playful outdoor setting where the man may need to throw the plane to initiate its flight. The correct answer is D. get it start flying."
+            "After analyzing the newly extracted frames, it is evident that the man has to throw the plane first in the middle of the video to get it to start flying."
         ],
         "question_w_options": "Why does the man have to throw the plane first in the middle of the video? Choose your answer from below options: A.chase the ball, B.the toy car hit the wall, C.put on earmuffs, D.get it start flying, E.bounce baby on cushion.",
         "predicted_options": [
-            3
+            -1
         ],
         "match_methods": [
-            "full matching"
+            "none"
         ],
-        "final_predicted_option": 3,
-        "is_correct": true
+        "final_predicted_option": null,
+        "is_correct": false
     },
     {
         "quid": "10521491465_4",
@@ -117,7 +117,7 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1102/10521491465.mp4",
         "answers": [
-            "After analyzing the additional frames, it appears that the panda is not on the grass but on rocks. The frames do not provide a direct answer as to why the panda on the grass is brown. Therefore, based on the information available, the reason for the panda on the grass being brown remains unclear."
+            "Sorry, need more steps to process this request."
         ],
         "question_w_options": "Why is the panda on the grass brown? Choose your answer from below options: A.to sit up, B.dirty, C.prevent it from escaping, D.get dirt off, E.resting and eating.",
         "predicted_options": [
@@ -143,17 +143,17 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1009/4177168857.mp4",
         "answers": [
-            "After analyzing the additional frames, it appears that the baby grabbed the man's ear and hair while being held in his arms. The interaction seems to be playful and affectionate. Therefore, the most likely reason for the baby grabbing the man's ear and hair is to play with him and show affection."
+            "Based on the captions of the sampled frames, it appears that the baby grabbed the man's ear and hair while being held by the man. The possible reasons could be to play with the man or to show affection. Given the context, the most likely answer is E. want to play."
         ],
         "question_w_options": "Why did the baby grab the man s ear and hair? Choose your answer from below options: A.to sing, B.play with the man, C.stabilize the baby, D.wave the horse, E.want to play.",
         "predicted_options": [
-            1
+            -1
         ],
         "match_methods": [
-            "full matching"
+            "none"
         ],
-        "final_predicted_option": 1,
-        "is_correct": true
+        "final_predicted_option": null,
+        "is_correct": false
     },
     {
         "quid": "3136982378_7",
@@ -195,16 +195,16 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1099/4729027639.mp4",
         "answers": [
-            "Based on the information from the sampled frames, it appears that the lady in white was holding a white bottle and talking to the girls on stage. This suggests that the lady approached the girls to talk about the white bottle."
+            "Based on the captions of the sampled frames, the lady in white approached the girls on stage to interact with them while they were reading a book and standing in front of a whiteboard. The reason for her approach could be related to their activity or performance on stage."
         ],
         "question_w_options": "Why did the lady in white approach the girls on stage in the middle of the video? Choose your answer from below options: A.asked her to stand in position, B.for fun, C.holding dog leash, D.point into the booklet, E.talking about the white bottle.",
         "predicted_options": [
-            4
+            1
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 4,
+        "final_predicted_option": 1,
         "is_correct": false
     },
     {
@@ -221,17 +221,17 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1099/7093500213.mp4",
         "answers": [
-            "Sorry, need more steps to process this request."
+            "After analyzing the extracted frames, it is observed that the man in checkered takes out some paper after walking onto the stage with microphone stands at the start."
         ],
         "question_w_options": "What does the man in checkered do after walking onto the stage with microphone stands at the start? Choose your answer from below options: A.bow to people, B.set up the stand, C.take away the stand, D.takes out some paper, E.hands him a bottle.",
         "predicted_options": [
-            1
+            3
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 1,
-        "is_correct": true
+        "final_predicted_option": 3,
+        "is_correct": false
     },
     {
         "quid": "6102982194_2",
@@ -273,7 +273,7 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1122/7417682572.mp4",
         "answers": [
-            "After analyzing the additional frames, it is still not clear what the man playing the drums does with his feet as he plays the drum. Unfortunately, the frames do not provide specific information on his foot movements. To accurately answer the question, further analysis or extraction of frames may be required."
+            "Sorry, need more steps to process this request."
         ],
         "question_w_options": "What does the man playing the drums do with his feet as he plays the drum? Choose your answer from below options: A.look through the box, B.moves his feet, C.smoke, D.walk around the hoop, E.cap.",
         "predicted_options": [
@@ -299,17 +299,17 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1203/8364779007.mp4",
         "answers": [
-            "After analyzing the additional frames extracted, it appears that the reason why the boy in red turns around after getting out on the grass at the start is not explicitly clear from the provided frames. To determine the exact reason, I may need to extract more frames from the video. Would you like me to extract more frames for further analysis?"
+            "After analyzing the newly extracted frames, it appears that the boy in red turns around after getting out on the grass at the start to look at the camera. The frames show a series of activities in the snow and the yard, but the action of looking at the camera is evident in the frames."
         ],
         "question_w_options": "Why does the boy in red turn around after getting out on the grass at the start? Choose your answer from below options: A.to see if there is anything, B.to get onto table, C.failed at goal keeping, D.to look at camera, E.wait for people behind.",
         "predicted_options": [
-            0
+            3
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 0,
-        "is_correct": false
+        "final_predicted_option": 3,
+        "is_correct": true
     },
     {
         "quid": "5319843668_1",
@@ -325,7 +325,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1019/5319843668.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the flashes of light during the children playing in the boxes could be part of a performance. The flashes of light may be used to enhance the visual appeal or add excitement to the activity."
+            "Based on the captions of the sampled frames, the flashes of light when the children are playing in the boxes could be part of a performance."
         ],
         "question_w_options": "Why are there flashes of light when the children are playing in the boxes? Choose your answer from below options: A.camera taking photo, B.guide the direction, C.shine brightness, D.start of the gane, E.part of performance.",
         "predicted_options": [
@@ -351,7 +351,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1027/4597414801.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the lady continues to hold the cat after shaking her body for a while in the middle. Therefore, the answer is: B. let go of cat."
+            "Based on the captions of the sampled frames, the lady continues to hold the cat in her arms after shaking her body for a while in the middle. Therefore, the answer is B. let go of cat."
         ],
         "question_w_options": "What does the lady do after shaking her body for a while in the middle? Choose your answer from below options: A.pet the cat, B.let go of cat, C.went upstairs, D.play with dogs, E.continue cycling.",
         "predicted_options": [
@@ -377,17 +377,17 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1120/3229982634.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, it seems that the video is taken in a **ballroom**."
+            "Based on the captions of the sampled frames, it appears that the video is taken in a room. The options provided are not specific enough to determine the exact location within a room, so the answer would be A. house."
         ],
         "question_w_options": "Where is this video taken? Choose your answer from below options: A.house, B.kitchen, C.stage, D.ballroom, E.train.",
         "predicted_options": [
-            3
+            0
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 3,
-        "is_correct": false
+        "final_predicted_option": 0,
+        "is_correct": true
     },
     {
         "quid": "9177467036_2",
@@ -403,7 +403,7 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1102/9177467036.mp4",
         "answers": [
-            "After analyzing the additional frames, it appears that the man wearing a hat while riding the horse is likely part of the outfit for the rodeo arena. The frames show the man consistently wearing the hat while riding the horse in various settings. Therefore, the most suitable answer to the question is B. part of the outfit."
+            "Based on the sampled frames, the man wore a hat while riding the horse as part of his outfit."
         ],
         "question_w_options": "Why did the man wear hat while riding the horse? Choose your answer from below options: A.conversing with them, B.part of the outfit, C.support woman, D.to move it, E.give good performance.",
         "predicted_options": [
@@ -455,7 +455,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1025/10745999374.mp4",
         "answers": [
-            "After analyzing the additional frames, it appears that the toy sword starts blinking in the middle of the video because several children are sitting on a couch playing with a toy sword. The interaction with the toy sword might have triggered the blinking effect."
+            "After analyzing the newly extracted frames, it appears that the toy sword starts blinking in the middle of the video because several children sitting on a couch are playing with a toy sword. The toy sword might have a feature that causes it to blink during play."
         ],
         "question_w_options": "Why does the toy sword start blinking in the middle of the video? Choose your answer from below options: A.boy in red turn it on, B.ball rolling away, C.road bumpy, D.get cat s attention, E.finished playing till that page.",
         "predicted_options": [
@@ -507,7 +507,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1000/2400987326.mp4",
         "answers": [
-            "I have gathered information about the man in the grey plaid shirt from the sampled frames. Unfortunately, the captions do not provide specific details about the man's facial expression or body language while talking. To accurately determine how the man is feeling, I will need to use the frame-extraction-tool to extract more frames from the video. Shall I proceed with extracting more frames?"
+            "After analyzing the newly extracted frames, the man in the grey plaid shirt appears to be \"arafed\" which does not clearly indicate his emotional state. Therefore, based on the available information, it is not possible to determine how the man is feeling while talking at the start."
         ],
         "question_w_options": "How is the man in grey plaid shirt feeling while talking at the start? Choose your answer from below options: A.worried, B.terrible, C.curious, D.frightened, E.happy.",
         "predicted_options": [
@@ -533,7 +533,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1005/6217597005.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, it seems like the video is taken on the street. Therefore, the answer to the question is E. road."
+            "After analyzing the newly extracted frames, it is clear that the video is taken on the street. The correct answer is E. road."
         ],
         "question_w_options": "Where is this video taken? Choose your answer from below options: A.playground, B.sea, C.zoo, D.boxing ring, E.road.",
         "predicted_options": [
@@ -559,16 +559,16 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1026/2927552798.mp4",
         "answers": [
-            "After analyzing the additional frames, it is evident that the man in stripes put on his jacket at the door for fashion. The captions indicate that the man was seen in various outfits and poses, suggesting that his choice to put on the jacket was likely for style or fashion purposes."
+            "Sorry, need more steps to process this request."
         ],
         "question_w_options": "Why did the man in stripes put on his jacket at the door? Choose your answer from below options: A.look cool, B.prevent it from falling, C.for fashion, D.protect from sun, E.feeling hot.",
         "predicted_options": [
-            2
+            4
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 2,
+        "final_predicted_option": 4,
         "is_correct": false
     },
     {
@@ -585,7 +585,7 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1010/6083954222.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the boy in orange holding a ball on his head was likely **part of a performance** rather than aiming at a hoop, wanting to throw the ball, hitting blocks, or posing for photos."
+            "Based on the captions of the sampled frames, it seems that the boy in orange holding a ball on his head was part of a performance or a playful activity. The frames show young boys playing with a basketball hoop and a ball in the yard, indicating that the action was likely part of a fun and entertaining moment rather than aiming at the hoop, throwing the ball, hitting blocks, or posing for photos."
         ],
         "question_w_options": "Why did the boy in orange hold a ball on his head? Choose your answer from below options: A.to aim at hoop, B.want to throw the ball, C.hitting the blocks, D.part of performance, E.pose for photos.",
         "predicted_options": [
@@ -637,7 +637,7 @@
         "truth": 2,
         "video_path": "/share_data/NExT-QA/NExTVideo/0030/2857624971.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, it is likely that the bubbles coming from the diver's mouth are due to them breathing underwater with scuba equipment."
+            "Based on the captions of the sampled frames, the bubbles coming from the diver's mouth are likely due to the diver breathing underwater using scuba equipment. The bubbles are a result of the diver exhaling air while breathing underwater."
         ],
         "question_w_options": "Why are there bubbles coming from the divers mouth? Choose your answer from below options: A.fell off their jetski, B.resistance from water, C.oxygen, D.beach, E.they are breathing.",
         "predicted_options": [
@@ -663,7 +663,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1201/2934685860.mp4",
         "answers": [
-            "Based on the sampled frames, the woman walked back towards the stroller after the kid moved away from the fence to push the stroller."
+            "Based on the newly extracted frames and their captions, the reason why the woman walked back towards the stroller after the kid moved away from the fence at the end is to push the stroller."
         ],
         "question_w_options": "Why did the woman walk back towards the stroller after the kid moved away from the fence at the end? Choose your answer from below options: A.ignores, B.follow girl in pink, C.hold hands and move in circles together, D.kiss the boy, E.to push stroller.",
         "predicted_options": [
@@ -715,17 +715,17 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1106/6349106171.mp4",
         "answers": [
-            "The men are squinting their eyes due to the bright stage light."
+            "Based on the captions of the sampled frames, the men are standing in a field and not in a setting where the stage light is too bright, underwater, posing for pictures, or in a spectacles shop. The most likely reason for the men squinting their eyes could be that it is sunny in the field where they are standing."
         ],
         "question_w_options": "Why are the men squinting their eyes? Choose your answer from below options: A.stage light too bright, B.underwater, C.to pose for pictures, D.sunny, E.in spectacles shop.",
         "predicted_options": [
-            -1
+            3
         ],
         "match_methods": [
-            "none"
+            "full matching"
         ],
-        "final_predicted_option": null,
-        "is_correct": false
+        "final_predicted_option": 3,
+        "is_correct": true
     },
     {
         "quid": "5858839474_9",
@@ -741,7 +741,7 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1023/5858839474.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the boy in striped opened the book to see its contents by flipping the pages. The answer is D. flip the pages."
+            "Sorry, need more steps to process this request."
         ],
         "question_w_options": "How did the boy in stripped open the book to see its contents? Choose your answer from below options: A.with a bookmark, B.asked the girl for help, C.observe the book, D.flip the pages, E.stare at the book.",
         "predicted_options": [
@@ -767,7 +767,7 @@
         "truth": 2,
         "video_path": "/share_data/NExT-QA/NExTVideo/1017/5721638917.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the dog was playing with a frisbee in the room. Therefore, the answer to the question is B. waiting for frisbee game."
+            "Based on the captions of the sampled frames, the dog was waiting for a frisbee game near the middle of the video."
         ],
         "question_w_options": "Why was the dog waiting at the other side of the room near the middle of the video? Choose your answer from below options: A.looking for food, B.waiting for frisbee game, C.waiting to fetch ball, D.waiting for sheeps, E.waiting for another dog.",
         "predicted_options": [
@@ -793,16 +793,16 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1150/5680168187.mp4",
         "answers": [
-            "After analyzing the additional frames extracted, it is observed that the man on the boat does not perform any specific action that matches the provided options. Therefore, based on the information available, it is not possible to determine what the man on the boat does after getting up."
+            "After analyzing the additional frames extracted, the man on the boat does not appear to perform any specific action after getting up. Therefore, based on the frames sampled, the man on the boat does not exhibit any of the actions listed in the options provided."
         ],
         "question_w_options": "What does the man on the boat do after getting up? Choose your answer from below options: A.strokes his beard, B.stand up, C.move backwards, D.pull it up, E.speed up.",
         "predicted_options": [
-            -1
+            1
         ],
         "match_methods": [
-            "none"
+            "full matching"
         ],
-        "final_predicted_option": null,
+        "final_predicted_option": 1,
         "is_correct": false
     },
     {
@@ -845,17 +845,17 @@
         "truth": 2,
         "video_path": "/share_data/NExT-QA/NExTVideo/1021/4400119620.mp4",
         "answers": [
-            "After analyzing the newly extracted frames, there is no specific information about what the man in spectacles did after the couple linked arms. Unfortunately, the frames do not provide a clear answer to the question. If you have any other questions or need further analysis, feel free to ask."
+            "Sorry, need more steps to process this request."
         ],
         "question_w_options": "What did the man in spectacles do after the couple linked arms? Choose your answer from below options: A.start writing, B.hands him a bottle, C.gesture for them to move forward, D.turn back, E.start performing.",
         "predicted_options": [
-            2
+            0
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 2,
-        "is_correct": true
+        "final_predicted_option": 0,
+        "is_correct": false
     },
     {
         "quid": "9186559718_0",
@@ -871,7 +871,7 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1124/9186559718.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the colourful objects in the bathtub with the baby are toys."
+            "Based on the sampled frames, the colourful objects in the bathtub with the baby are toys."
         ],
         "question_w_options": "What are the colourful objects in the bathtub with the baby? Choose your answer from below options: A.duck toy, B.bathball, C.bathtub, D.toys, E.bird.",
         "predicted_options": [
@@ -897,7 +897,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1024/9337790459.mp4",
         "answers": [
-            "Based on the additional frames extracted and their captions, it is clear that the video is taken in a pool where children are playing with various toys. The closest option to describe this location would be \"E. lake.\""
+            "After analyzing the additional frames extracted, it is clear that the video is taken in a pool where children are playing with various toys. The location is not a lake but rather a pool. Therefore, the correct answer to the question is not provided in the options given."
         ],
         "question_w_options": "Where is this video taken? Choose your answer from below options: A.garden, B.field, C.dinning table, D.along the streets, E.lake.",
         "predicted_options": [
@@ -923,16 +923,16 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/0034/5379354799.mp4",
         "answers": [
-            "Based on the information from the sampled frames, the lady reached her hand out towards the bush. The action she took when they reached the bush was to reach her hand out. So, the answer to the question is C. reach her hand out."
+            "After analyzing the newly extracted frames, there is no specific information about what the lady did when they reached the bush. Unfortunately, the frames do not provide a clear answer to the question."
         ],
         "question_w_options": "What did the lady do when they reached the bush? Choose your answer from below options: A.point at pumpkin, B.let go of balloon, C.reach her hand out, D.point at camera, E.pat dog s head.",
         "predicted_options": [
-            2
+            -1
         ],
         "match_methods": [
-            "full matching"
+            "none"
         ],
-        "final_predicted_option": 2,
+        "final_predicted_option": null,
         "is_correct": false
     },
     {
@@ -949,7 +949,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1201/5085607670.mp4",
         "answers": [
-            "After analyzing the newly extracted frames, the information provided does not directly indicate how the people on stage react when the lady in green makes a dance move. Unfortunately, the frames do not provide a clear answer to the question."
+            "Sorry, need more steps to process this request."
         ],
         "question_w_options": "How do the people on stage react when the lady in green makes a dance move? Choose your answer from below options: A.followed her dance steps, B.smile, C.touch their hair band, D.lie on floor, E.move away.",
         "predicted_options": [
@@ -975,7 +975,7 @@
         "truth": 2,
         "video_path": "/share_data/NExT-QA/NExTVideo/1014/6096381083.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the woman in spectacles projects her voice by using a microphone."
+            "Based on the sampled frames, the woman in spectacles projects her voice by using a microphone."
         ],
         "question_w_options": "How does the woman in spectacles project her voice? Choose your answer from below options: A.use poles, B.singing into toy mike, C.use microphone, D.doing show and tell, E.strum the guitar.",
         "predicted_options": [
@@ -1027,7 +1027,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1020/2622813876.mp4",
         "answers": [
-            "Sorry, need more steps to process this request."
+            "Based on the captions of the sampled frames, the baby grabs the bottle after the adult puts it down near the middle. The answer is A. grab bottle."
         ],
         "question_w_options": "What does the baby do after the adult put down the bottle near the middle? Choose your answer from below options: A.grab bottle, B.look down, C.smile, D.cry, E.jump.",
         "predicted_options": [
@@ -1079,7 +1079,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1107/5806747559.mp4",
         "answers": [
-            "After reviewing the newly extracted frames, it appears that the woman in the video stands on stage with a laptop in front of a Dell sign after opening the notes on her hands. Therefore, the correct answer to the question \"What does the woman do after opening the notes on her hands?\" is E. stands up."
+            "Sorry, need more steps to process this request."
         ],
         "question_w_options": "What does the woman do after opening the notes on her hands? Choose your answer from below options: A.smile, B.jump, C.stood up, D.walk to camera, E.stands up.",
         "predicted_options": [
@@ -1105,16 +1105,16 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1099/2640440327.mp4",
         "answers": [
-            "Based on the additional frames extracted, it appears that the lady on the right may have looked away at the end because she was covering her face with her hands."
+            "After analyzing the newly extracted frames, it appears that the lady on the right may have looked away at the end to brush her teeth in the bathroom."
         ],
         "question_w_options": "Why did the lady on the right look away at the end? Choose your answer from below options: A.speak to all audiences, B.laugh, C.watch for girl in pink, D.play with things on floor, E.looking at tickets.",
         "predicted_options": [
-            3
+            4
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 3,
+        "final_predicted_option": 4,
         "is_correct": false
     },
     {
@@ -1131,7 +1131,7 @@
         "truth": 2,
         "video_path": "/share_data/NExT-QA/NExTVideo/1009/6595307655.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the lighter brown dog is playing with a toy on the floor at the start of the video."
+            "Based on the captions of the sampled frames, the lighter brown dog is **playing with a toy on the floor** at the start of the video."
         ],
         "question_w_options": "Why is the lighter brown dog lying on the floor at the start of the video? Choose your answer from below options: A.imbalanced, B.sniffing the ground, C.playing, D.waiting for treats, E.playing with sheep.",
         "predicted_options": [
@@ -1183,7 +1183,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1203/4136860893.mp4",
         "answers": [
-            "Based on the newly extracted frames, the boys are eating the ice cream with a spoon. The captions indicate that the boys are sitting at a table eating various foods, including cake, cereal, and food, and some frames specifically mention the boys using a spoon. Therefore, the answer to the question \"How are the boys eating the ice cream?\" is E. with the spoon."
+            "Based on the sampled frames, the boys are eating with a spoon."
         ],
         "question_w_options": "How are the boys eating the ice cream? Choose your answer from below options: A.turn and twist it, B.lady feed, C.left hand, D.use fork, E.with the spoon.",
         "predicted_options": [
@@ -1235,16 +1235,16 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/0036/8997865396.mp4",
         "answers": [
-            "Sorry, need more steps to process this request."
+            "Based on the captions of the sampled frames, the cat's reaction after being tickled for a long time is that it is sleeping on a keyboard with its eyes closed. The cat does not exhibit any specific reaction like looking at a bird, lifting its head up, climbing up and touching the screen, turning away, or being distracted by something."
         ],
         "question_w_options": "How does the cat react after being tickled for a long time? Choose your answer from below options: A.look at bird, B.lift its head up, C.climb up and touch the screen, D.turns away, E.distracted by something.",
         "predicted_options": [
-            3
+            4
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 3,
+        "final_predicted_option": 4,
         "is_correct": false
     },
     {
@@ -1261,7 +1261,7 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/0023/2549562657.mp4",
         "answers": [
-            "Sorry, need more steps to process this request."
+            "Based on the captions of the sampled frames, the baby in the blue shirt is laying on the floor next to a basket."
         ],
         "question_w_options": "How is the baby in blue shirt positioned? Choose your answer from below options: A.heat up metal, B.sitting, C.standing, D.sitting at the sofa, E.throw away the blue toy.",
         "predicted_options": [
@@ -1287,7 +1287,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1008/5585306763.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, it seems that the bald headed man was unable to catch the ball after the boy with red pants threw it because his hands were occupied."
+            "Based on the information from the sampled frames, the bald headed man was unable to catch the ball after the boy with red pants threw the ball because his hands were occupied."
         ],
         "question_w_options": "Why was the bald headed man unable to catch the ball after the the boy with red pants threw ball? Choose your answer from below options: A.throw too high up, B.not ready for the game, C.to defend his team, D.ball was thrown to another side, E.hands were occupied.",
         "predicted_options": [
@@ -1313,16 +1313,16 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1107/13559530235.mp4",
         "answers": [
-            "Based on the information from the sampled frames, the wires connected from the picture to the laptop are likely used for recording time."
+            "After analyzing the newly extracted frames, it is evident that the wires connected from the picture to the laptop are for connecting the picture (possibly a camera or external device) to the laptop for transferring data or displaying images. The most suitable answer to the question is D. show the picture from the camera."
         ],
         "question_w_options": "Why are there wires connected from the picture to the laptop? Choose your answer from below options: A.focused on the game, B.nobody using currently, C.test duration of computer setting up, D.show the picture from camera, E.recording time.",
         "predicted_options": [
-            4
+            -1
         ],
         "match_methods": [
-            "full matching"
+            "none"
         ],
-        "final_predicted_option": 4,
+        "final_predicted_option": null,
         "is_correct": false
     },
     {
@@ -1365,16 +1365,16 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1161/9583453634.mp4",
         "answers": [
-            "After analyzing the additional frames, the man's reaction after the crocodile opened its mouth near him is not clearly visible. The frames show the man in various positions on a skateboard and in water, but the specific reaction to the crocodile is not evident. To provide an accurate answer, more frames may need to be extracted. Would you like to extract more frames or proceed with the available information?"
+            "After analyzing the extracted frames, it appears that the man's reaction after the crocodile opened its mouth near him is not clearly captured in the frames. To provide a definitive answer, I may need to extract more frames or use additional tools for further analysis."
         ],
         "question_w_options": "How did the man react after the crocodile open its mouth near him? Choose your answer from below options: A.ran behind, B.excited, C.make it do tricks, D.lifts up his leg, E.straighten up his legs.",
         "predicted_options": [
-            3
+            4
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 3,
+        "final_predicted_option": 4,
         "is_correct": false
     },
     {
@@ -1391,7 +1391,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1008/13312922233.mp4",
         "answers": [
-            "Based on the information extracted from the frames, the boy touched the cat after putting his finger to his mouth. The correct answer is D. touch the cat."
+            "After analyzing the additional frames, it is still not clear what the boy did after putting his finger to his mouth. Unfortunately, the extracted frames did not provide the necessary information to determine the boy's actions. If you would like, I can extract more frames from the video to further investigate. Let me know if you would like to proceed with more frame extraction."
         ],
         "question_w_options": "What did the boy do after putting his finger to his mouth? Choose your answer from below options: A.bend his back, B.reach for the airconditioners, C.move cameras, D.touch the cat, E.open his palm.",
         "predicted_options": [
@@ -1443,7 +1443,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1160/4004287747.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the people are celebrating the birthday of the woman sitting on a couch in front of a cake with a video game remote. The answer is E. the lady in black."
+            "Based on the captions of the sampled frames, the people are celebrating the birthday of the lady in black."
         ],
         "question_w_options": "Whose birthday are the people celebrating for? Choose your answer from below options: A.lady in dotted shirt, B.man in red pants, C.rainforest rescue organization, D.man in green, E.the lady in black.",
         "predicted_options": [
@@ -1469,7 +1469,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1102/7835628046.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the boy is playing with a toy after bending down. The answer is A. play with toy."
+            "Based on the captions of the sampled frames, the boy is playing with a toy after bending down. The action he takes after bending down is playing with a toy. So, the answer is A. play with toy."
         ],
         "question_w_options": "What does the boy do after bending down? Choose your answer from below options: A.play with toy, B.performing, C.lean and look forward, D.touch man s hoodie, E.water ride.",
         "predicted_options": [
@@ -1495,17 +1495,17 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/0099/3227968260.mp4",
         "answers": [
-            "After analyzing the additional frames, there is no specific information about how the two women reacted after one released their hand at the start of the video. Unfortunately, the frames do not provide a clear answer to the question."
+            "Based on the captions of the sampled frames, it seems that the two women reacted by arm wrestling in the kitchen after the woman in stripes released their hand at the start of the video."
         ],
         "question_w_options": "How did the two women react after the woman in stripes released their hand at the start of the video? Choose your answer from below options: A.start pushing and wrestling, B.touch her eyes, C.roll on her back, D.open her eyes, E.tilt head forward.",
         "predicted_options": [
-            0
+            -1
         ],
         "match_methods": [
-            "full matching"
+            "none"
         ],
-        "final_predicted_option": 0,
-        "is_correct": true
+        "final_predicted_option": null,
+        "is_correct": false
     },
     {
         "quid": "3396663702_2",
@@ -1521,7 +1521,7 @@
         "truth": 2,
         "video_path": "/share_data/NExT-QA/NExTVideo/1019/3396663702.mp4",
         "answers": [
-            "Based on the sampled frames, it seems like the baby is fidgeting after falling. The baby is shown sitting on a couch, then on a brown blanket with a surprised look, and finally laying on a bed. This behavior suggests that the baby is fidgeting rather than being sleepy or new to walking."
+            "Based on the sampled frames, the baby is fidgeting."
         ],
         "question_w_options": "Why does the baby keeps moving his hands and legs after falling? Choose your answer from below options: A.move closer to him, B.play with the toy, C.fidgeting, D.sleepy, E.new to walking.",
         "predicted_options": [
@@ -1547,7 +1547,7 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1025/9338319433.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the men were wearing helmets while working with rusty iron bars. The helmets were likely worn for safety reasons to protect their heads during this work activity."
+            "Based on the captions of the sampled frames, the men were wearing helmets while working with ropes and climbing a steep hill. Therefore, the men wore helmets for **working**."
         ],
         "question_w_options": "Why did the men wear helmets? Choose your answer from below options: A.flying fox, B.playing baseball, C.skateboarding, D.working, E.cycling.",
         "predicted_options": [
@@ -1599,16 +1599,16 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1006/8968804598.mp4",
         "answers": [
-            "Sorry, need more steps to process this request."
+            "After analyzing the additional frames, it appears that the men walking in synchronisation are actually sumo wrestlers in a gym. The reason for their synchronised walking could be related to a performance or a traditional practice in sumo wrestling. Therefore, the answer to the question is E. performance."
         ],
         "question_w_options": "Why are the men walking in synchronisation? Choose your answer from below options: A.exercising, B.found what he wanted, C.prevent falling off, D.not part of the group, E.performance.",
         "predicted_options": [
-            3
+            4
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 3,
+        "final_predicted_option": 4,
         "is_correct": false
     },
     {
@@ -1625,17 +1625,17 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1028/4527426680.mp4",
         "answers": [
-            "After analyzing the additional frames, the girl's reaction while watching the blanket is not clearly indicated. The frames show the woman and child in various store settings, but the specific reaction of the girl towards the blanket is not captured. To provide an accurate answer, further analysis or additional frames may be required."
+            "Based on the sampled frames, the girl is laughing while watching the blanket. The answer to the question is E. laugh."
         ],
         "question_w_options": "How does the girl react while watching the blanket? Choose your answer from below options: A.walk away, B.bend down, C.show his bottle to camera, D.relaxed, E.laugh.",
         "predicted_options": [
-            3
+            4
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 3,
-        "is_correct": false
+        "final_predicted_option": 4,
+        "is_correct": true
     },
     {
         "quid": "3552516882_7",
@@ -1651,7 +1651,7 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1014/3552516882.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the place appears to be a house. So, the answer is D. house."
+            "Based on the captions of the sampled frames, the place appears to be a **house**."
         ],
         "question_w_options": "Where is this place? Choose your answer from below options: A.bus terminal, B.outdoors, C.kitchen, D.house, E.waterfall.",
         "predicted_options": [
@@ -1677,17 +1677,17 @@
         "truth": 2,
         "video_path": "/share_data/NExT-QA/NExTVideo/1023/5176535833.mp4",
         "answers": [
-            "After analyzing the additional frames, it is evident that the girls were engaged in various activities such as playing with a box, a remote, a nintendo wii, a toy, and a gift. However, the specific reason why they threw the crushed papers from the box around is still not clear. I recommend using the frame-extraction-tool again to extract more frames for further analysis to determine the exact reason for their actions."
+            "After analyzing the newly extracted frames, it is evident that the girls were playing with a box of items, including a piece of paper. Therefore, the most suitable answer to the question is B. to draw on the paper."
         ],
         "question_w_options": "Why did the girls throw the crushed papers from the box around? Choose your answer from below options: A.to clean the floor, B.to draw on the paper, C.paper blocking them, D.to play with dog, E.easier to put things in.",
         "predicted_options": [
-            2
+            1
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 2,
-        "is_correct": true
+        "final_predicted_option": 1,
+        "is_correct": false
     },
     {
         "quid": "3918022916_3",
@@ -1729,7 +1729,7 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1160/5436130345.mp4",
         "answers": [
-            "Sorry, need more steps to process this request."
+            "After analyzing the newly extracted frames, there is no specific information available to determine why the boy puts his tongue out towards the end. Unfortunately, the frames do not provide a clear answer to the question."
         ],
         "question_w_options": "Why does the boy put his tongue out towards the end? Choose your answer from below options: A.to throw out, B.playful, C.speak to someone, D.finish singing, E.show by man in black.",
         "predicted_options": [
@@ -1781,7 +1781,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/0027/8748339924.mp4",
         "answers": [
-            "After analyzing the newly extracted frames, the pig on the outer left in the middle of the video is standing in the dirt. There is no specific action mentioned in the captions."
+            "After analyzing the newly extracted frames, the pig on the outer left in the middle of the video is seen standing in the dirt. The action of the pig was not explicitly captured in the frames provided. To determine the exact action of the pig, further analysis or extraction of frames may be required."
         ],
         "question_w_options": "What does the pig on the outer left do in the middle of the video? Choose your answer from below options: A.walk away, B.move, C.shake itself, D.go back, E.follow the hand.",
         "predicted_options": [
@@ -1807,7 +1807,7 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1164/3023021780.mp4",
         "answers": [
-            "Based on the sampled frames, it seems that the girl raises her arm higher up at the end while playing with a video game on the TV. Therefore, the most likely reason for her action could be **B. playing**."
+            "Based on the captions of the sampled frames, it seems that the girl raises her arm higher up at the end while playing with a video game on the TV. Therefore, the most likely answer to the question is B. playing."
         ],
         "question_w_options": "Why does the girl raise her arm higher up at the end? Choose your answer from below options: A.moving baby s hands, B.playing, C.holding the dog s collar, D.adjusting self stick, E.interacting with audience.",
         "predicted_options": [
@@ -1833,17 +1833,17 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1120/8290475933.mp4",
         "answers": [
-            "Sorry, need more steps to process this request."
+            "Based on the captions of the sampled frames, the man was holding a microphone while speaking. Therefore, the answer to the question is: A. hold the microphone."
         ],
         "question_w_options": "How did the man position his hands while speaking? Choose your answer from below options: A.hold the microphone, B.put into pockets, C.push the trolley, D.hug the lady, E.strum the string.",
         "predicted_options": [
-            3
+            0
         ],
         "match_methods": [
-            "answer full matching"
+            "full matching"
         ],
-        "final_predicted_option": 3,
-        "is_correct": true
+        "final_predicted_option": 0,
+        "is_correct": false
     },
     {
         "quid": "12464813773_1",
@@ -1859,7 +1859,7 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1102/12464813773.mp4",
         "answers": [
-            "After analyzing the additional frames extracted, it is observed that there is a pink sled sitting in the snow next to a tree. Therefore, the pink color board the pink girl is holding is likely a sled. The correct answer is B. sleigh."
+            "Based on the sampled frames, the pink girl is holding a pink umbrella, not a pink color board."
         ],
         "question_w_options": "What is the pink colour board the pink girl is holding for? Choose your answer from below options: A.swinging her arms, B.sleigh, C.smiling, D.look back, E.happy.",
         "predicted_options": [
@@ -1911,7 +1911,7 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1015/5332533757.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, it seems that the men in black are working on ladders and using them to reach, climb, and lift objects. Holding onto the metal may be part of their performance or necessary for support while working on the ladders. Therefore, the most suitable answer to the question is C. part of performance."
+            "After analyzing the newly extracted frames, it is evident that the men in black are not constantly holding onto metal throughout the video. They are primarily seen working with ladders and lifting beds or climbing chandeliers. Therefore, the answer to the question is not related to holding onto metal."
         ],
         "question_w_options": "Why do the men in black constantly hold onto the metal throughout the video? Choose your answer from below options: A.lighting weights, B.want to test strength, C.part of performance, D.support metal structure, E.show where to hit.",
         "predicted_options": [
@@ -1937,7 +1937,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/0019/2408143908.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the man in the red helmet is likely staring into the trees in the middle of the video to look at something."
+            "Based on the captions of the sampled frames, the man in the red helmet is likely staring into the trees to look at something."
         ],
         "question_w_options": "Why does the man in red helmet keep staring into the trees in the middle of the video? Choose your answer from below options: A.to video him, B.adjust screen, C.adjust aim, D.look at something, E.look at man doing flying fox.",
         "predicted_options": [
@@ -1963,7 +1963,7 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1019/4704253964.mp4",
         "answers": [
-            "Based on the additional frames extracted, the lady in white turns back near the end of the video to engage the audience."
+            "Based on the sampled frames, it appears that the lady in white turns back near the end to engage the audience."
         ],
         "question_w_options": "Why does the lady in white turns back near the end? Choose your answer from below options: A.hold the bowl, B.talking to cameraman, C.engage the audience, D.to get her glass refilled, E.hold the bottle.",
         "predicted_options": [
@@ -1989,16 +1989,16 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1021/5558701375.mp4",
         "answers": [
-            "After analyzing the additional frames, it appears that the lady in green does not perform any specific action after the girl walks away at the start. Therefore, the answer to the question \"What does the lady in green do after the girl walks away at the start?\" is that she does not engage in any particular action."
+            "After the girl walks away at the start of the video, the lady in green is seen walking up stone steps with a frisbee. She does not perform any of the actions listed in the options provided."
         ],
         "question_w_options": "What does the lady in green do after the girl walks away at the start? Choose your answer from below options: A.look at camera, B.she bows twice, C.push the board away, D.lie on the ground, E.follow girl.",
         "predicted_options": [
-            0
+            -1
         ],
         "match_methods": [
-            "full matching"
+            "none"
         ],
-        "final_predicted_option": 0,
+        "final_predicted_option": null,
         "is_correct": false
     },
     {
@@ -2015,7 +2015,7 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1016/11049178966.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, after putting the cup of water down, the man continues to play music with others in a music studio with microphones. Therefore, the correct answer is B. start playing the instruments."
+            "Based on the captions of the sampled frames, the man starts playing the instruments after putting the cup of water down."
         ],
         "question_w_options": "What does the man do after putting the cup of water down? Choose your answer from below options: A.stops drinking, B.start playing the instruments, C.swirl the drink, D.smile, E.closes the tap.",
         "predicted_options": [
@@ -2067,7 +2067,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1009/5996570774.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the woman seems to be enjoying herself while playing with the girl in grey. She is engaged in playful activities with the child, indicating an enjoyable interaction. Therefore, the answer to the question is D. enjoyable."
+            "Based on the captions of the sampled frames, the woman appears to be enjoying herself while playing with the girl in grey. The answer is D. enjoyable."
         ],
         "question_w_options": "How is the woman feeling while playing with the girl in grey? Choose your answer from below options: A.bored, B.embarrassed, C.scared, D.enjoyable, E.blessed.",
         "predicted_options": [
@@ -2093,17 +2093,17 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/0063/2407008208.mp4",
         "answers": [
-            "Sorry, need more steps to process this request."
+            "Based on the captions of the sampled frames, it is evident that the divers are underwater. Therefore, the reason why the divers wear goggles is to see better underwater."
         ],
         "question_w_options": "Why do the divers wear goggles? Choose your answer from below options: A.to get onto the boat, B.showering the dog, C.cooling, D.see better underwater, E.oxygen.",
         "predicted_options": [
-            -1
+            3
         ],
         "match_methods": [
-            "none"
+            "full matching"
         ],
-        "final_predicted_option": null,
-        "is_correct": false
+        "final_predicted_option": 3,
+        "is_correct": true
     },
     {
         "quid": "6247230354_10",
@@ -2119,7 +2119,7 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1019/6247230354.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the people in the video are trekking. The correct answer is D. trekking."
+            "Based on the captions of the sampled frames, the people in the video are trekking. The answer is D. trekking."
         ],
         "question_w_options": "What are the people doing in the video? Choose your answer from below options: A.paragliding, B.playing guitars, C.climbing tree, D.trekking, E.buying drink.",
         "predicted_options": [
@@ -2171,7 +2171,7 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1101/2411016012.mp4",
         "answers": [
-            "Based on the analysis of the extracted frames, it appears that the people warmed themselves indoors by being covered with a blanket. Therefore, the answer to the question is D. covered with blanket."
+            "Based on the additional frames extracted and analyzed, it appears that the people in the video are indoors, and some of them are holding babies while sitting on a bed. The frames also show instances of people holding babies wrapped in blankets. Therefore, the most suitable option for how the people are warming themselves indoors would be **D. covered with blanket**."
         ],
         "question_w_options": "How did the people warm themselves in door? Choose your answer from below options: A.keep jumping, B.thick clothing, C.lady open tap, D.covered with blanket, E.lean against wall.",
         "predicted_options": [
@@ -2197,7 +2197,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/0077/2413341572.mp4",
         "answers": [
-            "After analyzing the newly extracted frames, it appears that the man in the red hoodie puts his hands up nearing the end of the video as a gesture of acknowledgment."
+            "After analyzing the newly extracted frames, there is no clear indication as to why the man in the red hoodie puts his both hands up nearing the end of the video. The frames do not provide specific context for this action."
         ],
         "question_w_options": "Why does the man in red hoodie put his both hands up nearing the end? Choose your answer from below options: A.instructed by bespectacled man, B.need to play the drum, C.acknowledge, D.on ship, E.tourist.",
         "predicted_options": [
@@ -2223,16 +2223,16 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/0012/2509406389.mp4",
         "answers": [
-            "Based on the information from the sampled frames, the cat climbed up to the sink using its paws."
+            "Based on the sampled frames, the cat climbed up to the sink."
         ],
         "question_w_options": "How did the cat get up to the sink? Choose your answer from below options: A.jump to toilet bowl then sink, B.climbing up, C.hugged by man, D.with its paws, E.smell the camera.",
         "predicted_options": [
-            3
+            1
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 3,
+        "final_predicted_option": 1,
         "is_correct": false
     },
     {
@@ -2249,17 +2249,17 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1107/9069281283.mp4",
         "answers": [
-            "After analyzing the newly extracted frames, it is still not clear what the man in black did as the man in brown walked up the stairs. Unfortunately, the information from the frames is not sufficient to provide a definitive answer."
+            "Sorry, need more steps to process this request."
         ],
         "question_w_options": "What did the man in black do as the man in brown walked up the stairs? Choose your answer from below options: A.eat the jelly, B.watch him, C.camera, D.happy, E.look towards the man speaking.",
         "predicted_options": [
-            1
+            4
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 1,
-        "is_correct": true
+        "final_predicted_option": 4,
+        "is_correct": false
     },
     {
         "quid": "10542271055_5",
@@ -2275,16 +2275,16 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1025/10542271055.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the girl in brown picks up leaves after the girl in blue points at a direction. The answer is E. pick up leaves."
+            "Sorry, need more steps to process this request."
         ],
         "question_w_options": "What did the girl in brown do after the girl in blue pointed at a direction in the middle of the video? Choose your answer from below options: A.smiles at the baby, B.run away, C.pick up something, D.swing her arms, E.pick up leaves.",
         "predicted_options": [
-            4
+            0
         ],
         "match_methods": [
             "full matching"
         ],
-        "final_predicted_option": 4,
+        "final_predicted_option": 0,
         "is_correct": false
     },
     {
@@ -2301,7 +2301,7 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1051/4154183202.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the girl is holding onto a toy for support to keep herself from falling down. Therefore, the answer is: A. hold onto toy for support."
+            "Based on the captions of the sampled frames, the girl is holding onto a toy for support to keep herself from falling down. Therefore, the answer to the question is: A. hold onto toy for support."
         ],
         "question_w_options": "How does the girl keep herself from falling down? Choose your answer from below options: A.hold onto toy for support, B.mask, C.thick clothes, D.hold her hand, E.hold onto table.",
         "predicted_options": [
@@ -2327,7 +2327,7 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1110/4943421690.mp4",
         "answers": [
-            "After extracting additional frames, it is evident that the girl controls the direction of the toy vehicle by turning the handlebars. The answer to the question is D. turn the handle bars."
+            "Based on the information extracted from the frames, the girl controls the direction of the toy vehicle by turning the handle bars."
         ],
         "question_w_options": "How does the girl control the direction of the toy vehicle at the start of the video? Choose your answer from below options: A.pull the rope, B.hold up string, C.with support of the toy, D.turn the handle bars, E.using her toes.",
         "predicted_options": [
@@ -2379,7 +2379,7 @@
         "truth": 2,
         "video_path": "/share_data/NExT-QA/NExTVideo/0061/7722027264.mp4",
         "answers": [
-            "Based on the sampled frames, the groom was standing at a table with the bride with a microphone in front of them. The groom was likely listening to the bride giving her speech at the beginning of the video."
+            "Based on the sampled frames, the groom was standing at a table with the bride with a microphone in front of them while the bride was giving her speech at the beginning of the video. The groom was likely listening to the bride's speech."
         ],
         "question_w_options": "What was the groom doing when the bridge was giving her speech at the beginning of the video? Choose your answer from below options: A.run, B.pull skirt up, C.looking at bride, D.pretend to punch him, E.get out of car.",
         "predicted_options": [
@@ -2405,7 +2405,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1155/4254574573.mp4",
         "answers": [
-            "Based on the analysis of the newly extracted frames, the user touches the screen to take pictures of a cat displayed on the cell phone. The correct answer is not provided in the options given. The user's interaction with the cell phone is primarily focused on capturing images of the cat."
+            "Based on the captions of the sampled frames, the user touches the screen to take a picture of a cat on their cell phone."
         ],
         "question_w_options": "Why does the user touch the screen? Choose your answer from below options: A.it is a barrier, B.hand gesture for bear, C.typing, D.live webcam, E.to check the effects.",
         "predicted_options": [
@@ -2431,7 +2431,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1110/8655296645.mp4",
         "answers": [
-            "Based on the sampled frames, while the lady in jeans disappears from the video for a while, the lady in the brown skirt plays with a frisbee. Therefore, the answer to the question is E. play with baby."
+            "Based on the information from the sampled frames, while the lady in jeans disappears from the video for a while, the lady in the brown skirt is playing with a frisbee with a child. Therefore, the answer to the question is E. play with baby."
         ],
         "question_w_options": "What does the lady in brown skirt do while the lady in jeans disappears from the video for a while? Choose your answer from below options: A.lean to the side, B.claps, C.look at ground, D.get in the pool, E.play with baby.",
         "predicted_options": [
@@ -2457,7 +2457,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1103/8260341634.mp4",
         "answers": [
-            "Based on the sampled frames, it is not clear how the baby signals the woman to start moving at the start. To provide a more accurate answer, I will need to extract more frames from the video. Let's proceed with extracting additional frames."
+            "Based on the information extracted from the sampled frames, the baby signals the woman to start moving at the start by tugging on her shirt."
         ],
         "question_w_options": "How does the baby signal the woman to start moving at the start? Choose your answer from below options: A.holds his hand, B.jump, C.bite it, D.walk around, E.tugs on her shirt.",
         "predicted_options": [
@@ -2535,16 +2535,16 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1162/5782595661.mp4",
         "answers": [
-            "After touching the black setup, the man looked at the computer."
+            "After analyzing the newly extracted frames, it is observed that the man continued to stand under a tent with laptops after touching the black setup. Therefore, the man did not perform any specific action like looking at a computer, moving backwards, smiling, grabbing a book, or eating jelly."
         ],
         "question_w_options": "What did the man do after touching the black setup at first? Choose your answer from below options: A.look at computer, B.move backwards, C.smiling, D.grab the book, E.eat the jelly.",
         "predicted_options": [
-            -1
+            2
         ],
         "match_methods": [
-            "none"
+            "full matching"
         ],
-        "final_predicted_option": null,
+        "final_predicted_option": 2,
         "is_correct": false
     },
     {
@@ -2561,7 +2561,7 @@
         "truth": 2,
         "video_path": "/share_data/NExT-QA/NExTVideo/1000/4337269702.mp4",
         "answers": [
-            "Based on the sampled frames, the small cat is likely smelling the cushion while playing with it."
+            "After analyzing the newly extracted frames, it appears that the small cat keeps smelling the cushion in the middle of the video because it is playing with it out of curiosity. The behavior seems to be part of the playful interaction with the cushion."
         ],
         "question_w_options": "Why does one of the small cat keep smelling the cushion in the middle of video? Choose your answer from below options: A.paw got wet, B.eating, C.playing with it, D.happy, E.change sitting position.",
         "predicted_options": [
@@ -2587,7 +2587,7 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1107/2660007586.mp4",
         "answers": [
-            "Based on the captions of the sampled frames, the lady stops on a brick road where there are no other vehicles around the area. Therefore, the reason there are no other vehicles around could be because the lady stops on a brick road. So, the answer to the question is: B. pavement to walk."
+            "Based on the captions of the sampled frames, it appears that the lady is riding a scooter or moped on city streets. The absence of other vehicles around the area where the lady stops could be due to the lady riding on a pavement to walk."
         ],
         "question_w_options": "Why is there no other vehicles around the area where the lady stops? Choose your answer from below options: A.off road, B.pavement to walk, C.hot sun, D.instructors, E.do not want shoe to get wet.",
         "predicted_options": [
