@@ -1,0 +1,38 @@
+[
+    {
+        "quid": "3238737531_2",
+        "uid": "3238737531",
+        "qid": 2,
+        "q_type": "DC",
+        "question": "how many children are in the video",
+        "optionA": "one",
+        "optionB": "three",
+        "optionC": "seven",
+        "optionD": "two",
+        "optionE": "five",
+        "truth": 3,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4",
+        "answers": [
+            "Based on the captions of the frames, it appears that there are **two children** in the video."
+        ],
+        "question_w_options": "How many children are in the video? Choose your answer from below options: A.one, B.three, C.seven, D.two, E.five."
+    },
+    {
+        "quid": "8968804598_0",
+        "uid": "8968804598",
+        "qid": 0,
+        "q_type": "CW",
+        "question": "why is the blue sweater guy looking at the shirtless men",
+        "optionA": "sharing with his friends",
+        "optionB": "found the man funny",
+        "optionC": "poor vision",
+        "optionD": "keep hands warm",
+        "optionE": "training",
+        "truth": 4,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1006/8968804598.mp4",
+        "answers": [
+            "Based on the information from the frames, it seems that the blue sweater guy is looking at the shirtless men because they are sumo wrestlers in a ring in a gym. This suggests that the most likely answer is E. training. If you need more information, I can use the frame-augmentation-tool to extract additional frames."
+        ],
+        "question_w_options": "Why is the blue sweater guy looking at the shirtless men? Choose your answer from below options: A.sharing with his friends, B.found the man funny, C.poor vision, D.keep hands warm, E.training."
+    }
+]

@@ -63,8 +63,6 @@ class VisibleFrames:
                    video_stride=None):
         """添加新的可见帧"""
 
-        # TODO 累计添加
-
         # 确定要读取的帧索引
         total_frames = self.video_info["total_frames"]
         if frame_indices is None:
@@ -84,6 +82,11 @@ class VisibleFrames:
                 print(f"Warning: Frame index {frame_idx} is out of range [0, {total_frames-1}]")
                 continue
             
+            # 检查帧是否已存在
+            if any(frame.index == frame_idx for frame in self.frames):
+                print(f"Frame {frame_idx} already exists, skipping...")
+                continue
+
             # 设置要读取的帧位置
             cap.set(cv2.CAP_PROP_POS_FRAMES, frame_idx)
             

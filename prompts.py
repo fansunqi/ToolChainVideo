@@ -3,7 +3,9 @@ QUERY_PREFIX = """Regarding a given video, use tools to answer the following que
 Questions: """
 
 
-TOOLS_RULE = ""
+TOOLS_RULE = """Please strictly follow the rules below while using the tools:
+Rule 1: Do not use the frame-extraction-tool as the first tool. You may use it only after other tools have been used and you determine that the information obtained is still insufficient to answer the question.
+"""
 
 
 SELECT_FRAMES_PROMPT = """Given a video that has {num_frames} frames, the frames are decoded at {fps} fps. 

@@ -15,6 +15,7 @@ def prompts(name, description):
 # frame-level
 class YOLOTracker:
     def __init__(self, 
+                conf = None, 
                 model_path: str = "checkpoints/yoloe-11l-seg.pt",
                 persist: bool = True, 
                 stream: bool = True, 

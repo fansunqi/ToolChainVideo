@@ -15,7 +15,7 @@ use_cache: False
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/train.csv"
-num_examples_to_run: 2
+num_examples_to_run: 10
 start_num: 0
 quids_to_exclude: ["6595307655_4"]
 

@@ -25,7 +25,8 @@ def prompts(name, description):
 class ImageCaptioner:
     def __init__(
         self,
-        device="cuda:0"
+        conf = None, 
+        device = "cuda:0"
     ):
         self.device = device
         self.torch_dtype = torch.float16 if "cuda" in device else torch.float32

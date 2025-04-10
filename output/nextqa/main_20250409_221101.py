@@ -176,7 +176,7 @@ if __name__ == "__main__":
         input_question=question_w_options,
         llm=tool_planner_llm,
         tools=tools,
-        recursion_limit=24,
+        recursion_limit=5,
     )
 
     print(tool_chain_output)

@@ -66,7 +66,7 @@ def get_tools(conf):
     tool_list = conf.tool.tool_list
     tool_instances = []
     for tool_name in tool_list:
-        tool_instances.append(globals()[tool_name](conf))
+        tool_instances.append(globals()[tool_name]())
     print(f"tool_instances: {str(tool_instances)}")
     
     tools = []
@@ -176,7 +176,7 @@ if __name__ == "__main__":
         input_question=question_w_options,
         llm=tool_planner_llm,
         tools=tools,
-        recursion_limit=24,
+        recursion_limit=5,
     )
 
     print(tool_chain_output)

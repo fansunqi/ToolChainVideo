@@ -220,7 +220,6 @@ if __name__ == "__main__":
                         llm=tool_planner_llm,
                         tools=tools,
                         recursion_limit=conf.recursion_limit,
-                        use_cache=conf.use_cache,
                         mannual_cache=mannual_cache,
                         mannual_cache_file=mannual_cache_file
                     )
@@ -233,7 +232,6 @@ if __name__ == "__main__":
                     llm=tool_planner_llm,
                     tools=tools,
                     recursion_limit=conf.recursion_limit,
-                    use_cache=conf.use_cache,
                     mannual_cache=mannual_cache,
                     mannual_cache_file=mannual_cache_file
                 )
