@@ -126,3 +126,17 @@ python scripts/main.py
 python eval/eval_nextqa.py
 ```
 
+
+(04.11 更新) 最新的运行指令：
+
+```
+python main_new_tools.py
+```
+
+默认使用的 config 是 `config/nextqa_new_tool.yaml`
+
+最新的评测指令：
+
+```
+python eval.py
+```

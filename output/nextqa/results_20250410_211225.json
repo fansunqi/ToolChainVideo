@@ -1,0 +1,102 @@
+[
+    {
+        "quid": "2976913210_6",
+        "uid": "2976913210",
+        "qid": 6,
+        "q_type": "TC",
+        "question": "how did the man respond when he is stuck in the dirt",
+        "optionA": "touched his head",
+        "optionB": "pointing towards the jumping line",
+        "optionC": "kept trying",
+        "optionD": "prepare to swing again",
+        "optionE": "looking at the floor",
+        "truth": 2,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1111/2976913210.mp4",
+        "answers": [
+            "Based on the newly extracted frames, the man's response when stuck in the dirt is not clearly captured. Unfortunately, the frames do not provide a direct answer to the question.",
+            "After analyzing the newly extracted frames, there is still no clear indication of how the man responded when he was stuck in the dirt. Unfortunately, the frames do not provide the specific actions or response of the man in that situation.",
+            "The newly extracted frames also show the man riding a four-wheeler through a muddy river. The options provided do not align with the observed actions. Based on the information available, the man's response when stuck in the dirt cannot be accurately determined."
+        ],
+        "question_w_options": "How did the man respond when he is stuck in the dirt? Choose your answer from below options: A.touched his head, B.pointing towards the jumping line, C.kept trying, D.prepare to swing again, E.looking at the floor."
+    },
+    {
+        "quid": "2793260225_6",
+        "uid": "2793260225",
+        "qid": 6,
+        "q_type": "CH",
+        "question": "how did the lady and man on top try to keep their balance",
+        "optionA": "hold the ropes tightly",
+        "optionB": "held each other",
+        "optionC": "walk side to side",
+        "optionD": "hold ski stick",
+        "optionE": "standing still",
+        "truth": 1,
+        "video_path": "/share_data/NExT-QA/NExTVideo/0066/2793260225.mp4",
+        "answers": [
+            "Sorry, need more steps to process this request.",
+            "Sorry, need more steps to process this request.",
+            "Based on the captions of the sampled frames, the lady and man on top tried to keep their balance by holding the ropes tightly. The answer is A. hold the ropes tightly."
+        ],
+        "question_w_options": "How did the lady and man on top try to keep their balance? Choose your answer from below options: A.hold the ropes tightly, B.held each other, C.walk side to side, D.hold ski stick, E.standing still."
+    },
+    {
+        "quid": "7508439506_1",
+        "uid": "7508439506",
+        "qid": 1,
+        "q_type": "CW",
+        "question": "why did the boy put his hands on the baby",
+        "optionA": "play with baby",
+        "optionB": "to give her food",
+        "optionC": "play",
+        "optionD": "support the baby",
+        "optionE": "fall and pounce on the boy",
+        "truth": 0,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1201/7508439506.mp4",
+        "answers": [
+            "After analyzing the newly extracted frames, it is evident that the boy put his hands on the baby while the baby was laying on a bed with a man in the background. The reason for the boy's action appears to be related to interacting with the baby in a playful or supportive manner. Based on the information available, the most suitable answer would be A. play with baby.",
+            "After analyzing the newly extracted frames, the reason why the boy put his hands on the baby is still not explicitly mentioned in the captions. Therefore, based on the available information, it is not possible to provide a definitive answer to the question.",
+            "Based on the captions of the sampled frames, it seems that the boy put his hands on the baby to play with the baby."
+        ],
+        "question_w_options": "Why did the boy put his hands on the baby? Choose your answer from below options: A.play with baby, B.to give her food, C.play, D.support the baby, E.fall and pounce on the boy."
+    },
+    {
+        "quid": "7508439506_4",
+        "uid": "7508439506",
+        "qid": 4,
+        "q_type": "DL",
+        "question": "where is this video taken",
+        "optionA": "swimming pool",
+        "optionB": "outdoor",
+        "optionC": "field",
+        "optionD": "desert",
+        "optionE": "bed room",
+        "truth": 4,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1201/7508439506.mp4",
+        "answers": [
+            "Based on the sampled frames, the video appears to be taken in a bedroom.",
+            "Based on the sampled frames, the video appears to be taken in a bedroom.",
+            "Based on the sampled frames, the video appears to be taken in a bedroom."
+        ],
+        "question_w_options": "Where is this video taken? Choose your answer from below options: A.swimming pool, B.outdoor, C.field, D.desert, E.bed room."
+    },
+    {
+        "quid": "6136926089_8",
+        "uid": "6136926089",
+        "qid": 8,
+        "q_type": "TN",
+        "question": "what does the baby do after letting go of the cart",
+        "optionA": "open her eyes",
+        "optionB": "move toward the slides",
+        "optionC": "touch the toy",
+        "optionD": "turn to his back",
+        "optionE": "lean forward and put head down",
+        "truth": 1,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1005/6136926089.mp4",
+        "answers": [
+            "After analyzing the newly extracted frames, it is observed that the baby moves toward the slides after letting go of the cart. Therefore, the correct answer is B. move toward the slides.",
+            "Based on the captions of the sampled frames, the baby moves toward the slides after letting go of the cart. The correct answer is B. move toward the slides.",
+            "Based on the captions of the sampled frames, the baby moves toward the slides after letting go of the cart. The correct answer is B. move toward the slides."
+        ],
+        "question_w_options": "What does the baby do after letting go of the cart? Choose your answer from below options: A.open her eyes, B.move toward the slides, C.touch the toy, D.turn to his back, E.lean forward and put head down."
+    }
+]

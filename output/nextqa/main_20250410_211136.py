@@ -48,7 +48,7 @@ timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 TO_TXT = True
 TRY_EXCEPT_MODE = True
 
-# TODO 可以把这些工具函数移到 util.py 中去
+
 def backup_file(opt, conf):
     # 将 main.py 文件自身和 opt.config 文件复制一份存储至 conf.output_path
     current_script_path = os.path.abspath(__file__)  # 获取当前脚本的绝对路径
@@ -213,15 +213,16 @@ if __name__ == "__main__":
         result["answers"] = []
         result["question_w_options"] = question_w_options
 
-        # trim
+        #### trim
         adjust_video_resolution(video_path)
 
+        # 建立 VisibleFrames
         video_info = get_video_info(video_path)
         init_video_stride = int(video_info["fps"] * conf.init_interval_sec)
-        
-        for try_count in range(try_num):
+        visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
 
-            visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
+
+        for try_count in range(try_num):
             
             for tool_instance in tool_instances:
                 tool_instance.set_frames(visible_frames)
@@ -255,6 +256,8 @@ if __name__ == "__main__":
 
             result["answers"].append(tool_chain_output)
 
+            # TODO 检查 tool_chain_output 是否真正选出来了答案
+
         all_results.append(result)
 
     output_file = os.path.join(conf.output_path, f"results_{timestamp}.json")
@@ -269,6 +272,6 @@ if __name__ == "__main__":
 
 
 # TODO 可视化 langgraph 工具图
-# TODO 尝试手动规定工具顺序
+
 
     

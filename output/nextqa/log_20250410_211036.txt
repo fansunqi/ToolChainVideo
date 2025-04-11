@@ -1,0 +1,9 @@
+Loading LLM cache from cache/gpt35_cache_new_tool.pkl...
+
+tool_instances: [<tools.image_captioner.ImageCaptioner object at 0x7f2e15e50a00>, <tools.frame_selector.FrameSelector object at 0x7f2e0ed63460>]
+tools: [Tool(name='image-caption-tool', description="Useful when you need to caption the frames in the video.The input to this tool is a placeholder and does not affect the tool's output.", func=<bound method ImageCaptioner.inference of <tools.image_captioner.ImageCaptioner object at 0x7f2e15e50a00>>), Tool(name='frame-extraction-tool', description="Useful when you find that the currently sampled frames do not provide enough information and more frames need to be extracted from the video to answer the question.The input to this tool must be a question about the video that remains unresolved. For example, 'How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.'", func=<bound method FrameSelector.inference of <tools.frame_selector.FrameSelector object at 0x7f2e0ed63460>>)]
+
+Building dataset...
+
+
+Processing: 2976913210_6

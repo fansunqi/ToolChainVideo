@@ -48,7 +48,7 @@ timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 TO_TXT = True
 TRY_EXCEPT_MODE = True
 
-# TODO 可以把这些工具函数移到 util.py 中去
+
 def backup_file(opt, conf):
     # 将 main.py 文件自身和 opt.config 文件复制一份存储至 conf.output_path
     current_script_path = os.path.abspath(__file__)  # 获取当前脚本的绝对路径
@@ -269,6 +269,6 @@ if __name__ == "__main__":
 
 
 # TODO 可视化 langgraph 工具图
-# TODO 尝试手动规定工具顺序
+
 
     

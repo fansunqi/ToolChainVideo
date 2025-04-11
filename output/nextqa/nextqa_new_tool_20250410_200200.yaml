@@ -14,15 +14,17 @@ use_cache: False
 
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
-anno_path: "/share_data/NExT-QA/dataset/nextqa/val.csv"
+anno_path: "/share_data/NExT-QA/dataset/nextqa/train.csv"
 num_examples_to_run: 100
 start_num: 0
+
+specific_quids: ["13884124143_1"]
 
 output_path: "output/nextqa/"
 
 recursion_limit: 10
 
-try_num: 3
+try_num: 1
 
 init_interval_sec: 10
 
