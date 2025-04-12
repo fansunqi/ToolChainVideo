@@ -6,10 +6,10 @@ openai:
 
 tool:
   tool_list:
-    - "ImageQA"
+    - "ImageCaptioner"
     - "FrameSelector"
 
-mannual_cache_file: "cache/gpt35_cache_new_tool_3.pkl"
+mannual_cache_file: "cache/gpt35_cache_new_tool_1.pkl"
 use_cache: False
 
 dataset: "nextqa"

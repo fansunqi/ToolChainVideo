@@ -40,7 +40,6 @@ from langchain_core.tools import Tool
 from tools.yolo_tracker import YOLOTracker
 from tools.image_captioner import ImageCaptioner
 from tools.frame_selector import FrameSelector
-from tools.image_qa import ImageQA
 
 from visible_frames import get_video_info, VisibleFrames
 
@@ -104,6 +103,13 @@ def tool_chain_reasoning(
     mannual_cache=None,
     mannual_cache_file=None
 ):
+    # prompt = ChatPromptTemplate.from_messages(
+    #     [
+    #         ("system", "You are a helpful assistant."),
+    #         ("placeholder", "{messages}"),
+    #         ("placeholder", "{agent_scratchpad}"),
+    #     ]
+    # )
 
     prompt = ChatPromptTemplate.from_messages(
         [
@@ -119,6 +125,8 @@ def tool_chain_reasoning(
     tool_planner = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
     
     query = QUERY_PREFIX + input_question + '\n\n' + TOOLS_RULE
+
+    # query = QUERY_PREFIX + input_question
     
     if use_cache and (query in mannual_cache):
         print("\nCache hit!")
@@ -131,7 +139,7 @@ def tool_chain_reasoning(
             {"messages": [("human", query)]}, 
             {"recursion_limit": recursion_limit},
                 stream_mode="values"):
-            
+
             step_message = step["messages"][-1]
 
             if isinstance(step_message, tuple):

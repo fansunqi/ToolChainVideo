@@ -40,7 +40,6 @@ from langchain_core.tools import Tool
 from tools.yolo_tracker import YOLOTracker
 from tools.image_captioner import ImageCaptioner
 from tools.frame_selector import FrameSelector
-from tools.image_qa import ImageQA
 
 from visible_frames import get_video_info, VisibleFrames
 
@@ -131,6 +130,8 @@ def tool_chain_reasoning(
             {"messages": [("human", query)]}, 
             {"recursion_limit": recursion_limit},
                 stream_mode="values"):
+
+            pdb.set_trace()
             
             step_message = step["messages"][-1]
 

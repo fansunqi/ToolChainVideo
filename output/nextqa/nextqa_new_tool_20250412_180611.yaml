@@ -10,7 +10,7 @@ tool:
     - "FrameSelector"
 
 mannual_cache_file: "cache/gpt35_cache_new_tool_3.pkl"
-use_cache: False
+use_cache: True
 
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"

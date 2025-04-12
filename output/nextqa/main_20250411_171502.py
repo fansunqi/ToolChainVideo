@@ -25,6 +25,7 @@ from prompts import (
     QUERY_PREFIX,
     TOOLS_RULE,
     ASSISTANT_ROLE,
+    QUERY_PREFIX_DES,
 )
 
 from dataset import get_dataset
@@ -40,14 +41,12 @@ from langchain_core.tools import Tool
 from tools.yolo_tracker import YOLOTracker
 from tools.image_captioner import ImageCaptioner
 from tools.frame_selector import FrameSelector
-from tools.image_qa import ImageQA
 
 from visible_frames import get_video_info, VisibleFrames
 
 
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-TO_TXT = True
-TRY_EXCEPT_MODE = True
+TO_TXT = False
 
 # TODO 可以把这些工具函数移到 util.py 中去
 def backup_file(opt, conf):
@@ -95,64 +94,6 @@ def get_tools(conf):
     return tool_instances, tools
 
 
-def tool_chain_reasoning( 
-    input_question, 
-    llm, 
-    tools,
-    recursion_limit=24,  
-    use_cache=True,
-    mannual_cache=None,
-    mannual_cache_file=None
-):
-
-    prompt = ChatPromptTemplate.from_messages(
-        [
-            ("system", ASSISTANT_ROLE),
-            ("placeholder", "{messages}"),
-            ("placeholder", "{agent_scratchpad}"),
-        ]
-    )
-    
-    def _modify_state_messages(state: AgentState):
-        return prompt.invoke({"messages": state["messages"]}).to_messages()
-    
-    tool_planner = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
-    
-    query = QUERY_PREFIX + input_question + '\n\n' + TOOLS_RULE
-    
-    if use_cache and (query in mannual_cache):
-        print("\nCache hit!")
-        steps = mannual_cache[query]
-    else:
-        print("\nCache miss. Calling API...")
-        steps = []
-    
-        for step in tool_planner.stream(
-            {"messages": [("human", query)]}, 
-            {"recursion_limit": recursion_limit},
-                stream_mode="values"):
-            
-            step_message = step["messages"][-1]
-
-            if isinstance(step_message, tuple):
-                print(step_message)
-            else:
-                step_message.pretty_print()
-        
-            steps.append(step)
-        
-        save_cache(mannual_cache, query, steps, mannual_cache_file)    
- 
-    try:
-        output = steps[-1]["messages"][-1].content
-    except:
-        output = None
-    
-    print(f"\nToolChainOutput: {output}") 
-    return output
-
-
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
@@ -173,7 +114,8 @@ if __name__ == "__main__":
     mannual_cache_file = conf.mannual_cache_file
     mannual_cache = load_cache(mannual_cache_file)
 
-    tool_instances, tools = get_tools(conf)
+    # tool_instances, tools = get_tools(conf)
+    image_captioner = ImageCaptioner()
     
     tool_planner_llm = ChatOpenAI(
         api_key = conf.openai.GPT_API_KEY,
@@ -189,7 +131,8 @@ if __name__ == "__main__":
     specific_quids = conf["specific_quids"] if "specific_quids" in conf else None
     dataset = get_dataset(conf, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
 
-    try_num = conf.try_num
+    # try_num = conf.try_num
+    try_num = 1
     all_results = []
 
     for data in tqdm(dataset):
@@ -209,43 +152,34 @@ if __name__ == "__main__":
         adjust_video_resolution(video_path)
 
         video_info = get_video_info(video_path)
-        init_video_stride = int(video_info["fps"] * conf.init_interval_sec)
+        min_interval_sec = 1
+        init_video_stride = int(video_info["fps"] * min_interval_sec)
         
         for try_count in range(try_num):
 
             visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
             
-            for tool_instance in tool_instances:
-                tool_instance.set_frames(visible_frames)
+            # for tool_instance in tool_instances:
+            #     tool_instance.set_frames(visible_frames)
+            image_captioner.set_frames(visible_frames)
 
             # TODO 各种工具也可以加上一个 set_question 功能
+            image_captioner.inference(input="placeholder")
             
-            if TRY_EXCEPT_MODE:
-                try:
-                    tool_chain_output = tool_chain_reasoning(
-                        input_question=question_w_options,
-                        llm=tool_planner_llm,
-                        tools=tools,
-                        recursion_limit=conf.recursion_limit,
-                        use_cache=conf.use_cache,
-                        mannual_cache=mannual_cache,
-                        mannual_cache_file=mannual_cache_file
-                    )
-                except Exception as e:
-                    print(f"Error: {e}")
-                    tool_chain_output = "Error"
-            else:
-                tool_chain_output = tool_chain_reasoning(
-                    input_question=question_w_options,
-                    llm=tool_planner_llm,
-                    tools=tools,
-                    recursion_limit=conf.recursion_limit,
-                    use_cache=conf.use_cache,
-                    mannual_cache=mannual_cache,
-                    mannual_cache_file=mannual_cache_file
-                )
+            all_frames_descriptions = visible_frames.get_frame_descriptions()
 
-            result["answers"].append(tool_chain_output)
+            input_prompt = QUERY_PREFIX_DES.format(
+                frame_caption = all_frames_descriptions,
+                question = question_w_options,
+            )
+
+            print("Input Prompt: ", input_prompt)
+
+            output = tool_planner_llm(input_prompt)
+
+            print("Output Answer: ", output)
+            
+            result["answers"].append(output)
 
         all_results.append(result)
 

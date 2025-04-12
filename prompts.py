@@ -40,3 +40,12 @@ To achieve this, we will:
 
 Return the selected video segments in the specified JSON format.
 """
+
+QUERY_PREFIX_DES = """Regarding a given video, based on the following frame caption to answer the following question as best you can.
+
+Frame Caption: 
+{frame_caption}
+
+Question:
+{question}
+"""
