@@ -71,7 +71,7 @@ class ImageQA:
         # 如果输入问题中包含选项，则去掉选项
         input = clean_question(input)
         
-        result = "Here are the question-answering result of sampled frames:\n"
+        result = "Here are the question answering results of sampled frames:\n"
         for frame in self.visible_frames.frames:
             
             answer = self.image_qa(frame.image, input)
@@ -80,7 +80,7 @@ class ImageQA:
             if add_info not in frame.description:
                 frame.description += (add_info + "\n")
                 
-            print(f"QA... Frame {frame.index}: {add_info}\n")
+            print(f"Image QA... Frame {frame.index}: {add_info}")
             result += f"\nFrame {frame.index}: {add_info}"
 
         return result       

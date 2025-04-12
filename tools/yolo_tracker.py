@@ -25,15 +25,15 @@ class YOLOTracker:
         self.model = YOLOE(model_path)
         print("Model loaded successfully.")
 
-        self.frames = None
+        self.visible_frames = None
 
         self.persist = persist
         self.stream = stream
         self.save = save
         self.output_id = output_id
 
-    def set_frames(self, frames: List[cv2.Mat]):
-        self.frames = frames
+    def set_frames(self, visible_frames):
+        self.visible_frames = visible_frames
 
     def track_frames(self, 
               open_vocabulary: List[str]):
@@ -49,28 +49,34 @@ class YOLOTracker:
         
         self.model.set_classes(open_vocabulary, self.model.get_text_pe(open_vocabulary))
         
-        # TODO 检查 stream 函数
-        results = self.model.track(self.frames, 
+
+        frames_image_list = []
+        for visible_frame in self.visible_frames.frames:
+            frames_image_list.append(visible_frame.image)
+            
+        results = self.model.track(frames_image_list, 
                                 persist=self.persist, 
                                 save=self.save, 
                                 stream=self.stream)
 
         # result 是单独一帧的结果
         result_message = "Here are the detection and tracking results for the video clip:\n"
-        for frame_idx, result in enumerate(results):
+        for result_idx, result in enumerate(results):
             cls = result.boxes.cls.cpu().numpy().astype(int)
             try: 
                 ids = result.boxes.id.cpu().numpy().astype(int)
             except AttributeError:
                 ids = [None] * len(cls)
 
-            result_message += f"Frame {frame_idx} has "
+            frame_idx = self.visible_frames.frames[result_idx].index
+            frame_result_message = f"Frame {frame_idx} has "
 
             if self.output_id: 
                 # TODO 完善 output_id = True 的情况
-                for id, c in zip(ids, cls):
-                    c_name = open_vocabulary[c]
-                    result_message += f"ID {id}, Class {c_name}; "
+                # for id, c in zip(ids, cls):
+                #     c_name = open_vocabulary[c]
+                #     result_message += f"ID {id}, Class {c_name}; "
+                raise NotImplementedError("output_id=True is not implemented yet.")
             else:
                 # 统计各类物体个数
                 frame_class_counts = {cls_name: 0 for cls_name in open_vocabulary}
@@ -81,9 +87,14 @@ class YOLOTracker:
                 # 输出个数
                 for cls_name, count in frame_class_counts.items():
                     if count > 0:
-                        result_message += f"{count} {cls_name}"
+                        frame_result_message += f"{count} {cls_name}"
 
-            result_message += "\n"
+            frame_result_message += "\n"
+            result_message += frame_result_message
+            
+            # 维护 frame.description
+            if "Detection and tracking results" not in self.visible_frames.frames[result_idx].description:
+                self.visible_frames.frames[result_idx].description += f"Detection and tracking results: {frame_result_message}"
         
         # TODO ReID 
 
