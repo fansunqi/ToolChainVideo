@@ -13,118 +13,33 @@
    conda create -n tcv python=3.9
    conda activate tcv
    pip install -r requirements.txt
-   
-   # install spatial_correlation_sampler from source code:
-   git clone git@github.com:ClementPinard/Pytorch-Correlation-extension.git
-   cd Pytorch-Correlation-extension
-   python setup.py install
-   cd ..
    ```
-   Install Segment Anything and Grounding DINO in Grounded-Segment-Anything as in https://github.com/IDEA-Research/Grounded-Segment-Anything:
-   ```python
-   cd project/Grounded-Segment-Anything
-   python -m pip install -e segment_anything
-   pip install --no-build-isolation -e GroundingDINO
-   cd ../..
-   ```
-
-3. Set up your API key 🗝️:
-   - Fill in config/inference/inference.yaml with your keys:
+3. Set up your API key 🗝️ in `config/*.yaml`:
      ```python
      openai:
-       GPT_API_KEY: ["put your openai key here", ...]
+       GPT_API_KEY: "put your openai api key here"
+       PROXY: "put your openai base url here"
      ```
 
 5. Download the checkpoints  and bulid related project🧩:
 
-   Thanks for the authors of these open source projects below for providing valuable pre-training models with outstanding performance🤝. When utilizing these models, users must strictly adhere to the authors' licensing agreements and properly cite the sources in published works.
-   ```
-   cd checkpoints
-   ```
-
-   - **download the pretrained model for yolo-tracking**
-     ```python
-     # download the pretrained model for object detection and tracking
-     wget https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8n-seg.pt
-     # download yolov8n
-     wget https://huggingface.co/Ultralytics/YOLOv8/blob/main/yolov8n.pt
-     # download mobilenetv2_x1_4_dukemtmcreid.pt
-     wget https://drive.google.com/uc?id=12uD5FeVqLg9-AFDju2L7SQxjmPb4zpBN
-     ```
-     Rename the mobilenet checkpoint to mobilenetv2_x1_4_dukemtmcreid.pt
-     Obtain the uniformerv2 checkpoint k400+k710_uniformerv2_b16_8x224.pyth from https://huggingface.co/Andy1621/uniformerv2/tree/main and place it under ```checkpoints/```. Rename it as ```k400+k710_uniformerv2_b16_8x224.pyth```
-   - **download the pretrained model for dense captioning**
-   
-      The code will automatically download BLIP model from huggingface (https://huggingface.co/Salesforce/blip-image-captioning-large/tree/main). You can also download mannully.
-   
-
-   - **(TODO) download the pretrained model for rvos**
-     ```python
-     #download the pretrained model for rvos
-     mkdir AOT 
-     cd ./AOT
-     # dowlond the chekpoints from below 
-     [[Google Drive](https://drive.google.com/file/d/1QoChMkTVxdYZ_eBlZhK2acq9KMQZccPJ/view)]
-     cd ..
-     
-     mkdir GroundedSAM
-     cd ./GroundedSAM
-     wget https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alpha2/groundingdino_swinb_cogcoor.pth
-     wget https://github.com/ChaoningZhang/MobileSAM/blob/master/weights/mobile_sam.pt
-     cd ../..
-     ```
    - **download LLaVA for Image QA**
      
-     modify ```LLaVA/llava/eval/run_llava.py```:
-     ```python
-     if args.image_file is not None:
-        image_files = image_parser(args)
-        images = load_images(image_files)
-        image_sizes = [x.size for x in images]
-        images_tensor = process_images(
-            images,
-            image_processor,
-            model.config
-        ).to(model.device, dtype=torch.float16)
-     elif args.input_pil_image is not None:
-        images = [args.input_pil_image] if isinstance(args.input_pil_image, Image.Image) else args.input_pil_image
-        image_sizes = [x.size for x in images]
-        images_tensor = process_images(
-            images,
-            image_processor,
-            model.config
-        ).to(model.device, dtype=torch.float16)
-     else:
-        raise ValueError("`--image-file` or `--input-pil-image` must be provided.")
-     ```
+     git clone this [repo](https://github.com/haotian-liu/LLaVA), modify ```LLaVA/llava/eval/run_llava.py``` and install following instrutions.
 
 
-
-## Memory Construction
+## Tools
 
 Thanks to the authors of these open-source projects for providing excellent projects.
 
-- **Time-dominant Memory** ⏱️
-  - **Captioning**
-    - BLIP/ BLIP2/ InstructBLIP
-      - [https://huggingface.co/Salesforce/blip-image-captioning-large](https://huggingface.co/Salesforce/blip-image-captioning-large "https://huggingface.co/Salesforce/blip-image-captioning-large")
-      - [https://huggingface.co/Salesforce/blip2-opt-2.7b](https://huggingface.co/Salesforce/blip2-opt-2.7b "https://huggingface.co/Salesforce/blip2-opt-2.7b")
-      - [https://huggingface.co/docs/transformers/model\_doc/instructblip](https://huggingface.co/docs/transformers/model_doc/instructblip "https://huggingface.co/docs/transformers/model_doc/instructblip")
-- **Space-dominant Memory** 🌐
-  - **Category & Trajectory & Segmentation**
-    - BOXMOT(yolo-tracking)+yolov8-seg
-      - [mikel-brostrom/yolo\_tracking: A collection of SOTA real-time, multi-object tracking algorithms for object detectors (github.com)](https://github.com/mikel-brostrom/yolo_tracking "mikel-brostrom/yolo_tracking: A collection of SOTA real-time, multi-object tracking algorithms for object detectors (github.com)")
-    - GroundedSAM+Deaot
-      - [https://github.com/IDEA-Research/Grounded-Segment-Anything](https://github.com/IDEA-Research/Grounded-Segment-Anything "https://github.com/IDEA-Research/Grounded-Segment-Anything")
-      - [https://github.com/yoxu515/aot-benchmark](https://github.com/yoxu515/aot-benchmark "https://github.com/yoxu515/aot-benchmark")
-  - **Appearance**
-    - BLIP/ BLIP2/ InstructBLIP
-      - [https://huggingface.co/Salesforce/blip-image-captioning-large](https://huggingface.co/Salesforce/blip-image-captioning-large "https://huggingface.co/Salesforce/blip-image-captioning-large")
-      - [https://huggingface.co/Salesforce/blip2-opt-2.7b](https://huggingface.co/Salesforce/blip2-opt-2.7b "https://huggingface.co/Salesforce/blip2-opt-2.7b")
-      - [https://huggingface.co/docs/transformers/model\_doc/instructblip](https://huggingface.co/docs/transformers/model_doc/instructblip "https://huggingface.co/docs/transformers/model_doc/instructblip")
-  - **Action Recognition**
-    - UniFormerV2
-      - [https://github.com/OpenGVLab/UniFormerV2](https://github.com/OpenGVLab/UniFormerV2"https://github.com/OpenGVLab/UniFormerV2")
+- Object Tracker: 
+    + YOLO by ultralytics: https://github.com/ultralytics/ultralytics
+- Image Captioner: 
+    + BLIP: https://huggingface.co/docs/transformers/model_doc/blip
+- Image QA:
+    + BLIP: https://huggingface.co/docs/transformers/model_doc/blip
+    + LLaVA: https://github.com/haotian-liu/LLaVA
+- Frame Selector
 
 ## NExT-QA 试验
 
