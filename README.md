@@ -21,7 +21,7 @@
        PROXY: "put your openai base url here"
      ```
 
-5. Download the checkpoints  and bulid related project🧩:
+5. Download the checkpoints  and bulid related projects 🧩:
 
    - **download LLaVA for Image QA**
      
@@ -41,38 +41,21 @@ Thanks to the authors of these open-source projects for providing excellent proj
     + LLaVA: https://github.com/haotian-liu/LLaVA
 - Frame Selector
 
-## NExT-QA 试验
+## Download Datasets
+- NeXT-QA：
+  ```
+  git clone git@github.com:doc-doc/NExT-QA.git
+  ```
+  specify your data path in ```config/nextqa.yaml```
 
-下载 NeXT-QA 数据：
-```
-git clone git@github.com:doc-doc/NExT-QA.git
-```
-specify your data path in ```config/nextqa.yaml```
+## Run and evaluate
 
-运行指令：
-
-```
-python scripts/main.py
-```
-
-默认使用的 config 是 `config/nextqa.yaml`
-
-评测指令：
-
-```
-python eval/eval_nextqa.py
-```
-
-
-(04.11 更新) 最新的运行指令：
-
+Specify your config file and run:
 ```
 python main_new_tools.py
 ```
 
-默认使用的 config 是 `config/nextqa_new_tool.yaml`
-
-最新的评测指令：
+Evaluate:
 
 ```
 python eval.py
