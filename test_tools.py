@@ -24,20 +24,21 @@ init_video_stride = int(video_info["fps"] * init_interval_sec)
 # 创建可见帧管理器
 visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
 
+'''
 # YOLO Tracker
 yolo_tracker = YOLOTracker(conf=conf)
 yolo_tracker.set_frames(visible_frames)
 results = yolo_tracker.inference(input="children")
-pdb.set_trace()
-
 '''
+
+
 # image_qa
-image_qa = ImageQA()
+image_qa = ImageQA(conf=conf)
 image_qa.set_frames(visible_frames)
 # question = "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five."
 question = "How many children are in the video?"
 image_qa.inference(input=question)
-'''
+
 
 '''
 # image_captioner

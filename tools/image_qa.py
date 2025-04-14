@@ -34,6 +34,15 @@ def clean_question(question):
     return question
 
 
+def get_pil_image_list(visible_frames):
+    pil_image_list = []
+    for visible_frame in visible_frames.frames:
+        rgb_image = cv2.cvtColor(visible_frame.image, cv2.COLOR_BGR2RGB)
+        raw_image = Image.fromarray(rgb_image)
+        pil_image_list.append(raw_image)
+    return pil_image_list
+     
+        
 class ImageQA:
     def __init__(
         self,
@@ -60,6 +69,9 @@ class ImageQA:
             raise NotImplementedError(f"Unknown VLM type: {conf.tool.vlm_type}")
 
         self.visible_frames = None
+        
+        # LLaVA 则使用 batch, BLIP 不使用
+        self.batch = (self.conf.tool.vlm_type == "LLaVA")
 
     def set_frames(self, visible_frames):
         self.visible_frames = visible_frames
@@ -112,22 +124,56 @@ class ImageQA:
         input = clean_question(input)
         
         result = "Here are the question answering results of sampled frames:\n"
-        for frame in self.visible_frames.frames:
+        
+        if self.batch == True:
+            print("batch inferencing...")
+            pil_image_list = get_pil_image_list(self.visible_frames)
+            prompt_list = [input] * len(pil_image_list)
             
-            # TODO 不重复 qa
-            answer = self.image_qa(frame.image, input)
-            add_info = f"Question: {input}\tAnswer: {answer}"
+            args = type('Args', (), {
+                "model_path": self.model_path, 
+                "tokenizer": self.llava_tokenizer,
+                "model": self.llava_model,
+                "image_processor": self.llava_image_processor,
+                "query": prompt_list,
+                "conv_mode": None,
+                "input_pil_image": pil_image_list,
+                "image_file": None,  # 传递处理后的图像
+                "sep": ",",
+                "temperature": 0,
+                "top_p": None,
+                "num_beams": 1,
+                "max_new_tokens": 512
+            })()
             
-            if add_info not in frame.description:
-                frame.description += (add_info + "\n")
+            outputs = eval_model(args)
+            
+            assert len(outputs) == len(self.visible_frames.frames)
+            
+            for frame_idx, answer in enumerate(outputs):
+                add_info = f"Question: {input}\tAnswer: {answer}"
                 
-            print(f"Image QA... Frame {frame.index}: {add_info}")
-            result += f"\nFrame {frame.index}: {add_info}"
+                frame = self.visible_frames.frames[frame_idx]
+                
+                if add_info not in frame.description:
+                    frame.description += (add_info + "\n")
+                    
+                print(f"Image QA... Frame {frame.index}: {add_info}")
+                result += f"\nFrame {frame.index}: {add_info}"
+                    
+        else:
+            for frame in self.visible_frames.frames:
+                
+                answer = self.image_qa(frame.image, input)
+                add_info = f"Question: {input}\tAnswer: {answer}"
+                
+                if add_info not in frame.description:
+                    frame.description += (add_info + "\n")
+                    
+                print(f"Image QA... Frame {frame.index}: {add_info}")
+                result += f"\nFrame {frame.index}: {add_info}"
 
         return result       
-
-
-# TODO LlaVA 搞一个 batch qa
 
 
 if __name__ == "__main__":
