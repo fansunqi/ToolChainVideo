@@ -15,22 +15,26 @@ tokenizer, model, image_processor, context_len = load_pretrained_model(
 )
 
 # 提示语和图像路径
-prompt = "What are the things I should be cautious about when I visit here?"
+prompt1 = "What are the things I should be cautious about when I visit here?"
+prompt2 = "What are the things I should be cautious about when I visit here?"
+
 image_file = "/home/fsq/video_agent/ToolChainVideo/misc/view.jpg"
+image_file2 = "/home/fsq/video_agent/ToolChainVideo/misc/view_cabin.jpg"
 
 # 使用 OpenCV 读取图像
 image = cv2.imread(image_file)
-if image is None:
-    raise FileNotFoundError(f"Image file not found: {image_file}")
+image2 = cv2.imread(image_file2)
 
 # 将 BGR 图像转换为 RGB（LLaVA 模型通常需要 RGB 格式）
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
 
 # 将 OpenCV 图像转换为 PIL.Image 格式
 pil_image = Image.fromarray(image)
+pil_image2 = Image.fromarray(image2)
 
-# 将 PIL.Image 图像传递给 image_processor
-# processed_image = image_processor(pil_image)
+prompt_list = [prompt1, prompt2]
+pil_image_list = [pil_image, pil_image2]
 
 # 构造参数
 args = type('Args', (), {
@@ -38,9 +42,9 @@ args = type('Args', (), {
     "tokenizer": tokenizer,
     "model": model,
     "image_processor": image_processor,
-    "query": prompt,
+    "query": prompt_list,
     "conv_mode": None,
-    "input_pil_image": pil_image,
+    "input_pil_image": pil_image_list,
     "image_file": None,  # 传递处理后的图像
     "sep": ",",
     "temperature": 0,
@@ -50,4 +54,5 @@ args = type('Args', (), {
 })()
 
 # 调用 eval_model 进行推理
-eval_model(args)
+outputs = eval_model(args)
+print(outputs)
