@@ -19,7 +19,7 @@ class YOLOTracker:
                 model_path: str = "checkpoints/yoloe-11l-seg.pt",
                 persist: bool = True, 
                 stream: bool = True, 
-                save: bool = True, 
+                save: bool = False, 
                 output_id: bool = False):
         
         self.model = YOLOE(model_path)
@@ -86,8 +86,9 @@ class YOLOTracker:
 
                 # 输出个数
                 for cls_name, count in frame_class_counts.items():
-                    if count > 0:
-                        frame_result_message += f"{count} {cls_name}"
+                    # if count > 0:
+                    #     frame_result_message += f"{count} {cls_name}"
+                    frame_result_message += f"{count} {cls_name}"
 
             frame_result_message += "\n"
             result_message += frame_result_message
