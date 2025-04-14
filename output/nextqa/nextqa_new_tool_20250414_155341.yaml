@@ -1,0 +1,36 @@
+openai:
+  GPT_MODEL_NAME : "gpt-4o-2024-11-20"
+  EVAL_MODEL_NAME: "gpt-3.5-turbo"
+  GPT_API_KEY: "sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra"
+  PROXY: "https://api.juheai.top/v1"
+
+tool:
+  tool_list:
+    - "ImageCaptioner"
+    - "FrameSelector"
+
+mannual_cache_file: "cache/gpt35_cache_new_tool_5.pkl"
+use_cache: False
+
+dataset: "nextqa"
+video_path_base: "/share_data/NExT-QA/NExTVideo"
+anno_path: "/share_data/NExT-QA/dataset/nextqa/val.csv"
+num_examples_to_run: 100
+start_num: 0
+
+output_path: "output/nextqa/"
+
+recursion_limit: 20
+
+try_num: 1
+
+init_interval_sec: 10
+
+try_except_mode: True
+to_txt: True
+
+
+eval:
+  eval_cache_file: cache/gpt35_eval_cache.pkl
+  use_cache: True
+

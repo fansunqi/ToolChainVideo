@@ -73,10 +73,32 @@
      wget https://github.com/ChaoningZhang/MobileSAM/blob/master/weights/mobile_sam.pt
      cd ../..
      ```
+   - **download LLaVA for Image QA**
+     
+     modify ```LLaVA/llava/eval/run_llava.py```:
+     ```python
+     if args.image_file is not None:
+        image_files = image_parser(args)
+        images = load_images(image_files)
+        image_sizes = [x.size for x in images]
+        images_tensor = process_images(
+            images,
+            image_processor,
+            model.config
+        ).to(model.device, dtype=torch.float16)
+     elif args.input_pil_image is not None:
+        images = [args.input_pil_image] if isinstance(args.input_pil_image, Image.Image) else args.input_pil_image
+        image_sizes = [x.size for x in images]
+        images_tensor = process_images(
+            images,
+            image_processor,
+            model.config
+        ).to(model.device, dtype=torch.float16)
+     else:
+        raise ValueError("`--image-file` or `--input-pil-image` must be provided.")
+     ```
 
-The overall checkpoints file structure is as follows (TODO):
 
-<img src="assets/ckpt_files.png" alt="ckpt_files" style="zoom: 33%;" />
 
 ## Memory Construction
 

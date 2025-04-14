@@ -1,6 +1,7 @@
 import os
 import sys
 import pdb
+import json
 import datetime
 import shutil
 import pickle
@@ -134,6 +135,11 @@ if __name__ == "__main__":
     # try_num = conf.try_num
     try_num = 1
     all_results = []
+    
+    # 2. 使用 VideoTree 中的 llava1.5_fps1.json
+    llava_caption_file = "data/nextqa/llava1.5_fps1.json"
+    with open(llava_caption_file, "r", encoding="utf-8") as f:
+        llava_caption = json.load(f)
 
     for data in tqdm(dataset):
 
@@ -144,6 +150,14 @@ if __name__ == "__main__":
         options = [data['optionA'], data['optionB'], data['optionC'], data['optionD'], data['optionE']]
         question_w_options = f"{question}? Choose your answer from below options: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
 
+        # 2. 使用 VideoTree 中的 llava1.5_fps1.json
+        uid = data["uid"]
+        llava_descriptions = llava_caption[uid]
+        all_frames_descriptions = ""
+        for frame_idx, description in enumerate(llava_descriptions):
+            frame_description = f"Frame {frame_idx}: {description}"
+            all_frames_descriptions += frame_description + "\n"
+        
         result = data
         result["answers"] = []
         result["question_w_options"] = question_w_options
@@ -156,17 +170,14 @@ if __name__ == "__main__":
         init_video_stride = int(video_info["fps"] * min_interval_sec)
         
         for try_count in range(try_num):
-
+            
+            '''
+            # 1. 使用 BLIP 得到 caption
             visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
-            
-            # for tool_instance in tool_instances:
-            #     tool_instance.set_frames(visible_frames)
             image_captioner.set_frames(visible_frames)
-
-            # TODO 各种工具也可以加上一个 set_question 功能
             image_captioner.inference(input="placeholder")
-            
             all_frames_descriptions = visible_frames.get_frame_descriptions()
+            '''
 
             input_prompt = QUERY_PREFIX_DES.format(
                 frame_caption = all_frames_descriptions,
