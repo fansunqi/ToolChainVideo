@@ -6,6 +6,7 @@ from tools.image_captioner import ImageCaptioner
 from tools.frame_selector import FrameSelector
 from tools.image_qa import ImageQA
 from tools.yolo_tracker import YOLOTracker
+from tools.temporal_grounding import TemporalGrounding
 
 import pdb
 
@@ -15,7 +16,8 @@ opt = parser.parse_args()
 conf = OmegaConf.load(opt.config)
 
 
-video_path = "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4"
+# video_path = "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4"
+video_path = "/home/fsq/video_agent/ToolChainVideo/projects/Grounded-Video-LLM/experiments/_3klvlS4W7A.mp4"
 question = "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five."
 init_interval_sec = 10
 video_info = get_video_info(video_path)
@@ -24,6 +26,10 @@ init_video_stride = int(video_info["fps"] * init_interval_sec)
 # 创建可见帧管理器
 visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
 
+# temporal grounding
+temporal_grounding = TemporalGrounding(conf=conf)
+temporal_grounding.set_frames(visible_frames)
+
 '''
 # YOLO Tracker
 yolo_tracker = YOLOTracker(conf=conf)
@@ -31,14 +37,14 @@ yolo_tracker.set_frames(visible_frames)
 results = yolo_tracker.inference(input="children")
 '''
 
-
+'''
 # image_qa
 image_qa = ImageQA(conf=conf)
 image_qa.set_frames(visible_frames)
 # question = "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five."
 question = "How many children are in the video?"
 image_qa.inference(input=question)
-
+'''
 
 '''
 # image_captioner

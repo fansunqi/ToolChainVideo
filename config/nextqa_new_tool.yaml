@@ -9,6 +9,10 @@ tool:
     - "ImageQA"
     - "FrameSelector"
   vlm_type: "LLaVA"
+  temporal_grounding:
+    llm: "phi3.5"
+    weight_path: "/hf_home/Grounded-Video-LLM/"
+    device: "cuda:0"
 
 mannual_cache_file: "cache/gpt35_cache_new_tool_7.pkl"
 use_cache: False
