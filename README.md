@@ -21,11 +21,15 @@
        PROXY: "put your openai base url here"
      ```
 
-5. Download the checkpoints  and bulid related projects 🧩:
+5. Bulid related projects 🧩:
 
    - **download LLaVA for Image QA**
      
-     git clone this [repo](https://github.com/haotian-liu/LLaVA), modify ```LLaVA/llava/eval/run_llava.py``` and install following instrutions.
+     Clone this [repo](https://github.com/haotian-liu/LLaVA), modify ```LLaVA/llava/eval/run_llava.py``` and install as instrutions.
+
+     If you encounter this error:
+     `TypeError: forward() got an unexpected keyword argument 'cache_position'`, 
+     fix by add `cache_position=None` to the `forward()` method in `Class LlavaLlamaForCausalLM` as mentioned [here](https://github.com/huggingface/transformers/issues/29426).
 
 
 ## Tools

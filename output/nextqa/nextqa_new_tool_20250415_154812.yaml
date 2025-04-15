@@ -28,7 +28,7 @@ try_num: 1
 init_interval_sec: 10
 
 try_except_mode: True
-to_txt: False
+to_txt: True
 
 
 eval:
