@@ -1,18 +1,26 @@
+import torch
 from transformers import Qwen2_5_VLForConditionalGeneration, AutoTokenizer, AutoProcessor
 from qwen_vl_utils import process_vision_info
 
 # default: Load the model on the available device(s)
-model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-    "Qwen/Qwen2.5-VL-7B-Instruct", torch_dtype="auto", device_map="auto"
-)
+# model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+#     "Qwen/Qwen2.5-VL-7B-Instruct", torch_dtype="auto", device_map="auto"
+# )
+
+# device_map = {0: 'cuda:0', 1: 'cuda:1', 2: 'cuda:2', 3: 'cuda:3', 
+#               4: 'cuda:4', 5: 'cuda:5', 6: 'cuda:6', 7: 'cuda:7'}
+
+# model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+#     "Qwen/Qwen2.5-VL-7B-Instruct", torch_dtype="auto", device_map="balanced_low_0"
+# )
 
 # We recommend enabling flash_attention_2 for better acceleration and memory saving, especially in multi-image and video scenarios.
-# model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-#     "Qwen/Qwen2.5-VL-7B-Instruct",
-#     torch_dtype=torch.bfloat16,
-#     attn_implementation="flash_attention_2",
-#     device_map="auto",
-# )
+model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+    "Qwen/Qwen2.5-VL-7B-Instruct",
+    torch_dtype=torch.bfloat16,
+    attn_implementation="flash_attention_2",
+    device_map="auto",
+)
 
 # default processer
 processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-7B-Instruct")
@@ -23,15 +31,32 @@ processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-7B-Instruct")
 # max_pixels = 1280*28*28
 # processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-7B-Instruct", min_pixels=min_pixels, max_pixels=max_pixels)
 
+# messages = [
+#     {
+#         "role": "user",
+#         "content": [
+#             {
+#                 "type": "image",
+#                 "image": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg",
+#             },
+#             {"type": "text", "text": "Describe this image."},
+#         ],
+#     }
+# ]
+
+
 messages = [
     {
         "role": "user",
         "content": [
             {
-                "type": "image",
-                "image": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg",
+                "type": "video",
+                "video": "/home/fsq/video_agent/ToolChainVideo/projects/Grounded-Video-LLM/experiments/_3klvlS4W7A.mp4",
             },
-            {"type": "text", "text": "Describe this image."},
+            {
+                "type": "text", 
+                "text": "Describe this video."
+            },
         ],
     }
 ]

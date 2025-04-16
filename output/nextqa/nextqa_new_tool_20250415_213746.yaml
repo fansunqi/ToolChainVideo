@@ -10,16 +10,12 @@ tool:
     - "FrameSelector"
   image_qa:
     vlm_type: "LLaVA"
-  image_grid_qa:
-    vlm_gpt_model_name: "gpt-4o" 
-    grid_size: 3
-    save_path: null
   temporal_grounding:
     llm: "phi3.5"
     weight_path: "/hf_home/Grounded-Video-LLM/"
     device: "cuda:0"
 
-mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"
+mannual_cache_file: "cache/gpt35_cache_new_tool_7.pkl"
 use_cache: False
 
 dataset: "nextqa"
@@ -36,7 +32,7 @@ try_num: 1
 
 init_interval_sec: 10
 
-try_except_mode: False
+try_except_mode: True
 to_txt: False
 
 

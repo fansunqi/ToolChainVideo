@@ -53,11 +53,13 @@ class ImageQA:
         self.device = device
         self.torch_dtype = torch.float16 if "cuda" in device else torch.float32
         
-        if conf.tool.vlm_type == "BLIP":
+        self.vlm_type = conf.tool.image_qa.vlm_type
+        
+        if self.vlm_type == "BLIP":
             print("Loading BLIP for Image QA...")
             self.blip_processor = BlipProcessor.from_pretrained("Salesforce/blip-vqa-base")
             self.blip_model = BlipForQuestionAnswering.from_pretrained("Salesforce/blip-vqa-base").to(self.device)
-        elif conf.tool.vlm_type == "LLaVA":
+        elif self.vlm_type == "LLaVA":
             self.model_path = "liuhaotian/llava-v1.5-7b"
             print(f"Loading {self.model_path} for Image QA...")
             self.llava_tokenizer, self.llava_model, self.llava_image_processor, context_len = load_pretrained_model(
@@ -66,12 +68,12 @@ class ImageQA:
                 model_name=get_model_name_from_path(self.model_path)
             )
         else:
-            raise NotImplementedError(f"Unknown VLM type: {conf.tool.vlm_type}")
+            raise NotImplementedError(f"Unknown VLM type: {self.vlm_type}")
 
         self.visible_frames = None
         
         # LLaVA 则使用 batch, BLIP 不使用
-        self.batch = (self.conf.tool.vlm_type == "LLaVA")
+        self.batch = (self.vlm_type == "LLaVA")
 
     def set_frames(self, visible_frames):
         self.visible_frames = visible_frames
@@ -84,14 +86,14 @@ class ImageQA:
         rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         raw_image = Image.fromarray(rgb_image)
         
-        if self.conf.tool.vlm_type == "BLIP":
+        if self.vlm_type == "BLIP":
             inputs = self.blip_processor(raw_image, question, return_tensors="pt").to(
                 self.device, self.torch_dtype
             )
             out = self.blip_model.generate(**inputs)
             answer = self.blip_processor.decode(out[0], skip_special_tokens=True)
         
-        elif self.conf.tool.vlm_type == "LLaVA":
+        elif self.vlm_type == "LLaVA":
             args = type('Args', (), {
                 "model_path": self.model_path,
                 "tokenizer": self.llava_tokenizer,
@@ -109,7 +111,7 @@ class ImageQA:
             })()
             answer = eval_model(args)
         else:
-            raise NotImplementedError(f"Unknown VLM type: {self.conf.tool.vlm_type}")
+            raise NotImplementedError(f"Unknown VLM type: {self.vlm_type}")
             
         return answer
 

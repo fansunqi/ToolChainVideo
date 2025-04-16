@@ -36,14 +36,34 @@
 
 Thanks to the authors of these open-source projects for providing excellent projects.
 
-- Object Tracker: 
+Temporal Tools:
+- Frame Selector
+    + select frames of interest based on current information, driven by LLM.
+- Temporal Grounding
+    + Grounded-Video-LLM: https://github.com/WHB139426/Grounded-Video-LLM
+- Temporal Refering
+    + Grounded-Video-LLM: https://github.com/WHB139426/Grounded-Video-LLM
+- Temporal QA
+    + Grounded-Video-LLM: https://github.com/WHB139426/Grounded-Video-LLM
+- 时序动作定位(TODO)
+    + MMaction
+
+Spatial Tools:
+- Object Tracking 
     + YOLO by ultralytics: https://github.com/ultralytics/ultralytics
-- Image Captioner: 
+- Image Captioning
     + BLIP: https://huggingface.co/docs/transformers/model_doc/blip
-- Image QA:
+- Image QA
     + BLIP: https://huggingface.co/docs/transformers/model_doc/blip
     + LLaVA: https://github.com/haotian-liu/LLaVA
-- Frame Selector
+- Action Recognition
+    + MMAction: https://mmaction2.readthedocs.io/
+
+
+Generalist Solution:
+- Video QA
+    + Qwen-VL-2.5: https://github.com/QwenLM/Qwen2.5-VL
+
 
 ## Download Datasets
 - NeXT-QA：

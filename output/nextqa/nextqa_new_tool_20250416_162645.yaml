@@ -10,10 +10,6 @@ tool:
     - "FrameSelector"
   image_qa:
     vlm_type: "LLaVA"
-  image_grid_qa:
-    vlm_gpt_model_name: "gpt-4o" 
-    grid_size: 3
-    save_path: null
   temporal_grounding:
     llm: "phi3.5"
     weight_path: "/hf_home/Grounded-Video-LLM/"
