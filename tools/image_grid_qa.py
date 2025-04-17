@@ -235,9 +235,9 @@ class ImageGridQA:
         center_time = duration / 2
         interval = duration / (self.grid_size**2 - 1)
 
-        print(f"center_time: {center_time}")
-        print(f"interval: {interval}")
-        print(f"grid_size: {self.grid_size}")
+        # print(f"center_time: {center_time}")
+        # print(f"interval: {interval}")
+        # print(f"grid_size: {self.grid_size}")
 
         image, used_frame_indices = create_frame_grid(
             self.video_path, center_time, interval, self.grid_size)

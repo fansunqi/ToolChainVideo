@@ -40,13 +40,11 @@ Temporal Tools:
 - Frame Selector
     + select frames of interest based on current information, driven by LLM.
 - Temporal Grounding
-    + Grounded-Video-LLM: https://github.com/WHB139426/Grounded-Video-LLM
+    + Grounded-Video-LLM-7B: https://github.com/WHB139426/Grounded-Video-LLM
 - Temporal Refering
-    + Grounded-Video-LLM: https://github.com/WHB139426/Grounded-Video-LLM
+    + Grounded-Video-LLM-7B: https://github.com/WHB139426/Grounded-Video-LLM
 - Temporal QA
-    + Grounded-Video-LLM: https://github.com/WHB139426/Grounded-Video-LLM
-- 时序动作定位(TODO)
-    + MMaction
+    + Grounded-Video-LLM-7B: https://github.com/WHB139426/Grounded-Video-LLM
 
 Spatial Tools:
 - Object Tracking 
@@ -56,13 +54,12 @@ Spatial Tools:
 - Image QA
     + BLIP: https://huggingface.co/docs/transformers/model_doc/blip
     + LLaVA: https://github.com/haotian-liu/LLaVA
-- Action Recognition
-    + MMAction: https://mmaction2.readthedocs.io/
-
 
 Generalist Solution:
+- Image Grid QA
+    + Image Grid QA driven by GPT-4o: https://github.com/microsoft/VLM-Video-Action-Localization
 - Video QA
-    + Qwen-VL-2.5: https://github.com/QwenLM/Qwen2.5-VL
+    + Qwen-VL-2.5-7B: https://github.com/QwenLM/Qwen2.5-VL
 
 
 ## Download Datasets

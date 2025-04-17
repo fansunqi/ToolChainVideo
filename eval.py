@@ -202,3 +202,5 @@ if __name__ == "__main__":
 
     main(args.input_file, args.output_file, conf, eval_llm, llm_cache)
 
+    print(f"Output saved to {args.output_file}.")
+
