@@ -247,7 +247,16 @@ class ImageGridQA:
             cv2.imwrite(output_img_path, image)
             print(f"Image grid saved to {output_img_path}.")
 
-        result = self.image_grid_qa(input, image)
+        grid_num = self.grid_size**2
+
+        prompt_image_grid_qa = (
+            f"I will show an image sequence of {grid_num} sampled frames from a video. "
+            f"I have annotated the images with numbered circles. "
+            f"Based on the video, try to answer this question: "
+            f"{input}"
+        )
+
+        result = self.image_grid_qa(prompt_image_grid_qa, image)
 
         return result
 
@@ -259,58 +268,14 @@ if __name__ == "__main__":
 
     conf = OmegaConf.load("/home/fsq/video_agent/ToolChainVideo/config/nextqa_new_tool.yaml")
     image_grid_qa = ImageGridQA(conf)
-    
-    grid_num = image_grid_qa.grid_size**2
-    
-    # video_path = "/home/fsq/video_agent/VLM-Video-Action-Localization/sample_video/sample.mp4"
-    # prompt_image_grid_qa = (
-    #     f"I will show an image sequence of {grid_num} sampled frames from a video. "
-    #     f"I have annotated the images with numbered circles. "
-    #     f"Briefly describe the events or the actions of the characters in this image sequence. "
-    # )
 
     video_path = "/share_data/NExT-QA/NExTVideo/1106/4010069381.mp4"
     question_w_options = "How do the two man play the instrument? Choose your answer from below options: A.roll the handle, B.tap their feet, C.strum the string, D.hit with sticks, E.pat with hand."
-    prompt_image_grid_qa = (
-        f"I will show an image sequence of {grid_num} sampled frames from a video. "
-        f"I have annotated the images with numbered circles. "
-        f"Based on the video, try to answer this question: "
-        f"{question_w_options}"
-    )
     
-    print(prompt_image_grid_qa)
 
     image_grid_qa.set_video_path(video_path)
     
-    result = image_grid_qa.inference(input=prompt_image_grid_qa)
+    result = image_grid_qa.inference(input=question_w_options)
     print(f"Result: {result}")
     
     print("main done") 
-
-
-
-    # video_path = "/home/fsq/video_agent/VLM-Video-Action-Localization/sample_video/sample.mp4"
-    # video = cv2.VideoCapture(video_path)
-    # fps = video.get(cv2.CAP_PROP_FPS)
-    # total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
-    # print(f"Total frames: {total_frames}")
-    # duration = float(total_frames) / fps
-    
-    # center_time = duration / 2
-    
-    # grid_size = 3
-    
-    # interval = duration / (grid_size**2 - 1)
-
-    # output_folder = "/home/fsq/video_agent/ToolChainVideo/misc/image_grid_results/"
-
-    # print(f"center_time: {center_time}")
-    # print(f"interval: {interval}")
-    # print(f"grid_size: {grid_size}")
-
-    # image, used_frame_indices = create_frame_grid(
-    #         video_path, center_time, interval, grid_size)
-    
-    # print(f"used_frame_indices: {used_frame_indices}")
-    # output_img_path = os.path.join(output_folder, f"grid_image_sample.png")
-    # cv2.imwrite(output_img_path, image)
