@@ -3,6 +3,7 @@ from PIL import Image
 from typing import List
 import torch
 import re
+import pdb
 from transformers import (
     pipeline,
     BlipProcessor,
@@ -56,12 +57,12 @@ class ImageQA:
         self.vlm_type = conf.tool.image_qa.vlm_type
         
         if self.vlm_type == "BLIP":
-            print("Loading BLIP for Image QA...")
+            print("Loading BLIP for Image QA...\n")
             self.blip_processor = BlipProcessor.from_pretrained("Salesforce/blip-vqa-base")
             self.blip_model = BlipForQuestionAnswering.from_pretrained("Salesforce/blip-vqa-base").to(self.device)
         elif self.vlm_type == "LLaVA":
             self.model_path = "liuhaotian/llava-v1.5-7b"
-            print(f"Loading {self.model_path} for Image QA...")
+            print(f"Loading {self.model_path} for Image QA...\n")
             self.llava_tokenizer, self.llava_model, self.llava_image_processor, context_len = load_pretrained_model(
                 model_path=self.model_path,
                 model_base=None,
@@ -71,12 +72,17 @@ class ImageQA:
             raise NotImplementedError(f"Unknown VLM type: {self.vlm_type}")
 
         self.visible_frames = None
+        self.video_path = None
         
         # LLaVA 则使用 batch, BLIP 不使用
         self.batch = (self.vlm_type == "LLaVA")
+        self.batch_size = conf.tool.image_qa.batch_size
 
     def set_frames(self, visible_frames):
         self.visible_frames = visible_frames
+    
+    def set_video_path(self, video_path):
+        self.video_path = video_path  
 
     def image_qa(
         self,
@@ -128,27 +134,33 @@ class ImageQA:
         result = "Here are the question answering results of sampled frames:\n"
         
         if self.batch == True:
-            print("batch inferencing...")
+            print("\nImage QA: batch inferencing...")
             pil_image_list = get_pil_image_list(self.visible_frames)
             prompt_list = [input] * len(pil_image_list)
-            
-            args = type('Args', (), {
-                "model_path": self.model_path, 
-                "tokenizer": self.llava_tokenizer,
-                "model": self.llava_model,
-                "image_processor": self.llava_image_processor,
-                "query": prompt_list,
-                "conv_mode": None,
-                "input_pil_image": pil_image_list,
-                "image_file": None,  # 传递处理后的图像
-                "sep": ",",
-                "temperature": 0,
-                "top_p": None,
-                "num_beams": 1,
-                "max_new_tokens": 512
-            })()
-            
-            outputs = eval_model(args)
+
+            outputs = []
+            for i in range(0, len(prompt_list), self.batch_size):
+                batch_prompts = prompt_list[i:i+self.batch_size]
+                batch_images = pil_image_list[i:i+self.batch_size]
+                
+                args = type('Args', (), {
+                    "model_path": self.model_path, 
+                    "tokenizer": self.llava_tokenizer,
+                    "model": self.llava_model,
+                    "image_processor": self.llava_image_processor,
+                    "query": batch_prompts,
+                    "conv_mode": None,
+                    "input_pil_image": batch_images,
+                    "image_file": None,
+                    "sep": ",",
+                    "temperature": 0,
+                    "top_p": None,
+                    "num_beams": 1,
+                    "max_new_tokens": 512
+                })()
+                
+                batch_outputs = eval_model(args)
+                outputs.extend(batch_outputs)
             
             assert len(outputs) == len(self.visible_frames.frames)
             

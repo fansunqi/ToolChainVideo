@@ -29,7 +29,7 @@ class SegmentList(BaseModel):
 
 class FrameSelector:
     def __init__(self, conf):
-        # llm
+        
         self.llm = ChatOpenAI(
             api_key = conf.openai.GPT_API_KEY,
             model = conf.openai.GPT_MODEL_NAME,

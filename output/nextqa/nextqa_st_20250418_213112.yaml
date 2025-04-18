@@ -14,7 +14,7 @@ tool:
     - "Summarizer"
   image_qa:
     vlm_type: "LLaVA"
-    batch_size: 10
+    batch_size: 5
   image_grid_qa:
     vlm_gpt_model_name: "gpt-4o" 
     init_grid_size: 3
@@ -43,8 +43,9 @@ try_num: 1
 init_interval_sec: 10
 
 try_except_mode: False
-to_txt: True
+to_txt: False
 
+specific_quids: ["5026660202_8"]
 
 eval:
   eval_cache_file: cache/gpt35_eval_cache.pkl

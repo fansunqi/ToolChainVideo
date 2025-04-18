@@ -13,9 +13,6 @@ from omegaconf import OmegaConf
 import time
 
 
-
-
-
 def prompts(name, description):
     
     def decorator(func):
@@ -116,6 +113,7 @@ def draw_grid_img(frames, grid_size, spacer=0, render_pos='topright'):
                 grid_img[y1:y2, x1:x2] = frame
     
     return grid_img
+
 
 def image_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
     dim = None
@@ -287,6 +285,7 @@ class ImageGridQA:
         
         return frames, actual_indices
 
+
     @prompts(
         name = "image-grid-qa-tool",
         description = "Useful when you want to know the whole event or action in the video. This tool arranges multiple images into an image grid, allowing the MLLM to analyze the events or actions taking place in the video."
@@ -317,7 +316,7 @@ class ImageGridQA:
 
         return result
 
-
+        # TODO: 要不要把这个结果加到 visible_frame.description 中去
 
 if __name__ == "__main__":
 

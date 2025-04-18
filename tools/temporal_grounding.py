@@ -67,7 +67,7 @@ class TemporalGrounding:
         
         self.device = conf.tool.temporal_grounding.device
         
-        print("Start loading Temporal-Grounding-Tool model...\n")
+        print("Loading Temporal-Grounding-Tool model...\n")
         self.model = LLAVA_NEXT_VIDEO(
             dtype=args.dtype, 
             stage=args.stage, 

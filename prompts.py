@@ -49,3 +49,12 @@ Frame Caption:
 Question:
 {question}
 """
+
+QUERY_PREFIX_INFO = """Regarding a given video, based on the frame information to answer the following question as best you can.
+
+Frame Information: 
+{frame_information}
+
+Question:
+{question}
+"""

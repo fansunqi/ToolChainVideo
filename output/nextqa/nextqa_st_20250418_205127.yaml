@@ -14,7 +14,6 @@ tool:
     - "Summarizer"
   image_qa:
     vlm_type: "LLaVA"
-    batch_size: 10
   image_grid_qa:
     vlm_gpt_model_name: "gpt-4o" 
     init_grid_size: 3
