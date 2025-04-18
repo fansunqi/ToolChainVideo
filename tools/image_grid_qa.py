@@ -13,17 +13,13 @@ from omegaconf import OmegaConf
 
 render_pos = 'topright'  # center or topright
 
-# Extract JSON part from the response
-def extract_json_part(text):
-    text = text.strip().replace(" ", "").replace("\n", "")
-    try:
-        start = text.index('{"points":')
-        text_json = text[start:].strip()
-        end = text_json.index('}') + 1
-        text_json = text_json[:end].strip()
-        return text_json
-    except ValueError:
-        raise ValueError("JSON part not found in the response")
+def sample_evenly(lst, num_samples):
+    if num_samples <= 0:
+        return []
+    if num_samples >= len(lst):
+        return lst[:]
+    step = (len(lst) - 1) / (num_samples - 1)
+    return [lst[int(round(i * step))] for i in range(num_samples)]
 
 
 def image_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
@@ -62,85 +58,6 @@ def image_resize_for_vlm(frame, inter=cv2.INTER_AREA):
         frame, (new_width, new_height), interpolation=inter)
     return resized_frame
 
-# Create a grid of frames
-def create_frame_grid(video_path, center_time, interval, grid_size):
-    spacer = 0
-    video = cv2.VideoCapture(video_path)
-    fps = video.get(cv2.CAP_PROP_FPS)
-    total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT)) - 1
-    center_frame = int(center_time * fps)
-    interval_frames = int(interval * fps)
-    num_frames = grid_size**2
-    half_num_frames = num_frames // 2
-    frame_indices = [max(0,
-                         min(center_frame + i * interval_frames,
-                             total_frames - 1)) for i in range(-half_num_frames,
-                                                               half_num_frames + 1)]
-    frames = []
-    actual_indices = []
-    for index in frame_indices:
-        video.set(cv2.CAP_PROP_POS_FRAMES, index)
-        success, frame = video.read()
-        if success:
-            frame = image_resize(frame, width=200)
-            frames.append(frame)
-            actual_indices.append(index)
-        else:
-            print(f"Warning: Frame {index} not found")
-            print(f"Total frames: {total_frames}")
-            video.set(cv2.CAP_PROP_POS_FRAMES, 0)
-            success, frame = video.read()
-            frame = image_resize(frame, width=200)
-            frame = frame * 0
-            frames.append(frame)
-            actual_indices.append(index)
-    video.release()
-
-    if len(frames) < grid_size**2:
-        raise ValueError("Not enough frames to create the grid.")
-
-    frame_height, frame_width = frames[0].shape[:2]
-
-    grid_height = grid_size * frame_height + (grid_size - 1) * spacer
-    grid_width = grid_size * frame_width + (grid_size - 1) * spacer
-
-    grid_img = np.ones((grid_height, grid_width, 3), dtype=np.uint8) * 255
-
-    for i in range(grid_size):
-        for j in range(grid_size):
-            index = i * grid_size + j
-            frame = frames[index]
-            cX, cY = frame.shape[1] // 2, frame.shape[0] // 2
-            max_dim = int(min(frame.shape[:2]) * 0.5)
-            overlay = frame.copy()
-            if render_pos == 'center':
-                circle_center = (cX, cY)
-            else:
-                circle_center = (frame.shape[1] - max_dim // 2, max_dim // 2)
-            cv2.circle(overlay, circle_center,
-                       max_dim // 2, (255, 255, 255), -1)
-            alpha = 0.3
-            frame = cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0)
-            cv2.circle(frame, circle_center, max_dim // 2, (255, 255, 255), 2)
-            font_scale = max_dim / 50
-            text_size = cv2.getTextSize(
-                str(index + 1), cv2.FONT_HERSHEY_SIMPLEX, font_scale, 2)[0]
-            if render_pos == 'center':
-                text_x = cX - text_size[0] // 2
-                text_y = cY + text_size[1] // 2
-            else:
-                text_x = frame.shape[1] - text_size[0] // 2 - max_dim // 2
-                text_y = text_size[1] // 2 + max_dim // 2
-            cv2.putText(frame, str(index + 1), (text_x, text_y),
-                        cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), 2)
-            y1 = i * (frame_height + spacer)
-            y2 = y1 + frame_height
-            x1 = j * (frame_width + spacer)
-            x2 = x1 + frame_width
-            grid_img[y1:y2, x1:x2] = frame
-
-    return grid_img, actual_indices
-
 
 class ImageGridQA:
     def __init__(
@@ -148,6 +65,8 @@ class ImageGridQA:
         conf = None, 
     ):
         self.conf = conf
+
+        self.mode = conf.tool.image_grid_qa.mode
 
         self.client_gpt = OpenAI(
             api_key = conf.openai.GPT_API_KEY,
@@ -221,26 +140,111 @@ class ImageGridQA:
         return text_result
     
 
+    def create_frame_grid(self, video_path, center_time, interval, grid_size):
+        spacer = 0
+
+        if video_path == None:
+            sampled_visible_frames = sample_evenly(self.visible_frames.frames, grid_size**2)
+            frames = []
+            actual_indices = []
+            for sampled_frame in sampled_visible_frames:
+                frame = image_resize(sampled_frame.image, width=200)
+                frames.append(frame)
+                actual_indices.append(sampled_frame.index)
+        else:
+            video = cv2.VideoCapture(video_path)
+            fps = video.get(cv2.CAP_PROP_FPS)
+            total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT)) - 1
+            center_frame = int(center_time * fps)
+            interval_frames = int(interval * fps)
+            num_frames = grid_size**2
+            half_num_frames = num_frames // 2
+            frame_indices = [max(0,
+                                min(center_frame + i * interval_frames,
+                                    total_frames - 1)) for i in range(-half_num_frames,
+                                                                    half_num_frames + 1)]
+            frames = []
+            actual_indices = []
+            for index in frame_indices:
+                video.set(cv2.CAP_PROP_POS_FRAMES, index)
+                success, frame = video.read()
+                if success:
+                    frame = image_resize(frame, width=200)
+                    frames.append(frame)
+                    actual_indices.append(index)
+                else:
+                    print(f"Warning: Frame {index} not found")
+                    print(f"Total frames: {total_frames}")
+                    video.set(cv2.CAP_PROP_POS_FRAMES, 0)
+                    success, frame = video.read()
+                    frame = image_resize(frame, width=200)
+                    frame = frame * 0
+                    frames.append(frame)
+                    actual_indices.append(index)
+            video.release()
+
+        if len(frames) < grid_size**2:
+            raise ValueError("Not enough frames to create the grid.")
+
+        frame_height, frame_width = frames[0].shape[:2]
+
+        grid_height = grid_size * frame_height + (grid_size - 1) * spacer
+        grid_width = grid_size * frame_width + (grid_size - 1) * spacer
+
+        grid_img = np.ones((grid_height, grid_width, 3), dtype=np.uint8) * 255
+
+        for i in range(grid_size):
+            for j in range(grid_size):
+                index = i * grid_size + j
+                frame = frames[index]
+                cX, cY = frame.shape[1] // 2, frame.shape[0] // 2
+                max_dim = int(min(frame.shape[:2]) * 0.5)
+                overlay = frame.copy()
+                if render_pos == 'center':
+                    circle_center = (cX, cY)
+                else:
+                    circle_center = (frame.shape[1] - max_dim // 2, max_dim // 2)
+                cv2.circle(overlay, circle_center,
+                        max_dim // 2, (255, 255, 255), -1)
+                alpha = 0.3
+                frame = cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0)
+                cv2.circle(frame, circle_center, max_dim // 2, (255, 255, 255), 2)
+                font_scale = max_dim / 50
+                text_size = cv2.getTextSize(
+                    str(index + 1), cv2.FONT_HERSHEY_SIMPLEX, font_scale, 2)[0]
+                if render_pos == 'center':
+                    text_x = cX - text_size[0] // 2
+                    text_y = cY + text_size[1] // 2
+                else:
+                    text_x = frame.shape[1] - text_size[0] // 2 - max_dim // 2
+                    text_y = text_size[1] // 2 + max_dim // 2
+                cv2.putText(frame, str(index + 1), (text_x, text_y),
+                            cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), 2)
+                y1 = i * (frame_height + spacer)
+                y2 = y1 + frame_height
+                x1 = j * (frame_width + spacer)
+                x2 = x1 + frame_width
+                grid_img[y1:y2, x1:x2] = frame
+
+        return grid_img, actual_indices
+
+
     def inference(self, input):
 
-        # cv2 读取视频
-        video = cv2.VideoCapture(self.video_path)
+        if self.mode == "by_video_path":         
+            # 准备 grid 参数
+            duration = self.visible_frames.video_info["duration"]
+            center_time = duration / 2
+            interval = duration / (self.grid_size**2 - 1)
 
-        # video info
-        fps = video.get(cv2.CAP_PROP_FPS)
-        total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
-        duration = float(total_frames) / fps
+            image, used_frame_indices = self.create_frame_grid(
+                self.video_path, center_time, interval, self.grid_size)
         
-        # 准备 grid 参数
-        center_time = duration / 2
-        interval = duration / (self.grid_size**2 - 1)
-
-        # print(f"center_time: {center_time}")
-        # print(f"interval: {interval}")
-        # print(f"grid_size: {self.grid_size}")
-
-        image, used_frame_indices = create_frame_grid(
-            self.video_path, center_time, interval, self.grid_size)
+        elif self.mode == "by_visible_frames":
+            image, used_frame_indices = self.create_frame_grid(
+                None, None, None, self.grid_size)
+        else:
+            raise KeyError("self.mode in image_grid_qa error")
 
         if self.save_path:
             output_img_path = os.path.join(self.save_path, f"grid_image_sample.png")
@@ -262,11 +266,9 @@ class ImageGridQA:
 
 
 
-
-
 if __name__ == "__main__":
 
-    conf = OmegaConf.load("/home/fsq/video_agent/ToolChainVideo/config/nextqa_new_tool.yaml")
+    conf = OmegaConf.load("/home/fsq/video_agent/ToolChainVideo/config/nextqa_st.yaml")
     image_grid_qa = ImageGridQA(conf)
 
     video_path = "/share_data/NExT-QA/NExTVideo/1106/4010069381.mp4"

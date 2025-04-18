@@ -7,28 +7,38 @@ from tools.frame_selector import FrameSelector
 from tools.image_qa import ImageQA
 from tools.yolo_tracker import YOLOTracker
 from tools.temporal_grounding import TemporalGrounding
+from tools.image_grid_qa import ImageGridQA
 
 import pdb
 
 parser = argparse.ArgumentParser(description="demo")               
-parser.add_argument('--config', default="config/nextqa_new_tool.yaml",type=str)                           
+parser.add_argument('--config', default="config/nextqa_st.yaml",type=str)                           
 opt = parser.parse_args()
 conf = OmegaConf.load(opt.config)
 
+# video_path = "/home/fsq/video_agent/ToolChainVideo/projects/Grounded-Video-LLM/experiments/_3klvlS4W7A.mp4"
 
-# video_path = "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4"
-video_path = "/home/fsq/video_agent/ToolChainVideo/projects/Grounded-Video-LLM/experiments/_3klvlS4W7A.mp4"
+video_path = "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4"
 question = "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five."
-init_interval_sec = 10
+init_interval_sec = 1
 video_info = get_video_info(video_path)
 init_video_stride = int(video_info["fps"] * init_interval_sec)
 
 # 创建可见帧管理器
 visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
 
+# image_grid_qa
+image_grid_qa = ImageGridQA(conf)
+image_grid_qa.set_video_path(video_path)
+image_grid_qa.set_frames(visible_frames)
+result = image_grid_qa.inference(input=question)
+print(result)
+
+'''
 # temporal grounding
 temporal_grounding = TemporalGrounding(conf=conf)
 temporal_grounding.set_frames(visible_frames)
+'''
 
 '''
 # YOLO Tracker

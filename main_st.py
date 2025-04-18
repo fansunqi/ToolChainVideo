@@ -2,8 +2,8 @@ import os
 import sys
 import pdb
 import datetime
-import shutil
-import pickle
+
+
 import argparse
 from tqdm import tqdm
 from omegaconf import OmegaConf
@@ -21,19 +21,17 @@ torch.cuda.manual_seed(seed)
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
 
-from prompts import (
-    QUERY_PREFIX,
-    TOOLS_RULE,
-    ASSISTANT_ROLE,
-)
 
 from dataset import get_dataset
 
-from util import save_to_json, adjust_video_resolution
+from util import (
+    save_to_json, 
+    adjust_video_resolution,
+    backup_file,
+    load_cache, 
+)
 
-from langchain_core.prompts import ChatPromptTemplate
-from langgraph.prebuilt.chat_agent_executor import AgentState
-from langgraph.prebuilt import create_react_agent
+
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import Tool
 
@@ -41,39 +39,17 @@ from tools.yolo_tracker import YOLOTracker
 from tools.image_captioner import ImageCaptioner
 from tools.frame_selector import FrameSelector
 from tools.image_qa import ImageQA
+from tools.temporal_grounding import TemporalGrounding
 
 from visible_frames import get_video_info, VisibleFrames
 
+from reasoning import (
+    langgraph_reasoning,
+    spatiotemporal_reasoning,
+)
 
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-TO_TXT = True
 
-# TODO 可以把这些工具函数移到 util.py 中去
-def backup_file(opt, conf):
-    # 将 main.py 文件自身和 opt.config 文件复制一份存储至 conf.output_path
-    current_script_path = os.path.abspath(__file__)  # 获取当前脚本的绝对路径
-    shutil.copy(current_script_path, os.path.join(conf.output_path, f"main_{timestamp}.py"))
-    # 复制 opt.config 文件到输出目录
-    config_basename = os.path.basename(opt.config).split('.')[0]
-    shutil.copy(opt.config, os.path.join(conf.output_path, f"{config_basename}_{timestamp}.yaml"))   
-    
-
-def load_cache(mannual_cache_file):
-    if os.path.exists(mannual_cache_file):
-        print(f"Loading LLM cache from {mannual_cache_file}...\n")
-        with open(mannual_cache_file, "rb") as f:
-            mannual_cache = pickle.load(f)
-    else:
-        print(f"Creating LLM cache: {mannual_cache_file}...\n")
-        mannual_cache = {}
-    return mannual_cache
-
-
-def save_cache(mannual_cache, query, steps, mannual_cache_file):
-    mannual_cache[query] = steps
-    print("\nSaving cache...")
-    with open(mannual_cache_file, "wb") as f:
-        pickle.dump(mannual_cache, f)
 
 
 def get_tools(conf):
@@ -94,72 +70,13 @@ def get_tools(conf):
     return tool_instances, tools
 
 
-def tool_chain_reasoning( 
-    input_question, 
-    llm, 
-    tools,
-    recursion_limit=24,  
-    use_cache=True,
-    mannual_cache=None,
-    mannual_cache_file=None
-):
-
-    prompt = ChatPromptTemplate.from_messages(
-        [
-            ("system", ASSISTANT_ROLE),
-            ("placeholder", "{messages}"),
-            ("placeholder", "{agent_scratchpad}"),
-        ]
-    )
-    
-    def _modify_state_messages(state: AgentState):
-        return prompt.invoke({"messages": state["messages"]}).to_messages()
-    
-    tool_planner = create_react_agent(llm, tools, state_modifier=_modify_state_messages)
-    
-    query = QUERY_PREFIX + input_question + '\n\n' + TOOLS_RULE
-    
-    if use_cache and (query in mannual_cache):
-        print("\nCache hit!")
-        steps = mannual_cache[query]
-    else:
-        print("\nCache miss. Calling API...")
-        steps = []
-    
-        for step in tool_planner.stream(
-            {"messages": [("human", query)]}, 
-            {"recursion_limit": recursion_limit},
-                stream_mode="values"):
-            
-            step_message = step["messages"][-1]
-
-            if isinstance(step_message, tuple):
-                print(step_message)
-            else:
-                step_message.pretty_print()
-        
-            steps.append(step)
-        
-        save_cache(mannual_cache, query, steps, mannual_cache_file)    
- 
-    try:
-        output = steps[-1]["messages"][-1].content
-    except:
-        output = None
-    
-    print(f"\nToolChainOutput: {output}") 
-    return output
-
-
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/nextqa_new_tool.yaml",type=str)                           
+    parser.add_argument('--config', default="config/nextqa_st.yaml",type=str)                           
     opt = parser.parse_args()
     conf = OmegaConf.load(opt.config)
 
-    backup_file(opt, conf)
+    backup_file(opt, conf, timestamp)
 
     if conf.to_txt:
         log_path = os.path.join(conf.output_path, f"log_{timestamp}.txt")
@@ -205,19 +122,52 @@ if __name__ == "__main__":
 
         video_info = get_video_info(video_path)
         init_video_stride = int(video_info["fps"] * conf.init_interval_sec)
+
+        print(question_w_options)
         
         for try_count in range(try_num):
 
-            visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
+            # visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
+            visible_frames = VisibleFrames(video_path=video_path, init_video_stride=None)
             
             for tool_instance in tool_instances:
                 tool_instance.set_frames(visible_frames)
+                tool_instance.set_video_path(video_path)
 
-            # TODO 各种工具也可以加上一个 set_question 功能
+            # TODO 各种工具也可以加上一个 set_question 功能, 使得 question 不用再占据 input 的位置
+            # TODO 简化，统一下面的代码
             
             if conf.try_except_mode:
                 try:
-                    tool_chain_output = tool_chain_reasoning(
+                    if conf.reasoning_mode == "langgrah":
+                        tool_chain_output = langgraph_reasoning(
+                            input_question=question_w_options,
+                            llm=tool_planner_llm,
+                            tools=tools,
+                            recursion_limit=conf.recursion_limit,
+                            use_cache=conf.use_cache,
+                            mannual_cache=mannual_cache,
+                            mannual_cache_file=mannual_cache_file
+                        )
+                    elif conf.reasoning_mode == "st":
+                        tool_chain_output = spatiotemporal_reasoning(
+                            question=question,
+                            question_w_options=question_w_options,
+                            llm=tool_planner_llm,
+                            tools=tool_instances,
+                            recursion_limit=conf.recursion_limit,
+                            use_cache=conf.use_cache,
+                            mannual_cache=mannual_cache,
+                            mannual_cache_file=mannual_cache_file
+                        )
+                    else:
+                        raise KeyError("conf.reasoning_mode error")
+                except Exception as e:
+                    print(f"Error: {e}")
+                    tool_chain_output = "Error"
+            else:
+                if conf.reasoning_mode == "langgrah":
+                    tool_chain_output = langgraph_reasoning(
                         input_question=question_w_options,
                         llm=tool_planner_llm,
                         tools=tools,
@@ -226,19 +176,19 @@ if __name__ == "__main__":
                         mannual_cache=mannual_cache,
                         mannual_cache_file=mannual_cache_file
                     )
-                except Exception as e:
-                    print(f"Error: {e}")
-                    tool_chain_output = "Error"
-            else:
-                tool_chain_output = tool_chain_reasoning(
-                    input_question=question_w_options,
-                    llm=tool_planner_llm,
-                    tools=tools,
-                    recursion_limit=conf.recursion_limit,
-                    use_cache=conf.use_cache,
-                    mannual_cache=mannual_cache,
-                    mannual_cache_file=mannual_cache_file
-                )
+                elif conf.reasoning_mode == "st":
+                     tool_chain_output = spatiotemporal_reasoning(
+                        question=question,
+                        question_w_options=question_w_options,
+                        llm=tool_planner_llm,
+                        tools=tool_instances,
+                        recursion_limit=conf.recursion_limit,
+                        use_cache=conf.use_cache,
+                        mannual_cache=mannual_cache,
+                        mannual_cache_file=mannual_cache_file
+                    )
+                else:
+                    raise KeyError("conf.reasoning_mode error")
 
             result["answers"].append(tool_chain_output)
 
@@ -249,13 +199,7 @@ if __name__ == "__main__":
     print(f"\n{str(len(all_results))} results saved")   
 
     if conf.to_txt:
-        # 恢复标准输出
         sys.stdout = sys.__stdout__
         f.close()
-
-
-
-# TODO 可视化 langgraph 工具图
-# TODO 尝试手动规定工具顺序
 
     

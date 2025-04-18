@@ -38,7 +38,11 @@ class FrameSelector:
         )
 
         self.visible_frames = None
-
+        self.video_path = None
+    
+    def set_video_path(self, video_path):
+        self.video_path = video_path  
+        
     def set_frames(self, visible_frames):
         self.visible_frames = visible_frames
     

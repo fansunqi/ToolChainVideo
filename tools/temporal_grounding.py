@@ -1,6 +1,7 @@
+import re
 import sys
 sys.path.append("projects/Grounded-Video-LLM")
-
+import pdb
 import numpy as np
 import torch
 from omegaconf import OmegaConf
@@ -8,12 +9,43 @@ import decord
 from decord import VideoReader
 
 from models.llava_next_video import LLAVA_NEXT_VIDEO
-from inference import parse_args, parse_time_interval
+from inference import parse_args
 from mm_utils.video_utils import get_frame_indices
 from mm_utils.utils import *
 from datasets.chat.base_template import LLaMA3_Template, Vicuna_Template, Phi_3_5_Template, DEFAULT_IMAGE_TOKEN, GROUNDING_TOKEN
 
 args = parse_args()
+
+
+def prompts(name, description):
+    
+    def decorator(func):
+        func.name = name
+        func.description = description
+        return func
+
+    return decorator
+
+
+def parse_time_interval(text, duration, num_temporal_tokens=300, llm='phi3.5'):
+    pattern = r"<(\d+)>"
+    replaced_xs = []
+
+    def replace_func(match):
+        x = int(match.group(1))
+        replaced_xs.append(x)
+        m = duration * x / num_temporal_tokens
+        if llm == 'phi3.5':
+            return f" {m:.2f} seconds"
+        elif llm == 'llama3':
+            return f"{m:.2f} seconds"
+        else:
+            return f"{m:.2f} sec"  # fallback
+
+    new_text = re.sub(pattern, replace_func, text)
+    return new_text, replaced_xs
+
+
 
 class TemporalGrounding:
     def __init__(
@@ -40,8 +72,8 @@ class TemporalGrounding:
             dtype=args.dtype, 
             stage=args.stage, 
             max_txt_len=args.max_txt_len, 
-            num_frames=args.num_frames,
-            num_segs=args.num_segs,
+            num_frames=args.num_frames,  # NOTE
+            num_segs=args.num_segs,      # NOTE
             num_temporal_tokens=args.num_temporal_tokens,
             lora=args.lora,
             llm=self.llm_type,
@@ -137,9 +169,18 @@ class TemporalGrounding:
     
         return samples, duration
     
-    
+    @prompts(
+        name = "temporal-grounding-tool",
+        description = "Useful when you want to know which time segment of the video a certain event or content appears in"
+        "The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'."
+    )
     def inference(self, input):
-        samples_grounding, duration_grounding = self.create_inputs(self.video_path, input)
+
+        # TODO 对 input 进行清除选项
+
+        prompt_grounding = f"Give you a textual query: '{input}'. When does the described content occur in the video? Please return the start and end timestamps."
+        
+        samples_grounding, duration_grounding = self.create_inputs(self.video_path, prompt_grounding)
         
         generate_kwargs = {
             "do_sample": args.do_sample,
@@ -155,8 +196,29 @@ class TemporalGrounding:
         
         # print('\n******grounding example******')
         # print(samples_grounding['prompts'][0])
-        result = parse_time_interval(pred_texts_grounding, duration_grounding, args.num_temporal_tokens, self.llm_type)
+        result, time_token_list = parse_time_interval(pred_texts_grounding, duration_grounding, args.num_temporal_tokens, self.llm_type)
         
+        # 这里直接对 self.visible_frames 进行操作，添加帧
+        assert len(time_token_list) == 2
+        start_token_idx = time_token_list[0]
+        end_token_idx = time_token_list[1]
+
+        total_frames_num = self.visible_frames.video_info["total_frames"]
+        start_frame_idx = int(start_token_idx / args.num_temporal_tokens * total_frames_num)
+        if start_frame_idx < 0:
+            start_frame_idx = 0
+        end_frame_idx = int(end_token_idx / args.num_temporal_tokens * total_frames_num) + 1
+        if end_frame_idx >= total_frames_num:
+            end_frame_idx = total_frames_num - 1
+
+        # 最小间隔为 1s 抽一帧
+        minimal_interval = int(1 * self.visible_frames.video_info["fps"])
+        frame_indices = range(start_frame_idx, end_frame_idx + 1, minimal_interval)
+
+        pdb.set_trace()
+
+        self.visible_frames.add_frames(frame_indices=frame_indices)
+
         return result
         
         
@@ -166,12 +228,12 @@ if __name__ == "__main__":
     conf = OmegaConf.load("/home/fsq/video_agent/ToolChainVideo/config/nextqa_new_tool.yaml")
     temporal_grounding = TemporalGrounding(conf)
     
-    
+    # e.g.1
     video_path = "/home/fsq/video_agent/ToolChainVideo/projects/Grounded-Video-LLM/experiments/_3klvlS4W7A.mp4"
+    input_question = "The female host wearing purple clothes is reporting news in the studio"
     
     temporal_grounding.set_video_path(video_path)
-    prompt_grounding = "Give you a textual query: 'The female host wearing purple clothes is reporting news in the studio'. When does the described content occur in the video? Please return the start and end timestamps."
-    result = temporal_grounding.inference(input=prompt_grounding)
+    result = temporal_grounding.inference(input=input_question)
     print(f"Result: {result}")
     
     print("main done") 

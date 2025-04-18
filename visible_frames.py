@@ -73,7 +73,7 @@ class VisibleFrames:
                 # 根据stride抽帧
                 frame_indices = list(range(0, total_frames, video_stride))
 
-        # 打开视频文件
+        # 每次都是重新读取视频文件
         cap = cv2.VideoCapture(self.video_path)
 
         for frame_idx in frame_indices:

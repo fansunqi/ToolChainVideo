@@ -1,4 +1,9 @@
 # Copyright (c) OpenMMLab. All rights reserved.
+
+# python misc/test_mmaction.py /home/fsq/video_agent/mmaction2/demo/demo.mp4 --rec tsn --print-result --label-file /home/fsq/video_agent/mmaction2/tools/data/kinetics/label_map_k400.txt
+ 
+# python misc/test_mmaction.py /share_data/NExT-QA/NExTVideo/1106/4010069381.mp4 --rec tsn --print-result --label-file /home/fsq/video_agent/mmaction2/tools/data/kinetics/label_map_k400.txt
+
 from argparse import ArgumentParser
 
 from mmaction.apis.inferencers import MMAction2Inferencer
@@ -7,8 +12,7 @@ from mmaction.apis.inferencers import MMAction2Inferencer
 def parse_args():
     parser = ArgumentParser()
     parser.add_argument(
-        'inputs', type=str, help='Input video file or rawframes folder path.',
-        default="/home/fsq/video_agent/mmaction2/demo/demo.mp4")
+        'inputs', type=str, help='Input video file or rawframes folder path.')
     parser.add_argument(
         '--vid-out-dir',
         type=str,
