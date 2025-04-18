@@ -17,6 +17,7 @@ from tools.image_captioner import ImageCaptioner
 from tools.frame_selector import FrameSelector
 from tools.image_qa import ImageQA
 from tools.temporal_grounding import TemporalGrounding
+from tools.image_grid_qa import ImageGridQA
 
 
 def spatiotemporal_reasoning(
@@ -33,19 +34,29 @@ def spatiotemporal_reasoning(
     for tool in tools:
         if isinstance(tool, TemporalGrounding):
             temporal_grounding = tool
+        if isinstance(tool, ImageGridQA):
+            image_grid_qa = tool
+
 
     # 1. temporal grounding
     temporal_grounding_result = temporal_grounding.inference(input=question)
 
     # 2.1 image grid qa
-    pdb.set_trace()
+    # 注意，image_grid_qa 的输入一般需要是 question_w_options
+    image_grid_qa_result = image_grid_qa.inference(input=question_w_options)
 
-    # 2.2 时间截取送到 temporal qa 或者 video qa 中去
+    # 2.2 image qa LLaVA
 
     # 2.3 frame selector + 空间工具，再处理
 
+    # 2.3 时间截取送到 temporal qa 或者 video qa 中去
+
     # pdb.set_trace()
 
+
+    output = image_grid_qa_result
+    print(f"\nToolChainOutput: {output}") 
+    return output
 
 
 

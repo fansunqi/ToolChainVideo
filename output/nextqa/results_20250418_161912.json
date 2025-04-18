@@ -1,0 +1,20 @@
+[
+    {
+        "quid": "4010069381_6",
+        "uid": "4010069381",
+        "qid": 6,
+        "q_type": "CH",
+        "question": "how do the two man play the instrument",
+        "optionA": "roll the handle",
+        "optionB": "tap their feet",
+        "optionC": "strum the string",
+        "optionD": "hit with sticks",
+        "optionE": "pat with hand",
+        "truth": 0,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1106/4010069381.mp4",
+        "answers": [
+            "I'm unable to view the images, but I can help with general information. If you describe the actions or the instrument, I might be able to provide some insights on how it might be played."
+        ],
+        "question_w_options": "How do the two man play the instrument? Choose your answer from below options: A.roll the handle, B.tap their feet, C.strum the string, D.hit with sticks, E.pat with hand."
+    }
+]

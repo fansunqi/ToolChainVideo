@@ -8,11 +8,22 @@ import openai
 from openai import OpenAI
 import time
 import json
+import pdb
 from omegaconf import OmegaConf
 
 
 render_pos = 'topright'  # center or topright
 
+def prompts(name, description):
+    
+    def decorator(func):
+        func.name = name
+        func.description = description
+        return func
+
+    return decorator
+
+   
 def sample_evenly(lst, num_samples):
     if num_samples <= 0:
         return []
@@ -113,7 +124,7 @@ class ImageGridQA:
             "messages": PROMPT_MESSAGES,
             "temperature": 0.0,
         }
-
+        
         count = 0
         while True:
             if count > 5:
@@ -228,7 +239,11 @@ class ImageGridQA:
 
         return grid_img, actual_indices
 
-
+    @prompts(
+        name = "image-grid-qa-tool",
+        description = "Useful when you want to ask something about the visible sampled frames from the video. This tool arranges multiple images into an image grid, allowing the multimodal large language model to compare differences among the images in the grid and analyze the events or actions taking place in them."
+        "The input to this tool must be a question, such as 'How many children are in the video?' "
+    )
     def inference(self, input):
 
         if self.mode == "by_video_path":         
@@ -239,6 +254,8 @@ class ImageGridQA:
 
             image, used_frame_indices = self.create_frame_grid(
                 self.video_path, center_time, interval, self.grid_size)
+
+            # val1, test_tools_all_video: used_frame_indices = [0, 46, 92, 138, 184, 230, 276, 322, 367]
         
         elif self.mode == "by_visible_frames":
             image, used_frame_indices = self.create_frame_grid(

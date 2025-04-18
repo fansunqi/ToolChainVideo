@@ -215,8 +215,6 @@ class TemporalGrounding:
         minimal_interval = int(1 * self.visible_frames.video_info["fps"])
         frame_indices = range(start_frame_idx, end_frame_idx + 1, minimal_interval)
 
-        pdb.set_trace()
-
         self.visible_frames.add_frames(frame_indices=frame_indices)
 
         return result

@@ -103,11 +103,7 @@ def main(input_file, output_file, conf, eval_llm, llm_cache):
         options = [item['optionA'], item['optionB'], item['optionC'], item['optionD'], item['optionE']]
         question = item['question']
         
-        if not isinstance(item['answers'], list):
-            error_items += 1
-            continue
-        
-        if all(answer == "Error" for answer in item['answers']):
+        if isinstance(item['answers'], str) or item["answers"] == ["Error"]:
             error_items += 1
             continue
 
@@ -125,14 +121,25 @@ def main(input_file, output_file, conf, eval_llm, llm_cache):
                 predicted_option, match_method = get_predicted_option(answer_rephrase, options)
                 predicted_options.append(predicted_option)
                 match_methods.append(match_method)
+
+            # 多次 rephrase
+            # rephase_max = 5
+            # rephase_count = 0
+            # while rephase_count <= rephase_max and predicted_option == -1:
+            #     answer_rephrase = LLM_rephrase(answer, options, question, conf)
+            #     predicted_option, match_method = get_predicted_option(answer_rephrase, options)
+            # predicted_options.append(predicted_option)
+            # match_methods.append(match_method)
+
         
         item["predicted_options"] = predicted_options
         item["match_methods"] = match_methods
         
-        # 去除 -1, 即判断不出来的回答
+        # 去除 -1
         predicted_options = [option for option in predicted_options if option != -1]
         
-        # 投票确定最终预测答案, 多个选项个数一样, 随机选一个
+        # 投票确定最终预测答案
+        # 多个选项个数一样，随机选一个
         if predicted_options:
             option_counts = Counter(predicted_options)
             most_common_option, _ = option_counts.most_common(1)[0]

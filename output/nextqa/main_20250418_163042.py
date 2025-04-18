@@ -46,7 +46,7 @@ from util import save_to_json, adjust_video_resolution
 # from tools.video_qa import VideoQA
 from tools.image_grid_qa import ImageGridQA
 
-from visible_frames import get_video_info, VisibleFrames
+# from visible_frames import get_video_info, VisibleFrames
 
 
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -101,7 +101,7 @@ def get_tools(conf):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/nextqa_st.yaml",type=str)                           
+    parser.add_argument('--config', default="config/nextqa_new_tool.yaml",type=str)                           
     opt = parser.parse_args()
     conf = OmegaConf.load(opt.config)
 
@@ -151,12 +151,9 @@ if __name__ == "__main__":
         options = [data['optionA'], data['optionB'], data['optionC'], data['optionD'], data['optionE']]
         question_w_options = f"{question}? Choose your answer from below options: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
 
-        visible_frames = VisibleFrames(video_path=video_path, init_video_stride=None)
-
         # temporal_qa.set_video_path(video_path)
         # video_qa.set_video_path(video_path)
         image_grid_qa.set_video_path(video_path)
-        image_grid_qa.set_frames(visible_frames)
         
         result = data
         result["answers"] = []

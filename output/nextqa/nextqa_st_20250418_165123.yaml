@@ -15,7 +15,7 @@ tool:
   image_grid_qa:
     vlm_gpt_model_name: "gpt-4o" 
     grid_size: 3
-    save_path: null # "/home/fsq/video_agent/ToolChainVideo/misc/image_grid_results/"
+    save_path: "/home/fsq/video_agent/ToolChainVideo/misc/image_grid_results/"
     mode: "by_visible_frames"    # "by_video_path"
   temporal_grounding:
     llm: "phi3.5"
@@ -28,7 +28,7 @@ use_cache: False
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/val.csv"
-num_examples_to_run: 100
+num_examples_to_run: 1
 start_num: 0
 
 output_path: "output/nextqa/"
@@ -39,8 +39,8 @@ try_num: 1
 
 init_interval_sec: 10
 
-try_except_mode: True
-to_txt: True
+try_except_mode: False
+to_txt: False
 
 
 eval:

@@ -4,19 +4,16 @@ openai:
   GPT_API_KEY: "sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra"
   PROXY: "https://api.juheai.top/v1"
 
-reasoning_mode: "st"    # langgraph
-
 tool:
   tool_list:
-    - "ImageGridQA"
-    - "TemporalGrounding"
+    - "ImageQA"
+    - "FrameSelector"
   image_qa:
     vlm_type: "LLaVA"
   image_grid_qa:
     vlm_gpt_model_name: "gpt-4o" 
     grid_size: 3
-    save_path: null # "/home/fsq/video_agent/ToolChainVideo/misc/image_grid_results/"
-    mode: "by_visible_frames"    # "by_video_path"
+    save_path: null
   temporal_grounding:
     llm: "phi3.5"
     weight_path: "/hf_home/Grounded-Video-LLM/"
@@ -39,8 +36,8 @@ try_num: 1
 
 init_interval_sec: 10
 
-try_except_mode: True
-to_txt: True
+try_except_mode: False
+to_txt: False
 
 
 eval:

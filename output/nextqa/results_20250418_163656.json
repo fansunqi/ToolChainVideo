@@ -1,0 +1,20 @@
+[
+    {
+        "quid": "4010069381_6",
+        "uid": "4010069381",
+        "qid": 6,
+        "q_type": "CH",
+        "question": "how do the two man play the instrument",
+        "optionA": "roll the handle",
+        "optionB": "tap their feet",
+        "optionC": "strum the string",
+        "optionD": "hit with sticks",
+        "optionE": "pat with hand",
+        "truth": 0,
+        "video_path": "/share_data/NExT-QA/NExTVideo/1106/4010069381.mp4",
+        "answers": [
+            "I'm unable to view the details of the images, but I can help you analyze the sequence based on general observations. If the video shows two men playing an instrument, you might want to look for the following:\n\n1. **Positioning**: Are they sitting or standing? This can indicate the type of instrument.\n2. **Hand Movements**: Observe their hand movements. Are they strumming, plucking, or pressing keys?\n3. **Interaction**: Are they both playing the same instrument, or do they have separate roles?\n4. **Body Language**: Look for any signs of coordination or communication between them.\n\nIf you can describe any specific actions or details from the images, I can help further!"
+        ],
+        "question_w_options": "How do the two man play the instrument? Choose your answer from below options: A.roll the handle, B.tap their feet, C.strum the string, D.hit with sticks, E.pat with hand."
+    }
+]
