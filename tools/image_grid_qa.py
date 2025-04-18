@@ -10,9 +10,11 @@ import time
 import json
 import pdb
 from omegaconf import OmegaConf
+import time
 
 
-render_pos = 'topright'  # center or topright
+
+
 
 def prompts(name, description):
     
@@ -32,6 +34,88 @@ def sample_evenly(lst, num_samples):
     step = (len(lst) - 1) / (num_samples - 1)
     return [lst[int(round(i * step))] for i in range(num_samples)]
 
+# 留白模式
+def sample_adaptively_whitespace(lst):
+
+    if len(lst) <= 2**2:
+        grid_size = 2
+    else:
+        grid_size = 3
+
+    num_samples = grid_size**2
+    
+    if num_samples >= len(lst):
+        samples = lst[:]
+    else:
+        step = (len(lst) - 1) / (num_samples - 1)
+        samples = [lst[int(round(i * step))] for i in range(num_samples)]
+
+    return samples, grid_size
+
+# 舍弃模式
+def sample_adaptively_drop(lst):
+
+    if len(lst) >= 3**2:
+        grid_size = 3
+    elif len(lst) >= 2**2:
+        grid_size = 2
+    else:
+        grid_size = 1
+    
+    if grid_size > 1:
+        num_samples = grid_size**2
+        step = (len(lst) - 1) / (num_samples - 1)
+        samples = [lst[int(round(i * step))] for i in range(num_samples)]
+    else:
+        samples = lst
+
+    return samples, grid_size
+
+
+def draw_grid_img(frames, grid_size, spacer=0, render_pos='topright'):
+
+    frame_height, frame_width = frames[0].shape[:2]
+    
+    grid_height = grid_size * frame_height + (grid_size - 1) * spacer
+    grid_width = grid_size * frame_width + (grid_size - 1) * spacer
+
+    grid_img = np.ones((grid_height, grid_width, 3), dtype=np.uint8) * 255
+
+    for i in range(grid_size):
+        for j in range(grid_size):
+            index = i * grid_size + j
+            if index < len(frames):
+                frame = frames[index]
+                cX, cY = frame.shape[1] // 2, frame.shape[0] // 2
+                max_dim = int(min(frame.shape[:2]) * 0.5)
+                overlay = frame.copy()
+                if render_pos == 'center':
+                    circle_center = (cX, cY)
+                else:
+                    circle_center = (frame.shape[1] - max_dim // 2, max_dim // 2)
+                cv2.circle(overlay, circle_center,
+                        max_dim // 2, (255, 255, 255), -1)
+                alpha = 0.3
+                frame = cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0)
+                cv2.circle(frame, circle_center, max_dim // 2, (255, 255, 255), 2)
+                font_scale = max_dim / 50
+                text_size = cv2.getTextSize(
+                    str(index + 1), cv2.FONT_HERSHEY_SIMPLEX, font_scale, 2)[0]
+                if render_pos == 'center':
+                    text_x = cX - text_size[0] // 2
+                    text_y = cY + text_size[1] // 2
+                else:
+                    text_x = frame.shape[1] - text_size[0] // 2 - max_dim // 2
+                    text_y = text_size[1] // 2 + max_dim // 2
+                cv2.putText(frame, str(index + 1), (text_x, text_y),
+                            cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), 2)
+                y1 = i * (frame_height + spacer)
+                y2 = y1 + frame_height
+                x1 = j * (frame_width + spacer)
+                x2 = x1 + frame_width
+                grid_img[y1:y2, x1:x2] = frame
+    
+    return grid_img
 
 def image_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
     dim = None
@@ -84,7 +168,7 @@ class ImageGridQA:
             base_url = conf.openai.PROXY
         )
 
-        self.grid_size = conf.tool.image_grid_qa.grid_size
+        self.grid_size = conf.tool.image_grid_qa.init_grid_size
 
         self.save_path = conf.tool.image_grid_qa.save_path
 
@@ -151,25 +235,29 @@ class ImageGridQA:
         return text_result
     
 
-    def create_frame_grid(self, video_path, center_time, interval, grid_size):
-        spacer = 0
+    def select_grid_frames(self):
 
-        if video_path == None:
-            sampled_visible_frames = sample_evenly(self.visible_frames.frames, grid_size**2)
+        if self.mode == "by_visible_frames":
+            # create frame by_visible_frames
+            sampled_visible_frames, grid_size = sample_adaptively_whitespace(self.visible_frames.frames)
+            # 重置 self.grid_size
+            self.grid_size = grid_size
             frames = []
             actual_indices = []
             for sampled_frame in sampled_visible_frames:
                 frame = image_resize(sampled_frame.image, width=200)
                 frames.append(frame)
                 actual_indices.append(sampled_frame.index)
-        else:
-            video = cv2.VideoCapture(video_path)
+        
+        elif self.mode == "by_video_path":
+            # create frame by_video_path, 重新读取视频文件
+            video = cv2.VideoCapture(self.video_path)
             fps = video.get(cv2.CAP_PROP_FPS)
             total_frames = int(video.get(cv2.CAP_PROP_FRAME_COUNT)) - 1
-            center_frame = int(center_time * fps)
-            interval_frames = int(interval * fps)
-            num_frames = grid_size**2
+            center_frame = int(total_frames / 2)
+            num_frames = self.grid_size**2
             half_num_frames = num_frames // 2
+            interval_frames = int(total_frames / num_frames - 1)
             frame_indices = [max(0,
                                 min(center_frame + i * interval_frames,
                                     total_frames - 1)) for i in range(-half_num_frames,
@@ -193,78 +281,26 @@ class ImageGridQA:
                     frames.append(frame)
                     actual_indices.append(index)
             video.release()
-
-        if len(frames) < grid_size**2:
-            raise ValueError("Not enough frames to create the grid.")
-
-        frame_height, frame_width = frames[0].shape[:2]
-
-        grid_height = grid_size * frame_height + (grid_size - 1) * spacer
-        grid_width = grid_size * frame_width + (grid_size - 1) * spacer
-
-        grid_img = np.ones((grid_height, grid_width, 3), dtype=np.uint8) * 255
-
-        for i in range(grid_size):
-            for j in range(grid_size):
-                index = i * grid_size + j
-                frame = frames[index]
-                cX, cY = frame.shape[1] // 2, frame.shape[0] // 2
-                max_dim = int(min(frame.shape[:2]) * 0.5)
-                overlay = frame.copy()
-                if render_pos == 'center':
-                    circle_center = (cX, cY)
-                else:
-                    circle_center = (frame.shape[1] - max_dim // 2, max_dim // 2)
-                cv2.circle(overlay, circle_center,
-                        max_dim // 2, (255, 255, 255), -1)
-                alpha = 0.3
-                frame = cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0)
-                cv2.circle(frame, circle_center, max_dim // 2, (255, 255, 255), 2)
-                font_scale = max_dim / 50
-                text_size = cv2.getTextSize(
-                    str(index + 1), cv2.FONT_HERSHEY_SIMPLEX, font_scale, 2)[0]
-                if render_pos == 'center':
-                    text_x = cX - text_size[0] // 2
-                    text_y = cY + text_size[1] // 2
-                else:
-                    text_x = frame.shape[1] - text_size[0] // 2 - max_dim // 2
-                    text_y = text_size[1] // 2 + max_dim // 2
-                cv2.putText(frame, str(index + 1), (text_x, text_y),
-                            cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), 2)
-                y1 = i * (frame_height + spacer)
-                y2 = y1 + frame_height
-                x1 = j * (frame_width + spacer)
-                x2 = x1 + frame_width
-                grid_img[y1:y2, x1:x2] = frame
-
-        return grid_img, actual_indices
+        
+        else:
+            raise ValueError("self.mode in image_grid_qa error.")
+        
+        return frames, actual_indices
 
     @prompts(
         name = "image-grid-qa-tool",
-        description = "Useful when you want to ask something about the visible sampled frames from the video. This tool arranges multiple images into an image grid, allowing the multimodal large language model to compare differences among the images in the grid and analyze the events or actions taking place in them."
+        description = "Useful when you want to know the whole event or action in the video. This tool arranges multiple images into an image grid, allowing the MLLM to analyze the events or actions taking place in the video."
         "The input to this tool must be a question, such as 'How many children are in the video?' "
     )
     def inference(self, input):
 
-        if self.mode == "by_video_path":         
-            # 准备 grid 参数
-            duration = self.visible_frames.video_info["duration"]
-            center_time = duration / 2
-            interval = duration / (self.grid_size**2 - 1)
+        frames, actual_indices = self.select_grid_frames()
 
-            image, used_frame_indices = self.create_frame_grid(
-                self.video_path, center_time, interval, self.grid_size)
-
-            # val1, test_tools_all_video: used_frame_indices = [0, 46, 92, 138, 184, 230, 276, 322, 367]
-        
-        elif self.mode == "by_visible_frames":
-            image, used_frame_indices = self.create_frame_grid(
-                None, None, None, self.grid_size)
-        else:
-            raise KeyError("self.mode in image_grid_qa error")
+        image = draw_grid_img(frames, self.grid_size)
 
         if self.save_path:
-            output_img_path = os.path.join(self.save_path, f"grid_image_sample.png")
+            timestamp = time.strftime("%Y%m%d%H%M%S")
+            output_img_path = os.path.join(self.save_path, f"grid_image_sample_{timestamp}.png")
             cv2.imwrite(output_img_path, image)
             print(f"Image grid saved to {output_img_path}.")
 

@@ -1,0 +1,203 @@
+Creating LLM cache: cache/gpt35_cache_new_tool_8.pkl...
+
+Start loading Temporal-Grounding-Tool model...
+
+loading vision_tower
+loading video_encoder
+loading multi_modal_projector
+loading video_projector
+loading language_model
+Frozen ViT
+Frozen video_encoder
+LORA llm
+Frozen Part LLM
+Finish loading Temporal-Grounding-Tool model.
+
+tool_instances: [<tools.image_grid_qa.ImageGridQA object at 0x7fdaac37d760>, <tools.temporal_grounding.TemporalGrounding object at 0x7fdaac199a30>]
+tools: [Tool(name='image-grid-qa-tool', description="Useful when you want to ask something about the visible sampled frames from the video. This tool arranges multiple images into an image grid, allowing the multimodal large language model to compare differences among the images in the grid and analyze the events or actions taking place in them.The input to this tool must be a question, such as 'How many children are in the video?' ", func=<bound method ImageGridQA.inference of <tools.image_grid_qa.ImageGridQA object at 0x7fdaac37d760>>), Tool(name='temporal-grounding-tool', description="Useful when you want to know which time segment of the video a certain event or content appears inThe input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method TemporalGrounding.inference of <tools.temporal_grounding.TemporalGrounding object at 0x7fdaac199a30>>)]
+
+Building dataset...
+
+
+Processing: 4010069381_6
+How do the two man play the instrument? Choose your answer from below options: A.roll the handle, B.tap their feet, C.strum the string, D.hit with sticks, E.pat with hand.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 4882821564_1
+Why did the boy pick up one present from the group of them and move to the sofa? Choose your answer from below options: A.share with the girl, B.approach lady sitting there, C.unwrap it, D.playing with toy train, E.gesture something.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 2435100235_7
+How does the man cycling try to sell the watch to the man in the trishaw? Choose your answer from below options: A.give him catalogue, B.show him a video, C.show him the watch, D.dismount his bicycle, E.give him the watch strap.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 2834146886_8
+What does the white dog do after going to the cushion? Choose your answer from below options: A.drink again, B.shake its body, C.smells the black dog, D.wagging tail, E.touch lady in blue stripes.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 8132842161_2
+Why did the man in white hold tightly to the boy in white? Choose your answer from below options: A.forcing boy to look straight, B.dancing with boy, C.posing for camera, D.prevent falling off, E.boy keeps moving around.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 4260763967_4
+Why is the boy in yellow reaching out to things on the green mat? Choose your answer from below options: A.team uniform, B.watch something in the pool, C.assembling parts to build toy, D.keep his belonging, E.grab remote control.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 3462517143_2
+Why is the white dog walking around the green container? Choose your answer from below options: A.chasing, B.get drink, C.fashion for dogs, D.leading the way, E.excited.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 3441428429_10
+What does the female skater do after the male skater puts her back down on the ice? Choose your answer from below options: A.put hand in mouth, B.continue skating, C.jump, D.move her arms up and down, E.laugh and run forward.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 6356067859_6
+What does the girl in white do after bending down in the middle? Choose your answer from below options: A.grab her, B.feed horse with grass, C.run towards the camera, D.umbrella, E.put her arms up.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 5026660202_8
+Why are there high chairs on the stage? Choose your answer from below options: A.to place the microphones, B.for guitarists to sit comfortably, C.for audience to sit, D.to act as displays, E.to take up stage spaces.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 9873067604_4
+Why did the boy in white sway his head around? Choose your answer from below options: A.he is looking through it, B.see where the ball is falling, C.talking, D.acting, E.moving with rhythm.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 5735711594_5
+How did the white dog respond to the brown dog when it attacks from its tail? Choose your answer from below options: A.follow it, B.hopped away, C.wagging, D.ready to run away, E.move his head.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 9088819598_1
+Why does the baby keep the ball near his mouth in the beginning? Choose your answer from below options: A.take a photo, B.lick it, C.smelling the ball, D.blow it away, E.kiss it.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 5296635780_7
+What does the man do after the lady appear to punch him and smiles? Choose your answer from below options: A.look at him, B.touch their chests, C.kick him, D.lean forward, E.sit back properly.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 2614918961_1
+Why does the baby turn around near the end of the video? Choose your answer from below options: A.yawning, B.sits down to play, C.to see the toy, D.move towards toy, E.curious.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 6201488511_5
+Why did the lady put her hands over her eyes in the middle of the video? Choose your answer from below options: A.posing in the camera, B.adjust her hair, C.protection from sun, D.to wipe her eyes, E.cue woman to talk.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 2976913210_6
+How did the man respond when he is stuck in the dirt? Choose your answer from below options: A.touched his head, B.pointing towards the jumping line, C.kept trying, D.prepare to swing again, E.looking at the floor.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 2793260225_6
+How did the lady and man on top try to keep their balance? Choose your answer from below options: A.hold the ropes tightly, B.held each other, C.walk side to side, D.hold ski stick, E.standing still.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 7508439506_1
+Why did the boy put his hands on the baby? Choose your answer from below options: A.play with baby, B.to give her food, C.play, D.support the baby, E.fall and pounce on the boy.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 7508439506_4
+Where is this video taken? Choose your answer from below options: A.swimming pool, B.outdoor, C.field, D.desert, E.bed room.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 6136926089_8
+What does the baby do after letting go of the cart? Choose your answer from below options: A.open her eyes, B.move toward the slides, C.touch the toy, D.turn to his back, E.lean forward and put head down.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 5987365500_1
+Why does the girl have her mouth close to the item? Choose your answer from below options: A.eat, B.looking around, C.tries to sing, D.smell, E.record.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 6329077812_2
+Why is the lady holding the baby? Choose your answer from below options: A.to protect the baby, B.carry baby, C.adjust bottle, D.ease of carrying around, E.feed baby.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 6018490041_6
+What does the man in white do after moving forward at the start? Choose your answer from below options: A.sing, B.walk forward and observe, C.hit cans, D.clicks the picture, E.start dancing.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 6793786769_5
+What is the person in black behind the boy doing as the boy plays with the train? Choose your answer from below options: A.playing with ball, B.watch, C.watching television, D.reading a book, E.sleeping.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 3158022797_2
+Why are the people synchronizing their moves? Choose your answer from below options: A.choreography, B.part of game, C.one direction only, D.move with the rhythm, E.moving to the rhythm.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 6582763207_2
+Why is the lady standing in the middle tapping on the instrument in the beginning? Choose your answer from below options: A.talking to girl, B.to get the baby s attention, C.talking to the crowd, D.playing it, E.dance move.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 7416295940_7
+What does the dog do after the baby touches and caresses the dog s back? Choose your answer from below options: A.smile and wants to pet it, B.backed away, C.get up and sniff boy, D.play with toy, E.feeding.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 3171006258_0
+Why did the man remove one of his skates before standing up? Choose your answer from below options: A.counting beats, B.hit sofa, C.take something, D.pick it up, E.to get better balance.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 3943634344_4
+What did the girl do after she finished reciting the pictures on the book? Choose your answer from below options: A.hug the girl, B.smile, C.stand up, D.continue tlaking, E.nod.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 8547321641_7
+How many babies are in the video? Choose your answer from below options: A.kitchen, B.four, C.two, D.three, E.one.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 5840177726_3
+How are the men positioned in the video? Choose your answer from below options: A.riding the cycle, B.half squat, C.sit on the sofa, D.skateboard, E.stand closely.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 5833145209_5
+Why did the brown bird bend over into the water? Choose your answer from below options: A.drink water, B.look down, C.resting, D.to wet its head, E.peck fishes.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 5333075105_10
+Why is the man on all fours as he travelled through the thick snow? Choose your answer from below options: A.look at the cameraman, B.snow too thick, C.trying to move forward, D.snow mountain, E.obstacles.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 3963997053_7
+Where is the performance taking place? Choose your answer from below options: A.on a stage, B.room, C.bar, D.restaurant, E.road.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 9082180631_2
+Why does the woman in green pants skate behind everyone else? Choose your answer from below options: A.supervise the children, B.singing, C.pass her something, D.waiting for the man, E.nervous.
+Error: 'list' object has no attribute 'image'
+
+
+Processing: 7533369046_5
+Where is this video taken? Choose your answer from below options: A.dining table, B.lake, C.construction site, D.house, E.playground.
