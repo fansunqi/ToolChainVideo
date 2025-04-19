@@ -26,7 +26,13 @@ def image_resize_for_vlm(frame, inter=cv2.INTER_AREA):
     return resized_frame
 
 
-def openai_multimodal_qa(model_name, client, prompt, image):
+def openai_multimodal_qa(model_name, client, prompt, image=None, image_path=None):
+    
+    if image_path is not None:
+        image = cv2.imread(image_path)
+        if image is None:
+            raise ValueError(f"Failed to read image from path: {image_path}")
+
     image = image_resize_for_vlm(image)
     _, buffer = cv2.imencode(".jpg", image)
     base64_image = base64.b64encode(buffer).decode("utf-8")

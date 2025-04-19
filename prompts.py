@@ -58,3 +58,26 @@ Frame Information:
 Question:
 {question}
 """
+
+
+PATCH_ZOOMER_PROMPT = """Analyze this image to identify the most relevant region(s) for answering the question:
+
+Question: {question}
+
+The image is divided into 5 regions:
+- (A) Top-left quarter
+- (B) Top-right quarter
+- (C) Bottom-left quarter
+- (D) Bottom-right quarter
+- (E) Center region (1/4 size, overlapping middle section)
+
+Instructions:
+1. First describe what you see in each of the five regions.
+2. Then select the most relevant region(s) to answer the question.
+3. Choose only the minimum necessary regions - avoid selecting redundant areas that show the same content. For example, if one patch contains the entire object(s), do not select another patch that only shows a part of the same object(s).
+
+
+Response format:
+<analysis>: Describe the image and five patches first. Then analyze the question and select the most relevant patch or list of patches.
+<patch>: List of letters (A-E)
+"""
