@@ -6,8 +6,7 @@ import time
 import pdb
 from omegaconf import OmegaConf
 import time
-from engine.openai import ChatOpenAI
-from tools.common import image_resize_for_vlm
+from tools.common import openai_multimodal_qa
 
 
 def prompts(name, description):
@@ -137,9 +136,10 @@ class ImageGridQA:
 
         self.mode = conf.tool.image_grid_qa.mode
 
-        model_string = self.conf.tool.image_grid_qa.vlm_gpt_model_name
-        print(f"\nInitializing Image-Grid-QA Tool with model: {model_string}")
-        self.llm_engine = ChatOpenAI(model_string=model_string, is_multimodal=True) if model_string else None
+        self.client_gpt = OpenAI(
+            api_key = conf.openai.GPT_API_KEY,
+            base_url = conf.openai.PROXY
+        )
 
         self.grid_size = conf.tool.image_grid_qa.init_grid_size
 
@@ -233,10 +233,12 @@ class ImageGridQA:
             f"{input}"
         )
 
-        image = image_resize_for_vlm(grid_img)
-        _, buffer = cv2.imencode(".jpg", image)
-        input_data = [prompt_image_grid_qa, buffer]
-        result = self.llm_engine(input_data)
+        result = openai_multimodal_qa(
+            model_name=self.conf.tool.image_grid_qa.vlm_gpt_model_name,
+            client=self.client_gpt,
+            prompt=prompt_image_grid_qa,
+            image=grid_img
+        )
         
         return result
 
