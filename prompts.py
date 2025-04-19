@@ -79,7 +79,7 @@ Instructions:
 3. Choose only the minimum necessary regions - avoid selecting redundant areas that show the same content. For example, if one patch contains the entire object(s), do not select another patch that only shows a part of the same object(s).
 
 
-Response format:
+Response in json format:
 <analysis>: Describe the image and five patches first. Then analyze the question and select the most relevant patch or list of patches.
 <patch>: List of letters (A-E)
 """
