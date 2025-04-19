@@ -34,11 +34,13 @@ class PatchZoomer:
     ):
         self.conf = conf
 
-        self.mode = conf.tool.image_grid_qa.mode
-
         model_string = self.conf.tool.patch_zoomer.vlm_gpt_model_name
         print(f"\nInitializing Patch Zoomer Tool with model: {model_string}")
-        self.llm_engine = ChatOpenAI(model_string=model_string, is_multimodal=True) if model_string else None
+        self.llm_engine = ChatOpenAI(
+            model_string=model_string, 
+            is_multimodal=True,
+            enable_cache=self.conf.tool.patch_zoomer.use_cache
+        )
 
         self.matching_dict = {
             "A": "top-left",
@@ -180,3 +182,4 @@ if __name__ == "__main__":
 
     result = patch_zoomer.patch_zoom_qa(image_path=image_path, question=question, save_path=save_path)
 
+# python -m tools.patch_zoomer

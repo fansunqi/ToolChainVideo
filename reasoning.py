@@ -50,8 +50,8 @@ def spatiotemporal_reasoning(
     temporal_grounding_result = temporal_grounding.inference(input=question)
 
     # 2. patch zoomer 对所有 visible_frames 都进行 zoom in
-    # patch_zoomer.inference(input=question)
-    
+    patch_zoomer.inference(input=question)
+
     # 3 image grid qa
     output = image_grid_qa.inference(input=question_w_options)
 
