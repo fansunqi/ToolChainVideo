@@ -26,7 +26,7 @@ load_dotenv()
 
 from pydantic import BaseModel
 
-
+import numpy as np
 import pdb
 
 
@@ -194,8 +194,8 @@ class ChatOpenAI(EngineLM, CachedEngine):
 
     def _format_content(self, content: List[Union[str, bytes]]) -> List[dict]:
         formatted_content = []
-        for item in content:
-            if isinstance(item, bytes):
+        for item in content:     
+            if isinstance(item, bytes) or isinstance(item, np.ndarray):
                 base64_image = base64.b64encode(item).decode('utf-8')
                 formatted_content.append({
                     "type": "image_url",
@@ -238,8 +238,6 @@ class ChatOpenAI(EngineLM, CachedEngine):
             else:
                 response_text = response.choices[0].message.content
         elif self.model_string in OPENAI_STRUCTURED_MODELS and response_format is not None:
-
-            pdb.set_trace()
 
             response = self.client.beta.chat.completions.parse(
                 model=self.model_string,

@@ -221,7 +221,7 @@ class ImageGridQA:
         if self.save_path:
             timestamp = time.strftime("%Y%m%d%H%M%S")
             output_img_path = os.path.join(self.save_path, f"grid_image_sample_{timestamp}.png")
-            cv2.imwrite(output_img_path, image)
+            cv2.imwrite(output_img_path, grid_img)
             print(f"Image grid saved to {output_img_path}.")
 
         grid_num = self.grid_size**2

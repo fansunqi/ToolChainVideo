@@ -1,10 +1,25 @@
 import os
+import cv2
+import pdb
+import time 
+import base64
 from openai import OpenAI
 from pydantic import BaseModel
 from omegaconf import OmegaConf
 
 from prompts import PATCH_ZOOMER_PROMPT
 from engine.openai import ChatOpenAI
+from tools.common import image_resize_for_vlm
+
+
+def prompts(name, description):
+    
+    def decorator(func):
+        func.name = name
+        func.description = description
+        return func
+
+    return decorator
 
 
 class PatchZoomerResponse(BaseModel):
@@ -40,41 +55,116 @@ class PatchZoomer:
     def set_video_path(self, video_path):
         self.video_path = video_path
 
-    def patch_zoom_qa(self, image, question):
-
-        # Read image and create input data
-        with open(image, 'rb') as file:
-            image_bytes = file.read()
-        prompt = PATCH_ZOOMER_PROMPT.format(question=question)
-        input_data = [prompt, image_bytes]
+    def _get_patch(self, image, image_path, patch, save_path, zoom_factor=2):
+        """Extract and save a specific patch from the image with 10% margins."""
+        if image_path:
+            img = cv2.imread(image_path)
+        else:
+            img = image
+            
+        height, width = img.shape[:2]
         
-        # Get response from LLM
+        quarter_h = height // 2
+        quarter_w = width // 2
+        
+        margin_h = int(quarter_h * 0.1)
+        margin_w = int(quarter_w * 0.1)
+        
+        patch_coords = {
+            'A': ((max(0, 0 - margin_w), max(0, 0 - margin_h)),
+                  (min(width, quarter_w + margin_w), min(height, quarter_h + margin_h))),
+            'B': ((max(0, quarter_w - margin_w), max(0, 0 - margin_h)),
+                  (min(width, width + margin_w), min(height, quarter_h + margin_h))),
+            'C': ((max(0, 0 - margin_w), max(0, quarter_h - margin_h)),
+                  (min(width, quarter_w + margin_w), min(height, height + margin_h))),
+            'D': ((max(0, quarter_w - margin_w), max(0, quarter_h - margin_h)),
+                  (min(width, width + margin_w), min(height, height + margin_h))),
+            'E': ((max(0, quarter_w//2 - margin_w), max(0, quarter_h//2 - margin_h)),
+                  (min(width, quarter_w//2 + quarter_w + margin_w), 
+                   min(height, quarter_h//2 + quarter_h + margin_h)))
+        }
+        
+        (x1, y1), (x2, y2) = patch_coords[patch]
+        patch_img = img[y1:y2, x1:x2]
+        
+        zoomed_patch = cv2.resize(patch_img, 
+                                (patch_img.shape[1] * zoom_factor, 
+                                 patch_img.shape[0] * zoom_factor), 
+                                interpolation=cv2.INTER_LINEAR)
+        
+        if save_path:
+            os.makedirs(os.path.dirname(save_path), exist_ok=True)
+            cv2.imwrite(save_path, zoomed_patch)
+        
+        return zoomed_patch
+
+    def patch_zoom_qa(self, question, image=None, image_path=None, save_path=None, zoom_factor=2):
+
+        prompt = PATCH_ZOOMER_PROMPT.format(question=question)
+
+        if image_path:
+            assert image is None, "both image and image path are not None"
+            with open(image_path, 'rb') as file:
+                image_bytes = file.read()
+            input_data = [prompt, image_bytes]
+        else:
+            assert image is not None, "both image and image_path are None"
+            image = image_resize_for_vlm(image)
+            _, buffer = cv2.imencode(".jpg", image)
+            input_data = [prompt, buffer]
+        
         response = self.llm_engine(input_data, response_format=PatchZoomerResponse)
         
-        # Save patches
-        # image_dir = os.path.dirname(image)
-        # image_name = os.path.splitext(os.path.basename(image))[0]
+        if image_path:
+            image_name = os.path.splitext(os.path.basename(image_path))[0]
+        else:
+            image_name = "image"
         
-        # Update the return structure
         patch_info = []
         for patch in response.patch:
             patch_name = self.matching_dict[patch]
-            # save_path = os.path.join(self.output_dir, 
-            #                         f"{image_name}_{patch_name}_zoomed_{zoom_factor}x.png")
-            # saved_path = self._save_patch(image, patch, save_path, zoom_factor)
-            # save_path = os.path.abspath(saved_path)
+
+            if save_path:
+                save_patch_path = os.path.join(save_path, f"{image_name}_{patch_name}_zoomed_{zoom_factor}x.png")
+            else:
+                save_patch_path = None
+            
+            zoomed_patch = self._get_patch(image, image_path, patch, save_patch_path, zoom_factor)
+            
             patch_info.append({
-                # "path": save_path,
-                "description": f"The {self.matching_dict[patch]} region of the image: {image}."
+                "path": save_patch_path,
+                "description": f"The {self.matching_dict[patch]} region of the image: {image_path}.",
+                "zoomed_patch": zoomed_patch
             })
         
         print(response.analysis)
-        print(patch_info)
 
         return {
             "analysis": response.analysis,
             "patches": patch_info
         }
+
+
+    @prompts(
+        name = "relevant-patch-zooming-tool",
+        description = "placeholder"
+    )
+    def inference(self, input):
+
+        for frame_idx, visible_frame in enumerate(self.visible_frames.frames):
+            result_dict = self.patch_zoom_qa(
+                question=input,
+                image=visible_frame.image,
+                # save_path=...
+            )
+
+            patches = result_dict["patches"]
+
+            if len(patches) == 1:
+                self.visible_frames.frames[frame_idx].image = patches[0]["zoomed_patch"]
+
+        return "placeholder"
+
         
 
 
@@ -86,6 +176,7 @@ if __name__ == "__main__":
 
     image_path = "/home/fsq/video_agent/Octotools-Video/src/tools/relevant_patch_zoomer/examples/car.png"
     question = "What is the color of the car?"
+    save_path = "/home/fsq/video_agent/ToolChainVideo/misc/patch_zoomer_results"
 
-    result = patch_zoomer.patch_zoom_qa(image=image_path, question=question)
+    result = patch_zoomer.patch_zoom_qa(image_path=image_path, question=question, save_path=save_path)
 

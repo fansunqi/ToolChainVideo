@@ -11,8 +11,6 @@ tool:
     - "TemporalGrounding"
     - "PatchZoomer"
     - "ImageGridQA"
-    - "ImageQA"
-    - "Summarizer"
   image_qa:
     vlm_type: "LLaVA"
     batch_size: 10

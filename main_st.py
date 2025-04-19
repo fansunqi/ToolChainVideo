@@ -42,6 +42,7 @@ from tools.image_qa import ImageQA
 from tools.temporal_grounding import TemporalGrounding
 from tools.image_grid_qa import ImageGridQA
 from tools.summarizer import Summarizer
+from tools.patch_zoomer import PatchZoomer
 
 from visible_frames import get_video_info, VisibleFrames
 

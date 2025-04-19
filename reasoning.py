@@ -19,6 +19,7 @@ from tools.image_qa import ImageQA
 from tools.temporal_grounding import TemporalGrounding
 from tools.image_grid_qa import ImageGridQA
 from tools.summarizer import Summarizer
+from tools.patch_zoomer import PatchZoomer
 
 
 def spatiotemporal_reasoning(
@@ -41,29 +42,26 @@ def spatiotemporal_reasoning(
             image_qa = tool
         elif isinstance(tool, Summarizer):
             summarizer = tool
+        elif isinstance(tool, PatchZoomer):
+            patch_zoomer = tool
 
 
     # 1. temporal grounding
     temporal_grounding_result = temporal_grounding.inference(input=question)
 
+    # 2. patch zoomer 对所有 visible_frames 都进行 zoom in
+    patch_zoomer.inference(input=question)
 
-    # 2.1 image grid qa
-    # 注意，image_grid_qa 的输入一般需要是 question_w_options
+    pdb.set_trace()
+    # 3 image grid qa
     # image_grid_qa_result = image_grid_qa.inference(input=question_w_options)
 
-    # 2.2 image qa LLaVA
-    # 注意，image_grid_qa 的输入一般需要是 question
+    # 4 image qa LLaVA
     image_qa_result = image_qa.inference(input=question)
-    summarizer_result = summarizer.inference(input=question_w_options)
+    output = summarizer.inference(input=question_w_options)
 
+    # 5 时间截取送到 temporal qa 或者 video qa 中去
 
-    # 2.3 frame selector + 空间工具，再处理
-
-    # 2.3 时间截取送到 temporal qa 或者 video qa 中去
-
-    # pdb.set_trace()
-
-    output = summarizer_result
     print(f"\nToolChainOutput: {output}") 
     return output
 

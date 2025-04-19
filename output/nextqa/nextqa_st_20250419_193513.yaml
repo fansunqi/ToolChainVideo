@@ -34,7 +34,7 @@ use_cache: False
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/val.csv"
-num_examples_to_run: 1
+num_examples_to_run: 100
 start_num: 0
 
 output_path: "output/nextqa/"
@@ -46,7 +46,7 @@ try_num: 1
 init_interval_sec: 10
 
 try_except_mode: False
-to_txt: False
+to_txt: True
 
 
 eval:
