@@ -54,7 +54,6 @@ def spatiotemporal_reasoning(
     # 2.2 image qa LLaVA
     # 注意，image_grid_qa 的输入一般需要是 question
     image_qa_result = image_qa.inference(input=question)
-
     summarizer_result = summarizer.inference(input=question_w_options)
 
 
