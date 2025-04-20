@@ -36,15 +36,20 @@ class PatchZoomer:
         conf = None, 
     ):
         self.conf = conf
-        self.concurrent = self.conf.tool.patch_zoomer.concurrent
-        self.image_resize = self.conf.tool.patch_zoomer.image_resize
+        self.concurrent = conf.tool.patch_zoomer.concurrent
+        self.concurrent_thread_num = conf.tool.patch_zoomer.concurrent_thread_num
+        self.image_resize = conf.tool.patch_zoomer.image_resize
+        self.sys_prompt = conf.tool.patch_zoomer.sys_prompt
 
-        model_string = self.conf.tool.patch_zoomer.vlm_gpt_model_name
-        print(f"\nInitializing Patch Zoomer Tool with model: {model_string}")
+        model_string = conf.tool.patch_zoomer.vlm_gpt_model_name
+        print(f"\nInitializing Patch Zoomer Tool with model: {model_string}, sys_prompt: {self.sys_prompt}")
+        
+        
         self.llm_engine = ChatOpenAI(
             model_string=model_string, 
             is_multimodal=True,
-            enable_cache=self.conf.tool.patch_zoomer.use_cache
+            enable_cache=self.conf.tool.patch_zoomer.use_cache,
+            system_prompt=self.sys_prompt,
         )
 
         self.matching_dict = {
@@ -176,7 +181,7 @@ class PatchZoomer:
                     return frame_idx, patches[0]["zoomed_patch"]
                 return None
 
-            with ThreadPoolExecutor(max_workers=10) as executor:
+            with ThreadPoolExecutor(max_workers=self.concurrent_thread_num) as executor:
                 frame_args = [(idx, frame) for idx, frame in enumerate(self.visible_frames.frames)]
                 future_to_frame = {executor.submit(process_frame, args): args for args in frame_args}
                 

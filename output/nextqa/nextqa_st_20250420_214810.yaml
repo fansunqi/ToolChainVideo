@@ -29,11 +29,10 @@ tool:
     vlm_gpt_model_name: "gpt-4o" 
     use_cache: True
     concurrent: True
-    concurrent_thread_num: 16
     image_resize: False
-    sys_prompt: null # "You are a helpful, creative, and smart assistant."
+    sys_prompt: "You are a helpful, creative, and smart assistant."
   summarizer:
-    llm_model_name: "gpt-3.5-turbo"
+    llm_model_name: "gpt-4-turbo"
     use_cache: True
 
 mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"

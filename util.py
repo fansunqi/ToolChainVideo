@@ -43,10 +43,15 @@ def adjust_video_resolution(video_path: str):
 
 
 def backup_file(opt, conf, timestamp):
-    # 将 main.py 文件自身和 opt.config 文件复制一份存储至 conf.output_path
-    current_script_path = os.path.abspath(__file__)  # 获取当前脚本的绝对路径
-    shutil.copy(current_script_path, os.path.join(conf.output_path, f"main_{timestamp}.py"))
-    # 复制 opt.config 文件到输出目录
+    current_script_path = os.path.abspath(__file__) 
+    current_script_dir = os.path.dirname(current_script_path)
+    
+    main_file_path = os.path.join(current_script_dir, "main.py")
+    shutil.copy(main_file_path, os.path.join(conf.output_path, f"main_{timestamp}.py"))
+
+    reansoning_file_path = os.path.join(current_script_dir, "reasoning.py")
+    shutil.copy(reansoning_file_path, os.path.join(conf.output_path, f"reasoning_{timestamp}.py"))
+    
     config_basename = os.path.basename(opt.config).split('.')[0]
     shutil.copy(opt.config, os.path.join(conf.output_path, f"{config_basename}_{timestamp}.yaml"))   
     

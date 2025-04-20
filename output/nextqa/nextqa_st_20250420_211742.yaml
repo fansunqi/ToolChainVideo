@@ -29,11 +29,10 @@ tool:
     vlm_gpt_model_name: "gpt-4o" 
     use_cache: True
     concurrent: True
-    concurrent_thread_num: 16
     image_resize: False
-    sys_prompt: null # "You are a helpful, creative, and smart assistant."
+    sys_prompt: "You are a helpful, creative, and smart assistant."
   summarizer:
-    llm_model_name: "gpt-3.5-turbo"
+    llm_model_name: "gpt-4o"
     use_cache: True
 
 mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"
@@ -42,7 +41,7 @@ use_cache: False
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/val.csv"
-num_examples_to_run: 100
+num_examples_to_run: 10
 start_num: 0
 
 output_path: "output/nextqa/"

@@ -47,16 +47,16 @@ def spatiotemporal_reasoning(
 
 
     # 1. temporal grounding
-    temporal_grounding.inference(input=question)
+    temporal_grounding_result = temporal_grounding.inference(input=question)
 
     # 2. patch zoomer 对所有 visible_frames 都进行 zoom in
-    patch_zoomer.inference(input=question)
+    # patch_zoomer.inference(input=question)
 
     # 3 image grid qa
     # output = image_grid_qa.inference(input=question_w_options)
 
     # 4 image qa LLaVA
-    image_qa.inference(input=question)
+    image_qa_result = image_qa.inference(input=question)
     output = summarizer.inference(input=question_w_options)
 
     # 5 时间截取送到 temporal qa 或者 video qa 中去
