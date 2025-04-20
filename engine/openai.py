@@ -1,4 +1,4 @@
-# Reference: https://github.com/zou-group/textgrad/blob/main/textgrad/engine/openai.py
+# Adapted from https://github.com/zou-group/textgrad/blob/main/textgrad/engine/openai.py
 
 try:
     from openai import OpenAI
@@ -38,7 +38,7 @@ OPENAI_STRUCTURED_MODELS = ['gpt-4o', 'gpt-4o-2024-08-06','gpt-4o-mini',  'gpt-4
 
 
 class ChatOpenAI(EngineLM, CachedEngine):
-    DEFAULT_SYSTEM_PROMPT = "You are a helpful, creative, and smart assistant."
+    DEFAULT_SYSTEM_PROMPT = None
 
     def __init__(
         self,
@@ -62,17 +62,18 @@ class ChatOpenAI(EngineLM, CachedEngine):
             super().__init__(cache_path=cache_path)
 
         self.system_prompt = system_prompt
-        # if os.getenv("OPENAI_API_KEY") is None:
-        #     raise ValueError("Please set the OPENAI_API_KEY environment variable if you'd like to use OpenAI models.")
         
-        # self.client = OpenAI(
-        #     api_key=os.getenv("OPENAI_API_KEY"),
-        # )
+        openai_api_key = os.getenv("OPENAI_API_KEY")
+        if openai_api_key is None:
+            raise ValueError("Please set the OPENAI_API_KEY environment variable if you'd like to use OpenAI models.")
 
-        self.client = OpenAI(
-            api_key="sk-lAWdJVGgMJikTuhW2PBIgwecI6Gwg0gdM3xKVxwYDiOW98ra",
-            base_url="https://api.juheai.top/v1/"
-        )
+        openai_base_url = os.getenv("OPENAI_BASE_URL")
+        if openai_base_url is None:
+            print("!! OpenAI base_url not set")
+            self.client = OpenAI(api_key=openai_api_key)
+        else:
+            print(f"!! OpenAI base_url set as {openai_base_url}")
+            self.client = OpenAI(api_key=openai_api_key, base_url=openai_base_url)
 
         self.model_string = model_string
         self.is_multimodal = is_multimodal
@@ -128,7 +129,19 @@ class ChatOpenAI(EngineLM, CachedEngine):
                 "message": str(e),
                 "details": getattr(e, 'args', None)
             }
-        
+
+    def _format_messages(self, sys_prompt_arg, prompt):
+        if (sys_prompt_arg is None) or (self.model_string in ['o1', 'o1-mini']):
+            messages = [
+                {"role": "user", "content": prompt}
+            ]
+        else:
+            messages = [
+                {"role": "system", "content": sys_prompt_arg},
+                {"role": "user", "content": prompt},
+            ]
+        return messages
+
     def _generate_text(
         self, prompt, system_prompt=None, temperature=0, max_tokens=4000, top_p=0.99, response_format=None
     ):
@@ -136,17 +149,20 @@ class ChatOpenAI(EngineLM, CachedEngine):
         sys_prompt_arg = system_prompt if system_prompt else self.system_prompt
 
         if self.enable_cache:
-            cache_key = sys_prompt_arg + prompt
+            if sys_prompt_arg:
+                cache_key = sys_prompt_arg + prompt
+            else:
+                cache_key = prompt
             cache_or_none = self._check_cache(cache_key)
             if cache_or_none is not None:
                 return cache_or_none
 
+        formatted_messages = self._format_messages(sys_prompt_arg=sys_prompt_arg, prompt=prompt)
+
         if self.model_string in ['o1', 'o1-mini']: # only supports base response currently
             response = self.client.beta.chat.completions.parse(
                 model=self.model_string,
-                messages=[
-                    {"role": "user", "content": prompt},
-                ],
+                messages=formatted_messages,
                 max_completion_tokens=max_tokens
             )
             if response.choices[0].finishreason == "length":
@@ -156,10 +172,7 @@ class ChatOpenAI(EngineLM, CachedEngine):
         elif self.model_string in OPENAI_STRUCTURED_MODELS and response_format is not None:
             response = self.client.beta.chat.completions.parse(
                 model=self.model_string,
-                messages=[
-                    {"role": "system", "content": sys_prompt_arg},
-                    {"role": "user", "content": prompt},
-                ],
+                messages=formatted_messages,
                 frequency_penalty=0,
                 presence_penalty=0,
                 stop=None,
@@ -172,10 +185,7 @@ class ChatOpenAI(EngineLM, CachedEngine):
         else:
             response = self.client.chat.completions.create(
                 model=self.model_string,
-                messages=[
-                    {"role": "system", "content": sys_prompt_arg},
-                    {"role": "user", "content": prompt},
-                ],
+                messages=formatted_messages,
                 frequency_penalty=0,
                 presence_penalty=0,
                 stop=None,
@@ -219,18 +229,21 @@ class ChatOpenAI(EngineLM, CachedEngine):
         formatted_content = self._format_content(content)
 
         if self.enable_cache:
-            cache_key = sys_prompt_arg + json.dumps(formatted_content)
+            if sys_prompt_arg:
+                cache_key = sys_prompt_arg + json.dumps(formatted_content)
+            else:
+                cache_key = json.dumps(formatted_content)
             cache_or_none = self._check_cache(cache_key)
             if cache_or_none is not None:
                 return cache_or_none
+        
+        formatted_messages = self._format_messages(sys_prompt_arg=sys_prompt_arg, prompt=formatted_content)
 
         if self.model_string in ['o1', 'o1-mini']: # only supports base response currently
             print(f'Max tokens: {max_tokens}')
             response = self.client.chat.completions.create(
                 model=self.model_string,
-                messages=[
-                    {"role": "user", "content": formatted_content},
-                ],
+                messages=formatted_messages,
                 max_completion_tokens=max_tokens
             )
             if response.choices[0].finish_reason == "length":
@@ -241,10 +254,7 @@ class ChatOpenAI(EngineLM, CachedEngine):
 
             response = self.client.beta.chat.completions.parse(
                 model=self.model_string,
-                messages=[
-                    {"role": "system", "content": sys_prompt_arg},
-                    {"role": "user", "content": formatted_content},
-                ],
+                messages=formatted_messages,
                 temperature=temperature,
                 max_tokens=max_tokens,
                 top_p=top_p,
@@ -254,10 +264,7 @@ class ChatOpenAI(EngineLM, CachedEngine):
         else:
             response = self.client.chat.completions.create(
                 model=self.model_string,
-                messages=[
-                    {"role": "system", "content": sys_prompt_arg},
-                    {"role": "user", "content": formatted_content},
-                ],
+                messages=formatted_messages,
                 temperature=temperature,
                 max_tokens=max_tokens,
                 top_p=top_p,

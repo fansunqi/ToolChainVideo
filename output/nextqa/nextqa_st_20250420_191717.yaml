@@ -30,10 +30,9 @@ tool:
     use_cache: True
     concurrent: True
     image_resize: False
-    sys_prompt: "You are a helpful, creative, and smart assistant."
   summarizer:
-    llm_model_name: "gpt-4o"
-    use_cache: True
+    llm_model_name: "gpt-3.5-turbo"
+    use_cache: False
 
 mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"
 use_cache: False

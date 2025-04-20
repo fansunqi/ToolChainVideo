@@ -117,6 +117,7 @@ class PatchZoomer:
             assert image is not None, "both image and image_path are None"
 
             if self.image_resize:
+                pdb.set_trace()
                 image = image_resize_for_vlm(image)
 
             _, buffer = cv2.imencode(".jpg", image)

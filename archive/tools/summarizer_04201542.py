@@ -1,4 +1,4 @@
-from engine.openai import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from prompts import QUERY_PREFIX_DES, QUERY_PREFIX_INFO
 
 def prompts(name, description):
@@ -15,15 +15,15 @@ class Summarizer:
         self,
         conf = None, 
     ):
+        
         self.visible_frames = None
         self.video_path = None
 
-        model_string = conf.tool.summarizer.llm_model_name
-        print(f"\nInitializing Summarizer Tool with model: {model_string}")
-        self.llm_engine = ChatOpenAI(
-            model_string=model_string, 
-            is_multimodal=False,
-            enable_cache=conf.tool.summarizer.use_cache
+        self.llm = ChatOpenAI(
+            api_key = conf.openai.GPT_API_KEY,
+            model = conf.openai.GPT_MODEL_NAME,
+            temperature = 0,
+            base_url = conf.openai.PROXY
         )
     
     def set_frames(self, visible_frames):
@@ -41,6 +41,11 @@ class Summarizer:
 
         all_frames_descriptions = self.visible_frames.get_frame_descriptions()
 
+        # input_prompt = QUERY_PREFIX_DES.format(
+        #     frame_caption = all_frames_descriptions,
+        #     question = input,
+        # )
+
         input_prompt = QUERY_PREFIX_INFO.format(
             frame_information = all_frames_descriptions,
             question = input,
@@ -48,8 +53,8 @@ class Summarizer:
 
         print("\nSummarizer Input Prompt: ", input_prompt)
 
-        output = self.llm_engine(input_prompt)
+        output = self.llm.invoke(input_prompt)
 
-        print("\nSummarizer Output Answer: ", output)
+        print("\nSummarizer Output Answer: ", output.content)
 
-        return output
+        return output.content

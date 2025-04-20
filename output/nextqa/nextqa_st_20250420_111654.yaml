@@ -11,7 +11,7 @@ tool:
     - "TemporalGrounding"
     - "PatchZoomer"
     - "ImageGridQA"
-    - "ImageQA"
+    # - "ImageQA"
     - "Summarizer"
   image_qa:
     vlm_type: "LLaVA"
@@ -27,13 +27,9 @@ tool:
     device: "cuda:0"
   patch_zoomer:
     vlm_gpt_model_name: "gpt-4o" 
-    use_cache: True
+    use_cache: False
     concurrent: True
     image_resize: False
-    sys_prompt: "You are a helpful, creative, and smart assistant."
-  summarizer:
-    llm_model_name: "gpt-4o"
-    use_cache: True
 
 mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"
 use_cache: False
