@@ -28,8 +28,6 @@ tool:
   patch_zoomer:
     vlm_gpt_model_name: "gpt-4o" 
     use_cache: True
-    concurrent: True
-    image_resize: False
 
 mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"
 use_cache: False

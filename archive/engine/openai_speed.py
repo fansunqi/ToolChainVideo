@@ -28,6 +28,7 @@ from pydantic import BaseModel
 
 import numpy as np
 import pdb
+import time
 
 
 class DefaultFormat(BaseModel):
@@ -83,13 +84,13 @@ class ChatOpenAI(EngineLM, CachedEngine):
         else:
             print(f"!! Cache disabled for model: {self.model_string}")
 
-    @retry(wait=wait_random_exponential(min=1, max=5), stop=stop_after_attempt(5))
+    # @retry(wait=wait_random_exponential(min=1, max=5), stop=stop_after_attempt(5))
     def generate(self, content: Union[str, List[Union[str, bytes]]], system_prompt=None, **kwargs):
         try:
             # Print retry attempt information
-            attempt_number = self.generate.retry.statistics.get('attempt_number', 0) + 1
-            if attempt_number > 1:
-                print(f"Attempt {attempt_number} of 5")
+            # attempt_number = self.generate.retry.statistics.get('attempt_number', 0) + 1
+            # if attempt_number > 1:
+            #     print(f"Attempt {attempt_number} of 5")
 
             if isinstance(content, str):
                 return self._generate_text(content, system_prompt=system_prompt, **kwargs)
@@ -215,16 +216,33 @@ class ChatOpenAI(EngineLM, CachedEngine):
     def _generate_multimodal(
         self, content: List[Union[str, bytes]], system_prompt=None, temperature=0, max_tokens=4000, top_p=0.99, response_format=None
     ):
+        total_start = time.time()
+        
+        # 测量内容格式化时间
+        format_start = time.time()
         sys_prompt_arg = system_prompt if system_prompt else self.system_prompt
         formatted_content = self._format_content(content)
-
+        format_time = time.time() - format_start
+        
+        # 测量缓存检查时间
+        cache_time = 0
         if self.enable_cache:
+            cache_start = time.time()
             cache_key = sys_prompt_arg + json.dumps(formatted_content)
             cache_or_none = self._check_cache(cache_key)
             if cache_or_none is not None:
+                cache_time = time.time() - cache_start
+                print("\n=== Performance Analysis (Cache Hit) ===")
+                print(f"Content formatting: {format_time:.3f}s")
+                print(f"Cache check: {cache_time:.3f}s")
+                print(f"Total time: {time.time() - total_start:.3f}s")
+                print("====================================")
                 return cache_or_none
+            cache_time = time.time() - cache_start
 
-        if self.model_string in ['o1', 'o1-mini']: # only supports base response currently
+        # 测量API调用时间
+        api_start = time.time()
+        if self.model_string in ['o1', 'o1-mini']:
             print(f'Max tokens: {max_tokens}')
             response = self.client.chat.completions.create(
                 model=self.model_string,
@@ -238,19 +256,38 @@ class ChatOpenAI(EngineLM, CachedEngine):
             else:
                 response_text = response.choices[0].message.content
         elif self.model_string in OPENAI_STRUCTURED_MODELS and response_format is not None:
-
-            response = self.client.beta.chat.completions.parse(
+            
+            # 原来的方法
+            # response = self.client.beta.chat.completions.parse(
+            #     model=self.model_string,
+            #     messages=[
+            #         {"role": "system", "content": sys_prompt_arg},
+            #         {"role": "user", "content": formatted_content},
+            #     ],
+            #     temperature=temperature,
+            #     max_tokens=max_tokens,
+            #     top_p=top_p,
+            #     response_format=response_format
+            # )
+            # response_text = response.choices[0].message.parsed
+            
+            # 使用另一种 responses API 处理结构化输出
+            response = self.client.chat.completions.create(
                 model=self.model_string,
                 messages=[
                     {"role": "system", "content": sys_prompt_arg},
                     {"role": "user", "content": formatted_content},
                 ],
+                response_format={
+                    "type": "json_object",
+                    "schema": response_format.model_json_schema()
+                },
                 temperature=temperature,
                 max_tokens=max_tokens,
                 top_p=top_p,
-                response_format=response_format
             )
-            response_text = response.choices[0].message.parsed
+            response_text = json.loads(response.choices[0].message.content)
+
         else:
             response = self.client.chat.completions.create(
                 model=self.model_string,
@@ -263,7 +300,24 @@ class ChatOpenAI(EngineLM, CachedEngine):
                 top_p=top_p,
             )
             response_text = response.choices[0].message.content
+        api_time = time.time() - api_start
 
+        # 测量缓存保存时间
+        cache_save_time = 0
         if self.enable_cache:
+            cache_save_start = time.time()
             self._save_cache(cache_key, response_text)
+            cache_save_time = time.time() - cache_save_start
+
+        total_time = time.time() - total_start
+        
+        # 打印性能分析结果
+        print("\n=== Performance Analysis ===")
+        print(f"Content formatting: {format_time:.3f}s")
+        print(f"Cache check: {cache_time:.3f}s")
+        print(f"API call: {api_time:.3f}s")
+        print(f"Cache save: {cache_save_time:.3f}s")
+        print(f"Total time: {total_time:.3f}s")
+        print("====================================")
+        
         return response_text

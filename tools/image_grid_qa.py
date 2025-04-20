@@ -70,6 +70,7 @@ def draw_grid_img(frames, grid_size, spacer=0, render_pos='topright'):
 
     frame_height, frame_width = frames[0].shape[:2]
     
+    # 整个 grid_img 的大小
     grid_height = grid_size * frame_height + (grid_size - 1) * spacer
     grid_width = grid_size * frame_width + (grid_size - 1) * spacer
 

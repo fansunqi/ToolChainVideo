@@ -1,0 +1,38 @@
+Creating LLM cache: cache/gpt35_cache_new_tool_8.pkl...
+
+Loading Temporal-Grounding-Tool model...
+
+loading vision_tower
+loading video_encoder
+loading multi_modal_projector
+loading video_projector
+loading language_model
+Frozen ViT
+Frozen video_encoder
+LORA llm
+Frozen Part LLM
+Finish loading Temporal-Grounding-Tool model.
+
+
+Initializing Patch Zoomer Tool with model: gpt-4o
+!! Cache enabled for model: gpt-4o
+
+Initializing Image-Grid-QA Tool with model: gpt-4o
+!! Cache enabled for model: gpt-4o
+tool_instances: [<tools.temporal_grounding.TemporalGrounding object at 0x7f69bf317d00>, <tools.patch_zoomer.PatchZoomer object at 0x7f695c2c4850>, <tools.image_grid_qa.ImageGridQA object at 0x7f6b67e3bf70>, <tools.summarizer.Summarizer object at 0x7f6b67e3be20>]
+tools: [Tool(name='temporal-grounding-tool', description="Useful when you want to know which time segment of the video a certain event or content appears inThe input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method TemporalGrounding.inference of <tools.temporal_grounding.TemporalGrounding object at 0x7f69bf317d00>>), Tool(name='relevant-patch-zooming-tool', description='placeholder', func=<bound method PatchZoomer.inference of <tools.patch_zoomer.PatchZoomer object at 0x7f695c2c4850>>), Tool(name='image-grid-qa-tool', description="Useful when you want to know the whole event or action in the video. This tool arranges multiple images into an image grid, allowing the MLLM to analyze the events or actions taking place in the video.The input to this tool must be a question, such as 'How many children are in the video?' ", func=<bound method ImageGridQA.inference of <tools.image_grid_qa.ImageGridQA object at 0x7f6b67e3bf70>>), Tool(name='summarization-tool', description="Useful when you want to summarize the infomation of all visible frames and find the answer.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method Summarizer.inference of <tools.summarizer.Summarizer object at 0x7f6b67e3be20>>)]
+
+Building dataset...
+
+
+Processing: 2793260225_6
+How did the lady and man on top try to keep their balance? Choose your answer from below options: A.hold the ropes tightly, B.held each other, C.walk side to side, D.hold ski stick, E.standing still.
+> /home/fsq/video_agent/ToolChainVideo/tools/image_grid_qa.py(73)draw_grid_img()
+-> frame_height, frame_width = frames[0].shape[:2]
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) (Pdb) 
