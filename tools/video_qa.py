@@ -4,7 +4,7 @@ from transformers import Qwen2_5_VLForConditionalGeneration, AutoTokenizer, Auto
 from qwen_vl_utils import process_vision_info
 
 
-
+# TODO 将 qwen 环境合并至 tcv2 环境中，主要是 transformers 需要使用旧的
 
 
 class VideoQA:

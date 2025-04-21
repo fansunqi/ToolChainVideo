@@ -1,4 +1,5 @@
 import cv2
+import torch
 import numpy as np
 from langchain_openai import ChatOpenAI
 from typing import List, Dict, Optional
@@ -106,7 +107,22 @@ class VisibleFrames:
 
         self.frames.sort(key=lambda x: x.timestamp)
     
+
+    def get_images_rgb_tchw(self) -> torch.Tensor:
+        """获取所有可见帧的图像数据
+        
+        返回:
+            (T, C, H, W), torch.uint8, 0-255, RGB
+        """
+        all_images = []
+        for frame in self.frames:
+            # TODO 是否转为 RGB 格式
+            image_rgb = cv2.cvtColor(frame.image, cv2.COLOR_BGR2RGB)
+            all_images.append(image_rgb)
+        all_images = torch.stack([torch.from_numpy(img).permute(2, 0, 1) for img in all_images])
+        return all_images
     
+
     def get_frame_descriptions(self) -> str:
         """获取所有可见帧的文字描述"""
         if not self.frames:

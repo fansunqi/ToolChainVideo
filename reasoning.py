@@ -53,13 +53,16 @@ def spatiotemporal_reasoning(
     patch_zoomer.inference(input=question)
 
     # 3 image grid qa
-    # output = image_grid_qa.inference(input=question_w_options)
+    image_grid_qa_output = image_grid_qa.inference(input=question_w_options)
 
     # 4 image qa LLaVA
     image_qa.inference(input=question)
-    output = summarizer.inference(input=question_w_options)
+    summarizer_output = summarizer.inference(input=question_w_options)
 
-    # 5 时间截取送到 temporal qa 或者 video qa 中去
+    # 检查 image_grid_qa_output 与 summarizer_output 是否一致
+
+    # 5 使用 video trimmer 之后送到 temporal qa 或者 video qa 中去
+    # 能不能直接将 visible_frames 给送进去呢？
 
     print(f"\nToolChainOutput: {output}") 
     return output

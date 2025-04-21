@@ -25,6 +25,11 @@ tool:
     llm: "phi3.5"
     weight_path: "/hf_home/Grounded-Video-LLM/"
     device: "cuda:0"
+  temporal_qa:
+    llm: "phi3.5"
+    weight_path: "/hf_home/Grounded-Video-LLM/"
+    device: "cuda:0"
+    mode: "by_visible_frames"  # "by_video_path"
   patch_zoomer:
     vlm_gpt_model_name: "gpt-4o" 
     use_cache: True

@@ -1,11 +1,12 @@
 import sys
 sys.path.append("projects/Grounded-Video-LLM")
-
-import numpy as np
+import pdb
 import torch
-from omegaconf import OmegaConf
 import decord
+import numpy as np
 from decord import VideoReader
+from omegaconf import OmegaConf
+
 
 from models.llava_next_video import LLAVA_NEXT_VIDEO
 from inference import parse_args, parse_time_interval
@@ -20,22 +21,25 @@ class TemporalQA:
         self,
         conf = None, 
     ):
-        
+        # TODO: 是否要与 temporal grounding 进行共享权重?
         self.visible_frames = None
         self.video_path = None
         
-        self.llm_type = conf.tool.temporal_grounding.llm
+        self.mode = conf.tool.temporal_qa.mode
+        self.llm_type = conf.tool.temporal_qa.llm
         
-        weight_path = conf.tool.temporal_grounding.weight_path
+        weight_path = conf.tool.temporal_qa.weight_path
         config_path = f"{weight_path}/Phi-3.5-vision-instruct"
         tokenizer_path = f"{weight_path}/Phi-3.5-mini-instruct"
         pretrained_video_path = f"{weight_path}/internvideo/vision-encoder-InternVideo2-stage2_1b-224p-f4.pt"
         pretrained_vision_proj_llm_path = f"{weight_path}/Phi-3.5-vision-instruct-seperated"
         ckpt_path = f"{weight_path}/ckpt/sft_llava_next_video_phi3.5_mix_sft_multi_modal_projector_video_projecter_language_model.pth"
         
-        self.device = conf.tool.temporal_grounding.device
+        self.device = conf.tool.temporal_qa.device
         
         print("Start loading Temporal-QA-Tool model...\n")
+        
+        # TODO 查看一下这里各个参数的含义
         self.model = LLAVA_NEXT_VIDEO(
             dtype=args.dtype, 
             stage=args.stage, 
@@ -93,7 +97,7 @@ class TemporalQA:
             print(f'解码错误: {video_path}, {vlen}, {fps}, {duration}')
             print(f'Exception报错: {e}')
 
-        frames = frames.permute(0, 3, 1, 2)  # (T, C, H, W), torch.uint8
+        frames = frames.permute(0, 3, 1, 2)  # (T, C, H, W), torch.uint8, 0-255, RGB
 
         return frames, frame_indices, float(fps), vlen, duration
 
@@ -101,8 +105,13 @@ class TemporalQA:
         video_processor = frame_transform(image_size=224, mean=INTERNVIDEO_MEAN, std=INTERNVIDEO_STD)
         image_processor = frame_transform(image_size=336, mean=OPENAI_DATASET_MEAN, std=OPENAI_DATASET_STD)
         
-        pixel_values, frame_indices, fps, total_frame_num, duration = self.read_frames_decord(video_path)
-        
+        if self.mode == "by_video_path":
+            pixel_values, frame_indices, fps, total_frame_num, duration = self.read_frames_decord(video_path)
+        elif self.mode == "by_visible_frames":
+            pixel_values = self.visible_frames.get_images_rgb_tchw()
+        else:
+            raise ValueError("temporal_qa.mode error")
+
         temporal_pixel_values = []
         for i in range(pixel_values.shape[0]): 
             temporal_pixel_values.append(video_processor(pixel_values[i]))
@@ -113,7 +122,8 @@ class TemporalQA:
         indices_spatial = [(i*num_frames_per_seg) + int(num_frames_per_seg/2) for i in range(args.num_segs)]
         spatial_pixel_values = []
         for i_spatial in indices_spatial:
-            spatial_pixel_values.append(image_processor(pixel_values[i_spatial]))
+            if i_spatial < pixel_values.shape[0]:
+                spatial_pixel_values.append(image_processor(pixel_values[i_spatial]))
         spatial_pixel_values = torch.tensor(np.array(spatial_pixel_values)) # [num_segs, 3, 336, 336]
         spatial_pixel_values = spatial_pixel_values.unsqueeze(0)
         
@@ -134,11 +144,11 @@ class TemporalQA:
             "spatial_pixel_values": spatial_pixel_values.to(self.device),
         }
     
-        return samples, duration
+        return samples
     
     
     def inference(self, input):
-        samples_videoqa, duration_videoqa = self.create_inputs(self.video_path, input)
+        samples_videoqa = self.create_inputs(self.video_path, input)
         
         generate_kwargs = {
             "do_sample": args.do_sample,
@@ -159,15 +169,15 @@ class TemporalQA:
 
 if __name__ == "__main__":
     conf = OmegaConf.load("/home/fsq/video_agent/ToolChainVideo/config/nextqa_new_tool.yaml")
-    temporal_grounding = TemporalQA(conf)
+    temporal_qa = TemporalQA(conf)
     
     
     video_path = "/home/fsq/video_agent/ToolChainVideo/projects/Grounded-Video-LLM/experiments/_3klvlS4W7A.mp4"
     # prompt_videoqa = "Question: What does this TV news report about?\nOptions:\n(A) thievery\n(B) community violence incidents\n(C) fashion show\n(D) aging population"
     prompt_videoqa = "What does this TV news report about?"
-    temporal_grounding.set_video_path(video_path)
+    temporal_qa.set_video_path(video_path)
     
-    result = temporal_grounding.inference(input=prompt_videoqa)
+    result = temporal_qa.inference(input=prompt_videoqa)
     print(f"Result: {result}")
     
     print("main done") 

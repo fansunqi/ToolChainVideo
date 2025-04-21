@@ -8,6 +8,7 @@ from tools.image_qa import ImageQA
 from tools.yolo_tracker import YOLOTracker
 from tools.temporal_grounding import TemporalGrounding
 from tools.image_grid_qa import ImageGridQA
+from tools.temporal_qa import TemporalQA
 
 import pdb
 
@@ -27,12 +28,22 @@ init_video_stride = int(video_info["fps"] * init_interval_sec)
 # 创建可见帧管理器
 visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
 
+# temporal_qa
+temporal_qa = TemporalQA(conf)
+temporal_qa.set_video_path(video_path)
+temporal_qa.set_frames(visible_frames)
+result = temporal_qa.inference(input=question)
+print(f"Result: {result}")
+
+
+'''
 # image_grid_qa
 image_grid_qa = ImageGridQA(conf)
 image_grid_qa.set_video_path(video_path)
 image_grid_qa.set_frames(visible_frames)
 result = image_grid_qa.inference(input=question)
 print(result)
+'''
 
 '''
 # temporal grounding
