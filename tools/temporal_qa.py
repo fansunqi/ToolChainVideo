@@ -59,7 +59,7 @@ class TemporalQA:
         duration = vlen / float(fps)
         
         frame_indices = get_frame_indices(
-            num_frames = 96, 
+            num_frames = 96,   # 默认的值
             vlen = vlen, 
             sample = "middle", 
             fix_start = None,
@@ -87,48 +87,21 @@ class TemporalQA:
         if self.mode == "by_video_path":
             pixel_values, frame_indices, fps, total_frame_num, duration = self.read_frames_decord(video_path)
         elif self.mode == "by_visible_frames":
-            pixel_values = self.visible_frames.get_images_rgb_tchw()
+            pixel_values = self.visible_frames.get_images_rgb_tchw(args.num_frames)
         else:
             raise ValueError("temporal_qa.mode error")
 
         temporal_pixel_values = []
         for i in range(pixel_values.shape[0]): 
             temporal_pixel_values.append(video_processor(pixel_values[i]))
-        
-        num_frames = len(temporal_pixel_values)
-        # 分 seg 取空间图片
-        if args.num_segs < num_frames:
-            num_segs = args.num_segs
-
-            if num_frames % num_segs == 0:
-                # 整除
-                num_padding = 0
-            else:
-                # 非整除，补全成 num_frames 整除 num_segs
-                num_padding = num_segs * (int(num_frames // num_segs) + 1) - num_frames
-                for i in range(num_padding):
-                    temporal_pixel_values.append(video_processor(pixel_values[-1]))
-                # 更新 num_frames
-                num_frames = len(temporal_pixel_values)
-        else:
-            num_segs = num_frames
-            num_padding = 0
-            
-        print(f"Temporal QA... num_frames:{str(num_frames)}, num_segs:{str(num_segs)}, num_padding:{str(num_padding)}") 
-
         temporal_pixel_values = torch.tensor(np.array(temporal_pixel_values)) # [num_frames, 3, 224, 224]
         temporal_pixel_values = temporal_pixel_values.unsqueeze(0)
-        
-        num_frames_per_seg = int(num_frames // num_segs)
-        indices_spatial = [(i*num_frames_per_seg) + int(num_frames_per_seg/2) for i in range(num_segs)]
+
+        num_frames_per_seg = int(args.num_frames // args.num_segs)
+        indices_spatial = [(i*num_frames_per_seg) + int(num_frames_per_seg/2) for i in range(args.num_segs)]
         spatial_pixel_values = []
         for i_spatial in indices_spatial:
-            if i_spatial < pixel_values.shape[0]:
-                spatial_pixel_values.append(image_processor(pixel_values[i_spatial]))
-            else:
-                spatial_pixel_values.append(image_processor(pixel_values[-1]))
-
-        print(f"Temporal QA: Get {str(len(spatial_pixel_values))} spatial_pixel_values.")
+            spatial_pixel_values.append(image_processor(pixel_values[i_spatial]))
         spatial_pixel_values = torch.tensor(np.array(spatial_pixel_values)) # [num_segs, 3, 336, 336]
         spatial_pixel_values = spatial_pixel_values.unsqueeze(0)
         

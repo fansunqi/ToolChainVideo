@@ -108,17 +108,36 @@ class VisibleFrames:
         self.frames.sort(key=lambda x: x.timestamp)
     
 
-    def get_images_rgb_tchw(self) -> torch.Tensor:
+    def get_images_rgb_tchw(self, frames_num) -> torch.Tensor:
         """获取所有可见帧的图像数据
         
         返回:
             (T, C, H, W), torch.uint8, 0-255, RGB
         """
         all_images = []
-        for frame in self.frames:
-            # TODO 是否转为 RGB 格式
-            image_rgb = cv2.cvtColor(frame.image, cv2.COLOR_BGR2RGB)
-            all_images.append(image_rgb)
+        cur_frames_num = len(self.frames)
+
+        if cur_frames_num < frames_num:
+            duplicate_num = int(frames_num // cur_frames_num)
+            padding_num = frames_num - cur_frames_num * duplicate_num
+            for frame in self.frames:
+                # TODO 是否转为 RGB 格式
+                image_rgb = cv2.cvtColor(frame.image, cv2.COLOR_BGR2RGB)
+                for i in range(duplicate_num):
+                    all_images.append(image_rgb)
+            for i in range(padding_num):
+                image_rgb = cv2.cvtColor(self.frames[-1].image, cv2.COLOR_BGR2RGB)
+                all_images.append(image_rgb)
+        else:
+            # 计算需要跳过的帧数
+            step = int(cur_frames_num // frames_num)
+            for i in range(frames_num):
+                # 计算当前帧的索引
+                frame_idx = int(i * step)
+                # 获取对应帧并转换为RGB格式
+                image_rgb = cv2.cvtColor(self.frames[frame_idx].image, cv2.COLOR_BGR2RGB)
+                all_images.append(image_rgb)
+        
         all_images = torch.stack([torch.from_numpy(img).permute(2, 0, 1) for img in all_images])
         return all_images
     
