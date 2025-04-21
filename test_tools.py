@@ -28,10 +28,19 @@ init_video_stride = int(video_info["fps"] * init_interval_sec)
 # 创建可见帧管理器
 visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
 
+from util import load_temporal_model
+temporal_model = load_temporal_model(
+    weight_path=conf.tool.temporal_model.weight_path,
+    device=conf.tool.temporal_model.device,
+    llm_type=conf.tool.temporal_model.llm_type
+)
+    
+
 # temporal_qa
 temporal_qa = TemporalQA(conf)
 temporal_qa.set_video_path(video_path)
 temporal_qa.set_frames(visible_frames)
+temporal_qa.set_model(temporal_model)
 result = temporal_qa.inference(input=question)
 print(f"Result: {result}")
 

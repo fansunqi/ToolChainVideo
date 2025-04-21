@@ -14,10 +14,6 @@ tool:
     - "ImageGridQA"
     # - "ImageQA"
     - "Summarizer"
-  temporal_model:
-    llm_type: "phi3.5"
-    weight_path: "/hf_home/Grounded-Video-LLM/"
-    device: "cuda:0"
   image_qa:
     vlm_type: "LLaVA"
     batch_size: 10
@@ -26,7 +22,14 @@ tool:
     init_grid_size: 3
     save_path: null
     mode:  "by_visible_frames"  # "by_video_path"
+  temporal_grounding:
+    llm: "phi3.5"
+    weight_path: "/hf_home/Grounded-Video-LLM/"
+    device: "cuda:0"
   temporal_qa:
+    llm: "phi3.5"
+    weight_path: "/hf_home/Grounded-Video-LLM/"
+    device: "cuda:0"
     mode: "by_visible_frames"  # "by_video_path"
   patch_zoomer:
     vlm_gpt_model_name: "gpt-4o" 

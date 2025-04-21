@@ -1,10 +1,20 @@
-import json
 import os
 import cv2
+import sys
+import json
+import torch
 import ffmpeg
 import shutil
 import pickle
 from langchain_core.tools import Tool
+
+sys.path.append("projects/Grounded-Video-LLM")
+from models.llava_next_video import LLAVA_NEXT_VIDEO
+from inference import parse_args, parse_time_interval
+
+
+args = parse_args()
+
 
 def save_to_json(output_data, output_file):
     with open(output_file, 'w') as f:
@@ -72,6 +82,45 @@ def save_cache(mannual_cache, query, steps, mannual_cache_file):
     print("\nSaving cache...")
     with open(mannual_cache_file, "wb") as f:
         pickle.dump(mannual_cache, f)
+
+
+def load_temporal_model(weight_path, device, llm_type):
+    config_path = f"{weight_path}/Phi-3.5-vision-instruct"
+    tokenizer_path = f"{weight_path}/Phi-3.5-mini-instruct"
+    pretrained_video_path = f"{weight_path}/internvideo/vision-encoder-InternVideo2-stage2_1b-224p-f4.pt"
+    pretrained_vision_proj_llm_path = f"{weight_path}/Phi-3.5-vision-instruct-seperated"
+    ckpt_path = f"{weight_path}/ckpt/sft_llava_next_video_phi3.5_mix_sft_multi_modal_projector_video_projecter_language_model.pth"
+    
+    print("Start loading temporal model...\n")
+    
+    # TODO 查看一下这里各个参数的含义
+    model = LLAVA_NEXT_VIDEO(
+        dtype=args.dtype, 
+        stage=args.stage, 
+        max_txt_len=args.max_txt_len, 
+        num_frames=args.num_frames,
+        num_segs=args.num_segs,
+        num_temporal_tokens=args.num_temporal_tokens,
+        lora=args.lora,
+        llm=llm_type,
+        attn_implementation=args.attn_implementation,
+        config_path=config_path,
+        tokenizer_path=tokenizer_path,
+        pretrained_video_path=pretrained_video_path,
+        pretrained_vision_proj_llm_path=pretrained_vision_proj_llm_path, 
+    )
+    ckpt = torch.load(ckpt_path, map_location='cpu')['model']
+    if 'multi_modal_projector' in ckpt.keys():
+        model.multi_modal_projector.load_state_dict(ckpt['multi_modal_projector'])
+    if 'video_projecter' in ckpt.keys():
+        model.video_projecter.load_state_dict(ckpt['video_projecter'])
+    if 'language_model' in ckpt.keys():
+        model.language_model.load_state_dict(ckpt['language_model'])  
+    model.eval()
+    model.to(device)
+    print("Finish loading temporal model.\n")
+
+    return model
 
 
 if __name__ == "__main__":

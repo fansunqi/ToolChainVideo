@@ -28,8 +28,7 @@ from util import (
     save_to_json, 
     adjust_video_resolution,
     backup_file,
-    load_cache,
-    load_temporal_model, 
+    load_cache, 
 )
 
 
@@ -93,15 +92,6 @@ if __name__ == "__main__":
 
     tool_instances, tools = get_tools(conf)
     
-    temporal_model = load_temporal_model(
-        weight_path=conf.tool.temporal_model.weight_path,
-        device=conf.tool.temporal_model.device,
-        llm_type=conf.tool.temporal_model.llm_type
-    )
-    for tool_instance in tool_instances:
-        if isinstance(tool_instance, TemporalGrounding) or isinstance(tool_instance, TemporalQA):
-            tool_instance.set_model(temporal_model)
-
     tool_planner_llm = ChatOpenAI(
         api_key = conf.openai.GPT_API_KEY,
         model = conf.openai.GPT_MODEL_NAME,

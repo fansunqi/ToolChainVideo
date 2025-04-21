@@ -16,6 +16,16 @@ from datasets.chat.base_template import LLaMA3_Template, Vicuna_Template, Phi_3_
 
 args = parse_args()
 
+
+def prompts(name, description):
+    
+    def decorator(func):
+        func.name = name
+        func.description = description
+        return func
+
+    return decorator
+
 class TemporalQA:
     def __init__(
         self,
@@ -24,53 +34,22 @@ class TemporalQA:
         # TODO: 是否要与 temporal grounding 进行共享权重?
         self.visible_frames = None
         self.video_path = None
-        
+
+        self.model = None
+
+        self.llm_type = conf.tool.temporal_model.llm_type
+        self.device = conf.tool.temporal_model.device
+
         self.mode = conf.tool.temporal_qa.mode
-        self.llm_type = conf.tool.temporal_qa.llm
-        
-        weight_path = conf.tool.temporal_qa.weight_path
-        config_path = f"{weight_path}/Phi-3.5-vision-instruct"
-        tokenizer_path = f"{weight_path}/Phi-3.5-mini-instruct"
-        pretrained_video_path = f"{weight_path}/internvideo/vision-encoder-InternVideo2-stage2_1b-224p-f4.pt"
-        pretrained_vision_proj_llm_path = f"{weight_path}/Phi-3.5-vision-instruct-seperated"
-        ckpt_path = f"{weight_path}/ckpt/sft_llava_next_video_phi3.5_mix_sft_multi_modal_projector_video_projecter_language_model.pth"
-        
-        self.device = conf.tool.temporal_qa.device
-        
-        print("Start loading Temporal-QA-Tool model...\n")
-        
-        # TODO 查看一下这里各个参数的含义
-        self.model = LLAVA_NEXT_VIDEO(
-            dtype=args.dtype, 
-            stage=args.stage, 
-            max_txt_len=args.max_txt_len, 
-            num_frames=args.num_frames,
-            num_segs=args.num_segs,
-            num_temporal_tokens=args.num_temporal_tokens,
-            lora=args.lora,
-            llm=self.llm_type,
-            attn_implementation=args.attn_implementation,
-            config_path=config_path,
-            tokenizer_path=tokenizer_path,
-            pretrained_video_path=pretrained_video_path,
-            pretrained_vision_proj_llm_path=pretrained_vision_proj_llm_path, 
-        )
-        ckpt = torch.load(ckpt_path, map_location='cpu')['model']
-        if 'multi_modal_projector' in ckpt.keys():
-            self.model.multi_modal_projector.load_state_dict(ckpt['multi_modal_projector'])
-        if 'video_projecter' in ckpt.keys():
-            self.model.video_projecter.load_state_dict(ckpt['video_projecter'])
-        if 'language_model' in ckpt.keys():
-            self.model.language_model.load_state_dict(ckpt['language_model'])  
-        self.model.eval()
-        self.model.to(self.device)
-        print("Finish loading Temporal-QA-Tool model.\n")
     
     def set_frames(self, visible_frames):
         self.visible_frames = visible_frames  
     
     def set_video_path(self, video_path):
         self.video_path = video_path  
+    
+    def set_model(self, model):
+        self.model = model
      
     def read_frames_decord(self, video_path):
         video_reader = VideoReader(video_path, num_threads=1)
@@ -115,15 +94,41 @@ class TemporalQA:
         temporal_pixel_values = []
         for i in range(pixel_values.shape[0]): 
             temporal_pixel_values.append(video_processor(pixel_values[i]))
+        
+        num_frames = len(temporal_pixel_values)
+        # 分 seg 取空间图片
+        if args.num_segs < num_frames:
+            num_segs = args.num_segs
+
+            if num_frames % num_segs == 0:
+                # 整除
+                num_padding = 0
+            else:
+                # 非整除，补全成 num_frames 整除 num_segs
+                num_padding = num_segs * (int(num_frames // num_segs) + 1) - num_frames
+                for i in range(num_padding):
+                    temporal_pixel_values.append(video_processor(pixel_values[-1]))
+                # 更新 num_frames
+                num_frames = len(temporal_pixel_values)
+        else:
+            num_segs = num_frames
+            num_padding = 0
+            
+        print(f"Temporal QA... num_frames:{str(num_frames)}, num_segs:{str(num_segs)}, num_padding:{str(num_padding)}") 
+
         temporal_pixel_values = torch.tensor(np.array(temporal_pixel_values)) # [num_frames, 3, 224, 224]
         temporal_pixel_values = temporal_pixel_values.unsqueeze(0)
-
-        num_frames_per_seg = int(args.num_frames // args.num_segs)
-        indices_spatial = [(i*num_frames_per_seg) + int(num_frames_per_seg/2) for i in range(args.num_segs)]
+        
+        num_frames_per_seg = int(num_frames // num_segs)
+        indices_spatial = [(i*num_frames_per_seg) + int(num_frames_per_seg/2) for i in range(num_segs)]
         spatial_pixel_values = []
         for i_spatial in indices_spatial:
             if i_spatial < pixel_values.shape[0]:
                 spatial_pixel_values.append(image_processor(pixel_values[i_spatial]))
+            else:
+                spatial_pixel_values.append(image_processor(pixel_values[-1]))
+
+        print(f"Temporal QA: Get {str(len(spatial_pixel_values))} spatial_pixel_values.")
         spatial_pixel_values = torch.tensor(np.array(spatial_pixel_values)) # [num_segs, 3, 336, 336]
         spatial_pixel_values = spatial_pixel_values.unsqueeze(0)
         
@@ -146,7 +151,10 @@ class TemporalQA:
     
         return samples
     
-    
+    @prompts(
+        name = "temporal-qa-tool",
+        description = "placeholder"
+    )
     def inference(self, input):
         samples_videoqa = self.create_inputs(self.video_path, input)
         
@@ -168,8 +176,16 @@ class TemporalQA:
         
 
 if __name__ == "__main__":
-    conf = OmegaConf.load("/home/fsq/video_agent/ToolChainVideo/config/nextqa_new_tool.yaml")
+    conf = OmegaConf.load("/home/fsq/video_agent/ToolChainVideo/config/nextqa_st.yaml")
     temporal_qa = TemporalQA(conf)
+
+    from util import load_temporal_model
+    temporal_model = load_temporal_model(
+        weight_path=conf.tool.temporal_model.weight_path,
+        device=conf.tool.temporal_model.device,
+        llm_type=conf.tool.temporal_model.llm_type
+    )
+    temporal_qa.set_model(temporal_model)
     
     
     video_path = "/home/fsq/video_agent/ToolChainVideo/projects/Grounded-Video-LLM/experiments/_3klvlS4W7A.mp4"
