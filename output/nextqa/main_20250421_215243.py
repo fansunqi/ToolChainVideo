@@ -204,12 +204,7 @@ if __name__ == "__main__":
                 else:
                     raise KeyError("conf.reasoning_mode error")
 
-            if isinstance(tool_chain_output, str):
-                result["answers"].append(tool_chain_output)
-            elif isinstance(tool_chain_output, list):
-                result["answers"].extend(tool_chain_output)
-            else:
-                raise ValueError("tool_chain_output error")
+            result["answers"].append(tool_chain_output)
 
         all_results.append(result)
 

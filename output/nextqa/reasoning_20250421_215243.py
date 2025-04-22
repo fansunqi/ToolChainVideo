@@ -49,24 +49,27 @@ def spatiotemporal_reasoning(
             temporal_qa = tool
 
 
-    # 1. T: temporal grounding
+    # 1. temporal grounding
     temporal_grounding.inference(input=question)
 
-    # 2. S: patch zoomer 对所有 visible_frames 都进行 zoom in
+
+
+    # 2. patch zoomer 对所有 visible_frames 都进行 zoom in
     patch_zoomer.inference(input=question)
 
-    # 3. image grid qa
-    image_grid_qa_output = image_grid_qa.inference(input=question_w_options)
+    # 3 image grid qa
+    # image_grid_qa_output = image_grid_qa.inference(input=question_w_options)
 
-    # 4. image qa LLaVA
-    image_qa.inference(input=question)
-    summarizer_output = summarizer.inference(input=question_w_options)
+    # 4 image qa LLaVA
+    # image_qa.inference(input=question)
+    # summarizer_output = summarizer.inference(input=question_w_options)
 
-    # 5. temporal qa
-    temporal_qa_output = temporal_qa.inference(input=question_w_options)
+    # 检查 image_grid_qa_output 与 summarizer_output 是否一致
 
-    output = [image_grid_qa_output, summarizer_output, temporal_qa_output]
-    
+    # 5 使用 video trimmer 之后送到 temporal qa 或者 video qa 中去
+    # 能不能直接将 visible_frames 给送进去呢？
+    output = temporal_qa.inference(input=question_w_options)
+
     print(f"\nToolChainOutput: {output}") 
     return output
 

@@ -173,9 +173,11 @@ if __name__ == "__main__":
     conf = OmegaConf.load(args.config)
 
     input_file_list = [
-        "archive/output/nextqa/results_20250420_204303.json",
+        # "archive/output/nextqa/results_20250420_204303.json",
         "output/nextqa/results_20250421_202125.json",
+        # "output/nextqa/results_20250421_212143.json",
         "output/nextqa/results_20250420_222432.json",
+        "output/nextqa/results_20250420_230747.json",
     ]
     
     output_file = "eval/nextqa/ensemble_1.json"
