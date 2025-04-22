@@ -75,3 +75,5 @@ to_txt: True
 eval:
   eval_cache_file: cache/gpt35_eval_cache.pkl
   use_cache: True
+
+specific_quids: ["3429509208_3"]

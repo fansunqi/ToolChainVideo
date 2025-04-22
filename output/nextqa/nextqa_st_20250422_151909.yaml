@@ -6,11 +6,6 @@ openai:
 
 reasoning_mode: "st"    # langgraph
 
-visible_frames:
-  init_video_stride: null
-  min_interval: null
-  min_sec_interval: 1
-
 tool:
   tool_list:
     - "TemporalGrounding"
@@ -19,7 +14,6 @@ tool:
     - "ImageGridQA"
     - "ImageQA"
     - "Summarizer"
-    - "FrameSelector"
   temporal_model:
     llm_type: "phi3.5"
     weight_path: "/hf_home/Grounded-Video-LLM/"
@@ -32,8 +26,6 @@ tool:
     init_grid_size: 3
     save_path: null
     mode:  "by_visible_frames"  # "by_video_path"
-  temporal_grounding:
-    min_sec_interval: 1
   temporal_qa:
     mode: "by_visible_frames"  # "by_video_path"
   patch_zoomer:
@@ -46,10 +38,6 @@ tool:
   summarizer:
     llm_model_name: "gpt-3.5-turbo"
     use_cache: True
-  frame_selector:
-    llm_model_name: "gpt-4o-mini"
-  image_captioner:
-    device: "cuda:1"
 
 mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"
 use_cache: False
@@ -69,9 +57,10 @@ try_num: 1
 init_interval_sec: 10
 
 try_except_mode: False
-to_txt: True
+to_txt: False
 
 
 eval:
   eval_cache_file: cache/gpt35_eval_cache.pkl
   use_cache: True
+

@@ -31,7 +31,8 @@ class TemporalQA:
         self,
         conf = None, 
     ):
-        # TODO: 是否要与 temporal grounding 进行共享权重?
+        self.conf = conf
+        
         self.visible_frames = None
         self.video_path = None
 

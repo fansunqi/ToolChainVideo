@@ -53,8 +53,6 @@ def spatiotemporal_reasoning(
             patch_zoomer = tool
         elif isinstance(tool, TemporalQA):
             temporal_qa = tool
-        elif isinstance(tool, FrameSelector):
-            frame_selector = tool
 
 
     # 1. T: temporal grounding
@@ -65,44 +63,17 @@ def spatiotemporal_reasoning(
 
     # 3. image grid qa
     image_grid_qa_output = image_grid_qa.inference(input=question_w_options)
-    image_grid_qa_pred, _ = get_predicted_option_with_rephrase(
+    image_grid_qa_pred, match_option = get_predicted_option_with_rephrase(
         image_grid_qa_output, options, question, image_grid_qa.conf, eval_llm, eval_cache
     )
+    pdb.set_trace()
 
     # 4. image qa LLaVA
     image_qa.inference(input=question)
     summarizer_output = summarizer.inference(input=question_w_options)
-    summarizer_pred, _ = get_predicted_option_with_rephrase(
-        summarizer_output, options, question, summarizer.conf, eval_llm, eval_cache
-    )
 
     # 5. temporal qa
     temporal_qa_output = temporal_qa.inference(input=question_w_options)
-    temporal_qa_pred, _ = get_predicted_option_with_rephrase(
-        temporal_qa_output, options, question, temporal_qa.conf, eval_llm, eval_cache
-    )
-
-    if (image_grid_qa_pred == -1) or (summarizer_pred == -1) or (temporal_qa_pred == -1) or \
-        (image_grid_qa_pred != summarizer_pred) or (image_grid_qa_pred != temporal_qa_pred) or (summarizer_pred != temporal_qa_pred):
-        # 有一个方法不确定，进行 frame_selector
-
-        invisible_segments_list = frame_selector.visible_frames.get_invisible_segments()
-
-        # 检查是否还有分割的余地
-        if len(invisible_segments_list) > 0:
-            print("\nFrame Selector inferencing...")
-            frame_selector.inference(input=question)
-
-            # 3. image grid qa
-            image_grid_qa_output = image_grid_qa.inference(input=question_w_options)
-
-            # 4. image qa LLaVA
-            image_qa.inference(input=question)
-            summarizer_output = summarizer.inference(input=question_w_options)
-
-            # 5. temporal qa
-            temporal_qa_output = temporal_qa.inference(input=question_w_options)
-
 
     output = [image_grid_qa_output, summarizer_output, temporal_qa_output]
     

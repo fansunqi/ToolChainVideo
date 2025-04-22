@@ -1,0 +1,79 @@
+Creating LLM cache: cache/gpt35_cache_new_tool_8.pkl...
+
+
+Initializing Patch Zoomer Tool with model: gpt-4o, sys_prompt: None
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+
+Initializing Image-Grid-QA Tool with model: gpt-4o
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+Loading liuhaotian/llava-v1.5-7b for Image QA...
+
+
+Initializing Summarizer Tool with model: gpt-3.5-turbo
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-3.5-turbo
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o-mini
+tool_instances: [<tools.temporal_grounding.TemporalGrounding object at 0x7f3bf90d0b20>, <tools.temporal_qa.TemporalQA object at 0x7f3bf8e67100>, <tools.patch_zoomer.PatchZoomer object at 0x7f3bf8e80310>, <tools.image_grid_qa.ImageGridQA object at 0x7f3bf8e80400>, <tools.image_qa.ImageQA object at 0x7f3bf8e804f0>, <tools.summarizer.Summarizer object at 0x7f3bf8e28460>, <tools.frame_selector.FrameSelector object at 0x7f3da2234f70>]
+tools: [Tool(name='temporal-grounding-tool', description="Useful when you want to know which time segment of the video a certain event or content appears inThe input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method TemporalGrounding.inference of <tools.temporal_grounding.TemporalGrounding object at 0x7f3bf90d0b20>>), Tool(name='temporal-qa-tool', description='placeholder', func=<bound method TemporalQA.inference of <tools.temporal_qa.TemporalQA object at 0x7f3bf8e67100>>), Tool(name='relevant-patch-zooming-tool', description='placeholder', func=<bound method PatchZoomer.inference of <tools.patch_zoomer.PatchZoomer object at 0x7f3bf8e80310>>), Tool(name='image-grid-qa-tool', description="Useful when you want to know the whole event or action in the video. This tool arranges multiple images into an image grid, allowing the MLLM to analyze the events or actions taking place in the video.The input to this tool must be a question, such as 'How many children are in the video?' ", func=<bound method ImageGridQA.inference of <tools.image_grid_qa.ImageGridQA object at 0x7f3bf8e80400>>), Tool(name='image-question-answering-tool', description="Useful when you need to ask something about the frames in the video.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method ImageQA.inference of <tools.image_qa.ImageQA object at 0x7f3bf8e804f0>>), Tool(name='summarization-tool', description="Useful when you want to summarize the infomation of all visible frames and find the answer.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method Summarizer.inference of <tools.summarizer.Summarizer object at 0x7f3bf8e28460>>), Tool(name='frame-extraction-tool', description="Useful when you find that the currently sampled frames do not provide enough information and more frames need to be extracted from the video to answer the question.The input to this tool must be a question about the video that remains unresolved. For example, 'How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.'", func=<bound method FrameSelector.inference of <tools.frame_selector.FrameSelector object at 0x7f3da2234f70>>)]
+Start loading temporal model...
+
+loading vision_tower
+loading video_encoder
+loading multi_modal_projector
+loading video_projector
+loading language_model
+Frozen ViT
+Frozen video_encoder
+LORA llm
+Frozen Part LLM
+Finish loading temporal model.
+
+Loading LLM cache from cache/gpt35_eval_cache.pkl...
+
+
+Building dataset...
+
+
+Processing: 3429509208_3
+What did the baby do after he approached near the camera? Choose your answer from below options: A.move his legs, B.suck his thumb, C.raised his hand to take the camera, D.turn back to the toy, E.bored.
+Patch Zoomer: zoom in patch ['C', 'E']
+Patch Zoomer: zoom in patch ['A', 'C']
+Patch Zoomer: zoom in patch ['C']
+
+Image QA: batch inferencing...
+Image QA... Frame 322: Question: What did the baby do after he approached near the camera	Answer: After the baby approached near the camera, he started playing with the vacuum cleaner. The baby is seen holding onto the vacuum cleaner, possibly trying to operate it or simply enjoying the feeling of the cord. This interaction with the vacuum cleaner demonstrates the baby's curiosity and interest in exploring new objects in their environment.
+Image QA... Frame 345: Question: What did the baby do after he approached near the camera	Answer: After the baby approached near the camera, he started to play with the camera, possibly trying to interact with it or simply exploring the device. This indicates that the baby is curious and engaged with his surroundings, which is a common trait among young children.
+Image QA... Frame 368: Question: What did the baby do after he approached near the camera	Answer: The baby is now looking at the camera, possibly curious about the person taking the picture or the camera itself.
+
+Summarizer Input Prompt:  Regarding a given video, based on the frame information to answer the following question as best you can.
+
+Frame Information: 
+Frame 322:
+Question: What did the baby do after he approached near the camera	Answer: After the baby approached near the camera, he started playing with the vacuum cleaner. The baby is seen holding onto the vacuum cleaner, possibly trying to operate it or simply enjoying the feeling of the cord. This interaction with the vacuum cleaner demonstrates the baby's curiosity and interest in exploring new objects in their environment.
+
+Frame 345:
+Question: What did the baby do after he approached near the camera	Answer: After the baby approached near the camera, he started to play with the camera, possibly trying to interact with it or simply exploring the device. This indicates that the baby is curious and engaged with his surroundings, which is a common trait among young children.
+
+Frame 368:
+Question: What did the baby do after he approached near the camera	Answer: The baby is now looking at the camera, possibly curious about the person taking the picture or the camera itself.
+
+
+Question:
+What did the baby do after he approached near the camera? Choose your answer from below options: A.move his legs, B.suck his thumb, C.raised his hand to take the camera, D.turn back to the toy, E.bored.
+
+
+Summarizer Output Answer:  The correct answer is D. turn back to the toy.
+
+Frame Selector inferencing...
+> /home/fsq/video_agent/ToolChainVideo/tools/frame_selector.py(70)inference()
+-> add_frames_indices_all = []
+(Pdb) *** SyntaxError: unexpected EOF while parsing
+(Pdb) *** NameError: name 'isnw' is not defined
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) 

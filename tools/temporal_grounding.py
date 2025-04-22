@@ -53,6 +53,7 @@ class TemporalGrounding:
         conf = None, 
     ):
         
+        self.conf = conf
         self.visible_frames = None
         self.video_path = None
         
@@ -60,6 +61,8 @@ class TemporalGrounding:
 
         self.llm_type = conf.tool.temporal_model.llm_type
         self.device = conf.tool.temporal_model.device
+
+        self.min_sec_interval = conf.tool.temporal_grounding.min_sec_interval
     
     def set_frames(self, visible_frames):
         self.visible_frames = visible_frames  
@@ -182,7 +185,7 @@ class TemporalGrounding:
             end_frame_idx = total_frames_num - 1
 
         # 最小间隔为 1s 抽一帧
-        minimal_interval = int(1 * self.visible_frames.video_info["fps"])
+        minimal_interval = int(self.min_sec_interval * self.visible_frames.video_info["fps"])
         frame_indices = range(start_frame_idx, end_frame_idx + 1, minimal_interval)
 
         self.visible_frames.add_frames(frame_indices=frame_indices)

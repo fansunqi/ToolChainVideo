@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from typing import List
-from engine.openai import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from prompts import SELECT_FRAMES_PROMPT
 from pydantic import BaseModel, Field
 from pprint import pprint
@@ -17,18 +17,25 @@ def prompts(name, description):
     return decorator
 
 
+class Segment(BaseModel):
+    segment_id: int = Field(description="The index of the video segment, start from 0")
+    start_frame_idx: int = Field(description="The start frame index of the video segment")
+    end_frame_idx: int = Field(description="The end frame index of the video segment")
+
 
 class SegmentList(BaseModel):
-    analysis: str
-    segments: List[int]
+    segments: List[Segment] = Field(description="A list of segments")
 
 
 class FrameSelector:
     def __init__(self, conf):
-
-        self.conf = conf
         
-        self.llm = ChatOpenAI(model_string=conf.tool.frame_selector.llm_model_name, is_multimodal=False)    
+        self.llm = ChatOpenAI(
+            api_key = conf.openai.GPT_API_KEY,
+            model = conf.openai.GPT_MODEL_NAME,
+            temperature = 0,
+            base_url = conf.openai.PROXY
+        )
 
         self.visible_frames = None
         self.video_path = None
@@ -46,42 +53,37 @@ class FrameSelector:
         "The input to this tool must be a question about the video that remains unresolved. For example, 'How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.'",
     )
     def inference(self, input):
-        
-        invisible_segments_list = self.visible_frames.get_invisible_segments()
+        visible_info = self.visible_frames.get_frame_descriptions()
 
-        # 检查是否还有分割的余地
-        if len(invisible_segments_list) == 0:
-            return_message = "All video segments are already shorter than the minimum interval, so no more frames can be extracted from them."
-            print(f"\nFrame Selector: {return_message}")
-            return return_message
-        
         select_frames_prompt = SELECT_FRAMES_PROMPT.format(
             num_frames = self.visible_frames.video_info["total_frames"],
             fps = self.visible_frames.video_info["fps"],
             visible_frames_info = self.visible_frames.get_frame_descriptions(),
             question = input,
-            candidate_segment = self.visible_frames.invisible_segments_to_description(),
-            max_candidate_segment_id = str(len(invisible_segments_list) - 1)
+            candidate_segment = self.visible_frames.invisible_segments_to_description()
         )
 
-        response = self.llm(select_frames_prompt, response_format=SegmentList)
+        structured_llm = self.llm.with_structured_output(SegmentList)
+        segments_list = structured_llm.invoke(select_frames_prompt)
 
+        print("segments_list: ", segments_list)
+
+        # 扩展帧
+        # 最小间隔单位是 fps
+        fps = int(self.visible_frames.video_info["fps"])
         add_frames_indices_all = []
-        min_interval = self.visible_frames.min_interval
-        for segment_id in response.segments:
-            segment = invisible_segments_list[segment_id]
-            start_frame_idx = segment[0]
-            end_frame_idx = segment[1]
-            if end_frame_idx - start_frame_idx > min_interval:
-                add_frames_indices = range(start_frame_idx, end_frame_idx, min_interval)
-                # print("add_frames_indices: ", add_frames_indices)
-                add_frames_indices_all.extend(add_frames_indices)
+        invisible_segments_list = self.visible_frames.get_invisible_segments()
+        for segment in segments_list.segments:
+            invisible_segment = invisible_segments_list[segment.segment_id]
+            if invisible_segment[0] == segment.start_frame_idx and invisible_segment[1] == segment.end_frame_idx:
+                if segment.end_frame_idx - segment.start_frame_idx >= fps:
+                    add_frames_indices = range(segment.start_frame_idx, segment.end_frame_idx, fps)
+                    print("add_frames_indices: ", add_frames_indices)
+                    add_frames_indices_all.extend(add_frames_indices)
 
         add_frames_indices_all = list(set(add_frames_indices_all))
         add_frames_indices_all.sort()
-        print(f"\nFrame Selector: analysis: {response.analysis}")
-        print(f"Frame Selector: add_frames_indices_all: {str(add_frames_indices_all)}\n")
-
+        print("add_frames_indices_all: ", add_frames_indices_all)
 
         self.visible_frames.add_frames(frame_indices=add_frames_indices_all)
 

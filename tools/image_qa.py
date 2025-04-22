@@ -35,13 +35,21 @@ def clean_question(question):
     return question
 
 
-def get_pil_image_list(visible_frames):
+def get_pil_image_list(visible_frames, target):
     pil_image_list = []
+    frame_idx_list = []  # 相对的 frame_idx
+    frame_count = -1
     for visible_frame in visible_frames.frames:
+        frame_count += 1
+        #  如果目标已经出现了，就跳过 
+        if target in visible_frame.description:
+            continue
+
         rgb_image = cv2.cvtColor(visible_frame.image, cv2.COLOR_BGR2RGB)
         raw_image = Image.fromarray(rgb_image)
         pil_image_list.append(raw_image)
-    return pil_image_list
+        frame_idx_list.append(frame_count)
+    return pil_image_list, frame_idx_list
      
         
 class ImageQA:
@@ -135,7 +143,10 @@ class ImageQA:
         
         if self.batch == True:
             print("\nImage QA: batch inferencing...")
-            pil_image_list = get_pil_image_list(self.visible_frames)
+
+            # 问过同一个问题的帧就不加入
+            target = f"Question: {input}"
+            pil_image_list, frame_idx_list = get_pil_image_list(self.visible_frames, target)
             prompt_list = [input] * len(pil_image_list)
 
             outputs = []
@@ -162,9 +173,9 @@ class ImageQA:
                 batch_outputs = eval_model(args)
                 outputs.extend(batch_outputs)
             
-            assert len(outputs) == len(self.visible_frames.frames)
+            # assert len(outputs) == len(self.visible_frames.frames)
             
-            for frame_idx, answer in enumerate(outputs):
+            for frame_idx, answer in zip(frame_idx_list, outputs):
                 add_info = f"Question: {input}\tAnswer: {answer}"
                 
                 frame = self.visible_frames.frames[frame_idx]

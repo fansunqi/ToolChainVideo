@@ -155,12 +155,7 @@ if __name__ == "__main__":
         for try_count in range(try_num):
 
             # visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
-            visible_frames = VisibleFrames(
-                video_path=video_path, 
-                init_video_stride=conf.visible_frames.init_video_stride,
-                min_interval=conf.visible_frames.min_interval,
-                min_sec_interval=conf.visible_frames.min_sec_interval
-            )
+            visible_frames = VisibleFrames(video_path=video_path, init_video_stride=None)
             
             for tool_instance in tool_instances:
                 tool_instance.set_frames(visible_frames)
@@ -185,7 +180,6 @@ if __name__ == "__main__":
                         tool_chain_output = spatiotemporal_reasoning(
                             question=question,
                             question_w_options=question_w_options,
-                            options=options,
                             llm=tool_planner_llm,
                             tools=tool_instances,
                             recursion_limit=conf.recursion_limit,
@@ -216,7 +210,6 @@ if __name__ == "__main__":
                      tool_chain_output = spatiotemporal_reasoning(
                         question=question,
                         question_w_options=question_w_options,
-                        options=options,
                         llm=tool_planner_llm,
                         tools=tool_instances,
                         recursion_limit=conf.recursion_limit,

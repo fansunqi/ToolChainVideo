@@ -51,12 +51,19 @@ class VisibleFrames:
     """管理一个视频中的可见帧"""
     def __init__(self, 
                 video_path, 
-                init_video_stride=None):
+                init_video_stride=None,
+                min_interval=None,
+                min_sec_interval=1):
         self.frames: List[Frame] = [] 
         self.video_path = video_path                
         self.video_info = get_video_info(video_path)
         if init_video_stride != None:
             self.add_frames(video_stride=init_video_stride)
+
+        if min_interval:
+            self.min_interval = min_interval
+        else:
+            self.min_interval = int(min_sec_interval * self.video_info['fps'])
 
 
     def add_frames(self, 
@@ -189,22 +196,22 @@ class VisibleFrames:
         # 获取所有可见帧的索引并排序
         visible_indices = sorted(frame.index for frame in self.frames)
         total_frames = self.video_info['total_frames']
-        
+
         invisible_segments = []
         
         # 1. 检查视频开始到第一个可见帧之间的片段
-        if visible_indices[0] > 0:
+        if visible_indices[0] - 0 > self.min_interval:
             invisible_segments.append((0, visible_indices[0]))
         
         # 2. 检查相邻可见帧之间的片段
         for i in range(len(visible_indices) - 1):
             current_idx = visible_indices[i]
             next_idx = visible_indices[i + 1]
-            if next_idx - current_idx > 1:  # 如果相邻可见帧之间有间隔
+            if next_idx - current_idx > self.min_interval:  # 如果相邻可见帧之间有间隔
                 invisible_segments.append((current_idx + 1, next_idx))
         
         # 3. 检查最后一个可见帧到视频结束之间的片段
-        if visible_indices[-1] < total_frames - 1:
+        if visible_indices[-1] < total_frames - self.min_interval:
             invisible_segments.append((visible_indices[-1] + 1, total_frames))
         
         return invisible_segments

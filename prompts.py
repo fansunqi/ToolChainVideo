@@ -38,7 +38,9 @@ To achieve this, we will:
 
 2. Determine which segments are likely to contain frames that are most relevant to the question. These frames should capture key visual elements, such as objects, humans, interactions, actions, and scenes, that are supportive to answer the question.
 
-Return the selected video segments in the specified JSON format.
+Return the selected video segments in json format:
+<analysis>: Describe the known information of sampled frames first. Then analyze the question and select the most relevant uninformed video segment.
+<segments>: List of segment ids of selected video segments, i.e., list of integers in [0, {max_candidate_segment_id}].
 """
 
 

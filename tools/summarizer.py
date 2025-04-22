@@ -15,6 +15,7 @@ class Summarizer:
         self,
         conf = None, 
     ):
+        self.conf = conf
         self.visible_frames = None
         self.video_path = None
 

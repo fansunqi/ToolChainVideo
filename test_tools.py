@@ -21,13 +21,30 @@ conf = OmegaConf.load(opt.config)
 
 video_path = "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4"
 question = "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five."
-init_interval_sec = 1
+init_interval_sec = 10
 video_info = get_video_info(video_path)
 init_video_stride = int(video_info["fps"] * init_interval_sec)
 
 # 创建可见帧管理器
 visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
 
+'''
+# 再打印信息
+print("\n可见帧描述:")
+print(visible_frames.get_frame_descriptions())
+
+# frame selector
+frame_selector = FrameSelector(conf=conf)
+frame_selector.set_frames(visible_frames=visible_frames)
+frame_selector.inference(input=question)
+
+# 查看其它工具的 visible_frames 是否改变
+# 再打印信息
+print("\n可见帧描述:")
+print(visible_frames.get_frame_descriptions())
+'''
+
+'''
 from util import load_temporal_model
 temporal_model = load_temporal_model(
     weight_path=conf.tool.temporal_model.weight_path,
@@ -35,7 +52,6 @@ temporal_model = load_temporal_model(
     llm_type=conf.tool.temporal_model.llm_type
 )
     
-
 # temporal_qa
 temporal_qa = TemporalQA(conf)
 temporal_qa.set_video_path(video_path)
@@ -43,7 +59,7 @@ temporal_qa.set_frames(visible_frames)
 temporal_qa.set_model(temporal_model)
 result = temporal_qa.inference(input=question)
 print(f"Result: {result}")
-
+'''
 
 '''
 # image_grid_qa
@@ -76,9 +92,9 @@ question = "How many children are in the video?"
 image_qa.inference(input=question)
 '''
 
-'''
+
 # image_captioner
-image_captioner = ImageCaptioner()
+image_captioner = ImageCaptioner(conf=conf)
 image_captioner.set_frames(visible_frames)
 image_captioner.inference(input="placeholder")
 
@@ -94,7 +110,7 @@ frame_selector.inference(input=question)
 # 查看其它工具的 visible_frames 是否改变
 # 再打印信息
 print("\n可见帧描述:")
-print(image_captioner.visible_frames.get_frame_descriptions())
-'''
+print(visible_frames.get_frame_descriptions())
+
 
 

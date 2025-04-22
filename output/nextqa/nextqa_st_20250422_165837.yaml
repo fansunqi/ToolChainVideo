@@ -6,11 +6,6 @@ openai:
 
 reasoning_mode: "st"    # langgraph
 
-visible_frames:
-  init_video_stride: null
-  min_interval: null
-  min_sec_interval: 1
-
 tool:
   tool_list:
     - "TemporalGrounding"
@@ -75,3 +70,4 @@ to_txt: True
 eval:
   eval_cache_file: cache/gpt35_eval_cache.pkl
   use_cache: True
+

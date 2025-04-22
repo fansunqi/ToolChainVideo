@@ -27,10 +27,10 @@ class ImageCaptioner:
     def __init__(
         self,
         conf = None, 
-        device = "cuda:0"
     ):
-        self.device = device
-        self.torch_dtype = torch.float16 if "cuda" in device else torch.float32
+        self.conf = conf
+        self.device = conf.tool.image_captioner.device
+        self.torch_dtype = torch.float16 if "cuda" in self.device else torch.float32
         self.processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-large")
         self.model = BlipForConditionalGeneration.from_pretrained(
             "Salesforce/blip-image-captioning-large", torch_dtype=self.torch_dtype
