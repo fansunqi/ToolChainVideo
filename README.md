@@ -95,7 +95,7 @@ Generalist Solution:
 
 Specify your config file and run:
 ```
-python main_new_tools.py
+python main.py
 ```
 
 Evaluate:
