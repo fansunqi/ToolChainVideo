@@ -10,7 +10,7 @@ def download_all_parts():
     # Create list of all suffixes: ab, ac, ..., az, ba, bb, bc, bd, be
     suffixes = []
     # First add ab through az (skipping aa)
-    suffixes.extend([f"a{c}" for c in string.ascii_lowercase[1:]])  # Start from 'b'
+    suffixes.extend([f"a{c}" for c in string.ascii_lowercase])  # Start from 'b'
     # Then add ba through be
     suffixes.extend([f"b{c}" for c in string.ascii_lowercase[:5]])  # only up to 'be'
     
