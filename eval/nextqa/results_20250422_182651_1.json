@@ -1748,12 +1748,12 @@
         "question_w_options": "How did the lady compliment the girl at the end of the video? Choose your answer from below options: A.kissed her head, B.pointing her finger, C.puts hand on the baby s head, D.claps, E.stand facing the man.",
         "predicted_options": [
             0,
-            2,
+            -1,
             0
         ],
         "match_methods": [
             "option full matching",
-            "option full matching",
+            "none",
             "option full matching"
         ],
         "final_predicted_option": 0,
@@ -2099,12 +2099,12 @@
         ],
         "question_w_options": "Why did the man in white shirt moved his lips? Choose your answer from below options: A.eating snacks, B.drinking water, C.performing, D.biting straw, E.talking.",
         "predicted_options": [
-            -1,
+            4,
             4,
             4
         ],
         "match_methods": [
-            "none",
+            "option full matching",
             "option full matching",
             "option full matching"
         ],
@@ -2581,12 +2581,12 @@
         "predicted_options": [
             3,
             3,
-            -1
+            2
         ],
         "match_methods": [
             "option full matching",
             "option full matching",
-            "none"
+            "option full matching"
         ],
         "final_predicted_option": 3,
         "is_correct": false

@@ -25,8 +25,8 @@ class BaseDataset(Dataset):
         # self.narrations = self.get_descriptions()  # uid --> list of str  or  uid --> str
         self.anno = self.get_anno()
         # self.durations = load_json(args.duration_path)  # uid --> float
-        end_num = start_num + num_examples_to_run
-        data = self.build(end_num)
+        self.end_num = start_num + num_examples_to_run
+        data = self.build()
         data = self.filter(data, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
         self.data = data
 
@@ -118,7 +118,7 @@ class NextDataset(BaseDataset):
         video_path = find_mp4_files(video_path_base)
         return video_path
   
-    def build(self, end_num):
+    def build(self):
         print("\nBuilding dataset...")
         data = []
         video_path = self.get_video_path()
@@ -172,10 +172,55 @@ class NextDataset(BaseDataset):
                 'video_path': matching_path,
             })
             
-            if len(data) >= end_num:
+            if len(data) >= self.end_num:
                 break
             
         return data
+
+
+class VideoMMEDataset(BaseDataset):
+    def __init__(self, args, quids_to_exclude=None, num_examples_to_run=-1, start_num=0, specific_quids=None):
+        self.set_ukey('question_id')
+        super().__init__(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run, start_num=start_num, specific_quids=specific_quids)
+    
+    def get_anno(self):
+        return pd.read_parquet(self.args.anno_path, engine='pyarrow')
+    
+    def get_video_path(self):
+        video_path_base = self.args.video_path_base
+        video_path = find_mp4_files(video_path_base)
+        return video_path
+
+    def build(self):
+        print("\nBuilding dataset...")
+        data = []
+        video_path = self.get_video_path()
+
+        for row in self.anno.iterrows():
+            if isinstance(row, tuple):
+                row = row[-1]  # remove table index
+            
+            videoID = row['videoID']
+            question_id = row['question_id']
+            question = row['question']
+            options = row['options']
+            answer = row['answer']
+
+            pdb.set_trace()
+
+            matching_path = None
+            
+        
+
+
+
+
+
+
+
+
+
+
 
 
 def get_dataset(args, quids_to_exclude=None, num_examples_to_run=-1, start_num=0, specific_quids=None):
@@ -183,20 +228,31 @@ def get_dataset(args, quids_to_exclude=None, num_examples_to_run=-1, start_num=0
     #     return EgoSchemaDataset(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run)
     if args.dataset == 'nextqa':
         return NextDataset(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run, start_num=start_num, specific_quids=specific_quids)
+    elif args.dataset == 'videomme':
+        return VideoMMEDataset(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run, start_num=start_num, specific_quids=specific_quids)
     else:
         raise ValueError(f"Dataset {args.dataset} not found")
 
 
 
+
+
+
+
+# 调试
 def parse_args():
     parser = argparse.ArgumentParser(description="Dataset script")
-    parser.add_argument('--dataset', type=str, default="nextqa", help='Name of the dataset to use')
-    # parser.add_argument('--data_path', type=str, required=True, help='Path to the data file')
-    parser.add_argument('--video_path_base', type=str, default="/hf_home/hub/spaces/next-qa/NExTVideo")
-    parser.add_argument('--anno_path', type=str, default="/hf_home/hub/spaces/next-qa/NExT-QA/dataset/nextqa/train.csv", help='Path to the annotation file')
-    # parser.add_argument('--duration_path', type=str, required=True, help='Path to the duration file')
-    parser.add_argument('--num_examples_to_run', type=int, default=-1, help='Number of examples to run')
-    # parser.add_argument('--fps', type=float, default=1.0, help='Frames per second for narration formatting')
+
+    # parser.add_argument('--dataset', type=str, default="nextqa", help='Name of the dataset to use')
+    # parser.add_argument('--video_path_base', type=str, default="/hf_home/hub/spaces/next-qa/NExTVideo")
+    # parser.add_argument('--anno_path', type=str, default="/hf_home/hub/spaces/next-qa/NExT-QA/dataset/nextqa/train.csv", help='Path to the annotation file')
+    # parser.add_argument('--num_examples_to_run', type=int, default=100)
+
+    parser.add_argument('--dataset', type=str, default="videomme", help='Name of the dataset to use')
+    parser.add_argument('--video_path_base', type=str, default="/hf_home/hub/datasets--lmms-lab--Video-MME/snapshots/ead1408f75b618502df9a1d8e0950166bf0a2a0b/data/")
+    parser.add_argument('--anno_path', type=str, default="/hf_home/hub/datasets--lmms-lab--Video-MME/snapshots/ead1408f75b618502df9a1d8e0950166bf0a2a0b/videomme/test-00000-of-00001.parquet", help='Path to the annotation file')
+    parser.add_argument('--num_examples_to_run', type=int, default=100)
+
     return parser.parse_args()
 
 

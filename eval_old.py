@@ -1,14 +1,13 @@
 import os
 import pdb
 import json
+import pickle
 import argparse
 from tqdm import tqdm
 from collections import Counter
 from omegaconf import OmegaConf
-from engine.openai import ChatOpenAI
-
-from prompts import EVAL_PROMPT
-
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage
 
 def option_full_matching(answer, options):
     answer = answer.lower()
@@ -35,13 +34,34 @@ def LLM_rephrase(answer, options, question, conf, eval_llm, llm_cache):
     options_with_labels = "\n".join([f"{label}: {option}" for label, option in zip(option_labels, options)])
     
     # 创建 prompt 给 LLM
-    prompt = EVAL_PROMPT.format(
-        question=question,
-        answer=answer,
-        options_with_labels=options_with_labels
-    )
+    prompt = f"""
+    Given the following question and possible answers, determine which option matches the provided answer. 
+    Provide only the option letter (A, B, C, D, or E).
 
-    answer_rephrase = eval_llm(prompt)
+    Question: {question}
+    Answer: {answer}
+    Options:
+    {options_with_labels}
+
+    The correct answer option is:
+    """
+    
+    if conf.eval.use_cache and (prompt in llm_cache):
+        # 缓存命中
+        print("Cache hit!")
+        answer_rephrase = llm_cache[prompt]
+    else:
+        # 缓存未命中
+        print("Cache miss. Calling API...")
+        
+        messages = [HumanMessage(content=prompt)]
+        answer_rephrase = eval_llm.invoke(messages).content
+        
+        # 保存缓存
+        llm_cache[prompt] = answer_rephrase
+        print("Saving cache...")
+        with open(conf.eval.eval_cache_file, "wb") as f:
+            pickle.dump(llm_cache, f)
     
     return answer_rephrase
     
@@ -76,7 +96,7 @@ def get_latest_file(directory):
     return latest_file
 
 
-def main(input_file, output_file, conf, eval_llm, llm_cache=None):
+def main(input_file, output_file, conf, eval_llm, llm_cache):
 
     with open(input_file, 'r') as f:
         data = json.load(f)
@@ -153,7 +173,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Evaluate NextQA answers")
     parser.add_argument('--input_file', type=str, help="Path to the input JSON file")
     parser.add_argument('--output_file', type=str, help="Path to the output JSON file")
-    parser.add_argument('--config', default="config/nextqa.yaml",type=str)
+    parser.add_argument('--config', default="config/nextqa_st.yaml",type=str)
     args = parser.parse_args()
     conf = OmegaConf.load(args.config)
 
@@ -164,9 +184,21 @@ if __name__ == "__main__":
         args.output_file = args.input_file.replace('output/nextqa', 'eval/nextqa')
 
     # LLM for rephrase
-    eval_llm = ChatOpenAI(model_string=conf.openai.EVAL_MODEL_NAME, is_multimodal=False)
+    eval_llm = ChatOpenAI(
+        model=conf.openai.EVAL_MODEL_NAME,
+        temperature=0.0,
+        api_key=conf.openai.GPT_API_KEY,
+        base_url=conf.openai.PROXY
+    )
+    # cache
+    if conf.eval.use_cache and os.path.exists(conf.eval.eval_cache_file):
+        print("loading cache...")
+        with open(conf.eval.eval_cache_file, "rb") as f:
+            llm_cache = pickle.load(f)
+    else:
+        llm_cache = {}
 
-    main(args.input_file, args.output_file, conf, eval_llm)
+    main(args.input_file, args.output_file, conf, eval_llm, llm_cache)
 
     print(f"Output saved to {args.output_file}.")
 

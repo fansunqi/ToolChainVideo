@@ -85,3 +85,12 @@ Response in json format:
 <analysis>: Describe the image and five patches first. Then analyze the question and select the most relevant patch or list of patches.
 <patch>: List of letters (A-E)
 """
+
+EVAL_PROMPT = """Given the following question and answer, determine which option matches the provided answer.
+If the answer matches exactly one of the options, return that option in full, e.g. 'A. one ; if it matches none or more than one option, return 'not matched'.
+
+Question: {question}
+Answer: {answer}
+Options: {options_with_labels}
+
+The matched option is:"""

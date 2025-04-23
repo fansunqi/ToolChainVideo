@@ -22,14 +22,36 @@
      ```
 
 5. Bulid related projects 🧩:
+    ```python
+    mkdir projects
+    cd projects
+    ```
 
-   - **download LLaVA for Image QA**
+   - **Build [LLaVA](https://github.com/haotian-liu/LLaVA) for Image QA**
      
-     Clone this [repo](https://github.com/haotian-liu/LLaVA), modify ```LLaVA/llava/eval/run_llava.py``` and install as instrutions.
+     Clone this [repo](), modify ```LLaVA/llava/eval/run_llava.py``` and install.
 
-     If you encounter this error:
+     ```python
+     git clone git@github.com:haotian-liu/LLaVA.git
+     cd LLaVA
+     ```
+     Next, replace ```projects/LLaVA/llava/eval/run_llava.py``` with [```run_llava.py```]()
+     
+     ```python
+     pip install -e .
+     cd ..
+     ```
+
+     If you encounter this error in the runtime:
      `TypeError: forward() got an unexpected keyword argument 'cache_position'`, 
-     fix by add `cache_position=None` to the `forward()` method in `Class LlavaLlamaForCausalLM` as mentioned [here](https://github.com/huggingface/transformers/issues/29426).
+     fix by add `cache_position=None` to the `forward()` method in `Class LlavaLlamaForCausalLM` in ```LLaVA/llava/model/language_model/llava_llama.py``` as mentioned in this [issue](https://github.com/huggingface/transformers/issues/29426).
+    
+    - **Download [Grounded-Video-LLM](https://github.com/WHB139426/Grounded-Video-LLM) for temporal grounding and temporal QA**
+    
+        under the ```projects``` directory, run:
+        ```python
+        git clone git@github.com:WHB139426/Grounded-Video-LLM.git
+        ```
 
 
 ## Tools

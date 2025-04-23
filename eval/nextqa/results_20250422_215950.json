@@ -1869,8 +1869,8 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1015/4263096481.mp4",
         "answers": [
-            "Based on the sequence of images, the man first cuts off the head of the fish. The action in frame 1 shows the knife positioned at the head, indicating that the first step is to cut off the head. So, the answer is E. cut off the head.",
-            "The correct answer is E. cut off the head.",
+            "Based on the image sequence, the man cuts off the head of the fish first. So the answer is E. cut off the head.",
+            "The man cuts the fish first by: E. cutting off the head.",
             "E.cut off the head."
         ],
         "question_w_options": "How does the man cut the fish first? Choose your answer from below options: A.cut the tail, B.cut the body, C.remove the fins, D.remove the scale, E.cut off the head.",
@@ -1901,7 +1901,7 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1007/7533369046.mp4",
         "answers": [
-            "Based on the sequence of images, it appears that the baby is pulling the white box. The baby is reaching towards the box and seems to be moving it towards themselves. Therefore, the answer is D. pulling the box.",
+            "Based on the sequence of images, it appears that the baby is pulling the box. The frames show the baby reaching for and moving the box, which aligns with option D: pulling the box.",
             "The baby was pulling the box.",
             "D.pulling the box,"
         ],
@@ -1933,8 +1933,8 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1101/4273039295.mp4",
         "answers": [
-            "Based on the sequence of images, it appears that the baby bends down near the tree to pick up something from the ground. The most likely answer is:\n\nA. pick up snow ball.",
-            "The correct answer is A. pick up snow ball.",
+            "Based on the sequence of images, it looks like the baby bends down near the tree to pick up something from the ground. The most likely answer is A. pick up snowball.",
+            "A. pick up snow ball",
             "A.pick up snow ball"
         ],
         "question_w_options": "Why does the baby bend down near the tree? Choose your answer from below options: A.pick up snow ball, B.to move the bicycle, C.someone is calling her, D.crawling, E.play with ball.",
@@ -1997,18 +1997,18 @@
         "truth": 2,
         "video_path": "/share_data/NExT-QA/NExTVideo/1025/3711681535.mp4",
         "answers": [
-            "I can't determine the reason why the woman lets go of the handle based on the images alone. The context of the video is needed to make an accurate choice from the options provided.",
-            "C. to come down",
+            "Based on the sequence of images, it appears the woman is participating in a trapeze or similar aerial activity. She lets go of the handle near the end, likely to come down safely. Therefore, the most appropriate answer is:\n\nC. to come down.",
+            "The correct answer is C. to come down.",
             "C.to come down"
         ],
         "question_w_options": "Why does the woman let go of the handle near the end? Choose your answer from below options: A.play with the baby, B.look at donkeys, C.to come down, D.play with the babies, E.watch somewhere.",
         "predicted_options": [
-            -1,
+            2,
             2,
             2
         ],
         "match_methods": [
-            "none",
+            "option full matching",
             "option full matching",
             "option full matching"
         ],
@@ -2030,7 +2030,7 @@
         "video_path": "/share_data/NExT-QA/NExTVideo/1010/3066064005.mp4",
         "answers": [
             "I can't determine the exact reason why the woman in purple is holding the cutlery based on the images. The context of the video is needed to make an accurate guess.",
-            "A. distributing cutlery",
+            "The correct answer is A. distributing cutlery.",
             "A.distributing cutlery"
         ],
         "question_w_options": "Why is the woman in purple holding on to a bunch of cutlery? Choose your answer from below options: A.distributing cutlery, B.cut cake, C.she just bought new cutlery, D.demostrating a cooking class, E.posing for camera.",
@@ -2125,8 +2125,8 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/0058/3851961428.mp4",
         "answers": [
-            "I can't determine the reaction of the man on the right based on the images.",
-            "The man on the most right reacted by making a hand gesture back at the man in red. This suggests that they are engaging in a playful interaction or communication while they are all wearing scuba gear and sitting on the ground.",
+            "I can't determine the specific actions or reactions of individuals in images. However, you can look at the sequence of frames to see if there are any visible changes or movements that might indicate a reaction, such as adjusting equipment, removing goggles, or showing excitement.",
+            "Answer: C. performed",
             "B.took off goggles,"
         ],
         "question_w_options": "How did the man on the most right reacted after the man in red showed him a hand gesture? Choose your answer from below options: A.adjust the rein, B.took off goggles, C.performed, D.grab his shoulders, E.excited.",
@@ -2221,14 +2221,14 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1026/4822859674.mp4",
         "answers": [
-            "Based on the sequence of images, it seems the baby starts climbing on the floor after walking to reach for something. In frame 3, the baby is reaching towards an object that looks like a bottle or cup. This suggests the answer is likely E. to drink.",
-            "The correct answer is D. fall over.",
+            "Based on the sequence of images, it seems the baby starts climbing on the floor after walking for a while to reach for something. In frame 4, the baby is looking up at an adult who is holding a bottle, which suggests the baby might be trying to get to the bottle. Therefore, the most likely answer is:\n\nE. to drink.",
+            "The correct answer is C. hit toys.",
             "D.Fall over,"
         ],
         "question_w_options": "Why does the baby start climbing on the floor after walking for a while at the start of the video? Choose your answer from below options: A.air from balloon, B.to climb down the stairs, C.hit toys, D.fall over, E.to drink.",
         "predicted_options": [
             4,
-            3,
+            2,
             3
         ],
         "match_methods": [
@@ -2236,8 +2236,8 @@
             "option full matching",
             "option full matching"
         ],
-        "final_predicted_option": 3,
-        "is_correct": true
+        "final_predicted_option": 4,
+        "is_correct": false
     },
     {
         "quid": "4978714491_2",
@@ -2349,7 +2349,7 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1007/3557498300.mp4",
         "answers": [
-            "Based on the image sequence, the boy in blue appears to be running around.",
+            "Based on the images, the boy in blue appears to be running. So the answer is D. run.",
             "D. run",
             "D.run,"
         ],
@@ -2445,18 +2445,18 @@
         "truth": 2,
         "video_path": "/share_data/NExT-QA/NExTVideo/1002/9213637099.mp4",
         "answers": [
-            "Based on the images, it appears that there are five people involved. The frames show multiple individuals interacting, suggesting a group activity. Therefore, the answer is C. five.",
+            "I can't determine the exact number of people involved from the images.",
             "The correct answer is C. five.",
             "A.six"
         ],
         "question_w_options": "How many people are involved? Choose your answer from below options: A.six, B.two, C.five, D.seven, E.one.",
         "predicted_options": [
-            2,
+            -1,
             2,
             0
         ],
         "match_methods": [
-            "option full matching",
+            "none",
             "option full matching",
             "option full matching"
         ],
@@ -2509,8 +2509,8 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1015/8464056582.mp4",
         "answers": [
-            "Based on the image sequence, the baby appears to crawl towards the dog. So the answer is A. crawl to the dog.",
-            "The correct answer is A. crawl to the dog.",
+            "Based on the image sequence, the baby appears to crawl towards the dog as it walks away. So the answer is A. crawl to the dog.",
+            "A. crawl to the dog",
             "A.crawl to the dog,"
         ],
         "question_w_options": "What does the baby do as the dog walks away at the start? Choose your answer from below options: A.crawl to the dog, B.on the right, C.go towards the man, D.looking left and right, E.look at baby.",
@@ -2543,13 +2543,13 @@
         "answers": [
             "Based on the sequence of images, after reaching the corner of the cloth, the baby turns to his back. So the answer is C. turn to his back.",
             "The correct answer is C. turn to his back.",
-            "D.looks at the other side"
+            "B.touch the cloth"
         ],
         "question_w_options": "What does the baby do after reaching the corner of the cloth? Choose your answer from below options: A.swing it around, B.touch the cloth, C.turn to his back, D.looks at the other side, E.walking.",
         "predicted_options": [
             2,
             2,
-            3
+            1
         ],
         "match_methods": [
             "option full matching",
@@ -2575,18 +2575,18 @@
         "answers": [
             "Based on the image sequence, the lady shows affection to the baby by D. putting the baby on her lap.",
             "The correct answer is D. put baby on her lap.",
-            "A.pat head, C.kiss the baby, E.caress baby head."
+            "E.caress baby head."
         ],
         "question_w_options": "How does the lady show affection to the baby? Choose your answer from below options: A.pat head, B.move it towards the baby, C.kiss the baby, D.put baby on her lap, E.caress baby head.",
         "predicted_options": [
             3,
             3,
-            -1
+            4
         ],
         "match_methods": [
             "option full matching",
             "option full matching",
-            "none"
+            "option full matching"
         ],
         "final_predicted_option": 3,
         "is_correct": false
@@ -2733,7 +2733,7 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1015/8464056582.mp4",
         "answers": [
-            "Based on the sequence of images, after the baby sits down, the dog appears to sniff the baby's head. So the answer is B. sniff the baby's head.",
+            "Based on the image sequence, after the baby sits down, the dog appears to sniff the baby's head. So the answer is B. sniff the baby's head.",
             "The correct answer is B. sniff the baby's head.",
             "B.sniff the babys head"
         ],
@@ -2765,7 +2765,7 @@
         "truth": 4,
         "video_path": "/share_data/NExT-QA/NExTVideo/1025/3711681535.mp4",
         "answers": [
-            "The woman swings her legs while swinging on the handle to move it backwards and forwards. This is a common technique used to gain momentum on a swing or trapeze. So, the correct answer is:\n\nC. move it backwards and forwards.",
+            "The woman swings her legs while swinging on the handle to move it backwards and forwards. So, the correct answer is C.",
             "E. way of swinging",
             "E.way of swinging."
         ],
@@ -2893,13 +2893,13 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1026/7786283208.mp4",
         "answers": [
-            "Based on the sequence of images, the girl in white appears to be kicking up in the air. So, the answer is D. kick up in the air.",
+            "Based on the sequence of images, it appears that the girl in white is moving her legs to \"kick the boy\" (option C).",
             "The correct answer is D. kick up in the air.",
-            "D.kick up in the air."
+            "D.kick up in the air"
         ],
         "question_w_options": "How does the girl in white move her legs in the middle? Choose your answer from below options: A.put the table, B.play with string, C.kick the boy, D.kick up in the air, E.kick away toy.",
         "predicted_options": [
-            3,
+            2,
             3,
             3
         ],
@@ -2925,7 +2925,7 @@
         "truth": 2,
         "video_path": "/share_data/NExT-QA/NExTVideo/1051/8064178441.mp4",
         "answers": [
-            "Based on the sequence of images, after moving the penguin toy nearer, the baby looks at the camera. So the answer is E. look at the camera.",
+            "Based on the sequence of images, after the baby moves the penguin toy nearer, it appears that the baby looks at the camera. So the answer is E. look at the camera.",
             "The correct answer is D. moves it around.",
             "D.moves it around"
         ],
@@ -2989,23 +2989,23 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/0001/2793806282.mp4",
         "answers": [
-            "Based on the image sequence, the lady in blue appears to be helping a dog swim in a pool. When she reaches the stairs, as seen in frames 8 and 9, she is assisting the dog out of the pool. Therefore, the correct answer is not directly listed in the options, but the closest action is D. move hands around, as she is helping the dog.",
-            "The answer is B. sit on stairs.",
-            "A.put head on table, B.sit on stairs, C.goes to get food, D.move hands around, E.jump down stairs."
+            "Based on the image sequence, the lady in blue appears to be helping a dog out of the pool and onto the stairs. The most fitting option is:\n\nD. move hands around",
+            "The lady in blue did not put her head on the table, sit on the stairs, go to get food, move her hands around, or jump down the stairs. She either walked up the stairs, stopped at the stairs, or turned around to look at the dog when she reached the stairs.",
+            "A.put head on table,"
         ],
         "question_w_options": "What did the lady in blue do when she reached the stairs? Choose your answer from below options: A.put head on table, B.sit on stairs, C.goes to get food, D.move hands around, E.jump down stairs.",
         "predicted_options": [
             3,
-            1,
-            1
+            -1,
+            0
         ],
         "match_methods": [
             "option full matching",
-            "option full matching",
+            "none",
             "option full matching"
         ],
-        "final_predicted_option": 1,
-        "is_correct": true
+        "final_predicted_option": 3,
+        "is_correct": false
     },
     {
         "quid": "3524939594_2",
@@ -3021,7 +3021,7 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/1013/3524939594.mp4",
         "answers": [
-            "Based on the sequence of images, the two men appear to be experiencing a quick movement backwards, which is often associated with excitement or surprise. The most fitting option for their likely feelings is:\n\nD. thrilled",
+            "Based on the images, the two men appear to be experiencing a sense of excitement and enjoyment as they are moved backwards quickly. The most fitting answer would be:\n\nD. thrilled",
             "D. thrilled",
             "D.thrilled,"
         ],
@@ -3055,20 +3055,20 @@
         "answers": [
             "Based on the sequence of images, after the boy touches his spectacles, he appears to start running with the trolley. The images show a progression from touching his spectacles to moving away from the initial position, suggesting option D.",
             "The correct answer is E. play with toy.",
-            "E.play with toy."
+            "C.touch his hair"
         ],
         "question_w_options": "What did the boy do after touching his spectacles? Choose your answer from below options: A.look into camera, B.touch the cat, C.touch his hair, D.starts running with the trolley, E.play with toy.",
         "predicted_options": [
             3,
             4,
-            4
+            2
         ],
         "match_methods": [
             "option full matching",
             "option full matching",
             "option full matching"
         ],
-        "final_predicted_option": 4,
+        "final_predicted_option": 3,
         "is_correct": false
     },
     {
@@ -3085,13 +3085,13 @@
         "truth": 1,
         "video_path": "/share_data/NExT-QA/NExTVideo/1101/4273039295.mp4",
         "answers": [
-            "Based on the image sequence, the woman in the green beanie appears to follow the child after he runs away. So, the answer is A. follow girl.",
+            "Based on the image sequence, the woman in the green beanie appears to run and catch the child after he runs away. So the answer is B. run and catch him.",
             "The correct answer is A. follow girl.",
             "B.run and catch him"
         ],
         "question_w_options": "What does the woman in green beanie do after the child runs away for a while? Choose your answer from below options: A.follow girl, B.run and catch him, C.walk around, D.put hand on table, E.push the board away.",
         "predicted_options": [
-            0,
+            1,
             0,
             1
         ],
@@ -3100,8 +3100,8 @@
             "option full matching",
             "option full matching"
         ],
-        "final_predicted_option": 0,
-        "is_correct": false
+        "final_predicted_option": 1,
+        "is_correct": true
     },
     {
         "quid": "2793260225_4",
@@ -3149,14 +3149,14 @@
         "truth": 3,
         "video_path": "/share_data/NExT-QA/NExTVideo/0024/5328004991.mp4",
         "answers": [
-            "Based on the sequence of images, the child appears to react by wanting the stirrer back after the woman takes over. This is indicated by the child's actions in frames 4 and 5, where they reach towards the stirrer. Therefore, the answer is D. wants it back.",
-            "The correct answer is A. turns around.",
+            "Based on the image sequence, the child appears to react by wanting the stirrer back after the woman takes over. This is indicated by the child's body language and actions in frames 4 to 7.\n\nSo, the answer is: D. wants it back.",
+            "The correct answer is: D. wants it back",
             "D.wants it back"
         ],
         "question_w_options": "How does the child react after the woman takes over the stirrer? Choose your answer from below options: A.turns around, B.push food back in the mouth, C.moves forward, D.wants it back, E.stand beside the car.",
         "predicted_options": [
             3,
-            0,
+            3,
             3
         ],
         "match_methods": [
@@ -3181,15 +3181,15 @@
         "truth": 0,
         "video_path": "/share_data/NExT-QA/NExTVideo/1014/6160414832.mp4",
         "answers": [
-            "The green mat on the table is being used for playing a board game. The images show game pieces, cards, and money, which are typical components of a board game setup.",
+            "The green mat on the table is for option A: playing board game. The images show a board game setup with cards, money, and game pieces.",
             "A. playing board game",
-            "A.playing board game"
+            "A.playing board game, B.cooking, C.cutting paper, D.cover food, E.eating."
         ],
         "question_w_options": "Why is there a green mat on table? Choose your answer from below options: A.playing board game, B.cooking, C.cutting paper, D.cover food, E.eating.",
         "predicted_options": [
             0,
             0,
-            0
+            3
         ],
         "match_methods": [
             "option full matching",
