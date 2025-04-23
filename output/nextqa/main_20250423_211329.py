@@ -78,7 +78,7 @@ def get_tools(conf):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/nextqa.yaml",type=str)                           
+    parser.add_argument('--config', default="config/videomme.yaml",type=str)                           
     opt = parser.parse_args()
     conf = OmegaConf.load(opt.config)
 
@@ -126,7 +126,6 @@ if __name__ == "__main__":
         print(f"\nProcessing: {data['quid']}")
 
         video_path = data["video_path"]
-        # print(get_video_info(video_path))
         question = data["question"]
         options = data["options"]
         question_w_options = data["question_w_options"]
@@ -140,11 +139,9 @@ if __name__ == "__main__":
 
         video_info = get_video_info(video_path)
         init_video_stride = int(video_info["fps"] * conf.init_interval_sec)
-        duration = video_info["duration"]
 
         print(question_w_options)
         
-        visible_frames_all = 0
         for try_count in range(try_num):
 
             # visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
@@ -229,13 +226,7 @@ if __name__ == "__main__":
                 result["answers"].extend(tool_chain_output)
             else:
                 raise ValueError("tool_chain_output error")
-            
-            visible_frames_all += len(visible_frames.frames)
 
-        visible_frames_num = visible_frames_all / try_num
-        result["video_info"] = video_info
-        result["visible_frames_num"] = visible_frames_num
-        result["visible_frames_fps"] =  visible_frames_num / duration
         all_results.append(result)
 
     output_file = os.path.join(conf.output_path, f"results_{timestamp}.json")

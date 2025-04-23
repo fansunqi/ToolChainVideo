@@ -232,10 +232,7 @@ if __name__ == "__main__":
             
             visible_frames_all += len(visible_frames.frames)
 
-        visible_frames_num = visible_frames_all / try_num
-        result["video_info"] = video_info
-        result["visible_frames_num"] = visible_frames_num
-        result["visible_frames_fps"] =  visible_frames_num / duration
+        result["fps"] = (visible_frames_all / try_num) / duration
         all_results.append(result)
 
     output_file = os.path.join(conf.output_path, f"results_{timestamp}.json")

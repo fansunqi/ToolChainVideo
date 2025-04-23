@@ -51,21 +51,16 @@ tool:
   image_captioner:
     device: "cuda:1"
 
-
-eval:
-  eval_cache_file: cache/gpt35_eval_cache.pkl
-  use_cache: True
-  
 mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"
 use_cache: False
 
-dataset: "nextqa"
-video_path_base: "/share_data/NExT-QA/NExTVideo"
-anno_path: "/share_data/NExT-QA/dataset/nextqa/val.csv"
-num_examples_to_run: 100
+dataset: "videomme"
+video_path_base: "/hf_home/hub/datasets--lmms-lab--Video-MME/snapshots/ead1408f75b618502df9a1d8e0950166bf0a2a0b/data/"
+anno_path: "/hf_home/hub/datasets--lmms-lab--Video-MME/snapshots/ead1408f75b618502df9a1d8e0950166bf0a2a0b/videomme/test-00000-of-00001.parquet"
+num_examples_to_run: 10
 start_num: 0
 
-output_path: "output/nextqa/"
+output_path: "output/videomme/"
 
 recursion_limit: 20
 
@@ -74,7 +69,9 @@ try_num: 1
 init_interval_sec: 10
 
 try_except_mode: False
-to_txt: True
+to_txt: False
 
 
-
+eval:
+  eval_cache_file: cache/gpt35_eval_cache.pkl
+  use_cache: True

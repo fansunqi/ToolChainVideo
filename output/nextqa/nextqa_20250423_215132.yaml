@@ -51,11 +51,6 @@ tool:
   image_captioner:
     device: "cuda:1"
 
-
-eval:
-  eval_cache_file: cache/gpt35_eval_cache.pkl
-  use_cache: True
-  
 mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"
 use_cache: False
 
@@ -77,4 +72,6 @@ try_except_mode: False
 to_txt: True
 
 
-
+eval:
+  eval_cache_file: cache/gpt35_eval_cache.pkl
+  use_cache: True

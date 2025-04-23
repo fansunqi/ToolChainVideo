@@ -31,7 +31,7 @@
         ```python
         git clone git@github.com:WHB139426/Grounded-Video-LLM.git
         ```
-   - **Build [LLaVA](https://github.com/haotian-liu/LLaVA) for Image QA**
+   - **Build [LLaVA](https://github.com/haotian-liu/LLaVA) for image QA**
 
      ```python
      git clone git@github.com:fansunqi/LLaVA.git

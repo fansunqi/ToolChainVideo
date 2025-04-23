@@ -31,7 +31,13 @@ def answer_full_matching(answer, options):
 def LLM_rephrase(answer, options, question, conf, eval_llm, llm_cache):
     
     # 首先构造选项的提示
-    option_labels = ['A', 'B', 'C', 'D', 'E']
+    if len(options) == 5:
+        option_labels = ['A', 'B', 'C', 'D', 'E']
+    elif len(options) == 4:
+        option_labels = ['A', 'B', 'C', 'D']
+    else:
+        raise ValueError("options in the data error")
+    
     options_with_labels = "\n".join([f"{label}: {option}" for label, option in zip(option_labels, options)])
     
     # 创建 prompt 给 LLM
@@ -85,10 +91,12 @@ def main(input_file, output_file, conf, eval_llm, llm_cache=None):
     have_ans_items = 0
     correct_items = 0
     error_items = 0
+    total_visible_frames_num = 0
+    total_visible_frames_fps = 0
 
     for item in tqdm(data):
         truth = item['truth']
-        options = [item['optionA'], item['optionB'], item['optionC'], item['optionD'], item['optionE']]
+        options = item['options']
         question = item['question']
         
         if not isinstance(item['answers'], list):
@@ -134,8 +142,13 @@ def main(input_file, output_file, conf, eval_llm, llm_cache=None):
         item['is_correct'] = is_correct
         item['match_methods'] = match_methods
 
+        total_visible_frames_num += item["visible_frames_num"]
+        total_visible_frames_fps += item["visible_frames_fps"]
+
     acc_include_no_ans = correct_items / total_items
     acc_exclude_no_ans = correct_items / have_ans_items
+    avg_visible_frames_num = total_visible_frames_num / total_items
+    avg_visible_frames_fps = total_visible_frames_fps / total_items
 
     # 输出结果
     print(f"Total items: {total_items}")
@@ -144,6 +157,8 @@ def main(input_file, output_file, conf, eval_llm, llm_cache=None):
     print(f"Correct items: {correct_items}")
     print(f"Acc include no ans: {acc_include_no_ans:.2%}")
     print(f"Acc exclude no ans: {acc_exclude_no_ans:.2%}")
+    print(f"avg_visible_frames_num: {avg_visible_frames_num:.2f}")
+    print(f"avg_visible_frames_fps: {avg_visible_frames_fps:.2f}")
 
     # 保存评估结果到文件
     with open(output_file, 'w') as f:
