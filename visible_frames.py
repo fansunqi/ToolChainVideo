@@ -51,14 +51,16 @@ class VisibleFrames:
     """管理一个视频中的可见帧"""
     def __init__(self, 
                 video_path, 
-                init_video_stride=None,
+                init_sec_interval=None,
                 min_interval=None,
                 min_sec_interval=1):
         self.frames: List[Frame] = [] 
         self.video_path = video_path                
         self.video_info = get_video_info(video_path)
-        if init_video_stride != None:
-            self.add_frames(video_stride=init_video_stride)
+        if init_sec_interval != None:
+            fps = self.video_info["fps"]
+            init_interval = int(init_sec_interval * fps)
+            self.add_frames(video_stride=init_interval)
 
         if min_interval:
             self.min_interval = min_interval
@@ -81,6 +83,8 @@ class VisibleFrames:
                 # 根据stride抽帧
                 frame_indices = list(range(0, total_frames, video_stride))
 
+        print(f"\nVisible Frames: add {len(list(frame_indices))} frames to visible frames: {str(list(frame_indices))}")
+        
         # 每次都是重新读取视频文件
         cap = cv2.VideoCapture(self.video_path)
 

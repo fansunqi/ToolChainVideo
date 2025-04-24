@@ -142,8 +142,10 @@ def main(input_file, output_file, conf, eval_llm, llm_cache=None):
         item['is_correct'] = is_correct
         item['match_methods'] = match_methods
 
-        total_visible_frames_num += item["visible_frames_num"]
-        total_visible_frames_fps += item["visible_frames_fps"]
+        if "visible_frames_num" in item:
+            total_visible_frames_num += item["visible_frames_num"]
+        if "visible_frames_fps" in item:
+            total_visible_frames_fps += item["visible_frames_fps"]
 
     acc_include_no_ans = correct_items / total_items
     acc_exclude_no_ans = correct_items / have_ans_items
@@ -160,23 +162,29 @@ def main(input_file, output_file, conf, eval_llm, llm_cache=None):
     print(f"avg_visible_frames_num: {avg_visible_frames_num:.2f}")
     print(f"avg_visible_frames_fps: {avg_visible_frames_fps:.2f}")
 
+    # 检查 output_file 所在的文件夹是否存在，如果不存在则创建
+    output_dir = os.path.dirname(output_file)
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
     # 保存评估结果到文件
     with open(output_file, 'w') as f:
         json.dump(data, f, indent=4)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Evaluate NextQA answers")
+    parser = argparse.ArgumentParser(description="Evaluate answers")
     parser.add_argument('--input_file', type=str, help="Path to the input JSON file")
     parser.add_argument('--output_file', type=str, help="Path to the output JSON file")
-    parser.add_argument('--config', default="config/nextqa.yaml",type=str)
+    parser.add_argument('--config', default="config/videomme.yaml",type=str)
     args = parser.parse_args()
     conf = OmegaConf.load(args.config)
 
+    dataset_name = conf.dataset
     if not args.input_file:
-        args.input_file = get_latest_file('output/nextqa')
+        args.input_file = get_latest_file(f'output/{dataset_name}')
     
     if not args.output_file:
-        args.output_file = args.input_file.replace('output/nextqa', 'eval/nextqa')
+        args.output_file = args.input_file.replace(f'output/{dataset_name}', f'eval/{dataset_name}')
 
     # LLM for rephrase
     eval_llm = ChatOpenAI(model_string=conf.openai.EVAL_MODEL_NAME, is_multimodal=False)

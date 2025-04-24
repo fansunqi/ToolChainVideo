@@ -7,7 +7,7 @@ openai:
 reasoning_mode: "st"    # langgraph
 
 visible_frames:
-  init_video_stride: null
+  init_sec_interval: null
   min_interval: null
   min_sec_interval: 1
 
@@ -33,7 +33,7 @@ tool:
     save_path: null
     mode:  "by_visible_frames"  # "by_video_path"
   temporal_grounding:
-    min_sec_interval: 1
+    min_sec_interval: 2
   temporal_qa:
     mode: "by_visible_frames"  # "by_video_path"
   patch_zoomer:

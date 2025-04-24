@@ -7,12 +7,13 @@ openai:
 reasoning_mode: "st"    # langgraph
 
 visible_frames:
-  init_video_stride: null
+  init_sec_interval: 1
   min_interval: null
   min_sec_interval: 1
 
 tool:
   tool_list:
+    # - "VideoQA"
     - "TemporalGrounding"
     - "TemporalQA"
     - "PatchZoomer"
@@ -35,7 +36,7 @@ tool:
   temporal_grounding:
     min_sec_interval: 1
   temporal_qa:
-    mode: "by_visible_frames"  # "by_video_path"
+    mode:  "by_visible_frames" # "by_video_path" 
   patch_zoomer:
     vlm_gpt_model_name: "gpt-4o" 
     use_cache: True
@@ -55,10 +56,11 @@ mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"
 use_cache: False
 
 dataset: "videomme"
-video_path_base: "/hf_home/hub/datasets--lmms-lab--Video-MME/snapshots/ead1408f75b618502df9a1d8e0950166bf0a2a0b/data/"
-anno_path: "/hf_home/hub/datasets--lmms-lab--Video-MME/snapshots/ead1408f75b618502df9a1d8e0950166bf0a2a0b/videomme/test-00000-of-00001.parquet"
-num_examples_to_run: 10
-start_num: 0
+video_path_base: "/mnt/Shared_05_disk/fsq/VideoMME/data/"
+anno_path: "/mnt/Shared_05_disk/fsq/VideoMME/test-00000-of-00001.parquet"
+num_examples_to_run: 100
+start_num: 0  # short
+
 
 output_path: "output/videomme/"
 
@@ -69,7 +71,7 @@ try_num: 1
 init_interval_sec: 10
 
 try_except_mode: False
-to_txt: False
+to_txt: True
 
 
 eval:

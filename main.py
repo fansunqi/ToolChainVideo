@@ -46,6 +46,7 @@ from tools.image_grid_qa import ImageGridQA
 from tools.summarizer import Summarizer
 from tools.patch_zoomer import PatchZoomer
 from tools.temporal_qa import TemporalQA
+# from tools.video_qa import VideoQA
 
 from visible_frames import get_video_info, VisibleFrames
 
@@ -59,6 +60,7 @@ timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
 
 def get_tools(conf):
+    # TODO 更好地打印工具
     tool_list = conf.tool.tool_list
     tool_instances = []
     for tool_name in tool_list:
@@ -78,7 +80,7 @@ def get_tools(conf):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/nextqa.yaml",type=str)                           
+    parser.add_argument('--config', default="config/videomme.yaml",type=str)                           
     opt = parser.parse_args()
     conf = OmegaConf.load(opt.config)
 
@@ -147,10 +149,9 @@ if __name__ == "__main__":
         visible_frames_all = 0
         for try_count in range(try_num):
 
-            # visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
             visible_frames = VisibleFrames(
                 video_path=video_path, 
-                init_video_stride=conf.visible_frames.init_video_stride,
+                init_sec_interval=conf.visible_frames.init_sec_interval,
                 min_interval=conf.visible_frames.min_interval,
                 min_sec_interval=conf.visible_frames.min_sec_interval
             )
@@ -223,6 +224,8 @@ if __name__ == "__main__":
                 else:
                     raise KeyError("conf.reasoning_mode error")
 
+            pdb.set_trace()
+            
             if isinstance(tool_chain_output, str):
                 result["answers"].append(tool_chain_output)
             elif isinstance(tool_chain_output, list):

@@ -56,6 +56,9 @@ def backup_file(opt, conf, timestamp):
     current_script_path = os.path.abspath(__file__) 
     current_script_dir = os.path.dirname(current_script_path)
     
+    if not os.path.exists(conf.output_path):
+        os.makedirs(conf.output_path)
+    
     main_file_path = os.path.join(current_script_dir, "main.py")
     shutil.copy(main_file_path, os.path.join(conf.output_path, f"main_{timestamp}.py"))
 

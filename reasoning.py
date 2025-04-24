@@ -21,6 +21,7 @@ from tools.image_grid_qa import ImageGridQA
 from tools.summarizer import Summarizer
 from tools.patch_zoomer import PatchZoomer
 from tools.temporal_qa import TemporalQA
+# from tools.video_qa import VideoQA
 
 from eval import get_predicted_option_with_rephrase
 
@@ -55,8 +56,22 @@ def spatiotemporal_reasoning(
             temporal_qa = tool
         elif isinstance(tool, FrameSelector):
             frame_selector = tool
-
-
+    
+    
+    # 1. temporal_qa
+    # temporal_grounding.inference(input=question)
+    # output = temporal_qa.inference(input=question_w_options)
+    
+    image_qa.inference(input=question)
+    output = summarizer.inference(input=question_w_options)
+    
+    
+    
+    
+    
+    
+    
+    '''
     # 1. T: temporal grounding
     temporal_grounding.inference(input=question)
 
@@ -105,7 +120,7 @@ def spatiotemporal_reasoning(
 
 
     output = [image_grid_qa_output, summarizer_output, temporal_qa_output]
-    
+    '''
     print(f"\nToolChainOutput: {output}") 
     return output
 

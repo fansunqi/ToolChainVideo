@@ -188,6 +188,7 @@ class TemporalGrounding:
         minimal_interval = int(self.min_sec_interval * self.visible_frames.video_info["fps"])
         frame_indices = range(start_frame_idx, end_frame_idx + 1, minimal_interval)
 
+        print(f"\nTemporal Grounding: add {len(list(frame_indices))} frames to visible frames: {str(list(frame_indices))}")
         self.visible_frames.add_frames(frame_indices=frame_indices)
 
         return result
