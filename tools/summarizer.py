@@ -40,10 +40,11 @@ class Summarizer:
     )
     def inference(self, input):
 
-        all_frames_descriptions = self.visible_frames.get_frame_descriptions()
+        # all_frames_descriptions = self.visible_frames.get_frame_descriptions()
+        all_qa_descriptions = self.visible_frames.get_qa_descriptions()
 
         input_prompt = QUERY_PREFIX_INFO.format(
-            frame_information = all_frames_descriptions,
+            frame_information = all_qa_descriptions,
             question = input,
         )
 

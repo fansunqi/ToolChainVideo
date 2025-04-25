@@ -9,11 +9,12 @@ from tools.yolo_tracker import YOLOTracker
 from tools.temporal_grounding import TemporalGrounding
 from tools.image_grid_qa import ImageGridQA
 from tools.temporal_qa import TemporalQA
+from tools.summarizer import Summarizer
 
 import pdb
 
 parser = argparse.ArgumentParser(description="demo")               
-parser.add_argument('--config', default="config/nextqa_st.yaml",type=str)                           
+parser.add_argument('--config', default="config/nextqa.yaml",type=str)                           
 opt = parser.parse_args()
 conf = OmegaConf.load(opt.config)
 
@@ -21,12 +22,10 @@ conf = OmegaConf.load(opt.config)
 
 video_path = "/share_data/NExT-QA/NExTVideo/1164/3238737531.mp4"
 question = "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five."
-init_interval_sec = 10
-video_info = get_video_info(video_path)
-init_video_stride = int(video_info["fps"] * init_interval_sec)
+init_sec_interval = 10
 
 # 创建可见帧管理器
-visible_frames = VisibleFrames(video_path=video_path, init_video_stride=init_video_stride)
+visible_frames = VisibleFrames(video_path=video_path, init_sec_interval=init_sec_interval)
 
 '''
 # 再打印信息
@@ -83,16 +82,24 @@ yolo_tracker.set_frames(visible_frames)
 results = yolo_tracker.inference(input="children")
 '''
 
-'''
+
 # image_qa
 image_qa = ImageQA(conf=conf)
 image_qa.set_frames(visible_frames)
 # question = "How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five."
 question = "How many children are in the video?"
 image_qa.inference(input=question)
+qa_desp = visible_frames.get_qa_descriptions()
+print(qa_desp)
+
+# summarizer
+summarizer = Summarizer(conf=conf)
+summarizer.set_frames(visible_frames=visible_frames)
+output = summarizer.inference(input=question)
+print(output)
+
+
 '''
-
-
 # image_captioner
 image_captioner = ImageCaptioner(conf=conf)
 image_captioner.set_frames(visible_frames)
@@ -111,6 +118,7 @@ frame_selector.inference(input=question)
 # 再打印信息
 print("\n可见帧描述:")
 print(visible_frames.get_frame_descriptions())
+'''
 
 
 

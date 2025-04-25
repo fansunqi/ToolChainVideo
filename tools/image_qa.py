@@ -26,64 +26,44 @@ def prompts(name, description):
     return decorator
 
 
-
-def clean_question(question):
-    # 查找关键字并移除之后的内容
-    keyword = "Choose your answer from below options:"
-    if keyword in question:
-        question = question.split(keyword)[0].strip()
-    return question
-
-
 def get_pil_image_list(visible_frames, target):
     pil_image_list = []
-    frame_idx_list = []  # 相对的 frame_idx
+    relative_frame_idx_list = []  # 相对的 frame_idx
     frame_count = -1
     for visible_frame in visible_frames.frames:
         frame_count += 1
-        #  如果目标已经出现了，就跳过 
-        if target in visible_frame.description:
+        
+        # 如果目标是 visible_frames.qa_info 这个 dict 中的一个 key，就跳过
+        if target in visible_frame.qa_info:
             continue
 
         rgb_image = cv2.cvtColor(visible_frame.image, cv2.COLOR_BGR2RGB)
         raw_image = Image.fromarray(rgb_image)
         pil_image_list.append(raw_image)
-        frame_idx_list.append(frame_count)
-    return pil_image_list, frame_idx_list
+        relative_frame_idx_list.append(frame_count)
+    return pil_image_list, relative_frame_idx_list
      
         
 class ImageQA:
     def __init__(
         self,
         conf = None, 
-        device = "cuda:0"
     ):
         self.conf = conf
-        self.device = device
-        self.torch_dtype = torch.float16 if "cuda" in device else torch.float32
+        self.device = conf.tool.image_qa.device
+        self.torch_dtype = torch.float16 if "cuda" in self.device else torch.float32
         
-        self.vlm_type = conf.tool.image_qa.vlm_type
+        self.model_path = conf.tool.image_qa.model_path
+        print(f"Loading {self.model_path} for Image QA...\n")
+        self.llava_tokenizer, self.llava_model, self.llava_image_processor, context_len = load_pretrained_model(
+            model_path=self.model_path,
+            model_base=None,
+            model_name=get_model_name_from_path(self.model_path)
+        )
         
-        if self.vlm_type == "BLIP":
-            print("Loading BLIP for Image QA...\n")
-            self.blip_processor = BlipProcessor.from_pretrained("Salesforce/blip-vqa-base")
-            self.blip_model = BlipForQuestionAnswering.from_pretrained("Salesforce/blip-vqa-base").to(self.device)
-        elif self.vlm_type == "LLaVA":
-            self.model_path = "liuhaotian/llava-v1.5-7b"
-            print(f"Loading {self.model_path} for Image QA...\n")
-            self.llava_tokenizer, self.llava_model, self.llava_image_processor, context_len = load_pretrained_model(
-                model_path=self.model_path,
-                model_base=None,
-                model_name=get_model_name_from_path(self.model_path)
-            )
-        else:
-            raise NotImplementedError(f"Unknown VLM type: {self.vlm_type}")
-
         self.visible_frames = None
         self.video_path = None
         
-        # LLaVA 则使用 batch, BLIP 不使用
-        self.batch = (self.vlm_type == "LLaVA")
         self.batch_size = conf.tool.image_qa.batch_size
 
     def set_frames(self, visible_frames):
@@ -100,33 +80,22 @@ class ImageQA:
         rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         raw_image = Image.fromarray(rgb_image)
         
-        if self.vlm_type == "BLIP":
-            inputs = self.blip_processor(raw_image, question, return_tensors="pt").to(
-                self.device, self.torch_dtype
-            )
-            out = self.blip_model.generate(**inputs)
-            answer = self.blip_processor.decode(out[0], skip_special_tokens=True)
-        
-        elif self.vlm_type == "LLaVA":
-            args = type('Args', (), {
-                "model_path": self.model_path,
-                "tokenizer": self.llava_tokenizer,
-                "model": self.llava_model,
-                "image_processor": self.llava_image_processor,
-                "query": question,
-                "conv_mode": None,
-                "input_pil_image": raw_image,
-                "image_file": None,  # 传递处理后的图像
-                "sep": ",",
-                "temperature": 0,
-                "top_p": None,
-                "num_beams": 1,
-                "max_new_tokens": 512
-            })()
-            answer = eval_model(args)
-        else:
-            raise NotImplementedError(f"Unknown VLM type: {self.vlm_type}")
-            
+        args = type('Args', (), {
+            "model_path": self.model_path,
+            "tokenizer": self.llava_tokenizer,
+            "model": self.llava_model,
+            "image_processor": self.llava_image_processor,
+            "query": question,
+            "conv_mode": None,
+            "input_pil_image": raw_image,
+            "image_file": None,  # 传递处理后的图像
+            "sep": ",",
+            "temperature": 0,
+            "top_p": None,
+            "num_beams": 1,
+            "max_new_tokens": 512
+        })()
+        answer = eval_model(args)      
         return answer
 
     @prompts(
@@ -135,69 +104,46 @@ class ImageQA:
         "The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'."
     )
     def inference(self, input):
+        # 问过同一个问题的帧就不加入
+        pil_image_list, relative_frame_idx_list = get_pil_image_list(self.visible_frames, input)
+        prompt_list = [input] * len(pil_image_list)
         
-        # 如果输入问题中包含选项，则去掉选项
-        input = clean_question(input)
-        
-        result = "Here are the question answering results of sampled frames:\n"
-        
-        if self.batch == True:
-            print("\nImage QA: batch inferencing...")
+        print(f"\nImage QA: infer {str(len(pil_image_list))} frames...")
 
-            # 问过同一个问题的帧就不加入
-            target = f"Question: {input}"
-            pil_image_list, frame_idx_list = get_pil_image_list(self.visible_frames, target)
-            prompt_list = [input] * len(pil_image_list)
-
-            outputs = []
-            for i in range(0, len(prompt_list), self.batch_size):
-                batch_prompts = prompt_list[i:i+self.batch_size]
-                batch_images = pil_image_list[i:i+self.batch_size]
-                
-                args = type('Args', (), {
-                    "model_path": self.model_path, 
-                    "tokenizer": self.llava_tokenizer,
-                    "model": self.llava_model,
-                    "image_processor": self.llava_image_processor,
-                    "query": batch_prompts,
-                    "conv_mode": None,
-                    "input_pil_image": batch_images,
-                    "image_file": None,
-                    "sep": ",",
-                    "temperature": 0,
-                    "top_p": None,
-                    "num_beams": 1,
-                    "max_new_tokens": 512
-                })()
-                
-                batch_outputs = eval_model(args)
-                outputs.extend(batch_outputs)
+        outputs = []
+        for i in range(0, len(prompt_list), self.batch_size):
+            batch_prompts = prompt_list[i:i+self.batch_size]
+            batch_images = pil_image_list[i:i+self.batch_size]
             
-            # assert len(outputs) == len(self.visible_frames.frames)
+            args = type('Args', (), {
+                "model_path": self.model_path, 
+                "tokenizer": self.llava_tokenizer,
+                "model": self.llava_model,
+                "image_processor": self.llava_image_processor,
+                "query": batch_prompts,
+                "conv_mode": None,
+                "input_pil_image": batch_images,
+                "image_file": None,
+                "sep": ",",
+                "temperature": 0,
+                "top_p": None,
+                "num_beams": 1,
+                "max_new_tokens": 512
+            })()
             
-            for frame_idx, answer in zip(frame_idx_list, outputs):
-                add_info = f"Question: {input}\tAnswer: {answer}"
-                
-                frame = self.visible_frames.frames[frame_idx]
-                
-                if add_info not in frame.description:
-                    frame.description += (add_info + "\n")
-                    
-                print(f"Image QA... Frame {frame.index}: {add_info}")
-                result += f"\nFrame {frame.index}: {add_info}"
-                    
-        else:
-            for frame in self.visible_frames.frames:
-                
-                answer = self.image_qa(frame.image, input)
-                add_info = f"Question: {input}\tAnswer: {answer}"
-                
-                if add_info not in frame.description:
-                    frame.description += (add_info + "\n")
-                    
-                print(f"Image QA... Frame {frame.index}: {add_info}")
-                result += f"\nFrame {frame.index}: {add_info}"
+            batch_outputs = eval_model(args)
+            outputs.extend(batch_outputs)      
+        
+        result = "Here are the image question answering results of sampled frames:\n"
+        result += f"Question: {input}\n"
+        
+        for relative_frame_idx, answer in zip(relative_frame_idx_list, outputs):
+            
+            frame = self.visible_frames.frames[relative_frame_idx]                 
+            frame.qa_info[input] = answer
+            result += f"Frame {frame.index} Answer: {answer}\n"
 
+        print(result) 
         return result       
 
 

@@ -1,0 +1,84 @@
+Creating LLM cache: cache/gpt35_cache_new_tool_8.pkl...
+
+
+Initializing Patch Zoomer Tool with model: gpt-4o, sys_prompt: None
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+
+Initializing Image-Grid-QA Tool with model: gpt-4o
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+Loading liuhaotian/llava-v1.5-7b for Image QA...
+
+
+Initializing Summarizer Tool with model: gpt-3.5-turbo
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-3.5-turbo
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o-mini
+tool_instances: [<tools.temporal_grounding.TemporalGrounding object at 0x7f982dc68c40>, <tools.temporal_qa.TemporalQA object at 0x7f982e34b7c0>, <tools.patch_zoomer.PatchZoomer object at 0x7f982dc217c0>, <tools.image_grid_qa.ImageGridQA object at 0x7f982dc217f0>, <tools.image_qa.ImageQA object at 0x7f982dc21880>, <tools.summarizer.Summarizer object at 0x7f982dbc87f0>, <tools.frame_selector.FrameSelector object at 0x7f99d6fe2f40>]
+tools: [Tool(name='temporal-grounding-tool', description="Useful when you want to know which time segment of the video a certain event or content appears inThe input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method TemporalGrounding.inference of <tools.temporal_grounding.TemporalGrounding object at 0x7f982dc68c40>>), Tool(name='temporal-qa-tool', description='placeholder', func=<bound method TemporalQA.inference of <tools.temporal_qa.TemporalQA object at 0x7f982e34b7c0>>), Tool(name='relevant-patch-zooming-tool', description='placeholder', func=<bound method PatchZoomer.inference of <tools.patch_zoomer.PatchZoomer object at 0x7f982dc217c0>>), Tool(name='image-grid-qa-tool', description="Useful when you want to know the whole event or action in the video. This tool arranges multiple images into an image grid, allowing the MLLM to analyze the events or actions taking place in the video.The input to this tool must be a question, such as 'How many children are in the video?' ", func=<bound method ImageGridQA.inference of <tools.image_grid_qa.ImageGridQA object at 0x7f982dc217f0>>), Tool(name='image-question-answering-tool', description="Useful when you need to ask something about the frames in the video.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method ImageQA.inference of <tools.image_qa.ImageQA object at 0x7f982dc21880>>), Tool(name='summarization-tool', description="Useful when you want to summarize the infomation of all visible frames and find the answer.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method Summarizer.inference of <tools.summarizer.Summarizer object at 0x7f982dbc87f0>>), Tool(name='frame-extraction-tool', description="Useful when you find that the currently sampled frames do not provide enough information and more frames need to be extracted from the video to answer the question.The input to this tool must be a question about the video that remains unresolved. For example, 'How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.'", func=<bound method FrameSelector.inference of <tools.frame_selector.FrameSelector object at 0x7f99d6fe2f40>>)]
+Start loading temporal model...
+
+loading vision_tower
+loading video_encoder
+loading multi_modal_projector
+loading video_projector
+loading language_model
+Frozen ViT
+Frozen video_encoder
+LORA llm
+Frozen Part LLM
+Finish loading temporal model.
+
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-3.5-turbo
+
+Building nextqa dataset...
+
+Processing: 6201488511_5
+Why did the lady put her hands over her eyes in the middle of the video? Choose your answer from below options: A.posing in the camera, B.adjust her hair, C.protection from sun, D.to wipe her eyes, E.cue woman to talk.
+
+Temporal Grounding: add 5 frames to visible frames: [0, 29, 58, 87, 116]
+
+Visible Frames: add 5 frames to visible frames: [0, 29, 58, 87, 116]
+Patch Zoomer: zoom in patch ['E']
+Patch Zoomer: zoom in patch ['C', 'E']
+Patch Zoomer: zoom in patch ['E']
+Patch Zoomer: zoom in patch ['C', 'E']
+Patch Zoomer: zoom in patch ['C']
+
+Image QA: infer 5 frames...
+Here are the image question answering results of sampled frames:
+Question: Why did the lady put her hands over her eyes in the middle of the video
+Frame 0 Answer: The lady in the image is putting her hands over her eyes, which could be interpreted as a playful or humorous gesture. It is possible that she is trying to block out the sunlight or simply making a funny face for the camera. The context of the video might be a casual, lighthearted moment, and her actions could be a way to express her playfulness or to entertain the viewer.
+Frame 29 Answer: The lady in the image is covering her eyes with her hands, which could be interpreted as a playful or humorous gesture. It is possible that she is posing for a funny or candid moment, or she might be reacting to something unexpected or amusing in the scene. The context of the video and the presence of the man standing next to her could provide more information about the situation that led to this action.
+Frame 58 Answer: The lady putting her hands over her eyes in the middle of the video could be due to various reasons. She might be feeling emotional or expressing surprise, or she could be shielding her eyes from the sun. It is also possible that she is playfully reacting to something happening in the scene or simply trying to create a humorous or dramatic moment. The context of the video and the surrounding environment would provide more insight into her actions.
+Frame 87 Answer: The lady putting her hands over her eyes in the middle of the video could be due to various reasons. She might be feeling shy or playful, trying to hide her face from the camera, or simply reacting to something happening in the scene. It is also possible that she is posing for a humorous or candid moment, adding a touch of fun to the video. The context of the video and the relationship between the two individuals could provide more insight into her actions.
+Frame 116 Answer: The lady in the image is covering her eyes with her hands, which could be interpreted as a playful or humorous gesture. It is possible that she is posing for a funny or candid moment, or she might be reacting to something unexpected or amusing in the scene. The context of the video and the presence of the man standing next to her could provide more information about the situation that led to this action.
+
+
+Summarizer Input Prompt:  Regarding a given video, based on the frame information to answer the following question as best you can.
+
+Frame Information: 
+Here are the image question answering results of sampled frames:
+Question: Why did the lady put her hands over her eyes in the middle of the video
+Frame 0 Answer: The lady in the image is putting her hands over her eyes, which could be interpreted as a playful or humorous gesture. It is possible that she is trying to block out the sunlight or simply making a funny face for the camera. The context of the video might be a casual, lighthearted moment, and her actions could be a way to express her playfulness or to entertain the viewer.
+Frame 29 Answer: The lady in the image is covering her eyes with her hands, which could be interpreted as a playful or humorous gesture. It is possible that she is posing for a funny or candid moment, or she might be reacting to something unexpected or amusing in the scene. The context of the video and the presence of the man standing next to her could provide more information about the situation that led to this action.
+Frame 58 Answer: The lady putting her hands over her eyes in the middle of the video could be due to various reasons. She might be feeling emotional or expressing surprise, or she could be shielding her eyes from the sun. It is also possible that she is playfully reacting to something happening in the scene or simply trying to create a humorous or dramatic moment. The context of the video and the surrounding environment would provide more insight into her actions.
+Frame 87 Answer: The lady putting her hands over her eyes in the middle of the video could be due to various reasons. She might be feeling shy or playful, trying to hide her face from the camera, or simply reacting to something happening in the scene. It is also possible that she is posing for a humorous or candid moment, adding a touch of fun to the video. The context of the video and the relationship between the two individuals could provide more insight into her actions.
+Frame 116 Answer: The lady in the image is covering her eyes with her hands, which could be interpreted as a playful or humorous gesture. It is possible that she is posing for a funny or candid moment, or she might be reacting to something unexpected or amusing in the scene. The context of the video and the presence of the man standing next to her could provide more information about the situation that led to this action.
+
+
+Question:
+Why did the lady put her hands over her eyes in the middle of the video? Choose your answer from below options: A.posing in the camera, B.adjust her hair, C.protection from sun, D.to wipe her eyes, E.cue woman to talk.
+
+
+Summarizer Output Answer:  Based on the frame information provided, the most likely answer is C. protection from sun.
+
+Frame Selector inferencing...
+> /home/fsq/video_agent/ToolChainVideo/tools/frame_selector.py(71)inference()
+-> add_frames_indices_all = []
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) 

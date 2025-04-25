@@ -1,0 +1,154 @@
+Creating LLM cache: cache/gpt35_cache_new_tool_8.pkl...
+
+
+Initializing Patch Zoomer Tool with model: gpt-4o, sys_prompt: None
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+
+Initializing Image-Grid-QA Tool with model: gpt-4o
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+Loading liuhaotian/llava-v1.5-7b for Image QA...
+
+
+Initializing Summarizer Tool with model: gpt-3.5-turbo
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-3.5-turbo
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o-mini
+tool_instances: [<tools.temporal_grounding.TemporalGrounding object at 0x7faf0a0c5c40>, <tools.temporal_qa.TemporalQA object at 0x7faf0a7a87c0>, <tools.patch_zoomer.PatchZoomer object at 0x7faf0a07c6d0>, <tools.image_grid_qa.ImageGridQA object at 0x7faf0a07c760>, <tools.image_qa.ImageQA object at 0x7faf0a07c7c0>, <tools.summarizer.Summarizer object at 0x7faf0a0236d0>, <tools.frame_selector.FrameSelector object at 0x7fb0b33b2f70>]
+tools: [Tool(name='temporal-grounding-tool', description="Useful when you want to know which time segment of the video a certain event or content appears inThe input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method TemporalGrounding.inference of <tools.temporal_grounding.TemporalGrounding object at 0x7faf0a0c5c40>>), Tool(name='temporal-qa-tool', description='placeholder', func=<bound method TemporalQA.inference of <tools.temporal_qa.TemporalQA object at 0x7faf0a7a87c0>>), Tool(name='relevant-patch-zooming-tool', description='placeholder', func=<bound method PatchZoomer.inference of <tools.patch_zoomer.PatchZoomer object at 0x7faf0a07c6d0>>), Tool(name='image-grid-qa-tool', description="Useful when you want to know the whole event or action in the video. This tool arranges multiple images into an image grid, allowing the MLLM to analyze the events or actions taking place in the video.The input to this tool must be a question, such as 'How many children are in the video?' ", func=<bound method ImageGridQA.inference of <tools.image_grid_qa.ImageGridQA object at 0x7faf0a07c760>>), Tool(name='image-question-answering-tool', description="Useful when you need to ask something about the frames in the video.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method ImageQA.inference of <tools.image_qa.ImageQA object at 0x7faf0a07c7c0>>), Tool(name='summarization-tool', description="Useful when you want to summarize the infomation of all visible frames and find the answer.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method Summarizer.inference of <tools.summarizer.Summarizer object at 0x7faf0a0236d0>>), Tool(name='frame-extraction-tool', description="Useful when you find that the currently sampled frames do not provide enough information and more frames need to be extracted from the video to answer the question.The input to this tool must be a question about the video that remains unresolved. For example, 'How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.'", func=<bound method FrameSelector.inference of <tools.frame_selector.FrameSelector object at 0x7fb0b33b2f70>>)]
+Start loading temporal model...
+
+loading vision_tower
+loading video_encoder
+loading multi_modal_projector
+loading video_projector
+loading language_model
+Frozen ViT
+Frozen video_encoder
+LORA llm
+Frozen Part LLM
+Finish loading temporal model.
+
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-3.5-turbo
+
+Building nextqa dataset...
+
+Processing: 4010069381_6
+How do the two man play the instrument? Choose your answer from below options: A.roll the handle, B.tap their feet, C.strum the string, D.hit with sticks, E.pat with hand.
+
+Temporal Grounding: add 13 frames to visible frames: [0, 29, 58, 87, 116, 145, 174, 203, 232, 261, 290, 319, 348]
+
+Visible Frames: add 13 frames to visible frames: [0, 29, 58, 87, 116, 145, 174, 203, 232, 261, 290, 319, 348]
+Patch Zoomer: zoom in patch ['C', 'D']
+Patch Zoomer: zoom in patch ['C', 'D', 'E']
+Patch Zoomer: zoom in patch ['C', 'D', 'E']
+Patch Zoomer: zoom in patch ['C', 'D', 'E']
+Patch Zoomer: zoom in patch ['E']
+Patch Zoomer: zoom in patch ['C', 'D']
+Patch Zoomer: zoom in patch ['C', 'D']
+Patch Zoomer: zoom in patch ['C', 'D', 'E']
+Patch Zoomer: zoom in patch ['C', 'D', 'E']
+Patch Zoomer: zoom in patch ['C', 'D']
+Patch Zoomer: zoom in patch ['C', 'D']
+Patch Zoomer: zoom in patch ['C', 'D']
+Patch Zoomer: zoom in patch ['C', 'D', 'E']
+
+Image QA: infer 13 frames...
+Here are the image question answering results of sampled frames:
+Question: How do the two man play the instrument
+Frame 0 Answer: The two men are playing the instrument by sitting on chairs and holding it. One man is sitting on a chair on the left side of the image, while the other man is sitting on a chair on the right side. They are both holding the instrument, which appears to be a large wooden board, and seem to be playing it together. The presence of the woman standing behind them suggests that they might be performing a musical act or participating in a group activity.
+Frame 29 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a woman standing nearby suggests that they might be performing as a trio or a group, with each person contributing to the overall sound.
+Frame 58 Answer: The two men are playing the instrument by holding it in their hands and using their fingers to pluck the strings. They are sitting on chairs while playing, which allows them to maintain a comfortable position and focus on their performance.
+Frame 87 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a woman standing nearby suggests that they might be performing in a group or as part of a musical event.
+Frame 116 Answer: The two men are playing the instrument by holding it in their hands and using their fingers to pluck the strings. They are likely using a technique called "fingerstyle" or "travis-picking" to play the instrument, which involves plucking the strings with the fingers in a specific pattern to create a melody or rhythm. This type of playing style is commonly associated with guitar and banjo, but it can also be applied to other stringed instruments.
+Frame 145 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a dining table in the scene suggests that they might be in a casual setting, such as a home or a small gathering, where they can comfortably play and enjoy their musical performance.
+Frame 174 Answer: In the image, the two men are playing a musical instrument, likely a guitar, while standing next to each other. They are both holding the instrument, and it appears that they are playing together, possibly as a duo or a part of a larger ensemble. The presence of multiple people in the scene suggests that they might be performing in a group or a band, and they are likely collaborating to create music and entertain the audience.
+Frame 203 Answer: In the image, the two men are playing the instrument by holding it in their hands and playing it together. They are likely using their fingers or hands to pluck the strings or press the keys, depending on the type of instrument they are playing. The presence of a chair and a dining table in the scene suggests that they might be in a casual setting, possibly a gathering or a party, where they are entertaining others with their musical performance.
+Frame 232 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a guitar in the image suggests that they are playing a guitar-like instrument, which is a common choice for creating music in a group setting.
+Frame 261 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a dining table in the scene suggests that they might be in a casual setting, such as a home or a small gathering, where they can comfortably play and enjoy their music.
+Frame 290 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a guitar in the image suggests that they are playing a guitar-like instrument, which is a common choice for creating music in a group setting.
+Frame 319 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a dining table in the scene suggests that they might be in a casual setting, such as a home or a small gathering, where they can comfortably play and enjoy their musical performance.
+Frame 348 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a dining table in the scene suggests that they might be in a casual setting, such as a home or a small gathering, where they can comfortably play and enjoy their musical performance.
+
+
+Summarizer Input Prompt:  Regarding a given video, based on the frame information to answer the following question as best you can.
+
+Frame Information: 
+Here are the image question answering results of sampled frames:
+Question: How do the two man play the instrument
+Frame 0 Answer: The two men are playing the instrument by sitting on chairs and holding it. One man is sitting on a chair on the left side of the image, while the other man is sitting on a chair on the right side. They are both holding the instrument, which appears to be a large wooden board, and seem to be playing it together. The presence of the woman standing behind them suggests that they might be performing a musical act or participating in a group activity.
+Frame 29 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a woman standing nearby suggests that they might be performing as a trio or a group, with each person contributing to the overall sound.
+Frame 58 Answer: The two men are playing the instrument by holding it in their hands and using their fingers to pluck the strings. They are sitting on chairs while playing, which allows them to maintain a comfortable position and focus on their performance.
+Frame 87 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a woman standing nearby suggests that they might be performing in a group or as part of a musical event.
+Frame 116 Answer: The two men are playing the instrument by holding it in their hands and using their fingers to pluck the strings. They are likely using a technique called "fingerstyle" or "travis-picking" to play the instrument, which involves plucking the strings with the fingers in a specific pattern to create a melody or rhythm. This type of playing style is commonly associated with guitar and banjo, but it can also be applied to other stringed instruments.
+Frame 145 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a dining table in the scene suggests that they might be in a casual setting, such as a home or a small gathering, where they can comfortably play and enjoy their musical performance.
+Frame 174 Answer: In the image, the two men are playing a musical instrument, likely a guitar, while standing next to each other. They are both holding the instrument, and it appears that they are playing together, possibly as a duo or a part of a larger ensemble. The presence of multiple people in the scene suggests that they might be performing in a group or a band, and they are likely collaborating to create music and entertain the audience.
+Frame 203 Answer: In the image, the two men are playing the instrument by holding it in their hands and playing it together. They are likely using their fingers or hands to pluck the strings or press the keys, depending on the type of instrument they are playing. The presence of a chair and a dining table in the scene suggests that they might be in a casual setting, possibly a gathering or a party, where they are entertaining others with their musical performance.
+Frame 232 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a guitar in the image suggests that they are playing a guitar-like instrument, which is a common choice for creating music in a group setting.
+Frame 261 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a dining table in the scene suggests that they might be in a casual setting, such as a home or a small gathering, where they can comfortably play and enjoy their music.
+Frame 290 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a guitar in the image suggests that they are playing a guitar-like instrument, which is a common choice for creating music in a group setting.
+Frame 319 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a dining table in the scene suggests that they might be in a casual setting, such as a home or a small gathering, where they can comfortably play and enjoy their musical performance.
+Frame 348 Answer: The two men are playing the instrument by sitting on chairs and holding it in their hands. They are likely using their hands to pluck or strum the strings, creating music together. The presence of a dining table in the scene suggests that they might be in a casual setting, such as a home or a small gathering, where they can comfortably play and enjoy their musical performance.
+
+
+Question:
+How do the two man play the instrument? Choose your answer from below options: A.roll the handle, B.tap their feet, C.strum the string, D.hit with sticks, E.pat with hand.
+
+
+Summarizer Output Answer:  C. strum the string
+
+ToolChainOutput: ['Based on the images, it looks like the two men are playing the instrument by rolling the handle. So, the answer is A. roll the handle.', 'C. strum the string', 'C.strum the string,']
+
+Processing: 4882821564_1
+Why did the boy pick up one present from the group of them and move to the sofa? Choose your answer from below options: A.share with the girl, B.approach lady sitting there, C.unwrap it, D.playing with toy train, E.gesture something.
+
+Temporal Grounding: add 6 frames to visible frames: [746, 775, 804, 833, 862, 891]
+
+Visible Frames: add 6 frames to visible frames: [746, 775, 804, 833, 862, 891]
+Patch Zoomer: zoom in patch ['C', 'E']
+Patch Zoomer: zoom in patch ['E']
+Patch Zoomer: zoom in patch ['B', 'E']
+Patch Zoomer: zoom in patch ['C', 'E']
+Patch Zoomer: zoom in patch ['D', 'E']
+Patch Zoomer: zoom in patch ['C']
+
+Image QA: infer 6 frames...
+Here are the image question answering results of sampled frames:
+Question: Why did the boy pick up one present from the group of them and move to the sofa
+Frame 746 Answer: The boy might have picked up one present from the group of them and moved to the sofa for several reasons. One possibility is that he wanted to examine the present more closely or admire its wrapping before opening it. Another reason could be that he wanted to find a comfortable spot to sit down and open the present, as the sofa provides a more relaxed and comfortable environment. Additionally, the boy might have been feeling tired or needed a break, so he chose to sit on the sofa before opening the present. It is also possible that he was simply curious about the contents of the other presents and wanted to examine them before opening his own.
+Frame 775 Answer: The boy likely picked up one present from the group of them and moved to the sofa because he wanted to show it to the woman or someone else in the room. It could be a special gift, a favorite toy, or something that caught his attention. The boy might have been excited to share his find with others, or he might have been instructed to bring the present to a specific location in the room. The presence of the woman and the sofa in the image suggests that they might be in a living room or a similar setting where people gather and socialize.
+Frame 804 Answer: The boy might have picked up one present from the group of them and moved to the sofa for several reasons. One possibility is that he wanted to examine the present more closely or admire its wrapping before opening it. Another reason could be that he wanted to find a comfortable spot to sit or relax while opening the present. Additionally, the boy might have chosen the sofa as a place to open the present in a more private or less crowded area, away from the other presents and people in the room.
+Frame 833 Answer: The boy might have picked up one present from the group of them and moved to the sofa for several reasons. One possibility is that he wanted to show the present to the woman, possibly his mother, and share his excitement about the gift. Another reason could be that he wanted to sit on the sofa and relax, while still being close to the presents. It is also possible that he was simply curious about the contents of the present and wanted to open it right away. The presence of the woman in the image suggests that she might be involved in the gift-giving process or accompanying the boy during this moment.
+Frame 862 Answer: The boy might have picked up one present from the group of them and moved to the sofa for various reasons. It could be that he wanted to examine the present more closely or admire its wrapping before opening it. Alternatively, he might have chosen to sit on the sofa to relax or take a break before opening the presents. It is also possible that he wanted to create a comfortable and cozy environment to enjoy the holiday celebration with family and friends. The presence of the couch and the pink chair in the living room suggests that the space is designed for relaxation and socializing, making it an ideal spot for the boy to sit and enjoy the festive atmosphere.
+Frame 891 Answer: The boy might have picked up one present from the group of them and moved to the sofa for several reasons. One possibility is that he wanted to show the present to someone else, such as a family member or a friend, and he chose the sofa as a comfortable spot to sit and display the gift. Another reason could be that he wanted to open the present in a more private and relaxed environment, away from the hustle and bustle of the room. Additionally, the boy might have been tired or needed a break, and the sofa provided a comfortable place to rest while still being close to the presents.
+
+
+Summarizer Input Prompt:  Regarding a given video, based on the frame information to answer the following question as best you can.
+
+Frame Information: 
+Here are the image question answering results of sampled frames:
+Question: Why did the boy pick up one present from the group of them and move to the sofa
+Frame 746 Answer: The boy might have picked up one present from the group of them and moved to the sofa for several reasons. One possibility is that he wanted to examine the present more closely or admire its wrapping before opening it. Another reason could be that he wanted to find a comfortable spot to sit down and open the present, as the sofa provides a more relaxed and comfortable environment. Additionally, the boy might have been feeling tired or needed a break, so he chose to sit on the sofa before opening the present. It is also possible that he was simply curious about the contents of the other presents and wanted to examine them before opening his own.
+Frame 775 Answer: The boy likely picked up one present from the group of them and moved to the sofa because he wanted to show it to the woman or someone else in the room. It could be a special gift, a favorite toy, or something that caught his attention. The boy might have been excited to share his find with others, or he might have been instructed to bring the present to a specific location in the room. The presence of the woman and the sofa in the image suggests that they might be in a living room or a similar setting where people gather and socialize.
+Frame 804 Answer: The boy might have picked up one present from the group of them and moved to the sofa for several reasons. One possibility is that he wanted to examine the present more closely or admire its wrapping before opening it. Another reason could be that he wanted to find a comfortable spot to sit or relax while opening the present. Additionally, the boy might have chosen the sofa as a place to open the present in a more private or less crowded area, away from the other presents and people in the room.
+Frame 833 Answer: The boy might have picked up one present from the group of them and moved to the sofa for several reasons. One possibility is that he wanted to show the present to the woman, possibly his mother, and share his excitement about the gift. Another reason could be that he wanted to sit on the sofa and relax, while still being close to the presents. It is also possible that he was simply curious about the contents of the present and wanted to open it right away. The presence of the woman in the image suggests that she might be involved in the gift-giving process or accompanying the boy during this moment.
+Frame 862 Answer: The boy might have picked up one present from the group of them and moved to the sofa for various reasons. It could be that he wanted to examine the present more closely or admire its wrapping before opening it. Alternatively, he might have chosen to sit on the sofa to relax or take a break before opening the presents. It is also possible that he wanted to create a comfortable and cozy environment to enjoy the holiday celebration with family and friends. The presence of the couch and the pink chair in the living room suggests that the space is designed for relaxation and socializing, making it an ideal spot for the boy to sit and enjoy the festive atmosphere.
+Frame 891 Answer: The boy might have picked up one present from the group of them and moved to the sofa for several reasons. One possibility is that he wanted to show the present to someone else, such as a family member or a friend, and he chose the sofa as a comfortable spot to sit and display the gift. Another reason could be that he wanted to open the present in a more private and relaxed environment, away from the hustle and bustle of the room. Additionally, the boy might have been tired or needed a break, and the sofa provided a comfortable place to rest while still being close to the presents.
+
+
+Question:
+Why did the boy pick up one present from the group of them and move to the sofa? Choose your answer from below options: A.share with the girl, B.approach lady sitting there, C.unwrap it, D.playing with toy train, E.gesture something.
+
+
+Summarizer Output Answer:  The most likely answer based on the frame information provided is: A. share with the girl.
+
+Frame Selector inferencing...
+> /home/fsq/video_agent/ToolChainVideo/tools/frame_selector.py(71)inference()
+-> add_frames_indices_all = []
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) (Pdb) (Pdb) (Pdb) 

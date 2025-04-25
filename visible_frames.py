@@ -3,7 +3,7 @@ import torch
 import numpy as np
 from langchain_openai import ChatOpenAI
 from typing import List, Dict, Optional
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import timedelta
 
 
@@ -45,6 +45,7 @@ class Frame:
     timestamp: float  # 帧的时间戳（秒）
     image: cv2.Mat = None  # 帧的图像数据
     description: Optional[str] = ""  # 帧的文字描述
+    qa_info: dict = field(default_factory=dict)  # 帧的问答信息
 
 
 class VisibleFrames:
@@ -152,20 +153,43 @@ class VisibleFrames:
         all_images = torch.stack([torch.from_numpy(img).permute(2, 0, 1) for img in all_images])
         return all_images
     
-
-    def get_frame_descriptions(self) -> str:
-        """获取所有可见帧的文字描述"""
+    def get_qa_descriptions(self) -> str:
+        """获取所有可见帧的问答信息"""
         if not self.frames:
             return "No visible frames."
         
-        descriptions = []
+        qa_info_all = {}
         for frame in self.frames:
-            desc = f"Frame {frame.index}"
-            if frame.description:
-                desc += f":\n{frame.description}"
-            descriptions.append(desc)
+            for q, a in frame.qa_info.items():
+                if q in qa_info_all:
+                    qa_info_all[q][frame.index] = a
+                else:
+                    qa_info_all[q] = {frame.index: a}
         
-        return "\n".join(descriptions)
+        if len(qa_info_all) == 0:
+            return "No QA information available."
+
+        result = "Here are the image question answering results of sampled frames:\n"
+        for q, many_a in qa_info_all.items():
+            result += f"Question: {q}\n"
+            for f_idx, a in many_a.items():
+                result += f"Frame {f_idx} Answer: {a}\n"  
+        
+        return result
+    
+    # def get_frame_descriptions(self) -> str:
+    #     """获取所有可见帧的文字描述"""
+    #     if not self.frames:
+    #         return "No visible frames."
+        
+    #     descriptions = []
+    #     for frame in self.frames:
+    #         desc = f"Frame {frame.index}"
+    #         if frame.description:
+    #             desc += f":\n{frame.description}"
+    #         descriptions.append(desc)
+        
+    #     return "\n".join(descriptions)
     
     def get_frame_count(self) -> int:
         """获取可见帧数量"""

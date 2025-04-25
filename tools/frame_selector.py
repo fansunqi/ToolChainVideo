@@ -58,14 +58,14 @@ class FrameSelector:
         select_frames_prompt = SELECT_FRAMES_PROMPT.format(
             num_frames = self.visible_frames.video_info["total_frames"],
             fps = self.visible_frames.video_info["fps"],
-            visible_frames_info = self.visible_frames.get_frame_descriptions(),
+            visible_frames_info = self.visible_frames.get_qa_descriptions(),
             question = input,
             candidate_segment = self.visible_frames.invisible_segments_to_description(),
             max_candidate_segment_id = str(len(invisible_segments_list) - 1)
         )
 
         response = self.llm(select_frames_prompt, response_format=SegmentList)
-
+        
         add_frames_indices_all = []
         min_interval = self.visible_frames.min_interval
         for segment_id in response.segments:

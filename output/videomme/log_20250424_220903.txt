@@ -1,0 +1,84 @@
+Creating LLM cache: cache/gpt35_cache_new_tool_8.pkl...
+
+
+Initializing Patch Zoomer Tool with model: gpt-4o, sys_prompt: None
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+
+Initializing Image-Grid-QA Tool with model: gpt-4o
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+Loading liuhaotian/llava-v1.5-7b for Image QA...
+
+
+Initializing Summarizer Tool with model: gpt-4o-mini
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o-mini
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o-mini
+tool_instances: [<tools.temporal_grounding.TemporalGrounding object at 0x7f943f1609d0>, <tools.temporal_qa.TemporalQA object at 0x7f943f160490>, <tools.patch_zoomer.PatchZoomer object at 0x7f943f10c7c0>, <tools.image_grid_qa.ImageGridQA object at 0x7f943f10c7f0>, <tools.image_qa.ImageQA object at 0x7f943f10c850>, <tools.summarizer.Summarizer object at 0x7f943f0b5880>, <tools.frame_selector.FrameSelector object at 0x7f95e84cbf70>]
+tools: [Tool(name='temporal-grounding-tool', description="Useful when you want to know which time segment of the video a certain event or content appears inThe input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method TemporalGrounding.inference of <tools.temporal_grounding.TemporalGrounding object at 0x7f943f1609d0>>), Tool(name='temporal-qa-tool', description='placeholder', func=<bound method TemporalQA.inference of <tools.temporal_qa.TemporalQA object at 0x7f943f160490>>), Tool(name='relevant-patch-zooming-tool', description='placeholder', func=<bound method PatchZoomer.inference of <tools.patch_zoomer.PatchZoomer object at 0x7f943f10c7c0>>), Tool(name='image-grid-qa-tool', description="Useful when you want to know the whole event or action in the video. This tool arranges multiple images into an image grid, allowing the MLLM to analyze the events or actions taking place in the video.The input to this tool must be a question, such as 'How many children are in the video?' ", func=<bound method ImageGridQA.inference of <tools.image_grid_qa.ImageGridQA object at 0x7f943f10c7f0>>), Tool(name='image-question-answering-tool', description="Useful when you need to ask something about the frames in the video.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method ImageQA.inference of <tools.image_qa.ImageQA object at 0x7f943f10c850>>), Tool(name='summarization-tool', description="Useful when you want to summarize the infomation of all visible frames and find the answer.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method Summarizer.inference of <tools.summarizer.Summarizer object at 0x7f943f0b5880>>), Tool(name='frame-extraction-tool', description="Useful when you find that the currently sampled frames do not provide enough information and more frames need to be extracted from the video to answer the question.The input to this tool must be a question about the video that remains unresolved. For example, 'How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.'", func=<bound method FrameSelector.inference of <tools.frame_selector.FrameSelector object at 0x7f95e84cbf70>>)]
+Start loading temporal model...
+
+loading vision_tower
+loading video_encoder
+loading multi_modal_projector
+loading video_projector
+loading language_model
+Frozen ViT
+Frozen video_encoder
+LORA llm
+Frozen Part LLM
+Finish loading temporal model.
+
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-3.5-turbo
+
+Building videomme dataset...
+
+Processing: 001-1
+When demonstrating the germany modern christmas tree is initially decorated with apples, candles and berries, which kind of the decoration has the largest number?? Choose your answer from below options: A.Apples, B.Candles, C.Berries, D.The three kinds are of the same number.
+
+Temporal Grounding: add 9 frames to visible frames: [987, 1016, 1045, 1074, 1103, 1132, 1161, 1190, 1219]
+
+Visible Frames: add 9 frames to visible frames: [987, 1016, 1045, 1074, 1103, 1132, 1161, 1190, 1219]
+
+Image QA: infer 9 frames...
+Here are the image question answering results of sampled frames:
+Question: When demonstrating the germany modern christmas tree is initially decorated with apples, candles and berries, which kind of the decoration has the largest number?
+Frame 987 Answer: In the image, the modern Christmas tree is decorated with apples, candles, and berries. The largest number of decorations can be found on the tree's branches, which are covered with green leaves. The apples, candles, and berries are placed on the tree, but the leaves are the most prominent and abundant decoration.
+Frame 1016 Answer: In the image, the modern Christmas tree is decorated with apples, candles, and berries. The largest number of decorations can be found on the tree's branches, which are covered with green leaves. The apples, candles, and berries are placed on the tree, but the leaves are the most prominent and abundant decoration.
+Frame 1045 Answer: In the image, the modern Christmas tree is decorated with apples, candles, and berries. The largest number of decorations can be found on the tree's branches, which are covered with green leaves. The apples, candles, and berries are placed on the tree, but the number of decorations on the branches is significantly higher than the number of apples, candles, and berries. The tree's branches provide a natural and festive backdrop for the decorations, making the tree appear more lively and beautiful.
+Frame 1074 Answer: In the image, the modern Christmas tree is decorated with a large number of candles. There are at least 13 candles on the tree, which is more than the apples and berries combined. The candles are arranged in various positions on the tree, creating a festive and visually appealing display.
+Frame 1103 Answer: In the image, the modern Christmas tree is decorated with a large number of apples. There are at least 13 apples on the tree, which is more than the candles and berries combined. The apples are scattered throughout the tree, covering a significant portion of its branches.
+Frame 1132 Answer: In the image, the modern Christmas tree is decorated with a large number of apples. There are at least 13 apples on the tree, which is more than the candles and berries combined. The apples are scattered throughout the tree, covering a significant portion of its branches. This emphasizes the prominent role of apples as a decorative element in the modern Christmas tree.
+Frame 1161 Answer: In the image, the modern Christmas tree is decorated with a large number of apples. There are at least 13 apples visible on the tree, which is more than the candles and berries combined. The apples are scattered throughout the tree, covering a significant portion of the branches, making them the most prominent decoration.
+Frame 1190 Answer: In the image, the modern Christmas tree in Germany is decorated with a large number of apples. There are at least 13 apples visible on the tree, which is more than the candles and berries combined. The apples are scattered throughout the tree, covering a significant portion of its branches. This unique decoration choice adds a distinctive touch to the traditional Christmas tree, making it stand out from the more common ornaments like candles and berries.
+Frame 1219 Answer: In the image, the modern Christmas tree in Germany is decorated with a large number of apples. There are at least 13 apples visible on the tree, which is more than the candles and berries combined. The apples are scattered throughout the tree, covering a significant portion of its branches. This suggests that the apples are the most prominent decoration on the tree.
+
+
+Summarizer Input Prompt:  Regarding a given video, based on the frame information to answer the following question as best you can.
+
+Frame Information: 
+Here are the image question answering results of sampled frames:
+Question: When demonstrating the germany modern christmas tree is initially decorated with apples, candles and berries, which kind of the decoration has the largest number?
+Frame 987 Answer: In the image, the modern Christmas tree is decorated with apples, candles, and berries. The largest number of decorations can be found on the tree's branches, which are covered with green leaves. The apples, candles, and berries are placed on the tree, but the leaves are the most prominent and abundant decoration.
+Frame 1016 Answer: In the image, the modern Christmas tree is decorated with apples, candles, and berries. The largest number of decorations can be found on the tree's branches, which are covered with green leaves. The apples, candles, and berries are placed on the tree, but the leaves are the most prominent and abundant decoration.
+Frame 1045 Answer: In the image, the modern Christmas tree is decorated with apples, candles, and berries. The largest number of decorations can be found on the tree's branches, which are covered with green leaves. The apples, candles, and berries are placed on the tree, but the number of decorations on the branches is significantly higher than the number of apples, candles, and berries. The tree's branches provide a natural and festive backdrop for the decorations, making the tree appear more lively and beautiful.
+Frame 1074 Answer: In the image, the modern Christmas tree is decorated with a large number of candles. There are at least 13 candles on the tree, which is more than the apples and berries combined. The candles are arranged in various positions on the tree, creating a festive and visually appealing display.
+Frame 1103 Answer: In the image, the modern Christmas tree is decorated with a large number of apples. There are at least 13 apples on the tree, which is more than the candles and berries combined. The apples are scattered throughout the tree, covering a significant portion of its branches.
+Frame 1132 Answer: In the image, the modern Christmas tree is decorated with a large number of apples. There are at least 13 apples on the tree, which is more than the candles and berries combined. The apples are scattered throughout the tree, covering a significant portion of its branches. This emphasizes the prominent role of apples as a decorative element in the modern Christmas tree.
+Frame 1161 Answer: In the image, the modern Christmas tree is decorated with a large number of apples. There are at least 13 apples visible on the tree, which is more than the candles and berries combined. The apples are scattered throughout the tree, covering a significant portion of the branches, making them the most prominent decoration.
+Frame 1190 Answer: In the image, the modern Christmas tree in Germany is decorated with a large number of apples. There are at least 13 apples visible on the tree, which is more than the candles and berries combined. The apples are scattered throughout the tree, covering a significant portion of its branches. This unique decoration choice adds a distinctive touch to the traditional Christmas tree, making it stand out from the more common ornaments like candles and berries.
+Frame 1219 Answer: In the image, the modern Christmas tree in Germany is decorated with a large number of apples. There are at least 13 apples visible on the tree, which is more than the candles and berries combined. The apples are scattered throughout the tree, covering a significant portion of its branches. This suggests that the apples are the most prominent decoration on the tree.
+
+
+Question:
+When demonstrating the germany modern christmas tree is initially decorated with apples, candles and berries, which kind of the decoration has the largest number?? Choose your answer from below options: A.Apples, B.Candles, C.Berries, D.The three kinds are of the same number.
+
+
+Summarizer Output Answer:  Based on the frame information provided, the decoration with the largest number on the modern Christmas tree is **A. Apples**. Multiple frames indicate that there are at least 13 apples on the tree, which is more than the combined number of candles and berries.
+Image grid saved to /home/fsq/video_agent/ToolChainVideo/misc/image_grid_results_5/grid_image_sample_20250424221027.png.
+> /home/fsq/video_agent/ToolChainVideo/tools/image_grid_qa.py(229)inference()
+-> grid_num = self.grid_size**2
+(Pdb) 

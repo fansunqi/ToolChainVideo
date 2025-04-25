@@ -83,7 +83,7 @@ class VideoQA:
 
 
 if __name__ == "__main__":
-    conf = OmegaConf.load("/home/fsq/video_agent/ToolChainVideo/config/nextqa_new_tool.yaml")
+    conf = OmegaConf.load("/home/fsq/video_agent/ToolChainVideo/config/nextqa.yaml")
     video_qa = VideoQA(conf)
     
     video_path = "/home/fsq/video_agent/ToolChainVideo/projects/Grounded-Video-LLM/experiments/_3klvlS4W7A.mp4"

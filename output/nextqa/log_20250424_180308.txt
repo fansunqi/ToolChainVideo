@@ -1,0 +1,23 @@
+Creating LLM cache: cache/gpt35_cache_new_tool_8.pkl...
+
+
+Initializing Patch Zoomer Tool with model: gpt-4o, sys_prompt: None
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+
+Initializing Image-Grid-QA Tool with model: gpt-4o
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+Loading liuhaotian/llava-v1.5-7b for Image QA...
+
+
+Initializing Summarizer Tool with model: gpt-3.5-turbo
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-3.5-turbo
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o-mini
+tool_instances: [<tools.temporal_grounding.TemporalGrounding object at 0x7f0339974c40>, <tools.temporal_qa.TemporalQA object at 0x7f033a0577c0>, <tools.patch_zoomer.PatchZoomer object at 0x7f033992d7c0>, <tools.image_grid_qa.ImageGridQA object at 0x7f033992d7f0>, <tools.image_qa.ImageQA object at 0x7f033992d880>, <tools.summarizer.Summarizer object at 0x7f03398d37f0>, <tools.frame_selector.FrameSelector object at 0x7f04e2ce6f40>]
+tools: [Tool(name='temporal-grounding-tool', description="Useful when you want to know which time segment of the video a certain event or content appears inThe input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method TemporalGrounding.inference of <tools.temporal_grounding.TemporalGrounding object at 0x7f0339974c40>>), Tool(name='temporal-qa-tool', description='placeholder', func=<bound method TemporalQA.inference of <tools.temporal_qa.TemporalQA object at 0x7f033a0577c0>>), Tool(name='relevant-patch-zooming-tool', description='placeholder', func=<bound method PatchZoomer.inference of <tools.patch_zoomer.PatchZoomer object at 0x7f033992d7c0>>), Tool(name='image-grid-qa-tool', description="Useful when you want to know the whole event or action in the video. This tool arranges multiple images into an image grid, allowing the MLLM to analyze the events or actions taking place in the video.The input to this tool must be a question, such as 'How many children are in the video?' ", func=<bound method ImageGridQA.inference of <tools.image_grid_qa.ImageGridQA object at 0x7f033992d7f0>>), Tool(name='image-question-answering-tool', description="Useful when you need to ask something about the frames in the video.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method ImageQA.inference of <tools.image_qa.ImageQA object at 0x7f033992d880>>), Tool(name='summarization-tool', description="Useful when you want to summarize the infomation of all visible frames and find the answer.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method Summarizer.inference of <tools.summarizer.Summarizer object at 0x7f03398d37f0>>), Tool(name='frame-extraction-tool', description="Useful when you find that the currently sampled frames do not provide enough information and more frames need to be extracted from the video to answer the question.The input to this tool must be a question about the video that remains unresolved. For example, 'How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.'", func=<bound method FrameSelector.inference of <tools.frame_selector.FrameSelector object at 0x7f04e2ce6f40>>)]
+Start loading temporal model...
+
+loading vision_tower
