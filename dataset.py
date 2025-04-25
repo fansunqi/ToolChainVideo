@@ -29,7 +29,10 @@ class BaseDataset(Dataset):
         '''
         self.args = args
         self.anno = self.get_anno()
-        self.end_num = start_num + num_examples_to_run
+        if num_examples_to_run > 0:
+            self.end_num = start_num + num_examples_to_run
+        else:
+            self.end_num = len(self.anno)
         data = self.build()
         data = self.filter(data, quids_to_exclude, num_examples_to_run, start_num, specific_quids)
         self.data = data

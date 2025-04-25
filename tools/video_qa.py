@@ -1,6 +1,6 @@
 from omegaconf import OmegaConf
 import torch
-from transformers import Qwen2_5_VLForConditionalGeneration, AutoTokenizer, AutoProcessor
+from transformers import Qwen2VLForConditionalGeneration, Qwen2_5_VLForConditionalGeneration, AutoTokenizer, AutoProcessor
 from qwen_vl_utils import process_vision_info
 
 
@@ -14,13 +14,26 @@ class VideoQA:
     ):
         self.conf = conf
         
-        self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-            "Qwen/Qwen2.5-VL-7B-Instruct",
+        # model_path = "Qwen/Qwen2.5-VL-7B-Instruct"
+        # model_path = "Qwen/Qwen2.5-VL-3B-Instruct"
+        
+        # self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+        #     model_path,
+        #     torch_dtype=torch.bfloat16,
+        #     attn_implementation="flash_attention_2",
+        #     device_map="auto",
+        # )
+        
+        model_path = "/hf_home/hub/models--Qwen--Qwen2-VL-2B-Instruct/snapshots/895c3a49bc3fa70a340399125c650a463535e71c"
+        self.model = Qwen2VLForConditionalGeneration.from_pretrained(
+            model_path,
             torch_dtype=torch.bfloat16,
             attn_implementation="flash_attention_2",
             device_map="auto",
         )
-        self.processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-7B-Instruct")
+        
+        
+        self.processor = AutoProcessor.from_pretrained(model_path)
 
     def set_frames(self, visible_frames):
         self.visible_frames = visible_frames

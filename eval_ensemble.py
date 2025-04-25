@@ -175,8 +175,11 @@ if __name__ == "__main__":
     conf = OmegaConf.load(args.config)
 
     input_file_list = [
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250424_121706.json",
         "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250424_225733.json",
-        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250424_192740.json"
+        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250424_192740.json",
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250425_174141.json"
+        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250425_193249.json"
     ]
     
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
