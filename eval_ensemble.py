@@ -1,13 +1,14 @@
 import os
 import pdb
 import json
-import pickle
 import argparse
+import datetime
 from tqdm import tqdm
 from collections import Counter
 from omegaconf import OmegaConf
-from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage
+from engine.openai import ChatOpenAI
+from prompts import EVAL_PROMPT
+
 
 def option_full_matching(answer, options):
     answer = answer.lower()
@@ -27,41 +28,26 @@ def answer_full_matching(answer, options):
             return i, "answer full matching"
     return -1, "none"
 
-def LLM_rephrase(answer, options, question, conf, eval_llm, llm_cache):
+def LLM_rephrase(answer, options, question, conf, eval_llm):
     
     # 首先构造选项的提示
-    option_labels = ['A', 'B', 'C', 'D', 'E']
+    if len(options) == 5:
+        option_labels = ['A', 'B', 'C', 'D', 'E']
+    elif len(options) == 4:
+        option_labels = ['A', 'B', 'C', 'D']
+    else:
+        raise ValueError("options in the data error")
+    
     options_with_labels = "\n".join([f"{label}: {option}" for label, option in zip(option_labels, options)])
     
     # 创建 prompt 给 LLM
-    prompt = f"""
-    Given the following question and possible answers, determine which option matches the provided answer. 
-    Provide only the option letter (A, B, C, D, or E).
+    prompt = EVAL_PROMPT.format(
+        question=question,
+        answer=answer,
+        options_with_labels=options_with_labels
+    )
 
-    Question: {question}
-    Answer: {answer}
-    Options:
-    {options_with_labels}
-
-    The correct answer option is:
-    """
-    
-    if conf.eval.use_cache and (prompt in llm_cache):
-        # 缓存命中
-        print("Cache hit!")
-        answer_rephrase = llm_cache[prompt]
-    else:
-        # 缓存未命中
-        print("Cache miss. Calling API...")
-        
-        messages = [HumanMessage(content=prompt)]
-        answer_rephrase = eval_llm.invoke(messages).content
-        
-        # 保存缓存
-        llm_cache[prompt] = answer_rephrase
-        print("Saving cache...")
-        with open(conf.eval.eval_cache_file, "wb") as f:
-            pickle.dump(llm_cache, f)
+    answer_rephrase = eval_llm(prompt)
     
     return answer_rephrase
     
@@ -80,10 +66,10 @@ def get_predicted_option(answer, options):
     return -1, "none"
 
 
-def get_predicted_option_with_rephrase(answer, options, question, conf, eval_llm, llm_cache):
+def get_predicted_option_with_rephrase(answer, options, question, conf, eval_llm):
     predicted_option, match_method = get_predicted_option(answer, options)
     if predicted_option == -1:
-        answer_rephrase = LLM_rephrase(answer, options, question, conf, eval_llm, llm_cache)
+        answer_rephrase = LLM_rephrase(answer, options, question, conf, eval_llm)
         predicted_option, match_method = get_predicted_option(answer_rephrase, options)
     return predicted_option, match_method
 
@@ -96,16 +82,18 @@ def get_latest_file(directory):
     return latest_file
 
 
-def main(data, output_file, conf, eval_llm, llm_cache):
+def main(data, output_file, conf, eval_llm):
 
     total_items = len(data)
     have_ans_items = 0
     correct_items = 0
     error_items = 0
+    total_visible_frames_num = 0
+    total_visible_frames_fps = 0
 
     for item in tqdm(data):
         truth = item['truth']
-        options = [item['optionA'], item['optionB'], item['optionC'], item['optionD'], item['optionE']]
+        options = item['options']
         question = item['question']
         
         if not isinstance(item['answers'], list):
@@ -122,7 +110,7 @@ def main(data, output_file, conf, eval_llm, llm_cache):
         match_methods = []
         for answer in answers:
             predicted_option, match_method = get_predicted_option_with_rephrase(
-                answer, options, question, conf, eval_llm, llm_cache
+                answer, options, question, conf, eval_llm
             )
             predicted_options.append(predicted_option)
             match_methods.append(match_method)
@@ -151,8 +139,15 @@ def main(data, output_file, conf, eval_llm, llm_cache):
         item['is_correct'] = is_correct
         item['match_methods'] = match_methods
 
+        if "visible_frames_num" in item:
+            total_visible_frames_num += item["visible_frames_num"]
+        if "visible_frames_fps" in item:
+            total_visible_frames_fps += item["visible_frames_fps"]
+
     acc_include_no_ans = correct_items / total_items
     acc_exclude_no_ans = correct_items / have_ans_items
+    avg_visible_frames_num = total_visible_frames_num / total_items
+    avg_visible_frames_fps = total_visible_frames_fps / total_items
 
     # 输出结果
     print(f"Total items: {total_items}")
@@ -161,26 +156,31 @@ def main(data, output_file, conf, eval_llm, llm_cache):
     print(f"Correct items: {correct_items}")
     print(f"Acc include no ans: {acc_include_no_ans:.2%}")
     print(f"Acc exclude no ans: {acc_exclude_no_ans:.2%}")
+    print(f"avg_visible_frames_num: {avg_visible_frames_num:.2f}")
+    print(f"avg_visible_frames_fps: {avg_visible_frames_fps:.2f}")
+
+    # 检查 output_file 所在的文件夹是否存在，如果不存在则创建
+    output_dir = os.path.dirname(output_file)
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
     # 保存评估结果到文件
     with open(output_file, 'w') as f:
         json.dump(data, f, indent=4)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Evaluate NextQA answers")
-    parser.add_argument('--config', default="config/nextqa_new_tool.yaml",type=str)
+    parser = argparse.ArgumentParser(description="Evaluate answers")
+    parser.add_argument('--config', default="config/videomme.yaml",type=str)
     args = parser.parse_args()
     conf = OmegaConf.load(args.config)
 
     input_file_list = [
-        # "archive/output/nextqa/results_20250420_204303.json",
-        "output/nextqa/results_20250421_202125.json",
-        # "output/nextqa/results_20250421_212143.json",
-        "output/nextqa/results_20250420_222432.json",
-        "output/nextqa/results_20250420_230747.json",
+        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250424_225733.json",
+        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250424_192740.json"
     ]
     
-    output_file = "eval/nextqa/ensemble_1.json"
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_file = f"eval/videomme/ensemble_{timestamp}.json"
 
     with open(input_file_list[0], 'r') as f:
         data = json.load(f)
@@ -194,21 +194,9 @@ if __name__ == "__main__":
             data[j]['answers'].extend(extend_data[j]['answers'])
 
     # LLM for rephrase
-    eval_llm = ChatOpenAI(
-        model=conf.openai.EVAL_MODEL_NAME,
-        temperature=0.0,
-        api_key=conf.openai.GPT_API_KEY,
-        base_url=conf.openai.PROXY
-    )
-    # cache
-    if conf.eval.use_cache and os.path.exists(conf.eval.eval_cache_file):
-        print("loading cache...")
-        with open(conf.eval.eval_cache_file, "rb") as f:
-            llm_cache = pickle.load(f)
-    else:
-        llm_cache = {}
+    eval_llm = ChatOpenAI(model_string=conf.openai.EVAL_MODEL_NAME, is_multimodal=False)
 
-    main(data, output_file, conf, eval_llm, llm_cache)
+    main(data, output_file, conf, eval_llm)
 
     print(f"Output saved to {output_file}.")
 

@@ -6,7 +6,6 @@ from tqdm import tqdm
 from collections import Counter
 from omegaconf import OmegaConf
 from engine.openai import ChatOpenAI
-
 from prompts import EVAL_PROMPT
 
 
@@ -28,7 +27,7 @@ def answer_full_matching(answer, options):
             return i, "answer full matching"
     return -1, "none"
 
-def LLM_rephrase(answer, options, question, conf, eval_llm, llm_cache):
+def LLM_rephrase(answer, options, question, conf, eval_llm):
     
     # 首先构造选项的提示
     if len(options) == 5:
@@ -66,10 +65,10 @@ def get_predicted_option(answer, options):
     return -1, "none"
 
 
-def get_predicted_option_with_rephrase(answer, options, question, conf, eval_llm, llm_cache):
+def get_predicted_option_with_rephrase(answer, options, question, conf, eval_llm):
     predicted_option, match_method = get_predicted_option(answer, options)
     if predicted_option == -1:
-        answer_rephrase = LLM_rephrase(answer, options, question, conf, eval_llm, llm_cache)
+        answer_rephrase = LLM_rephrase(answer, options, question, conf, eval_llm)
         predicted_option, match_method = get_predicted_option(answer_rephrase, options)
     return predicted_option, match_method
 
@@ -82,7 +81,7 @@ def get_latest_file(directory):
     return latest_file
 
 
-def main(input_file, output_file, conf, eval_llm, llm_cache=None):
+def main(input_file, output_file, conf, eval_llm):
 
     with open(input_file, 'r') as f:
         data = json.load(f)
@@ -113,7 +112,7 @@ def main(input_file, output_file, conf, eval_llm, llm_cache=None):
         match_methods = []
         for answer in answers:
             predicted_option, match_method = get_predicted_option_with_rephrase(
-                answer, options, question, conf, eval_llm, llm_cache
+                answer, options, question, conf, eval_llm
             )
             predicted_options.append(predicted_option)
             match_methods.append(match_method)
