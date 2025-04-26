@@ -86,10 +86,12 @@ class NextDataset(BaseDataset):
                 continue
 
             question, truth = row['question'].capitalize(), row['answer']
+            if question[-1] != '?':
+                question += '?'
             qid, q_type = row['qid'], row['type']
             options = [row['a0'], row['a1'], row['a2'], row['a3'], row['a4']]
             quid = f'{uid}_{qid}'
-            question_w_options = f"{question}? Choose your answer from below options: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
+            question_w_options = f"{question} Choose your answer from below options: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
 
             data.append({
                 'quid': quid,
@@ -135,6 +137,8 @@ class VideoMMEDataset(BaseDataset):
             qid = row['question_id']
             q_type = row["task_type"]
             question = row['question'].capitalize()  # 首字母大写
+            if question[-1] != '?':
+                question += '?'
             
             options = row['options']
             new_options = []
@@ -144,7 +148,7 @@ class VideoMMEDataset(BaseDataset):
                     new_options.append(new_option)
 
             truth = char_to_num[row['answer']]
-            question_w_options = f"{question}? Choose your answer from below options: A.{new_options[0]}, B.{new_options[1]}, C.{new_options[2]}, D.{new_options[3]}."
+            question_w_options = f"{question} Choose your answer from below options: A.{new_options[0]}, B.{new_options[1]}, C.{new_options[2]}, D.{new_options[3]}."
 
             video_path = os.path.join(self.args.video_path_base, videoID + ".mp4")
             if not os.path.exists(video_path):

@@ -10,11 +10,12 @@ from tools.temporal_grounding import TemporalGrounding
 from tools.image_grid_qa import ImageGridQA
 from tools.temporal_qa import TemporalQA
 from tools.summarizer import Summarizer
+from tools.image_captioner_llava import ImageCaptionerLLaVA
 
 import pdb
 
 parser = argparse.ArgumentParser(description="demo")               
-parser.add_argument('--config', default="config/nextqa.yaml",type=str)                           
+parser.add_argument('--config', default="config/videomme.yaml",type=str)                           
 opt = parser.parse_args()
 conf = OmegaConf.load(opt.config)
 
@@ -82,7 +83,7 @@ yolo_tracker.set_frames(visible_frames)
 results = yolo_tracker.inference(input="children")
 '''
 
-
+'''
 # image_qa
 image_qa = ImageQA(conf=conf)
 image_qa.set_frames(visible_frames)
@@ -91,6 +92,14 @@ question = "How many children are in the video?"
 image_qa.inference(input=question)
 qa_desp = visible_frames.get_qa_descriptions()
 print(qa_desp)
+'''
+
+image_captioner_llava = ImageCaptionerLLaVA(conf=conf)
+image_captioner_llava.set_frames(visible_frames)
+image_captioner_llava.inference(input="placeholder")
+desp = visible_frames.get_frame_descriptions()
+print(desp)
+
 
 # summarizer
 summarizer = Summarizer(conf=conf)

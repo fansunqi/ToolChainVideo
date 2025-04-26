@@ -53,6 +53,7 @@ class VisibleFrames:
     def __init__(self, 
                 video_path, 
                 init_sec_interval=None,
+                init_interval_num=None,
                 min_interval=None,
                 min_sec_interval=1):
         self.frames: List[Frame] = [] 
@@ -62,6 +63,14 @@ class VisibleFrames:
             fps = self.video_info["fps"]
             init_interval = int(init_sec_interval * fps)
             self.add_frames(video_stride=init_interval)
+        elif init_interval_num != None:
+            total_frames = self.video_info["total_frames"]
+            if total_frames <= init_interval_num:
+                frame_indices = list(range(total_frames))
+            else:
+                step = (total_frames - 1) / (init_interval_num - 1)
+                frame_indices = [round(i * step) for i in range(init_interval_num)]
+            self.add_frames(frame_indices=frame_indices)
 
         if min_interval:
             self.min_interval = min_interval
@@ -177,19 +186,19 @@ class VisibleFrames:
         
         return result
     
-    # def get_frame_descriptions(self) -> str:
-    #     """获取所有可见帧的文字描述"""
-    #     if not self.frames:
-    #         return "No visible frames."
+    def get_frame_descriptions(self) -> str:
+        """获取所有可见帧的文字描述"""
+        if not self.frames:
+            return "No visible frames."
         
-    #     descriptions = []
-    #     for frame in self.frames:
-    #         desc = f"Frame {frame.index}"
-    #         if frame.description:
-    #             desc += f":\n{frame.description}"
-    #         descriptions.append(desc)
+        descriptions = []
+        for frame in self.frames:
+            desc = f"Frame {frame.index}"
+            if frame.description:
+                desc += f":\n{frame.description}"
+            descriptions.append(desc)
         
-    #     return "\n".join(descriptions)
+        return "\n".join(descriptions)
     
     def get_frame_count(self) -> int:
         """获取可见帧数量"""

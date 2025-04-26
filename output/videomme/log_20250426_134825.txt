@@ -1,0 +1,724 @@
+
+Building videomme dataset...
+
+
+Processing: 301-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/dphq5X-rMew.mp4
+414.49741666666665
+Input prompt:  According to the video, how many man-made ditches are found recently? Choose your answer from below options: A.4, B.2, C.3, D.1.
+Output Answer:  C.3
+
+
+Processing: 301-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/dphq5X-rMew.mp4
+414.49741666666665
+Input prompt:  Why cusco and tenochtitlan can be easily found while amazonian settlements can not? Choose your answer from below options: A.Because Amazonian settlements were built with wood and earth , B.Because Amazonian settlements were too small, C.Because Amazonian settlements were in the center of Amazon forest, D.Because local people all died from diseases.
+Output Answer:  C.Because Amazonian settlements were in the center of Amazon forest,
+
+
+Processing: 301-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/dphq5X-rMew.mp4
+414.49741666666665
+Input prompt:  Who finally find the lost city? Choose your answer from below options: A.Terra preta, B.Fawcett, C.European expeditions, D.Dr.Michael Heckenberger.
+Output Answer:  D
+
+
+Processing: 302-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/K64wRD8eaus.mp4
+505.7969583333333
+Input prompt:  Why does this video mention victor garber? Choose your answer from below options: A.Because he doesn't believe that the Titanic will sink, B.Because he is the architect of the Titanic, C.Because he played Tomas Andrew in the movie, D.Because he konws the tragic end of the Titanic.
+Output Answer:  D.Because he konws the tragic end of the Titanic.
+
+
+Processing: 302-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/K64wRD8eaus.mp4
+505.7969583333333
+Input prompt:  Which of the following statements is not correct? Choose your answer from below options: A.The Titanic finally sank because 5 adjacent compartments were breached, B.Despite the lack of lifeboats, the Titanic met all the requirement, C.People on the Titanic were not rescued in time because its operator was sleeping, D.The Titanic was equipped with 20 lifeboats.
+Output Answer:  B. Despite the lack of lifeboats, the Titanic met all the requirement,
+
+
+Processing: 302-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/K64wRD8eaus.mp4
+505.7969583333333
+Input prompt:  How many ships are shown in the map while the sinking ship sending out message? Choose your answer from below options: A.3 , B.8, C.11, D.9.
+Output Answer:  A.3
+
+
+Processing: 303-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/kSBB5PsRV-k.mp4
+285.36841111111113
+Input prompt:  When the video talks about sea level rise, what is the time span? Choose your answer from below options: A.1300 AD - 2016 AD, B.1200 BC - 2019 AD, C.1300 BC - 2016 AD, D.1200 AD - 2019 AD.
+Output Answer:  C.
+
+
+Processing: 303-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/kSBB5PsRV-k.mp4
+285.36841111111113
+Input prompt:  What is the accurate sequence for the video to present its content?
+(a) sunken cities.
+(b) sunken ships.
+(c) sunken things used to learn about ancient people.? Choose your answer from below options: A.(c)(b)(a), B.(a)(b)(c), C.(a)(c)(b), D.(b)(a)(c).
+Output Answer:  A.(c)(b)(a)
+
+
+Processing: 303-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/kSBB5PsRV-k.mp4
+285.36841111111113
+Input prompt:  What is the primary focus of this video for the audience? Choose your answer from below options: A.What is there 200 meters below the sea, B.What have humans discovered from deep-sea archaeology, C.What is the significance of deep-sea archaeology to the development of modern human society, D.How much of human history is on the bottom of the ocean.
+Output Answer:  D. How much of human history is on the bottom of the ocean.
+
+
+Processing: 304-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/QTA8j5wSTx4.mp4
+501.33416666666665
+Input prompt:  Why did the main character in the video put his hand in the coat? Choose your answer from below options: A.Because his hand was deformed, B.For public image, C.Because such action can released stomach pain, D.For warmth.
+Output Answer:  B. Because his hand was deformed
+
+
+Processing: 304-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/QTA8j5wSTx4.mp4
+501.33416666666665
+Input prompt:  Who started the custom of restraining hand activities in pulic? Choose your answer from below options: A.Demosthenes, B.Aeschines, C.Napoleon, D.Pizarro.
+Output Answer:  C.
+
+
+Processing: 304-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/QTA8j5wSTx4.mp4
+501.33416666666665
+Input prompt:  Which of the following elements isn't mentioned in the painting "the emperor napoleon in his study at the tuileries"? Choose your answer from below options: A.A lamp on the desk, B.A map on the floor, C.A clock on the wall, D.Napoleon Bonaparte with his hand tucked inside his coat.
+Output Answer:  B
+
+
+Processing: 305-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/tuZcS2Flabw.mp4
+333.29129166666667
+Input prompt:  Who embraces the parthenon temple in the video? Choose your answer from below options: A.Pheidias, B.Athena, C.The glory of the Athenians, D.Pericles.
+Output Answer:  D. Pericles.
+
+
+Processing: 305-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/tuZcS2Flabw.mp4
+333.29129166666667
+Input prompt:  Which of the following ideas about the temple's design is not innovative? Choose your answer from below options: A.Put human's and gods's sculptures side by side, B.Combine Doric columns with Ionic elements, C.Integrating traditional elements with modern ones in a harmonious manner., D.Incorporate entasis in each colum.
+Output Answer:  C.Integrating traditional elements with modern ones in a harmonious manner.,
+
+
+Processing: 305-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/tuZcS2Flabw.mp4
+333.29129166666667
+Input prompt:  Which of the following events are in correct order? Choose your answer from below options: A.The Parthenon Temple was completed, Pheidias left thanks to Athena's bless, Pheidias was accused of embezzlement, Pheidias accounted spending to prove his innocence, B.Pheidias was accused of embezzlement, Pheidias accounted spending to prove his innocence, the Parthenon Temple was completed, Pheidias left thanks to Athena's bless, C.The Parthenon Temple was completed, Pheidias was accused of embezzlement, Pheidias accounted spending to prove his innocence, Pheidias left thanks to Athena's bless, D.The Parthenon Temple was completed, Pheidias left thanks to Athena's bless, Pheidias accounted spending to prove his innocence, Pheidias was accused of embezzlement.
+Output Answer:  C
+
+
+Processing: 306-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/s_TGkDcjBqI.mp4
+309.26729166666667
+Input prompt:  How many princesses flew away when the cowherd approached? Choose your answer from below options: A.Eight, B.Seven, C.One, D.Six.
+Output Answer:  B.Seven
+
+
+Processing: 306-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/s_TGkDcjBqI.mp4
+309.26729166666667
+Input prompt:  What was weaver doing when the cowherd saw her at the first time? Choose your answer from below options: A.Taking a shower with her sisters, B.Combing her hair, C.Exploring the countryside, D.Teaching her skills to the villagers.
+Output Answer:  B.Combing her hair
+
+
+Processing: 306-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/s_TGkDcjBqI.mp4
+309.26729166666667
+Input prompt:  How did the cowherd use the bull's magic? Choose your answer from below options: A.Asked the magpies to form a bridge, B.Hurtled upwards and tried to wade through the stars, C.Plucked a golden hairpin and tore through the sky, D.Hastily placed each child in a basket.
+Output Answer:  A
+
+
+Processing: 307-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/8l1NyR6UvxU.mp4
+314.98133333333334
+Input prompt:  Which of the following events happened before 72 bce? Choose your answer from below options: A.The Senate retaliated with the full force of two legion, B.Praetor Variniu was ambushed, C.Crixus died in a battle, D.Marcus Licinius Crassus had assumed control of the war.
+Output Answer:  C
+
+
+Processing: 307-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/8l1NyR6UvxU.mp4
+314.98133333333334
+Input prompt:  Which of the following features can not describe spartacus? Choose your answer from below options: A.Thick beard, B.Curly hair, C.Strong muscle, D.Having a bold mind.
+Output Answer:  B.Curly hair
+
+
+Processing: 307-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/8l1NyR6UvxU.mp4
+314.98133333333334
+Input prompt:  What happened when the main character owned an army of about 120,000 soldiers? Choose your answer from below options: A.The army captured Rome, B.The army marched beyond Rome's border, C.The army climbed the Alp, D.The army turned south.
+Output Answer:  A
+
+
+Processing: 308-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/wgPymD-NBQU.mp4
+357.6489583333333
+Input prompt:  Who is the main character in the video? Choose your answer from below options: A.Mark Antony, B.Caesar, C.Brutus, D.Gaius Cassius Longinus.
+Output Answer:  D
+
+
+Processing: 308-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/wgPymD-NBQU.mp4
+357.6489583333333
+Input prompt:  How many people attended in the assasination of caesar according to the video? Choose your answer from below options: A.3, B.Around 20 to 30, C.About 60, D.1.
+Output Answer:  B. Around 20 to 30
+
+
+Processing: 308-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/wgPymD-NBQU.mp4
+357.6489583333333
+Input prompt:  Which of the following statements is true? Choose your answer from below options: A.Dante thought Brutus was a selfless fighter against dictators, B.Caesar was stingy with his followers, C.Brutus was Caesar's son, D.Caesar owned the crowd's support from beginning to end.
+Output Answer:  A.Dante thought Brutus was a selfless fighter against dictators,
+B.Caesar was stingy with his followers,
+
+
+Processing: 309-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/tjrvKA4w9-Y.mp4
+367.36699999999996
+Input prompt:  How does the video organize the story of che guevara? Choose your answer from below options: A.By holding a trial trying to evaluating his merits and demerits, B.By telling his life in flashback, C.By asking the Judge to tell Che Guevara's story, D.By debating on whether Che Guevara should be judged by his ideals or outcomes.
+Output Answer:  A.By holding a trial trying to evaluating his merits and demerits,
+
+
+Processing: 309-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/tjrvKA4w9-Y.mp4
+367.36699999999996
+Input prompt:  Whose portrait is on the cup of the judge in the video? Choose your answer from below options: A.The lawyer's, B.The judge's, C.Che Guevara's, D.Castro's.
+Output Answer:  C.Che Guevara's.
+
+
+Processing: 309-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/tjrvKA4w9-Y.mp4
+367.36699999999996
+Input prompt:  What happened when che guevara failed to rally rebels in the congo? Choose your answer from below options: A.He went to Soviet to rebel once again, B.He was captured and executed by Congo's government, C.His action led to the Cuban Missile Crisis, D.He went to Bolivia to rebel once again.
+Output Answer:  A.He went to Soviet to rebel once again,
+
+
+Processing: 310-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/A9fQPzZ1-hg.mp4
+385.8437916666666
+Input prompt:  How many defending layers were there in the barrier in the east of the berlin wall accoridng to the video? Choose your answer from below options: A.4, B.3, C.2, D.5.
+Output Answer:  A.4
+
+
+Processing: 310-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/A9fQPzZ1-hg.mp4
+385.8437916666666
+Input prompt:  Which of the following events happened after the fall of the berlin wall, according to the video? Choose your answer from below options: A.East Germany tired to defused tension by making travel permits easier to obtain, B.The disintegration of the soviet union, C.Mass demonstrations for free travel appeared, D.Many people fled to West Germany by various methods.
+Output Answer:  D. Many people fled to West Germany by various methods.
+
+
+Processing: 310-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/A9fQPzZ1-hg.mp4
+385.8437916666666
+Input prompt:  How many people from east germany had fled to west germany by 1961? Choose your answer from below options: A.About 5 million, B.About 4 million, C.About 3.5 million, D.About 2 million.
+Output Answer:  C. About 3.5 million
+
+
+Processing: 311-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/4jmMWohs1XM.mp4
+342.1334583333333
+Input prompt:  What are the colors of the famous statue of augustus caesar that is supposed to? Choose your answer from below options: A.Totally white, B.Mainly white and red, C.Mainly white and green, D.Mainly red and green.
+Output Answer:  C.Mainly white and green
+
+
+Processing: 311-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/4jmMWohs1XM.mp4
+342.1334583333333
+Input prompt:  Which of the following statements is not true? Choose your answer from below options: A.The colors on the Roman scultures faded in Renaissance, B."Laocoön and His Sons" is originally full of color, C.Artists in the Renaissance liked white marble because they wanted to imitated the Roman sculptures, D."David" is originally full of color.
+Output Answer:  D."David" is originally full of color.
+
+
+Processing: 311-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/4jmMWohs1XM.mp4
+342.1334583333333
+Input prompt:  Which of the following methods of revealing the original color of the ancient art work is not mentioned in the video? Choose your answer from below options: A.By imagining the color that fits in well with the art work, B.Ultraviolet light, C.Pigment analysis, D.Sampling some visible colors.
+Output Answer:  C.Pigment analysis
+
+
+Processing: 312-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/RBTiTcHm_ac.mp4
+284.86791666666664
+Input prompt:  What does michael bierut take as an example to illustrate pictoral logos? Choose your answer from below options: A.Nike's logo, B.Google's logo, C.Coca cola'logo, D.Apple's logo.
+Output Answer:  A.Nike's logo
+
+
+Processing: 312-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/RBTiTcHm_ac.mp4
+284.86791666666664
+Input prompt:  Why does michael bierut mention religious symbols? Choose your answer from below options: A.Because he thinks that logoss should take in religious elements, B.Because he believes that religious symbols are logos too, C.To illustrate that the logo's meaning is expressed by what people come to mind, D.Because he believes in Christianity.
+Output Answer:  A.Because he thinks that logoss should take in religious elements,
+
+
+Processing: 312-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/RBTiTcHm_ac.mp4
+284.86791666666664
+Input prompt:  What did nike do when a graphic design student submit her work in the video? Choose your answer from below options: A.They sent her a ring with a Nike swoosh, B.They associated the product with the idea of athletic, C.The Nike founders didn't like it, D.They abandoned her work.
+Output Answer:  B.They associated the product with the idea of athletic,
+
+
+Processing: 313-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/osRzbY_AdaM.mp4
+315.72
+Input prompt:  What do the two people at the beginning of the video have in common? Choose your answer from below options: A.The are both piano-learner, B.They both wear glasses, C.They are both good at playing the violin, D.They both wear black shirt.
+Output Answer:  B.They both wear glasses.
+
+
+Processing: 313-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/osRzbY_AdaM.mp4
+315.72
+Input prompt:  What is the teacher's attitude toward the student when the student attempts to play middle c on the violin? Choose your answer from below options: A.Inspired, B.Disappointed, C.Appreciated, D.Angry.
+Output Answer:  B. Disappointed
+
+
+Processing: 313-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/osRzbY_AdaM.mp4
+315.72
+Input prompt:  Which of the following statements about the violin-learner in the video is true? Choose your answer from below options: A.He keeps improving himself as the video goes on, B.He has lost confidence in his playing skills, C.He learned the violin because his neck wasn't that good, D.He is very enthusiastic when exposed to new playing techniques.
+Output Answer:  A.He keeps improving himself as the video goes on,
+
+
+Processing: 314-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/1pHkv4KUiFY.mp4
+266.9
+Input prompt:  How many listeners gave busking donations to the girl before she started playing? Choose your answer from below options: A.One, B.Two, C.None, D.Three.
+Output Answer:  B.Two
+
+
+Processing: 314-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/1pHkv4KUiFY.mp4
+266.9
+Input prompt:  What instrument is the little girl playing in the video? Choose your answer from below options: A.Violin, B.Piano, C.Cello, D.Guitar.
+Output Answer:  A.Violin
+
+
+Processing: 314-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/1pHkv4KUiFY.mp4
+266.9
+Input prompt:  What color shoes does the little girl wear? Choose your answer from below options: A.Yellow, B.Orange, C.Pink, D.Black.
+Output Answer:  C.Pink.
+
+
+Processing: 315-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/B2zhLYz4pYo.mp4
+330.33
+Input prompt:  What's the color of gabriel garcía márquez's car in the video? Choose your answer from below options: A.Green, B.Black, C.Orange, D.Red.
+Output Answer:  A. Green
+
+
+Processing: 315-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/B2zhLYz4pYo.mp4
+330.33
+Input prompt:  Which of the following plots about the book was not mentioned in the video? Choose your answer from below options: A.Globe-trotting adventure, B.Civil war, C.Political intrigue, D.The main character abruptly turned his car around and went home.
+Output Answer:  D.The main character abruptly turned his car around and went home.
+
+
+Processing: 315-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/B2zhLYz4pYo.mp4
+330.33
+Input prompt:  Which of the following statements about the author is not correct? Choose your answer from below options: A.He used to be a journalist, B.Despite having seen the dark side of the world, he still believed a better world, C.His writing style was influenced by his maternal grandparent, D.He growed up in a colonial society.
+Output Answer:  C.His writing style was influenced by his maternal grandparent,
+
+
+Processing: 316-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/IaTaaNinolU.mp4
+477.74393333333336
+Input prompt:  Which of the following features can describe hamlet in the video? Choose your answer from below options: A.Wearing brown coat, B.Blonde hair, C.Thick beard, D.Long hair.
+Output Answer:  C. Thick beard
+
+
+Processing: 316-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/IaTaaNinolU.mp4
+477.74393333333336
+Input prompt:  Which of the following events happened after polonius's death? Choose your answer from below options: A.The norwegian army intended to invade a small area in polan, B.Hamlet's mother screamed out for help, C.Hamlet rebuked Ophelia's advances, D.Rosencrantz and Guildenstern escorted hamlet on a diplomatic mission.
+Output Answer:  B. Hamlet's mother screamed out for help
+
+
+Processing: 316-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/IaTaaNinolU.mp4
+477.74393333333336
+Input prompt:  Why didn't the english king kill hamlet? Choose your answer from below options: A.Because Hamlet changed the content in the letter, B.Because Claudius asked the English king to protect Hamlet during their journey, C.Because the English king was unwilling to kill Hamlet, D.Because Hamlet's friends chose to be killed instead of Hamlet.
+Output Answer:  B.Because Claudius asked the English king to protect Hamlet during their journey,
+
+
+Processing: 317-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/Bkheu99K5lY.mp4
+445.6452
+Input prompt:  Which of the following materials used to recreate monate's water lilies is not neccessary? Choose your answer from below options: A.Paintbrushes (flat and round), B.Acrylic paints in green, blue, white, yellow, and purple, C.Tissue paper, D.Drawing board.
+Output Answer:  C.Tissue paper
+
+
+Processing: 317-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/Bkheu99K5lY.mp4
+445.6452
+Input prompt:  Which style does the painting in the video belong to? Choose your answer from below options: A.Romanticism, B.Realism, C.Impressionism, D.Minimalism.
+Output Answer:  C. Impressionism
+
+
+Processing: 317-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/Bkheu99K5lY.mp4
+445.6452
+Input prompt:  What's the correct order of the following events?
+1. creating basic background.
+2. add a few flowers to the painting.
+3. building up the texture of the painting even more.
+4. drawing the pads of the water lilies.? Choose your answer from below options: A.4, 1, 2, 3, B.2, 4, 1, 3, C.1, 4, 2, 3, D.1, 4, 3, 2.
+Output Answer:  C.1, 4, 2, 3
+
+
+Processing: 318-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/QdlP8ai8trw.mp4
+449.73333333333335
+Input prompt:  Where is the sculture supposed to stay? Choose your answer from below options: A.Inside the church, B.In Italy museum, C.On the cathedral, D.On the main street of Florence.
+Output Answer:  C
+
+
+Processing: 318-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/QdlP8ai8trw.mp4
+449.73333333333335
+Input prompt:  Which of the following statements is not correct? Choose your answer from below options: A.David ousted the Medici family, B.People in Florence identified with David because of his courage of defeating giant Goliath, C.Florence had experienced political turmoil before becoming a republic country, D.The very stance of the sculpture was taken directly from classical antiquity.
+Output Answer:  A.David ousted the Medici family.
+
+
+Processing: 318-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/QdlP8ai8trw.mp4
+449.73333333333335
+Input prompt:  What was david doing according to the sculpture? Choose your answer from below options: A.Completely relaxing, B.Ready for a fight, C.Overlooking at a battle in the distance, D.Fighting with giant Goliath.
+Output Answer:  B. Ready for a fight
+
+
+Processing: 319-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/MrRvX5I8PyY.mp4
+309.88
+Input prompt:  What kind of clothes is the speaker wearing? Choose your answer from below options: A.Blue jacket, B.Green plaid shirt, C.Brown shirt, D.Yellow T-shirt.
+Output Answer:  C
+
+
+Processing: 319-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/MrRvX5I8PyY.mp4
+309.88
+Input prompt:  Which one is listed top 2 according to the video? Choose your answer from below options: A.Wangjing Soho, B.London Aquatics Centre, C.Messner Mountain Museum, D.600 Collins Street.
+Output Answer:  B.
+
+
+Processing: 319-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/MrRvX5I8PyY.mp4
+309.88
+Input prompt:  Which of the following statements about zaha hadid's work is not correct? Choose your answer from below options: A.All of her works are built in the center of cities, B.Wangjing Soho consists of three towers resembling interweaving mountains, C.Heydar Aliyev Centre is named after the country's former president, D.600 Collins Street locates in Australia.
+Output Answer:  A. All of her works are built in the center of cities,
+
+
+Processing: 320-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/z2APU5ob9Og.mp4
+548.2143333333333
+Input prompt:  What is the first artist's specialty in pottery? Choose your answer from below options: A.Making coral, B.Making tiny pottery, C.Sculpting faces, D.Ceating symmetrical pierced pots.
+Output Answer:  A. Making coral
+
+
+Processing: 320-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/z2APU5ob9Og.mp4
+548.2143333333333
+Input prompt:  Why can the tenth artist create potteries with marbled designs? Choose your answer from below options: A.Because her works are made of marble, B.Because she glazes her pottery with bubbles, C.Because she paints marbel's texture to her works, D.Because she learns the perfect tempreture to generate such design.
+Output Answer:  B. Because she glazes her pottery with bubbles
+
+
+Processing: 320-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/z2APU5ob9Og.mp4
+548.2143333333333
+Input prompt:  What's the main color of hugh hope's work? Choose your answer from below options: A.Blue, B.Red, C.Green, D.Black.
+Output Answer:  A
+
+
+Processing: 321-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/7Hk9jct2ozY.mp4
+439.32
+Input prompt:  What is responsible for gene activation according to the video? Choose your answer from below options: A.Gene activation by Vitamin D, B.Hormonal changes during adolescence, C.Exposure to ultraviolet light, D.Cellular metabolism during exercise.
+Output Answer:  B. Hormonal changes during adolescence
+
+
+Processing: 321-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/7Hk9jct2ozY.mp4
+439.32
+Input prompt:  What is the correct order in which the following events are presented in the video?
+(a) the nucleus is introduced.
+(b) base pairing.
+(c) cell division.? Choose your answer from below options: A.(a)(c)(b), B.(c)(a)(b), C.(c)(b)(a), D.(a)(c)(b).
+Output Answer:  B.
+
+
+Processing: 321-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/7Hk9jct2ozY.mp4
+439.32
+Input prompt:  What does this video focus on? Choose your answer from below options: A.DNA variation, B.Transcription and coding of DNA, C.Technical principles of genetic engineering, D.Differences between animal and plant DNA.
+Output Answer:  B.
+
+
+Processing: 322-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/UZTf3OXJDWA.mp4
+844.0
+Input prompt:  What is the context of the video? Choose your answer from below options: A.A documentary film on human evolutionary biology, B.An overview of the human circulatory system, C.A clip about the human immune system, D.A detailed study of the human digestive system.
+Output Answer:  C.A clip about the human immune system
+
+
+Processing: 322-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/UZTf3OXJDWA.mp4
+844.0
+Input prompt:  What is the sequence of events in the video showing the following?
+(a) a rolling t-cell.
+(b) human hair follicles ooze oil.
+(c) plasma cell division.? Choose your answer from below options: A.(b)(a)(c), B.(a)(b)(c), C.(b)(c)(a), D.(c)(a)(b).
+Output Answer:  A.(b)(a)(c)
+
+
+Processing: 322-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/UZTf3OXJDWA.mp4
+844.0
+Input prompt:  Which of the following descriptions of the blue, bisected cell at the beginning of the video is correct? Choose your answer from below options: A.They recognize and destroy pathogens, B.They carry oxygen to various tissues and organs of the body, C.They are responsible for transmitting and processing nerve signals, D.They can differentiate into many kinds of cells.
+Output Answer:  D
+
+
+Processing: 323-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/URUJD5NEXC8.mp4
+441.3333333333333
+Input prompt:  Which cellular structure is responsible for receiving proteins according to the video? Choose your answer from below options: A.Golgi apparatus (Golgi body), B.Nucleus, C.Ribosome, D.Mitochondrion.
+Output Answer:  A.Golgi apparatus (Golgi body)
+
+
+Processing: 323-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/URUJD5NEXC8.mp4
+441.3333333333333
+Input prompt:  Which components are part of the object described in the video? Choose your answer from below options: A.Ribosomes and Endoplasmic Reticulum, B.Microfilaments and Microtubules, C.Golgi Apparatus and Lysosomes, D.Nucleolus and Peroxisomes.
+Output Answer:  C. Golgi Apparatus and Lysosomes
+
+
+Processing: 323-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/URUJD5NEXC8.mp4
+441.3333333333333
+Input prompt:  What is the correct chronological order in which the following parts of the video appear?
+(a) human lungs.
+(b) protein folding distortion.
+(c) mice, plants and cells.? Choose your answer from below options: A.(a)(b)(c), B.(c)(a)(b), C.(c)(b)(a), D.(b)(c)(a).
+Output Answer:  D.(b)(c)(a)
+
+
+Processing: 324-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/eWUAB194qhU.mp4
+293.5416666666667
+Input prompt:  What is the context of the video? Choose your answer from below options: A.It details the circulatory system and blood flow in the human body, B.It provides a simple explanation of the lymphatic system, C.It explores the muscular system and human movement, D.It focuses on the digestive system and nutrient absorption.
+Output Answer:  B. It provides a simple explanation of the lymphatic system.
+
+
+Processing: 324-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/eWUAB194qhU.mp4
+293.5416666666667
+Input prompt:  Which cells are contained within the lymph nodes, as depicted in the video? Choose your answer from below options: A.Macrophages, dendritic cells, B-cells, and T-cells, B.Red blood cells and platelets, C.Neurons and glial cells, D.Muscle cells and fat cells.
+Output Answer:  A.Macrophages, dendritic cells
+
+
+Processing: 324-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/eWUAB194qhU.mp4
+293.5416666666667
+Input prompt:  Why should exercise be included as a part of maintaining a healthy lymphatic system, according to the video? Choose your answer from below options: A.It increases body fat which is essential for lymphatic function, B.It helps to reduce the oxygen levels in the blood, C.It slows down the heart rate and reduces lymph flow, D.It speeds up the rate at which lymph drains back into your blood.
+Output Answer:  D.It speeds up the rate at which lymph drains back into your blood.
+
+
+Processing: 325-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/CxBbw8eT624.mp4
+878.9447333333334
+Input prompt:  What is the role of neuralink's first product, telepathy according to the video? Choose your answer from below options: A.Telepathy is designed for communication between users through thought alone without controlling devices, B.Telepathy enhances the brain's natural cognitive abilities without external interaction, C.Telepathy enhances the brain's natural cognitive abilities without external interaction, D.Telepathy allows the user to reach out and control pretty much everything interconnected.
+Output Answer:  C. Telepathy enhances the brain's natural cognitive abilities without external interaction
+
+
+Processing: 325-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/CxBbw8eT624.mp4
+878.9447333333334
+Input prompt:  How many individual electrodes are distributed across the circular hole in neuralink's device? Choose your answer from below options: A.512 electrodes, B.256 electrodes, C.1024 electrodes, D.2048 electrodes.
+Output Answer:  D. 2048 electrodes.
+
+
+Processing: 325-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/CxBbw8eT624.mp4
+878.9447333333334
+Input prompt:  What is the name of the brain-computer interface company introduced at the end of the video? Choose your answer from below options: A.Blackrock Neurotech, B.Vanguard, C.Neuralink, D.Synchron.
+Output Answer:  A. Blackrock Neurotech
+
+
+Processing: 326-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/ZGGDKC3GlrI.mp4
+701.2
+Input prompt:  What is the topic of the video? Choose your answer from below options: A.The future of medicine, B.A historical overview of medical treatments, C.The impact of traditional medicines on modern healthcare, D.A discussion on the ethics of animal testing in medical research.
+Output Answer:  D
+
+
+Processing: 326-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/ZGGDKC3GlrI.mp4
+701.2
+Input prompt:  What is the third future topic in medicine mentioned in the video? Choose your answer from below options: A.Regenerative medicine, B.Nanotechnology, C.Gene editing, D.Bioengineering.
+Output Answer:  D.Bioengineering.
+
+
+Processing: 326-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/ZGGDKC3GlrI.mp4
+701.2
+Input prompt:  What is the medical technique that takes up the most space in the video? Choose your answer from below options: A.A novel drug delivery system using nanotechnology, B.A gene-editing technology, C.An artificial intelligence for developing vaccines, D.An advanced magnetic resonance imaging (MRI).
+Output Answer:  B.D.A gene-editing technology
+
+
+Processing: 327-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/iPi-QNYgAa4.mp4
+326.24
+Input prompt:  Which summarizes the main focus of the video? Choose your answer from below options: A.The role of nanorobotics in medical treatment, B.R&D process and future application of nanorobotics, C.The role of nanorobots in cancer treatment, D.Cannot be inferred from the video.
+Output Answer:  C
+
+
+Processing: 327-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/iPi-QNYgAa4.mp4
+326.24
+Input prompt:  What is the exact order in which the video presents the following events?
+(a) application of respiratory cells to cardiovascular cure therapy.
+(b) the use of nanorobots in cancer treatment.
+(c) nanorobots for haemostasis.? Choose your answer from below options: A.(b)(a)(c), B.(a)(b)(c), C.(b)(c)(a), D.(c)(a)(b).
+Output Answer:  C.(b)(c)(a)
+
+
+Processing: 327-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/iPi-QNYgAa4.mp4
+326.24
+Input prompt:  For which diseases will respiratory cells potentially be used in treatment? Choose your answer from below options: A.Respiratory diseases, B.Cancer treatment, C.Cardiovascular disease, D.Alzheimer's disease.
+Output Answer:  A.Respiratory diseases
+
+
+Processing: 328-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/ckn9zybpYZ8.mp4
+270.4
+Input prompt:  What is the main focus of the video? Choose your answer from below options: A.Genetic factors contributing to multiple sclerosis, B.Global statistics on neurological diseases, C.Advances in the treatment of Alzheimer's disease, D.Parkinson's disease and its impact on the nervous system.
+Output Answer:  D.Parkinson's disease and its impact on the nervous system.
+
+
+Processing: 328-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/ckn9zybpYZ8.mp4
+270.4
+Input prompt:  How many cases of parkinson's disease are mentioned in the video? Choose your answer from below options: A.Over 4 million cases globally, B.Over 2 million cases globally, C.Over 6 million cases globally, D.Over 8 million cases globally.
+Output Answer:  C. Over 6 million cases globally
+
+
+Processing: 328-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/ckn9zybpYZ8.mp4
+270.4
+Input prompt:  What issue related to mitochondria is discussed in the context of parkinson's disease, as depicted in the video? Choose your answer from below options: A.There is an abnormal increase in the number of mitochondria, B.Mitochondria have an important role in neuronal connectivity, C.Mitochondria are too inefficient, resulting in inactive neurons, D.Mitochondria prevent the formation of new neuronal connections.
+Output Answer:  C.Mitochondria are too inefficient, resulting in inactive neurons
+
+
+Processing: 329-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/3uV8XZcIBbk.mp4
+766.8494166666666
+Input prompt:  What is the main topic of the video? Choose your answer from below options: A.The history of heart transplantation, B.The manufacture of durable artificial hearts, C.Developments in the treatment of cardiac arrhythmias, D.The development and production of new drugs for cardiovascular disease.
+Output Answer:  B.
+
+
+Processing: 329-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/3uV8XZcIBbk.mp4
+766.8494166666666
+Input prompt:  According to the video, how many heart transplants are performed annually, and how many are requested in the u.s. and worldwide? Choose your answer from below options: A.10,000 transplants were performed, 500,000 were requested in the U.S., and 5,000,000 were requested worldwide, B.6,000 transplants were performed, 600,000 were requested in the U.S., and 1,000,000 were requested worldwide, C.20,000 transplants were performed, 200,000 were requested in the U.S., and 2,000,000 were requested worldwide, D.3,000 transplants were performed, 300,000 were requested in the U.S., and 3,000,000 were requested worldwide.
+Output Answer:  A.10,000 transplants were performed, 500,000 were requested in the U.S., and 5,000,000 were requested worldwide,
+
+
+Processing: 329-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/3uV8XZcIBbk.mp4
+766.8494166666666
+Input prompt:  What is the role of the company bivacor in the field of medical devices? Choose your answer from below options: A.BiVACOR is engineering a long-term device intended to completely replace the function of a patient's native heart, B.BiVACOR is developing a temporary device for heart assistance during surgery, C.BiVACOR is focused on creating diagnostic tools for heart disease, D.BiVACOR designs pacemakers for regulating heart rhythm disorders.
+Output Answer:  A. BiVACOR is engineering a long-term device intended to completely replace the function of a patient's native heart,
+
+
+Processing: 330-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/cMim0uU1yzA.mp4
+525.84
+Input prompt:  Which summarizes the main focus of the video? Choose your answer from below options: A.The effects of neurological disorders on brain function, B.What happens to the brain as we age, C.The effects of social and emotional education on brain development, D.Neurological development of the human brain from infancy to adulthood.
+Output Answer:  D.
+
+
+Processing: 330-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/cMim0uU1yzA.mp4
+525.84
+Input prompt:  What is different from the other chapters in the video when introducing the children's chapter? Choose your answer from below options: A.No brain slice model demonstration, B.No neurotransmitter models were demonstrated, C.Brain waves of the human brain were demonstrated and analyzed, D.Video recordings of real-life scenarios are cited to reflect the function of the human brain at different ages.
+Output Answer:  D. Video recordings of real-life scenarios are cited to reflect the function of the human brain at different ages.
+
+
+Processing: 330-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/cMim0uU1yzA.mp4
+525.84
+Input prompt:  What happens to your brain when you're in your 70s according to the video? Choose your answer from below options: A.A greater tendency to be introverted, to avoid risk, or to have a stronger tendency towards social bonding, B.Reorganisation of the brain's neural network resulting in weaker connections between certain areas, C.The brain becomes smaller in size, D.'Natural death' or 'aging' of neurons in the brain.
+Output Answer:  B. Reorganisation of the brain's neural network resulting in weaker connections between certain areas.
+
+
+Processing: 331-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/t6V9i8fFADI.mp4
+366.8665
+Input prompt:  Which company is featured in the video but not mentioned in the audio? Choose your answer from below options: A.Coca-Cola, B.Apple, C.Dairy Queen, D.American Express.
+Output Answer:  C.Dairy Queen
+
+
+Processing: 331-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/t6V9i8fFADI.mp4
+366.8665
+Input prompt:  Suppose emily purchased some company stock in 2005 at a price of $50 per share. she passed away in 2020, when the stock's market value was $150 per share. if her heir, john, sold the stock in 2023 for $180 per share. assume the capital gains tax rate is 15%. according to the 'step-up in basis' rule, how much capital gains tax would john need to pay? Choose your answer from below options: A.$4.5 per share, B.$27 per share, C.$19.5 per share, D.$15 per share.
+Output Answer:  D.$15 per share.
+
+
+Processing: 331-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/t6V9i8fFADI.mp4
+366.8665
+Input prompt:  What is the correct order in which the billionaires appear in the video? Choose your answer from below options: A.Warren Buffett, Morris Pearl, Elon Musk, B.Warren Buffett, Jeff Bezos, Elon Musk, C.Warren Buffett, Elon Musk, Jeff Bezos, D.Morris Pearl, Jeff Bezos, Elon Musk.
+Output Answer:  B. Warren Buffett, Jeff Bezos, Elon Musk
+
+
+Processing: 332-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/zIbNJCSCEjk.mp4
+606.2723333333333
+Input prompt:  What event wasn't mentioned within the video? Choose your answer from below options: A.Witness the inflation in Venezuela, B.Fed rate hike, C.The epidemic is affecting global supply chains, D.Bicycle factory closed.
+Output Answer:  D.
+
+
+Processing: 332-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/zIbNJCSCEjk.mp4
+606.2723333333333
+Input prompt:  According to the video, how much did the central bank drop interest rates during the epidemic? Choose your answer from below options: A.5%, B.6%, C.1%, D.10%.
+Output Answer:  B. 6%
+
+
+Processing: 332-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/zIbNJCSCEjk.mp4
+606.2723333333333
+Input prompt:  Why does the price of apples go up in the video? Choose your answer from below options: A.There is excess liquidity in the market, B.Good sales, C.For profiteering, D.The apples don't sell.
+Output Answer:  A.There is excess liquidity in the market,
+
+
+Processing: 333-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/9XCKnN6o19k.mp4
+593.84
+Input prompt:  What is the role of the woman speaking in a white blouse in the video? Choose your answer from below options: A.Journalist, B.Employee, C.Company Executive, D.Counselor.
+Output Answer:  A.Journalist
+
+
+Processing: 333-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/9XCKnN6o19k.mp4
+593.84
+Input prompt:  Extrapolating from the video, when was shein founded? Choose your answer from below options: A.2015, B.2008, C.2011, D.2010.
+Output Answer:  C. 2011
+
+
+Processing: 333-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/9XCKnN6o19k.mp4
+593.84
+Input prompt:  Inferring from the video, what is the characteristic of shein corp? Choose your answer from below options: A.Open, B.Mystery, C.Expensive, D.Innovation.
+Output Answer:  D. Innovation
+
+
+Processing: 334-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/257wV-AbKaE.mp4
+286.66137499999996
+Input prompt:  What is the main point of this video? Choose your answer from below options: A.Who is Al Capone, B.Al Capone's estate, C.The operational process of money laundering, D.How to Start a Laundry Business.
+Output Answer:  C
+
+100 results saved

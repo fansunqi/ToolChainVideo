@@ -1,0 +1,15 @@
+
+Building videomme dataset...
+
+
+Processing: 301-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/dphq5X-rMew.mp4
+414.49741666666665
+Input prompt:  According to the video, how many man-made ditches are found recently? Choose your answer from below options: A.4, B.2, C.3, D.1.
+Output Answer:  B. 2
+
+
+Processing: 301-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/dphq5X-rMew.mp4
+414.49741666666665
+Input prompt:  Why cusco and tenochtitlan can be easily found while amazonian settlements can not? Choose your answer from below options: A.Because Amazonian settlements were built with wood and earth , B.Because Amazonian settlements were too small, C.Because Amazonian settlements were in the center of Amazon forest, D.Because local people all died from diseases.

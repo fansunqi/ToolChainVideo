@@ -26,6 +26,8 @@ class Summarizer:
             is_multimodal=False,
             enable_cache=conf.tool.summarizer.use_cache
         )
+        
+        self.mode = conf.tool.summarizer.mode
     
     def set_frames(self, visible_frames):
         self.visible_frames = visible_frames
@@ -39,12 +41,16 @@ class Summarizer:
         "The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'."
     )
     def inference(self, input):
-
-        # all_frames_descriptions = self.visible_frames.get_frame_descriptions()
-        all_qa_descriptions = self.visible_frames.get_qa_descriptions()
+        
+        if self.mode == "by_caption":
+            info = self.visible_frames.get_frame_descriptions()
+        elif self.mode == "by_qa":
+            info = self.visible_frames.get_qa_descriptions()
+        else:
+            raise ValueError(f"Unknown mode: {self.mode}")
 
         input_prompt = QUERY_PREFIX_INFO.format(
-            frame_information = all_qa_descriptions,
+            frame_information = info,
             question = input,
         )
 

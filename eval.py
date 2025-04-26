@@ -98,7 +98,7 @@ def main(input_file, output_file, conf, eval_llm):
         options = item['options']
         question = item['question']
         
-        if not isinstance(item['answers'], list):
+        if not isinstance(item['answers'], list) or len(item['answers']) == 0:
             error_items += 1
             continue
         

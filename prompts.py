@@ -87,7 +87,7 @@ Response in json format:
 """
 
 EVAL_PROMPT = """Given the following question and answer, determine which option matches the provided answer.
-If the answer matches exactly one of the options, return that option in full, e.g. 'A. one ; if it matches none or more than one option, return 'not matched'.
+If the answer matches exactly one of the options, return that option in full, e.g. 'A. one' ; if it matches none or more than one option, return 'not matched'.
 
 Question: {question}
 Answer: {answer}

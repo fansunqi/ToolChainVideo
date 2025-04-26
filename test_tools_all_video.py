@@ -53,6 +53,11 @@ if __name__ == "__main__":
     parser.add_argument('--config', default="config/videomme.yaml",type=str)                           
     opt = parser.parse_args()
     conf = OmegaConf.load(opt.config)
+    
+    if conf.to_txt:
+        log_path = os.path.join(conf.output_path, f"log_{timestamp}.txt")
+        f = open(log_path, "w")
+        sys.stdout = f
   
     # image_captioner = ImageCaptioner()
     # temporal_qa = TemporalQA(conf=conf)
@@ -101,18 +106,30 @@ if __name__ == "__main__":
         result["question_w_options"] = question_w_options
 
         # trim
-        # adjust_video_resolution(video_path)
+        adjust_video_resolution(video_path)
         
         for try_count in range(try_num):
 
             input_prompt = question_w_options
             print("Input prompt: ", input_prompt)
 
-            # output = temporal_qa.inference(input = input_prompt)
-            output = video_qa.inference(input = input_prompt)
-            # output = image_grid_qa.inference(input=input_prompt)
-            # output = temporal_grounding.inference(input=input_prompt)
-            # output = video_qa_internvl.inference(input=input_prompt)
+            if conf.try_except_mode:
+                try:
+                    # output = temporal_qa.inference(input = input_prompt)
+                    output = video_qa.inference(input = input_prompt)
+                    # output = image_grid_qa.inference(input=input_prompt)
+                    # output = temporal_grounding.inference(input=input_prompt)
+                    # output = video_qa_internvl.inference(input=input_prompt)
+                except Exception as e:
+                    output = "Error"
+                    print(f"Error during inference: {e}")
+                    continue
+            else:
+                # output = temporal_qa.inference(input = input_prompt)
+                output = video_qa.inference(input = input_prompt)
+                # output = image_grid_qa.inference(input=input_prompt)
+                # output = temporal_grounding.inference(input=input_prompt)
+                # output = video_qa_internvl.inference(input=input_prompt)
             
             # 存储 tg 数据
             # temporal_grounding_results["question"] = output
@@ -132,6 +149,8 @@ if __name__ == "__main__":
     # with open(tg_output_file, 'w') as f:
     #     json.dump(temporal_grounding_results, f, indent=4) 
 
-
+    if conf.to_txt:
+        sys.stdout = sys.__stdout__
+        f.close()
 
     

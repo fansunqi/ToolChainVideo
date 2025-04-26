@@ -9,11 +9,11 @@ repo_id = "lmms-lab/Video-MME"
 repo_type = "dataset"
 
 # 指定下载路径
-download_dir = "/mnt/Shared_05_disk/fsq/VideoMME"  # 替换为你的目标路径
+download_dir = "/mnt/Shared_03/fsq/VideoMME"  # 替换为你的目标路径
 os.makedirs(download_dir, exist_ok=True)
 
 # 下载所有文件
-for index in range(19, 21):
+for index in range(1, 21):
     if index < 10:
         filename = f"videos_chunked_0{index}.zip"
     else:   

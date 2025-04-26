@@ -130,16 +130,18 @@ class VideoQAInternVL:
     ):
         self.conf = conf
         
-        path = 'OpenGVLab/InternVL3-2B'
+        self.model_path = self.conf.tool.video_qa_internvl.model_path
+        self.device = self.conf.tool.video_qa_internvl.device
         self.model = AutoModel.from_pretrained(
-            path,
+            self.model_path,
             torch_dtype=torch.bfloat16,
             load_in_8bit=False,
             low_cpu_mem_usage=True,
             use_flash_attn=True,
             trust_remote_code=True,
-            device_map="cuda:0").eval()
-        self.tokenizer = AutoTokenizer.from_pretrained(path, trust_remote_code=True, use_fast=False)
+            device_map=self.device)
+        self.model.eval()
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_path, trust_remote_code=True, use_fast=False)
         self.generation_config = dict(max_new_tokens=1024, do_sample=True)
 
     def set_frames(self, visible_frames):

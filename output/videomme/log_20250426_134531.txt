@@ -1,0 +1,77 @@
+
+Building videomme dataset...
+
+
+Processing: 301-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/dphq5X-rMew.mp4
+414.49741666666665
+Input prompt:  According to the video, how many man-made ditches are found recently? Choose your answer from below options: A.4, B.2, C.3, D.1.
+Error during inference: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cuda:2! (when checking argument for argument weight in method wrapper_CUDA__cudnn_convolution)
+
+
+Processing: 301-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/dphq5X-rMew.mp4
+414.49741666666665
+Input prompt:  Why cusco and tenochtitlan can be easily found while amazonian settlements can not? Choose your answer from below options: A.Because Amazonian settlements were built with wood and earth , B.Because Amazonian settlements were too small, C.Because Amazonian settlements were in the center of Amazon forest, D.Because local people all died from diseases.
+Error during inference: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cuda:2! (when checking argument for argument weight in method wrapper_CUDA__cudnn_convolution)
+
+
+Processing: 301-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/dphq5X-rMew.mp4
+414.49741666666665
+Input prompt:  Who finally find the lost city? Choose your answer from below options: A.Terra preta, B.Fawcett, C.European expeditions, D.Dr.Michael Heckenberger.
+Error during inference: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cuda:2! (when checking argument for argument weight in method wrapper_CUDA__cudnn_convolution)
+
+
+Processing: 302-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/K64wRD8eaus.mp4
+505.7969583333333
+Input prompt:  Why does this video mention victor garber? Choose your answer from below options: A.Because he doesn't believe that the Titanic will sink, B.Because he is the architect of the Titanic, C.Because he played Tomas Andrew in the movie, D.Because he konws the tragic end of the Titanic.
+Error during inference: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cuda:2! (when checking argument for argument weight in method wrapper_CUDA__cudnn_convolution)
+
+
+Processing: 302-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/K64wRD8eaus.mp4
+505.7969583333333
+Input prompt:  Which of the following statements is not correct? Choose your answer from below options: A.The Titanic finally sank because 5 adjacent compartments were breached, B.Despite the lack of lifeboats, the Titanic met all the requirement, C.People on the Titanic were not rescued in time because its operator was sleeping, D.The Titanic was equipped with 20 lifeboats.
+Error during inference: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cuda:2! (when checking argument for argument weight in method wrapper_CUDA__cudnn_convolution)
+
+
+Processing: 302-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/K64wRD8eaus.mp4
+505.7969583333333
+Input prompt:  How many ships are shown in the map while the sinking ship sending out message? Choose your answer from below options: A.3 , B.8, C.11, D.9.
+Error during inference: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cuda:2! (when checking argument for argument weight in method wrapper_CUDA__cudnn_convolution)
+
+
+Processing: 303-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/kSBB5PsRV-k.mp4
+285.36841111111113
+Input prompt:  When the video talks about sea level rise, what is the time span? Choose your answer from below options: A.1300 AD - 2016 AD, B.1200 BC - 2019 AD, C.1300 BC - 2016 AD, D.1200 AD - 2019 AD.
+Error during inference: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cuda:2! (when checking argument for argument weight in method wrapper_CUDA__cudnn_convolution)
+
+
+Processing: 303-2
+/mnt/Shared_05_disk/fsq/VideoMME/data/kSBB5PsRV-k.mp4
+285.36841111111113
+Input prompt:  What is the accurate sequence for the video to present its content?
+(a) sunken cities.
+(b) sunken ships.
+(c) sunken things used to learn about ancient people.? Choose your answer from below options: A.(c)(b)(a), B.(a)(b)(c), C.(a)(c)(b), D.(b)(a)(c).
+Error during inference: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cuda:2! (when checking argument for argument weight in method wrapper_CUDA__cudnn_convolution)
+
+
+Processing: 303-3
+/mnt/Shared_05_disk/fsq/VideoMME/data/kSBB5PsRV-k.mp4
+285.36841111111113
+Input prompt:  What is the primary focus of this video for the audience? Choose your answer from below options: A.What is there 200 meters below the sea, B.What have humans discovered from deep-sea archaeology, C.What is the significance of deep-sea archaeology to the development of modern human society, D.How much of human history is on the bottom of the ocean.
+Error during inference: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cuda:2! (when checking argument for argument weight in method wrapper_CUDA__cudnn_convolution)
+
+
+Processing: 304-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/QTA8j5wSTx4.mp4
+501.33416666666665
+Input prompt:  Why did the main character in the video put his hand in the coat? Choose your answer from below options: A.Because his hand was deformed, B.For public image, C.Because such action can released stomach pain, D.For warmth.
+Error during inference: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cuda:2! (when checking argument for argument weight in method wrapper_CUDA__cudnn_convolution)
+
+10 results saved

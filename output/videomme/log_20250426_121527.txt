@@ -1,0 +1,8 @@
+
+Building videomme dataset...
+
+
+Processing: 301-1
+/mnt/Shared_05_disk/fsq/VideoMME/data/dphq5X-rMew.mp4
+414.49741666666665
+Input prompt:  According to the video, how many man-made ditches are found recently? Choose your answer from below options: A.4, B.2, C.3, D.1.

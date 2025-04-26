@@ -96,7 +96,7 @@ def main(data, output_file, conf, eval_llm):
         options = item['options']
         question = item['question']
         
-        if not isinstance(item['answers'], list):
+        if not isinstance(item['answers'], list) or len(item['answers']) == 0:
             error_items += 1
             continue
         
@@ -175,11 +175,24 @@ if __name__ == "__main__":
     conf = OmegaConf.load(args.config)
 
     input_file_list = [
-        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250424_121706.json",
-        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250424_225733.json",
-        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250424_192740.json",
-        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250425_174141.json"
-        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250425_193249.json"
+        # short
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250424_121706.json",   # 1 TQA
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250424_225733.json",   # 5.1 1fps+IGQA
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250424_192740.json",   # 4.1 1fps+IQA+S
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250425_174141.json",   # 2.4 VideoQA (InternVL3-VL-2B)
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250425_193249.json"    # 2.2 VideoQA (Qwen2.5-VL-3B)
+        
+        # medium
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_121708.json",   # 1.2 VideoQA (Qwen2.5-VL-3B)
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_134825.json",   # 1.4 VideoQA (InternVL3-2B)
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_194607.json",   # 2.2 16+IGQA
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_193722.json",   # 3.2 16+IQA+S
+
+        
+        # long
+        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_160749.json",   # VideoQA (Qwen2.5-VL-3B)
+        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_155926.json",   # VideoQA (InternVL3-2B)
+        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_202739.json",   # 16+IGQA
     ]
     
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")

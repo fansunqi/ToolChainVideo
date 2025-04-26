@@ -29,12 +29,20 @@ def sample_evenly(lst, num_samples):
     return [lst[int(round(i * step))] for i in range(num_samples)]
 
 # 留白模式
-def sample_adaptively_whitespace(lst):
+def sample_adaptively_whitespace(lst, grid_size):
 
-    if len(lst) <= 2**2:
-        grid_size = 2
-    else:
-        grid_size = 3
+    if grid_size == 3:
+        if len(lst) <= 2**2:
+            grid_size = 2
+        else:
+            grid_size = 3
+    elif grid_size == 4:
+        if len(lst) <= 2**2:
+            grid_size = 2
+        elif len(lst) <= 3**2:
+            grid_size = 3
+        else:
+            grid_size = 4
 
     num_samples = grid_size**2
     
@@ -159,7 +167,7 @@ class ImageGridQA:
 
         if self.mode == "by_visible_frames":
             # create frame by_visible_frames
-            sampled_visible_frames, grid_size = sample_adaptively_whitespace(self.visible_frames.frames)
+            sampled_visible_frames, grid_size = sample_adaptively_whitespace(self.visible_frames.frames, self.grid_size)
             # 重置 self.grid_size
             self.grid_size = grid_size
             frames = []
@@ -246,7 +254,7 @@ class ImageGridQA:
 
 if __name__ == "__main__":
 
-    conf = OmegaConf.load("/home/fsq/video_agent/ToolChainVideo/config/nextqa_st.yaml")
+    conf = OmegaConf.load("/home/fsq/video_agent/ToolChainVideo/config/videomme.yaml")
     conf.tool.image_grid_qa.mode = "by_video_path"
     image_grid_qa = ImageGridQA(conf)
 
