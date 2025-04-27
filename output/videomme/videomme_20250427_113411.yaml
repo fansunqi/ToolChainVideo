@@ -82,5 +82,14 @@ recursion_limit: 20
 
 try_num: 1
 
+init_interval_sec: 10
+
 try_except_mode: False
 to_txt: False
+
+
+eval:
+  eval_cache_file: cache/gpt35_eval_cache.pkl
+  use_cache: True
+
+specific_quids: ["606-1"]

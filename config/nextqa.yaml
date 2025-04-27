@@ -67,6 +67,8 @@ use_cache: False
 dataset: "nextqa"
 video_path_base: "/share_data/NExT-QA/NExTVideo"
 anno_path: "/share_data/NExT-QA/dataset/nextqa/val.csv"
+# video_path_base: "/home/fsq/video_agent/NExT-QA/NExTVideo"
+# anno_path: "/home/fsq/video_agent/NExT-QA/dataset/nextqa/val.csv"
 num_examples_to_run: 100
 start_num: 0
 

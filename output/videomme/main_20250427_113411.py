@@ -151,6 +151,7 @@ if __name__ == "__main__":
         adjust_video_resolution(video_path)
 
         video_info = get_video_info(video_path)
+        init_video_stride = int(video_info["fps"] * conf.init_interval_sec)
         duration = video_info["duration"]
 
         print(question_w_options)

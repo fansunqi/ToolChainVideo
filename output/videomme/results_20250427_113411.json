@@ -1,0 +1,32 @@
+[
+    {
+        "quid": "606-1",
+        "uid": "606",
+        "qid": "606-1",
+        "q_type": "Temporal Perception",
+        "question": "What is the first minute of the video about?",
+        "optionA": "Summary of battles waged by Napoleon",
+        "optionB": "Comments on Napoleon's achievements",
+        "optionC": "Criticism of Napoleon",
+        "optionD": "How Napoleon became so successful",
+        "options": [
+            "Summary of battles waged by Napoleon",
+            "Comments on Napoleon's achievements",
+            "Criticism of Napoleon",
+            "How Napoleon became so successful"
+        ],
+        "question_w_options": "What is the first minute of the video about? Choose your answer from below options: A.Summary of battles waged by Napoleon, B.Comments on Napoleon's achievements, C.Criticism of Napoleon, D.How Napoleon became so successful.",
+        "truth": 1,
+        "video_path": "/mnt/Shared_03/fsq/VideoMME/unzipped/data/uC8TK7GH85o.mp4",
+        "answers": [
+            "Based on the frame information provided, the first minute of the video likely focuses on historical scenes, including military gatherings and events that suggest a connection to Napoleon and his era. Given the context of the frames, particularly those depicting military uniforms, gatherings, and speeches, the most fitting option would be:\n\n**B. Comments on Napoleon's achievements.**\n\nThis choice aligns with the historical and ceremonial themes present in the frames, which may reflect on Napoleon's impact and accomplishments."
+        ],
+        "video_info": {
+            "total_frames": 68430,
+            "fps": 25.0,
+            "duration": 2737.2
+        },
+        "visible_frames_num": 40.0,
+        "visible_frames_fps": 0.014613473622680112
+    }
+]

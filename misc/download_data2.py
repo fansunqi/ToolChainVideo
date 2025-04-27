@@ -5,7 +5,7 @@ import os
 import argparse
 
 # Login to Hugging Face
-login(token="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")
+login(token="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")
 
 def download_all_parts(local_dir="downloads"):
     # Create the download directory if it doesn't exist
@@ -36,7 +36,7 @@ def download_all_parts(local_dir="downloads"):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Download video parts from Hugging Face')
-    parser.add_argument('--download_dir', type=str, default='/mnt/Shared_05_disk/fsq/LongVideoBench/',
+    parser.add_argument('--download_dir', type=str, default='/mnt/Shared_03/fsq/LongVideoBench',
                       help='Directory to save downloaded files')
     args = parser.parse_args()
     
