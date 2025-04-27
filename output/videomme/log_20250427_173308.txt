@@ -1,0 +1,39 @@
+Creating LLM cache: cache/gpt35_cache_new_tool_8.pkl...
+
+
+Initializing Patch Zoomer Tool with model: gpt-4o, sys_prompt: None
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+
+Initializing Image-Grid-QA Tool with model: gpt-4o
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+
+Initializing Image-Grid-Select Tool with model: gpt-4o
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+
+Initializing Summarizer Tool with model: gpt-4o-mini
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o-mini
+
+Initializing Frame Selection Tool with model: gpt-4o-mini
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o-mini
+tool_instances: [<tools.patch_zoomer.PatchZoomer object at 0x7febb06d9fd0>, <tools.image_grid_qa.ImageGridQA object at 0x7febb06d9b50>, <tools.image_grid_select.ImageGridSelect object at 0x7febb06904c0>, <tools.summarizer.Summarizer object at 0x7febb0637310>, <tools.frame_selector.FrameSelector object at 0x7febb0646520>]
+tools: [Tool(name='relevant-patch-zooming-tool', description='placeholder', func=<bound method PatchZoomer.inference of <tools.patch_zoomer.PatchZoomer object at 0x7febb06d9fd0>>), Tool(name='image-grid-qa-tool', description="Useful when you want to know the whole event or action in the video. This tool arranges multiple images into an image grid, allowing the MLLM to analyze the events or actions taking place in the video.The input to this tool must be a question, such as 'How many children are in the video?' ", func=<bound method ImageGridQA.inference of <tools.image_grid_qa.ImageGridQA object at 0x7febb06d9b50>>), Tool(name='image-grid-select-tool', description='placeholder', func=<bound method ImageGridSelect.inference of <tools.image_grid_select.ImageGridSelect object at 0x7febb06904c0>>), Tool(name='summarization-tool', description="Useful when you want to summarize the infomation of all visible frames and find the answer.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method Summarizer.inference of <tools.summarizer.Summarizer object at 0x7febb0637310>>), Tool(name='frame-extraction-tool', description="Useful when you find that the currently sampled frames do not provide enough information and more frames need to be extracted from the video to answer the question.The input to this tool must be a question about the video that remains unresolved. For example, 'How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.'", func=<bound method FrameSelector.inference of <tools.frame_selector.FrameSelector object at 0x7febb0646520>>)]
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-3.5-turbo
+
+Building videomme dataset...
+
+Processing: 447-2
+What is the team's lac hitting percentage when the score is 38-29? Choose your answer from below options: A.48%, B.41%, C.56%, D.54%.
+
+Visible Frames: add 16 frames to visible frames: [0, 1331, 2663, 3994, 5326, 6657, 7989, 9320, 10652, 11983, 13315, 14646, 15978, 17309, 18641, 19972]
+
+image_grid_qa_output: I can't determine the team's lac hitting percentage from the images provided. You might want to look for any visible statistics or scoreboards in the frames that could provide this information.
+using image grid select
+> /home/fsq/video_agent/ToolChainVideo/tools/image_grid_select.py(255)inference()
+-> actual_start_idx = actual_indices[result.start-1]
+(Pdb) 

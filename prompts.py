@@ -94,3 +94,25 @@ Answer: {answer}
 Options: {options_with_labels}
 
 The matched option is:"""
+
+
+IMAGE_GRID_SELECT_PROMPT = """Analyze this image sequence to identify the most relevant video segment(s) for answering the question:
+
+Question: {question}
+
+The image sequence is {grid_num} sampled frames from a video. The number in the circle indicates the frame index.
+
+Instructions:
+1. First describe what you see in each of the {grid_num} frames.
+2. Then select the most relevant video segment(s) to answer the question.
+3. Choose only the minimum necessary segments.
+
+Response in json format:
+<analysis>: Describe the image and {grid_num} frames first. Then analyze the question and select the most relevant segment(s).
+<start>: the start frame index of the selected segment(s), an integer in [0, {grid_num}]
+<end>: the end frame index of the selected segment(s), an integer in [start+1, {grid_num}]
+"""
+
+IMAGE_GRID_QA_PROMPT = \
+"""I will show you an image sequence of {grid_num} sampled frames from a video. I have annotated the images with numbered circles. Based on the image sequence, try to answer this question: 
+{question}"""

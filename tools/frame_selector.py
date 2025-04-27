@@ -28,7 +28,9 @@ class FrameSelector:
 
         self.conf = conf
         
-        self.llm = ChatOpenAI(model_string=conf.tool.frame_selector.llm_model_name, is_multimodal=False)    
+        model_string = conf.tool.frame_selector.llm_model_name
+        print(f"\nInitializing Frame Selection Tool with model: {model_string}")
+        self.llm = ChatOpenAI(model_string=model_string, is_multimodal=False)    
 
         self.visible_frames = None
         self.video_path = None

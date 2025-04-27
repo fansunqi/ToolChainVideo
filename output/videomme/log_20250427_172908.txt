@@ -1,0 +1,41 @@
+Creating LLM cache: cache/gpt35_cache_new_tool_8.pkl...
+
+
+Initializing Patch Zoomer Tool with model: gpt-4o, sys_prompt: None
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+
+Initializing Image-Grid-QA Tool with model: gpt-4o
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+
+Initializing Image-Grid-Select Tool with model: gpt-4o
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o
+
+Initializing Summarizer Tool with model: gpt-4o-mini
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o-mini
+
+Initializing Frame Selection Tool with model: gpt-4o-mini
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-4o-mini
+tool_instances: [<tools.patch_zoomer.PatchZoomer object at 0x7f40ae7ddfd0>, <tools.image_grid_qa.ImageGridQA object at 0x7f40ae7ddb20>, <tools.image_grid_select.ImageGridSelect object at 0x7f40ae793520>, <tools.summarizer.Summarizer object at 0x7f40ae739400>, <tools.frame_selector.FrameSelector object at 0x7f40ae749610>]
+tools: [Tool(name='relevant-patch-zooming-tool', description='placeholder', func=<bound method PatchZoomer.inference of <tools.patch_zoomer.PatchZoomer object at 0x7f40ae7ddfd0>>), Tool(name='image-grid-qa-tool', description="Useful when you want to know the whole event or action in the video. This tool arranges multiple images into an image grid, allowing the MLLM to analyze the events or actions taking place in the video.The input to this tool must be a question, such as 'How many children are in the video?' ", func=<bound method ImageGridQA.inference of <tools.image_grid_qa.ImageGridQA object at 0x7f40ae7ddb20>>), Tool(name='image-grid-select-tool', description='placeholder', func=<bound method ImageGridSelect.inference of <tools.image_grid_select.ImageGridSelect object at 0x7f40ae793520>>), Tool(name='summarization-tool', description="Useful when you want to summarize the infomation of all visible frames and find the answer.The input to this tool must be a question without options, such as 'How many children are in the video?', instead of 'How many children are in the video? A. 1 B. 2 C. 3 D. 4'.", func=<bound method Summarizer.inference of <tools.summarizer.Summarizer object at 0x7f40ae739400>>), Tool(name='frame-extraction-tool', description="Useful when you find that the currently sampled frames do not provide enough information and more frames need to be extracted from the video to answer the question.The input to this tool must be a question about the video that remains unresolved. For example, 'How many children are in the video? Choose your answer from below selections: A.one, B.three, C.seven, D.two, E.five.'", func=<bound method FrameSelector.inference of <tools.frame_selector.FrameSelector object at 0x7f40ae749610>>)]
+!! OpenAI base_url set as https://api.juheai.top/v1/
+!! Cache enabled for model: gpt-3.5-turbo
+
+Building videomme dataset...
+
+Processing: 119-1
+What is the subject of this video? Choose your answer from below options: A.The shortest man in the world, B.The shortest man in the world, C.Life in the United States, D.Medical care in the United States.
+
+Visible Frames: add 16 frames to visible frames: [0, 149, 298, 446, 595, 744, 893, 1042, 1190, 1339, 1488, 1637, 1786, 1934, 2083, 2232]
+
+image_grid_qa_output: The subject of the video is likely "B. The shortest man in the world."
+using image grid select
+> /home/fsq/video_agent/ToolChainVideo/tools/image_grid_select.py(255)inference()
+-> actual_start_idx = actual_indices[result.start]
+(Pdb) --KeyboardInterrupt--
+(Pdb) --KeyboardInterrupt--
+(Pdb) 

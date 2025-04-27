@@ -1,0 +1,32 @@
+[
+    {
+        "quid": "003-1",
+        "uid": "003",
+        "qid": "003-1",
+        "q_type": "Counting Problem",
+        "question": "How many national flags appear in the video?",
+        "optionA": "3",
+        "optionB": "4",
+        "optionC": "2",
+        "optionD": "5",
+        "options": [
+            "3",
+            "4",
+            "2",
+            "5"
+        ],
+        "question_w_options": "How many national flags appear in the video? Choose your answer from below options: A.3, B.4, C.2, D.5.",
+        "truth": 1,
+        "video_path": "/mnt/Shared_03/fsq/VideoMME/unzipped/data/HIjX8OPuf-w.mp4",
+        "answers": [
+            "C. 2"
+        ],
+        "video_info": {
+            "total_frames": 2712,
+            "fps": 23.976023976023978,
+            "duration": 113.11299999999999
+        },
+        "visible_frames_num": 40.0,
+        "visible_frames_fps": 0.3536286722127431
+    }
+]

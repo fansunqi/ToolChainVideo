@@ -8,6 +8,7 @@ from omegaconf import OmegaConf
 import time
 from engine.openai import ChatOpenAI
 from tools.common import image_resize_for_vlm
+from prompts import IMAGE_GRID_QA_PROMPT
 
 
 def prompts(name, description):
@@ -235,11 +236,15 @@ class ImageGridQA:
 
         grid_num = self.grid_size**2
 
-        prompt_image_grid_qa = (
-            f"I will show an image sequence of {grid_num} sampled frames from a video. "
-            f"I have annotated the images with numbered circles. "
-            f"Based on the video, try to answer this question: "
-            f"{input}"
+        # prompt_image_grid_qa = (
+        #     f"I will show an image sequence of {grid_num} sampled frames from a video. "
+        #     f"I have annotated the images with numbered circles. "
+        #     f"Based on the video, try to answer this question: "
+        #     f"{input}"
+        # )
+        prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT.format(
+            grid_num=grid_num, 
+            question=input
         )
 
         image = image_resize_for_vlm(grid_img)

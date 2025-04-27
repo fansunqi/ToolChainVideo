@@ -191,8 +191,9 @@ if __name__ == "__main__":
         
         # long
         "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_160749.json",   # VideoQA (Qwen2.5-VL-3B)
-        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_155926.json",   # VideoQA (InternVL3-2B)
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_155926.json",   # VideoQA (InternVL3-2B)
         "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_202739.json",   # 16+IGQA
+        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250427_113813.json",   # 16+ICL+S
     ]
     
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -210,7 +211,7 @@ if __name__ == "__main__":
             data[j]['answers'].extend(extend_data[j]['answers'])
 
     # LLM for rephrase
-    eval_llm = ChatOpenAI(model_string=conf.openai.EVAL_MODEL_NAME, is_multimodal=False)
+    eval_llm = ChatOpenAI(model_string=conf.EVAL_MODEL_NAME, is_multimodal=False)
 
     main(data, output_file, conf, eval_llm)
 

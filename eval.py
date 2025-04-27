@@ -186,7 +186,8 @@ if __name__ == "__main__":
         args.output_file = args.input_file.replace(f'output/{dataset_name}', f'eval/{dataset_name}')
 
     # LLM for rephrase
-    eval_llm = ChatOpenAI(model_string=conf.openai.EVAL_MODEL_NAME, is_multimodal=False)
+    print(f"\nInitializing eval-LLM for rephrase, model: {conf.EVAL_MODEL_NAME}")
+    eval_llm = ChatOpenAI(model_string=conf.EVAL_MODEL_NAME, is_multimodal=False)
 
     main(args.input_file, args.output_file, conf, eval_llm)
 

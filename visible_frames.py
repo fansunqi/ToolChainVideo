@@ -128,6 +128,10 @@ class VisibleFrames:
 
         self.frames.sort(key=lambda x: x.timestamp)
     
+    def remove_all_frames(self):
+        print("!! remove all frames")
+        self.frames = []
+        
 
     def get_images_rgb_tchw(self, frames_num) -> torch.Tensor:
         """获取所有可见帧的图像数据
