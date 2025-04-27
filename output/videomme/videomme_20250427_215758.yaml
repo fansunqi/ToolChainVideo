@@ -83,6 +83,6 @@ recursion_limit: 20
 try_num: 1
 
 try_except_mode: False
-to_txt: True
+to_txt: False
 
-# specific_quids: ["151-1"]
+specific_quids: ["151-1"]

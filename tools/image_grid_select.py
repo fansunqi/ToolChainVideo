@@ -247,14 +247,24 @@ class ImageGridSelect:
 
         image = image_resize_for_vlm(grid_img)
         _, buffer = cv2.imencode(".jpg", image)
-        input_data = [prompt_image_grid_select, buffer]
+        input_data = [prompt_image_grid_select, buffer]       
         result = self.llm_engine(input_data, response_format=ImageGridSelectResponse)
 
+        print(f"\nImage Grid Select Result: {result}") 
         actual_start_idx = actual_indices[result.start-1]
         actual_end_idx = actual_indices[result.end-1]
         self.visible_frames.remove_all_frames()
+        # 如果 actual_start_idx 和 actual_end_idx 过近，则往两边扩
+        if actual_end_idx - actual_start_idx + 1 < grid_num:
+            dist = grid_num - (actual_end_idx - actual_start_idx + 1)
+            actual_start_idx = max(0, actual_start_idx - dist // 2)
+            actual_end_idx = min(actual_start_idx + grid_num - 1, self.visible_frames.video_info["total_frames"] - 1)
+            
         add_frame_indices = np.linspace(actual_start_idx, actual_end_idx, grid_num, dtype=int).tolist()
         self.visible_frames.add_frames(frame_indices=add_frame_indices)
+        
+        # NOTE 最后，还要将 grid_size 还原成原来的值
+        self.grid_size = self.conf.tool.image_grid_qa.init_grid_size
         
         print("Image Grid Select Done.") 
         return "placeholder"
@@ -264,17 +274,17 @@ if __name__ == "__main__":
 
     conf = OmegaConf.load("/home/fsq/video_agent/ToolChainVideo/config/videomme.yaml")
     conf.tool.image_grid_qa.mode = "by_video_path"
-    image_grid_qa = ImageGridQA(conf)
+    image_grid_select = ImageGridSelect(conf)
 
     video_path = "/share_data/NExT-QA/NExTVideo/1106/4010069381.mp4"
     question_w_options = "How do the two man play the instrument? Choose your answer from below options: A.roll the handle, B.tap their feet, C.strum the string, D.hit with sticks, E.pat with hand."
     
 
-    image_grid_qa.set_video_path(video_path)
+    image_grid_select.set_video_path(video_path)
     
-    result = image_grid_qa.inference(input=question_w_options)
+    result = image_grid_select.inference(input=question_w_options)
     print(f"Result: {result}")
     
     print("main done")
 
-# python -m tools.image_grid_qa 
+# python -m tools.image_grid_select 

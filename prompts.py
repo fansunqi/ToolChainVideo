@@ -1,7 +1,3 @@
-# QUERY_PREFIX = """Regarding a given video, use tools to answer the following question as best you can.
-
-# Question: """
-
 QUERY_PREFIX = """Question: """
 
 ASSISTANT_ROLE = """You are an AI assistant for video analysis. Regarding a given video, you will receive information from sampled frames, use tools to extract additional information, and answer the following question as accurately as possible.
@@ -109,7 +105,7 @@ Instructions:
 
 Response in json format:
 <analysis>: Describe the image and {grid_num} frames first. Then analyze the question and select the most relevant segment(s).
-<start>: the start frame index of the selected segment(s), an integer in [0, {grid_num}]
+<start>: the start frame index of the selected segment(s), an integer in [1, {grid_num}]
 <end>: the end frame index of the selected segment(s), an integer in [start+1, {grid_num}]
 """
 

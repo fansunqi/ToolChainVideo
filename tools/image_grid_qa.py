@@ -252,6 +252,9 @@ class ImageGridQA:
         input_data = [prompt_image_grid_qa, buffer]
         result = self.llm_engine(input_data)
         
+        # NOTE 最后，还要将 grid_size 还原成原来的值
+        self.grid_size = self.conf.tool.image_grid_qa.init_grid_size
+        
         return result
 
         # TODO: 要不要把这个结果加到 visible_frame.description 中去

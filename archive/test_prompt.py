@@ -1,0 +1,2 @@
+TEST_PROMPT = \
+"""Why was the athlete in the video called for a traveling violation despite not being a foul? Choose your answer from below options: A.Because the referee made the wrong call, B.Because this happened before the rules were changed, C.Because the player trolled the referee, D.The penalty was not """

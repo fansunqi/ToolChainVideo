@@ -32,7 +32,7 @@ tool:
     device: "cuda:6"
   image_grid_qa:
     vlm_gpt_model_name: "gpt-4o" 
-    init_grid_size: 4           # [3, 4]
+    init_grid_size: 4  # [3, 4]
     save_path: null
     mode:  "by_visible_frames"  # "by_video_path"
   temporal_grounding:
@@ -45,11 +45,11 @@ tool:
     concurrent: True
     concurrent_thread_num: 16
     image_resize: False
-    sys_prompt: null           # "You are a helpful, creative, and smart assistant."
+    sys_prompt: null # "You are a helpful, creative, and smart assistant."
   summarizer:
     llm_model_name: "gpt-4o-mini"
     use_cache: True
-    mode: "by_caption"         # by_caption, by_qa
+    mode: "by_caption"  # by_caption, by_qa
   frame_selector:
     llm_model_name: "gpt-4o-mini"
   image_captioner:
@@ -85,4 +85,5 @@ try_num: 1
 try_except_mode: False
 to_txt: True
 
-# specific_quids: ["151-1"]
+specific_quids: ["109-1"]
+

@@ -85,4 +85,5 @@ try_num: 1
 try_except_mode: False
 to_txt: True
 
-# specific_quids: ["151-1"]
+specific_quids: ["148-3"]   # ["109-1"]
+

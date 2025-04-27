@@ -90,7 +90,10 @@ def spatiotemporal_reasoning(
         
         image_grid_qa_output = image_grid_qa.inference(input=question_w_options)
         print(f"\nimage_grid_qa_output: {image_grid_qa_output}")    
-        output = image_grid_qa_output      
+        output = image_grid_qa_output
+
+        pdb.set_trace()
+        
         if not_last_turn:
             image_grid_qa_pred, _ = get_predicted_option_with_rephrase(
                 image_grid_qa_output, options, question, image_grid_qa.conf, eval_llm

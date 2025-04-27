@@ -24,7 +24,7 @@ class CachedEngine:
     def _hash_prompt(self, prompt: str):
         return hashlib.sha256(f"{prompt}".encode()).hexdigest()
 
-    def _check_cache(self, prompt: str):
+    def _check_cache(self, prompt: str):     
         if prompt in self.cache:
             return self.cache[prompt]
         else:
