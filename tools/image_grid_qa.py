@@ -8,9 +8,14 @@ from omegaconf import OmegaConf
 import time
 from engine.openai import ChatOpenAI
 from tools.common import image_resize_for_vlm
-from prompts import IMAGE_GRID_QA_PROMPT
+from prompts import IMAGE_GRID_QA_PROMPT, IMAGE_GRID_QA_PROMPT_ANALYSIS
+from pydantic import BaseModel
 
 
+class ImageGridQAResponse(BaseModel):
+    analysis: str
+    answer: str
+    
 def prompts(name, description):
     
     def decorator(func):
@@ -236,13 +241,12 @@ class ImageGridQA:
 
         grid_num = self.grid_size**2
 
-        # prompt_image_grid_qa = (
-        #     f"I will show an image sequence of {grid_num} sampled frames from a video. "
-        #     f"I have annotated the images with numbered circles. "
-        #     f"Based on the video, try to answer this question: "
-        #     f"{input}"
+        # prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT.format(
+        #     grid_num=grid_num, 
+        #     question=input
         # )
-        prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT.format(
+        
+        prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT_ANALYSIS.format(
             grid_num=grid_num, 
             question=input
         )
@@ -250,12 +254,16 @@ class ImageGridQA:
         image = image_resize_for_vlm(grid_img)
         _, buffer = cv2.imencode(".jpg", image)
         input_data = [prompt_image_grid_qa, buffer]
-        result = self.llm_engine(input_data)
+        
+        # result = self.llm_engine(input_data)
+        result = self.llm_engine(input_data, response_format=ImageGridQAResponse)
+        analysis = result.analysis
+        answer = result.answer
         
         # NOTE 最后，还要将 grid_size 还原成原来的值
         self.grid_size = self.conf.tool.image_grid_qa.init_grid_size
         
-        return result
+        return answer
 
         # TODO: 要不要把这个结果加到 visible_frame.description 中去
 

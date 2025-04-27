@@ -104,7 +104,7 @@ Instructions:
 3. Choose only the minimum necessary segments.
 
 Response in json format:
-<analysis>: Describe the image and {grid_num} frames first. Then analyze the question and select the most relevant segment(s).
+<analysis>: Describe the {grid_num} frames first. Then analyze the question and select the most relevant segment(s).
 <start>: the start frame index of the selected segment(s), an integer in [1, {grid_num}]
 <end>: the end frame index of the selected segment(s), an integer in [start+1, {grid_num}]
 """
@@ -112,3 +112,20 @@ Response in json format:
 IMAGE_GRID_QA_PROMPT = \
 """I will show you an image sequence of {grid_num} sampled frames from a video. I have annotated the images with numbered circles. Based on the image sequence, try to answer this question: 
 {question}"""
+
+
+IMAGE_GRID_QA_PROMPT_ANALYSIS = \
+"""Analyze this image sequence to answer the question:
+
+Question: {question}
+
+The image sequence is {grid_num} sampled frames from a video arranged in temporal order. The number in the circle indicates the frame index.
+
+Instructions:
+1. First describe and analyze what you see in each of the {grid_num} frames.
+2. Then answer the question based on your descriptions and analysis.
+
+Response in json format:
+<analysis>: Describe the {grid_num} frames first. Then analyze the question.
+<answer>: Answer to the question.
+"""
