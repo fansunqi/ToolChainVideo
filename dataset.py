@@ -1,10 +1,11 @@
 # Adapted from VideoTree
 import os
-from torch.utils.data import Dataset
-import pandas as pd
 import pdb
-from pprint import pprint
+import json
 import argparse
+import pandas as pd
+from pprint import pprint
+from torch.utils.data import Dataset
 
 
 char_to_num = {
@@ -176,11 +177,78 @@ class VideoMMEDataset(BaseDataset):
         return data
 
 
+class LVBDataset(BaseDataset):
+    def __init__(self, args, quids_to_exclude=None, num_examples_to_run=-1, start_num=0, specific_quids=None):
+        self.set_ukey('quid')
+        super().__init__(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run, start_num=start_num, specific_quids=specific_quids)
+    
+    def get_anno(self):
+        with open(self.args.anno_path, 'r') as f:
+            return json.load(f)
+    
+    def build(self):
+        print(f"\nBuilding {self.args.dataset} dataset...")
+        data = []
+        
+        # 检查 video_id 是否重复  
+        for data_item in self.anno:
+            video_id = data_item['video_id']
+            seen_video_ids = set()
+            if video_id in seen_video_ids:
+                print(f"Duplicate video_id found: {video_id}")
+                raise ValueError(f"Duplicate video_id found: {video_id}")
+            else:
+                seen_video_ids.add(video_id)
+        
+        for data_item in self.anno:
+            uid = data_item['video_id']
+            question = data_item["question_wo_referring_query"].capitalize()
+            
+            # options = []
+            # for candidate in data_item['candidates']:
+            #     if candidate.endwith(','):
+            #         options.append(candidate[:-1])
+            #     else:
+            #         options.append(candidate)
+            
+            options = data_item['candidates']
+            
+            question_w_options = f"{question} Choose your answer from below options: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}."
+            
+            video_path = os.path.join(self.args.video_path_base, data_item['video_path'])
+            truth = data_item["correct_choice"]
+            
+            q_type = data_item["question_category"]
+            
+            data.append({
+                'quid': uid,
+                'uid': uid,
+                'qid': uid,
+                'q_type': q_type,
+                'question': question,
+                'optionA': options[0],
+                'optionB': options[1],
+                'optionC': options[2],
+                'optionD': options[3],
+                'options': options,
+                'question_w_options': question_w_options,
+                'truth': truth,
+                'video_path': video_path,
+            })
+            
+            if len(data) >= self.end_num:
+                break
+        
+        return data
+
+
 def get_dataset(args, quids_to_exclude=None, num_examples_to_run=-1, start_num=0, specific_quids=None):
     if args.dataset == 'nextqa':
         return NextDataset(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run, start_num=start_num, specific_quids=specific_quids)
     elif args.dataset == 'videomme':
         return VideoMMEDataset(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run, start_num=start_num, specific_quids=specific_quids)
+    elif args.dataset == 'lvb':  # longvideobench
+        return LVBDataset(args, quids_to_exclude=quids_to_exclude, num_examples_to_run=num_examples_to_run, start_num=start_num, specific_quids=specific_quids)
     else:
         raise ValueError(f"Dataset {args.dataset} not found")
 
@@ -194,9 +262,14 @@ def parse_args():
     # parser.add_argument('--anno_path', type=str, default="/share_data/NExT-QA/dataset/nextqa/val.csv", help='Path to the annotation file')
     # parser.add_argument('--num_examples_to_run', type=int, default=100)
 
-    parser.add_argument('--dataset', type=str, default="videomme", help='Name of the dataset to use')
-    parser.add_argument('--video_path_base', type=str, default="/hf_home/hub/datasets--lmms-lab--Video-MME/snapshots/ead1408f75b618502df9a1d8e0950166bf0a2a0b/data/")
-    parser.add_argument('--anno_path', type=str, default="/hf_home/hub/datasets--lmms-lab--Video-MME/snapshots/ead1408f75b618502df9a1d8e0950166bf0a2a0b/videomme/test-00000-of-00001.parquet", help='Path to the annotation file')
+    # parser.add_argument('--dataset', type=str, default="videomme", help='Name of the dataset to use')
+    # parser.add_argument('--video_path_base', type=str, default="/hf_home/hub/datasets--lmms-lab--Video-MME/snapshots/ead1408f75b618502df9a1d8e0950166bf0a2a0b/data/")
+    # parser.add_argument('--anno_path', type=str, default="/hf_home/hub/datasets--lmms-lab--Video-MME/snapshots/ead1408f75b618502df9a1d8e0950166bf0a2a0b/videomme/test-00000-of-00001.parquet", help='Path to the annotation file')
+    # parser.add_argument('--num_examples_to_run', type=int, default=100)
+    
+    parser.add_argument('--dataset', type=str, default="lvb", help='Name of the dataset to use')
+    parser.add_argument('--video_path_base', type=str, default="/mnt/Shared_03/fsq/LongVideoBench/videos")
+    parser.add_argument('--anno_path', type=str, default="/mnt/Shared_03/fsq/LongVideoBench/lvb_val.json", help='Path to the annotation file')
     parser.add_argument('--num_examples_to_run', type=int, default=100)
 
     return parser.parse_args()

@@ -174,7 +174,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Evaluate answers")
     parser.add_argument('--input_file', type=str, help="Path to the input JSON file")
     parser.add_argument('--output_file', type=str, help="Path to the output JSON file")
-    parser.add_argument('--config', default="config/videomme.yaml",type=str)
+    parser.add_argument('--config', default="config/lvb.yaml",type=str)
     args = parser.parse_args()
     conf = OmegaConf.load(args.config)
 

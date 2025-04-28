@@ -35,7 +35,6 @@ tool:
     init_grid_size: 4           # [3, 4]
     save_path: null
     mode:  "by_visible_frames"  # "by_video_path"
-    with_analysis: False
   temporal_grounding:
     min_sec_interval: 1
   temporal_qa:
@@ -66,18 +65,16 @@ tool:
 mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"
 use_cache: False
 
-dataset: "videomme"
-# video_path_base: "/mnt/Shared_05_disk/fsq/VideoMME/data/"
-# anno_path: "/mnt/Shared_05_disk/fsq/VideoMME/test-00000-of-00001.parquet"
-video_path_base: "/mnt/Shared_03/fsq/VideoMME/unzipped/data"
-# anno_path: "/mnt/Shared_03/fsq/VideoMME/test-00000-of-00001.parquet"
-anno_path: "/mnt/Shared_03/fsq/VideoMME/sample-100.parquet"
-num_examples_to_run: 10
+dataset: "lvb"
+video_path_base: "/mnt/Shared_03/fsq/LongVideoBench/videos/"
+# anno_path: "/mnt/Shared_03/fsq/LongVideoBench/lvb_val.json"
+anno_path: "/mnt/Shared_03/fsq/LongVideoBench/lvb_val_sample.json"
+num_examples_to_run: 100
 start_num: 0  # short
 # start_num: 900  # medium
 # start_num: 1800  # long
 
-output_path: "output/videomme/"
+output_path: "output/lvb/"
 
 recursion_limit: 20
 
@@ -85,5 +82,3 @@ try_num: 1
 
 try_except_mode: False
 to_txt: True
-
-# specific_quids: ["151-1"]

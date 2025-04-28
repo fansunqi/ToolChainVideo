@@ -140,12 +140,17 @@ if __name__ == "__main__":
     for data in tqdm(dataset):
 
         print(f"\nProcessing: {data['quid']}")
-        print(f"\nVideo path: {data['video_path']}")
-        
+        print(f"\nVideo path: {video_path}")
+
         video_path = data["video_path"]
+        # print(get_video_info(video_path))
         question = data["question"]
         options = data["options"]
         question_w_options = data["question_w_options"]
+        
+        result = data
+        result["answers"] = []
+        result["question_w_options"] = question_w_options
 
         adjust_video_resolution(video_path)
 
@@ -154,10 +159,7 @@ if __name__ == "__main__":
         print(f"Video duration: {duration:.2f} seconds")
         print(f"Question: {question_w_options}")
         
-        result = data
-        result["answers"] = []
         visible_frames_all = 0
-        
         for try_count in range(try_num):
 
             visible_frames = VisibleFrames(

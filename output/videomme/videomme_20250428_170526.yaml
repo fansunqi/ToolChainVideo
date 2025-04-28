@@ -35,7 +35,6 @@ tool:
     init_grid_size: 4           # [3, 4]
     save_path: null
     mode:  "by_visible_frames"  # "by_video_path"
-    with_analysis: False
   temporal_grounding:
     min_sec_interval: 1
   temporal_qa:

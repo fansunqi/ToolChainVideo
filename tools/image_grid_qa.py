@@ -151,6 +151,7 @@ class ImageGridQA:
         self.conf = conf
 
         self.mode = conf.tool.image_grid_qa.mode
+        self.with_analysis = conf.tool.image_grid_qa.with_analysis
 
         model_string = self.conf.tool.image_grid_qa.vlm_gpt_model_name
         print(f"\nInitializing Image-Grid-QA Tool with model: {model_string}")
@@ -162,6 +163,7 @@ class ImageGridQA:
 
         self.visible_frames = None
         self.video_path = None
+        
 
     def set_frames(self, visible_frames):
         self.visible_frames = visible_frames
@@ -241,24 +243,27 @@ class ImageGridQA:
 
         grid_num = self.grid_size**2
 
-        # prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT.format(
-        #     grid_num=grid_num, 
-        #     question=input
-        # )
-        
-        prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT_ANALYSIS.format(
-            grid_num=grid_num, 
-            question=input
-        )
+        if self.with_analysis:
+            prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT_ANALYSIS.format(
+                grid_num=grid_num, 
+                question=input
+            )
+        else:   
+            prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT.format(
+                grid_num=grid_num, 
+                question=input
+            )
 
         image = image_resize_for_vlm(grid_img)
         _, buffer = cv2.imencode(".jpg", image)
         input_data = [prompt_image_grid_qa, buffer]
         
-        # result = self.llm_engine(input_data)
-        result = self.llm_engine(input_data, response_format=ImageGridQAResponse)
-        analysis = result.analysis
-        answer = result.answer
+        if self.with_analysis:
+            result = self.llm_engine(input_data, response_format=ImageGridQAResponse)
+            analysis = result.analysis
+            answer = result.answer
+        else:
+            answer = self.llm_engine(input_data)
         
         # NOTE 最后，还要将 grid_size 还原成原来的值
         self.grid_size = self.conf.tool.image_grid_qa.init_grid_size

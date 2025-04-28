@@ -1,6 +1,7 @@
 import os
 import cv2
 import sys
+import pdb
 import json
 import torch
 import ffmpeg
@@ -126,6 +127,28 @@ def load_temporal_model(weight_path, device, llm_type):
     return model
 
 
+def read_lvb_subtitles(subtitle_path):
+    with open(subtitle_path, 'r', encoding='utf-8') as f:
+        subtitles = json.load(f)
+    
+    desp_all = ""
+    desp_line_template = """{start} - {end}: {line}\n"""
+    for subtitle in subtitles:
+        desp_line = desp_line_template.format(
+            start=subtitle['start'],
+            end=subtitle['end'],
+            line=subtitle['line']
+        )
+        desp_all += desp_line
+        
+    return desp_all
+    
+    
 if __name__ == "__main__":
-    test_video_path = "/share_data/NExT-QA/NExTVideo/0071/2617504308.mp4"
-    adjust_video_resolution(test_video_path)
+    # test_video_path = "/share_data/NExT-QA/NExTVideo/0071/2617504308.mp4"
+    # adjust_video_resolution(test_video_path)
+    
+    subtitle_path = "/mnt/Shared_03/fsq/LongVideoBench/subtitles/__Bchxr3ejw_en.json"
+    desp_all = read_lvb_subtitles(subtitle_path)
+    
+    pdb.set_trace()

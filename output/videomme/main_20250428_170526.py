@@ -83,7 +83,7 @@ def get_tools(conf):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/lvb.yaml",type=str)                           
+    parser.add_argument('--config', default="config/videomme.yaml",type=str)                           
     opt = parser.parse_args()
     conf = OmegaConf.load(opt.config)
 
@@ -140,24 +140,26 @@ if __name__ == "__main__":
     for data in tqdm(dataset):
 
         print(f"\nProcessing: {data['quid']}")
-        print(f"\nVideo path: {data['video_path']}")
-        
+
         video_path = data["video_path"]
+        # print(get_video_info(video_path))
         question = data["question"]
         options = data["options"]
         question_w_options = data["question_w_options"]
+        
+        result = data
+        result["answers"] = []
+        result["question_w_options"] = question_w_options
 
+        # trim
         adjust_video_resolution(video_path)
 
         video_info = get_video_info(video_path)
         duration = video_info["duration"]
-        print(f"Video duration: {duration:.2f} seconds")
-        print(f"Question: {question_w_options}")
+
+        print(question_w_options)
         
-        result = data
-        result["answers"] = []
         visible_frames_all = 0
-        
         for try_count in range(try_num):
 
             visible_frames = VisibleFrames(
