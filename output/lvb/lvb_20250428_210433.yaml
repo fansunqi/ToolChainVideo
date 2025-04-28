@@ -72,7 +72,7 @@ dataset: "lvb"
 video_path_base: "/mnt/Shared_03/fsq/LongVideoBench"
 # anno_path: "/mnt/Shared_03/fsq/LongVideoBench/lvb_val.json"
 anno_path: "/mnt/Shared_03/fsq/LongVideoBench/lvb_val_sample.json"
-num_examples_to_run: 100
+num_examples_to_run: 10
 start_num: 0  # short
 # start_num: 900  # medium
 # start_num: 1800  # long
@@ -84,4 +84,4 @@ recursion_limit: 20
 try_num: 1
 
 try_except_mode: False
-to_txt: True
+to_txt: False

@@ -127,23 +127,34 @@ def load_temporal_model(weight_path, device, llm_type):
     return model
 
 
-def read_lvb_subtitles(subtitle_path):
-    with open(subtitle_path, 'r', encoding='utf-8') as f:
-        subtitles = json.load(f)
+def read_lvb_subtitles(subtitles):
+    # with open(subtitle_path, 'r', encoding='utf-8') as f:
+    #     subtitles = json.load(f)
     
     desp_all = ""
     desp_line_template = """{start} - {end}: {line}\n"""
-    for subtitle in subtitles:
-        desp_line = desp_line_template.format(
-            start=subtitle['start'],
-            end=subtitle['end'],
-            line=subtitle['line']
-        )
-        desp_all += desp_line
+    if 'start' in subtitles[0]:
+        for subtitle in subtitles:
+            desp_line = desp_line_template.format(
+                start=subtitle['start'],
+                end=subtitle['end'],
+                line=subtitle['line']
+            )
+            desp_all += desp_line
+    elif 'timestamp' in subtitles[0]:
+        for subtitle in subtitles:
+            desp_line = desp_line_template.format(
+                start=subtitle['timestamp'][0],
+                end=subtitle['timestamp'][1],
+                line=subtitle['text']
+            )
+            desp_all += desp_line
+    else:
+        raise ValueError("Invalid subtitle format. Expected 'start' or 'timestamp' key.")
         
     return desp_all
     
-    
+
 if __name__ == "__main__":
     # test_video_path = "/share_data/NExT-QA/NExTVideo/0071/2617504308.mp4"
     # adjust_video_resolution(test_video_path)

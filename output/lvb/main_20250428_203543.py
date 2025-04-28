@@ -146,6 +146,7 @@ if __name__ == "__main__":
         question = data["question"]
         options = data["options"]
         question_w_options = data["question_w_options"]
+        pdb.set_trace()
 
         adjust_video_resolution(video_path)
 
@@ -166,7 +167,7 @@ if __name__ == "__main__":
                 init_interval_num=conf.visible_frames.init_interval_num,
                 min_interval=conf.visible_frames.min_interval,
                 min_sec_interval=conf.visible_frames.min_sec_interval,
-                subtitle_path=data['subtitle_path'],
+                subtitle_path=conf.visible_frames.subtitle_path,
             )
             
             for tool_instance in tool_instances:

@@ -215,7 +215,11 @@ class LVBDataset(BaseDataset):
             
             question_w_options = f"{question} Choose your answer from below options: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}."
             
-            video_path = os.path.join(self.args.video_path_base, data_item['video_path'])
+            video_path = os.path.join(self.args.video_path_base, 'videos', data_item['video_path'])
+            
+            subtitle_file = data_item['subtitle_path']
+            subtitle_path = os.path.join(self.args.video_path_base, 'subtitles', subtitle_file)
+            
             truth = data_item["correct_choice"]
             
             q_type = data_item["question_category"]
@@ -234,6 +238,7 @@ class LVBDataset(BaseDataset):
                 'question_w_options': question_w_options,
                 'truth': truth,
                 'video_path': video_path,
+                'subtitle_path': subtitle_path,
             })
             
             if len(data) >= self.end_num:
@@ -268,7 +273,7 @@ def parse_args():
     # parser.add_argument('--num_examples_to_run', type=int, default=100)
     
     parser.add_argument('--dataset', type=str, default="lvb", help='Name of the dataset to use')
-    parser.add_argument('--video_path_base', type=str, default="/mnt/Shared_03/fsq/LongVideoBench/videos")
+    parser.add_argument('--video_path_base', type=str, default="/mnt/Shared_03/fsq/LongVideoBench")
     parser.add_argument('--anno_path', type=str, default="/mnt/Shared_03/fsq/LongVideoBench/lvb_val.json", help='Path to the annotation file')
     parser.add_argument('--num_examples_to_run', type=int, default=100)
 

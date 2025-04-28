@@ -9,6 +9,7 @@ visible_frames:
   init_interval_num: 16
   min_interval: null
   min_sec_interval: 1
+  subtitle_path: null
 
 tool:
   tool_list:
@@ -36,6 +37,7 @@ tool:
     save_path: null
     mode:  "by_visible_frames"  # "by_video_path"
     with_analysis: False
+    with_subtitle: False
   temporal_grounding:
     min_sec_interval: 1
   temporal_qa:

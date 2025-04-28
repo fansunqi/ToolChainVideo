@@ -1,15 +1,19 @@
-import cv2
 import os
+import cv2
+import pdb
+import time
 import numpy as np
 from openai import OpenAI
-import time
-import pdb
 from omegaconf import OmegaConf
-import time
+from util import read_lvb_subtitles
 from engine.openai import ChatOpenAI
 from tools.common import image_resize_for_vlm
-from prompts import IMAGE_GRID_QA_PROMPT, IMAGE_GRID_QA_PROMPT_ANALYSIS
 from pydantic import BaseModel
+from prompts import (
+    IMAGE_GRID_QA_PROMPT, 
+    IMAGE_GRID_QA_PROMPT_ANALYSIS,
+    IMAGE_GRID_QA_PROMPT_SUBTITLE,
+)
 
 
 class ImageGridQAResponse(BaseModel):
@@ -152,6 +156,7 @@ class ImageGridQA:
 
         self.mode = conf.tool.image_grid_qa.mode
         self.with_analysis = conf.tool.image_grid_qa.with_analysis
+        self.with_subtitle = conf.tool.image_grid_qa.with_subtitle
 
         model_string = self.conf.tool.image_grid_qa.vlm_gpt_model_name
         print(f"\nInitializing Image-Grid-QA Tool with model: {model_string}")
@@ -232,7 +237,13 @@ class ImageGridQA:
     def inference(self, input):
 
         frames, actual_indices = self.select_grid_frames()
-
+        
+        if self.with_subtitle:
+            actual_timestamps = [ i / self.visible_frames.video_info['fps'] for i in actual_indices]
+            timestamp_desp = ""
+            for idx, actual_timestamp in enumerate(actual_timestamps):
+                timestamp_desp += f"Frame {idx+1}: {actual_timestamp:.2f} s; "
+                
         grid_img = draw_grid_img(frames, self.grid_size)
 
         if self.save_path:
@@ -243,16 +254,30 @@ class ImageGridQA:
 
         grid_num = self.grid_size**2
 
-        if self.with_analysis:
-            prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT_ANALYSIS.format(
-                grid_num=grid_num, 
-                question=input
-            )
-        else:   
-            prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT.format(
-                grid_num=grid_num, 
-                question=input
-            )
+        if self.with_subtitle:
+            if self.with_analysis:
+                raise NotImplementedError("with_subtitle and with_analysis are not supported together.")
+            else:
+                subtitle_desp = read_lvb_subtitles(self.visible_frames.subtitles)
+                
+                prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT_SUBTITLE.format(
+                    grid_num=grid_num, 
+                    duration=f"{self.visible_frames.video_info['duration']:.2f}",
+                    frame_timestamps=timestamp_desp,
+                    subtitle_desp=subtitle_desp,
+                    question=input,
+                )
+        else:
+            if self.with_analysis:
+                prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT_ANALYSIS.format(
+                    grid_num=grid_num, 
+                    question=input
+                )
+            else:   
+                prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT.format(
+                    grid_num=grid_num, 
+                    question=input
+                )
 
         image = image_resize_for_vlm(grid_img)
         _, buffer = cv2.imencode(".jpg", image)

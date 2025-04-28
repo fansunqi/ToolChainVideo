@@ -1,10 +1,11 @@
 import cv2
+import json
 import torch
 import numpy as np
+from datetime import timedelta
 from langchain_openai import ChatOpenAI
 from typing import List, Dict, Optional
 from dataclasses import dataclass, field
-from datetime import timedelta
 
 
 def get_video_info(video_path):
@@ -55,7 +56,8 @@ class VisibleFrames:
                 init_sec_interval=None,
                 init_interval_num=None,
                 min_interval=None,
-                min_sec_interval=1):
+                min_sec_interval=1,
+                subtitle_path=None):
         self.frames: List[Frame] = [] 
         self.video_path = video_path                
         self.video_info = get_video_info(video_path)
@@ -76,7 +78,11 @@ class VisibleFrames:
             self.min_interval = min_interval
         else:
             self.min_interval = int(min_sec_interval * self.video_info['fps'])
-
+        
+        if subtitle_path:
+            with open(subtitle_path, 'r', encoding='utf-8') as f:
+                self.subtitles = json.load(f)
+        
 
     def add_frames(self, 
                    frame_indices=None, 

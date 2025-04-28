@@ -166,7 +166,7 @@ if __name__ == "__main__":
                 init_interval_num=conf.visible_frames.init_interval_num,
                 min_interval=conf.visible_frames.min_interval,
                 min_sec_interval=conf.visible_frames.min_sec_interval,
-                subtitle_path=data['subtitle_path'],
+                subtitle_path=conf.visible_frames.subtitle_path,
             )
             
             for tool_instance in tool_instances:

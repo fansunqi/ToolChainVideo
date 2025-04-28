@@ -129,3 +129,17 @@ Response in json format:
 <analysis>: Describe the {grid_num} frames first. Then analyze the question.
 <answer>: Answer to the question.
 """
+
+
+
+IMAGE_GRID_QA_PROMPT_SUBTITLE = \
+"""I will show you an image sequence of {grid_num} sampled frames from a video. I have annotated the images with numbered circles. 
+
+The total duration of this video is {duration} seconds. The sampled frames are taken at the following timestamps:
+{frame_timestamps}
+
+The subtitles of this video, organized by timestamp, are as follows:
+{subtitle_desp}
+
+Based on the image sequence and the subtitles, try to answer this question: 
+{question}"""
