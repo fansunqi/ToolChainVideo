@@ -278,6 +278,8 @@ class ImageGridQA:
                     grid_num=grid_num, 
                     question=input
                 )
+                
+                print("\nprompt_image_grid_qa: ", prompt_image_grid_qa)
 
         image = image_resize_for_vlm(grid_img)
         _, buffer = cv2.imencode(".jpg", image)

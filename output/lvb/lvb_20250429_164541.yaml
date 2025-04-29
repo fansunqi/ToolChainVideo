@@ -2,7 +2,7 @@
 EVAL_MODEL_NAME: "gpt-4o-mini"
 
 reasoning_mode: "st"    # langgraph
-reasoning_try_max: 1
+reasoning_try_max: 2
 
 visible_frames:
   init_sec_interval: null
@@ -34,9 +34,9 @@ tool:
   image_grid_qa:
     vlm_gpt_model_name: "gpt-4o" 
     init_grid_size: 4           # [3, 4]
-    save_path: null # "/home/fsq/video_agent/ToolChainVideo/misc/IG_lvb_sample_100_2"
+    save_path: "/home/fsq/video_agent/ToolChainVideo/misc/IG_lvb_sample_100_2"
     mode:  "by_visible_frames"  # "by_video_path"
-    with_analysis: True
+    with_analysis: False
     with_subtitle: False
   temporal_grounding:
     min_sec_interval: 1
