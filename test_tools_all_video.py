@@ -38,10 +38,10 @@ from util import save_to_json, adjust_video_resolution
 # from tools.image_captioner import ImageCaptioner
 # from tools.frame_selector import FrameSelector
 # from tools.temporal_qa import TemporalQA
-from tools.video_qa import VideoQA
+# from tools.video_qa import VideoQA
 # from tools.image_grid_qa import ImageGridQA
 # from tools.temporal_grounding import TemporalGrounding
-# from tools.video_qa_internvl import VideoQAInternVL
+from tools.video_qa_internvl import VideoQAInternVL
 
 from visible_frames import VisibleFrames
 
@@ -50,7 +50,7 @@ timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/videomme.yaml",type=str)                           
+    parser.add_argument('--config', default="config/lvb.yaml",type=str)                           
     opt = parser.parse_args()
     conf = OmegaConf.load(opt.config)
     
@@ -61,10 +61,10 @@ if __name__ == "__main__":
   
     # image_captioner = ImageCaptioner()
     # temporal_qa = TemporalQA(conf=conf)
-    video_qa = VideoQA(conf=conf)
+    # video_qa = VideoQA(conf=conf)
     # image_grid_qa = ImageGridQA(conf=conf)
     # temporal_grounding = TemporalGrounding(conf=conf)
-    # video_qa_internvl = VideoQAInternVL(conf=conf)
+    video_qa_internvl = VideoQAInternVL(conf=conf)
 
     # 数据集
     quids_to_exclude = conf["quids_to_exclude"] if "quids_to_exclude" in conf else None
@@ -94,12 +94,12 @@ if __name__ == "__main__":
         print(visible_frames.video_info["duration"])
 
         # temporal_qa.set_video_path(video_path)
-        video_qa.set_video_path(video_path)
+        # video_qa.set_video_path(video_path)
         # image_grid_qa.set_video_path(video_path)
         # image_grid_qa.set_frames(visible_frames)
         # temporal_grounding.set_video_path(video_path)
         # temporal_grounding.set_frames(visible_frames)
-        # video_qa_internvl.set_video_path(video_path)
+        video_qa_internvl.set_video_path(video_path)
         
         result = data
         result["answers"] = []
@@ -116,20 +116,20 @@ if __name__ == "__main__":
             if conf.try_except_mode:
                 try:
                     # output = temporal_qa.inference(input = input_prompt)
-                    output = video_qa.inference(input = input_prompt)
+                    # output = video_qa.inference(input = input_prompt)
                     # output = image_grid_qa.inference(input=input_prompt)
                     # output = temporal_grounding.inference(input=input_prompt)
-                    # output = video_qa_internvl.inference(input=input_prompt)
+                    output = video_qa_internvl.inference(input=input_prompt)
                 except Exception as e:
                     output = "Error"
                     print(f"Error during inference: {e}")
                     continue
             else:
                 # output = temporal_qa.inference(input = input_prompt)
-                output = video_qa.inference(input = input_prompt)
+                # output = video_qa.inference(input = input_prompt)
                 # output = image_grid_qa.inference(input=input_prompt)
                 # output = temporal_grounding.inference(input=input_prompt)
-                # output = video_qa_internvl.inference(input=input_prompt)
+                output = video_qa_internvl.inference(input=input_prompt)
             
             # 存储 tg 数据
             # temporal_grounding_results["question"] = output
