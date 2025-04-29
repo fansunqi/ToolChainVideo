@@ -53,18 +53,22 @@ def adjust_video_resolution(video_path: str):
     print(f"\nVideo cropped to even resolution and saved as {video_path}, original saved as {backup_path}")  
 
 
-def backup_file(opt, conf, timestamp):
+def backup_file(opt, conf, timestamp, is_test=False):
     current_script_path = os.path.abspath(__file__) 
     current_script_dir = os.path.dirname(current_script_path)
     
     if not os.path.exists(conf.output_path):
         os.makedirs(conf.output_path)
     
-    main_file_path = os.path.join(current_script_dir, "main.py")
-    shutil.copy(main_file_path, os.path.join(conf.output_path, f"main_{timestamp}.py"))
+    if is_test:
+        test_file_path = os.path.join(current_script_dir, "test_tools_all_video.py")
+        shutil.copy(test_file_path, os.path.join(conf.output_path, f"test_tools_all_video_{timestamp}.py"))
+    else:
+        main_file_path = os.path.join(current_script_dir, "main.py")
+        shutil.copy(main_file_path, os.path.join(conf.output_path, f"main_{timestamp}.py"))
 
-    reansoning_file_path = os.path.join(current_script_dir, "reasoning.py")
-    shutil.copy(reansoning_file_path, os.path.join(conf.output_path, f"reasoning_{timestamp}.py"))
+        reansoning_file_path = os.path.join(current_script_dir, "reasoning.py")
+        shutil.copy(reansoning_file_path, os.path.join(conf.output_path, f"reasoning_{timestamp}.py"))
     
     config_basename = os.path.basename(opt.config).split('.')[0]
     shutil.copy(opt.config, os.path.join(conf.output_path, f"{config_basename}_{timestamp}.yaml"))   
