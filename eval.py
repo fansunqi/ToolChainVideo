@@ -34,6 +34,8 @@ def LLM_rephrase(answer, options, question, conf, eval_llm):
         option_labels = ['A', 'B', 'C', 'D', 'E']
     elif len(options) == 4:
         option_labels = ['A', 'B', 'C', 'D']
+    elif len(options) == 3:
+        option_labels = ['A', 'B', 'C']
     else:
         raise ValueError("options in the data error")
     

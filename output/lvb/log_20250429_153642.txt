@@ -1,0 +1,1567 @@
+
+Building lvb dataset...
+
+
+Processing: 86CxyhFV9MI
+/mnt/Shared_03/fsq/LongVideoBench/videos/86CxyhFV9MI.mp4
+190.15663333333333
+Input prompt:  Which subtitles appear at the same time? Choose your answer from below options: A.promisc has come to an end, in and run away countless times, i was just scared, i still, B.run away countless times, i was just scared, i still and front of our crown, like a world of souls,, C.promisc has come to an end, in and front of our crown, like a world of souls,, D.promisc has come to an end, in and captain of the godson, three three three three three three.
+Output Answer:  C
+
+
+Processing: 86CxyhFV9MI
+/mnt/Shared_03/fsq/LongVideoBench/videos/86CxyhFV9MI.mp4
+190.15663333333333
+Input prompt:  Which subtitles appear simultaneously? Choose your answer from below options: A.[applause] and Seye Seye Seye Seye Seye, B.[applause] and my love that I made on the ke is, C.captain of the godson, three three three three three three and my love that I made on the ke is, D.[applause] and captain of the godson, three three three three three three.
+Output Answer:  D. [applause] and captain of the godson, three three three three three three.
+
+
+Processing: 9PD3ciudpIE
+/mnt/Shared_03/fsq/LongVideoBench/videos/9PD3ciudpIE.mp4
+467.92
+Input prompt:  In front of an ancient building, a woman walks by holding something. when the subtitle says 'temples scattered throughout the', what color is the woman's clothing at that moment? Choose your answer from below options: A.yellow, B.green, C.blue, D.red.
+Output Answer:  A. yellow
+
+
+Processing: 9PD3ciudpIE
+/mnt/Shared_03/fsq/LongVideoBench/videos/9PD3ciudpIE.mp4
+467.92
+Input prompt:  What is the woman with the pink hat wearing? Choose your answer from below options: A.red short sleeves, B.red long sleeves, C.black long sleeves, D.pink short sleeves.
+Output Answer:  D
+
+
+Processing: 5qMcDQd17Y4
+/mnt/Shared_03/fsq/LongVideoBench/videos/5qMcDQd17Y4.mp4
+584.64
+Input prompt:  What is behind the man to his right? Choose your answer from below options: A.cell phone, B.car, C.computer, D.street light.
+Output Answer:  C.computer
+
+
+Processing: 5qMcDQd17Y4
+/mnt/Shared_03/fsq/LongVideoBench/videos/5qMcDQd17Y4.mp4
+584.64
+Input prompt:  What is behind this woman on the right? Choose your answer from below options: A.door, B.computer, C.lamp, D.phone.
+Output Answer:  A. door
+
+
+Processing: 7F9IrtSHmc0
+/mnt/Shared_03/fsq/LongVideoBench/videos/7F9IrtSHmc0.mp4
+422.6555666666667
+Input prompt:  What is he doing? Choose your answer from below options: A.drinking water, B.playing with a cell phone, C.speaking, D.dancing.
+Output Answer:  C.speaking
+
+
+Processing: 7F9IrtSHmc0
+/mnt/Shared_03/fsq/LongVideoBench/videos/7F9IrtSHmc0.mp4
+422.6555666666667
+Input prompt:  What are these people in the colorful outfits doing? Choose your answer from below options: A.Drinking water, B.Playing piano, C.Sitting, D.Dancing.
+Output Answer:  D
+
+
+Processing: QJ6sjg7SXOQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/QJ6sjg7SXOQ.mp4
+468.48
+Input prompt:  What is he doing? Choose your answer from below options: A.Walking the horse, B.Punching towards the camera, C.Riding the horse, D.Kneeling down, E.Extending his palm forward while facing the camera.
+Output Answer:  E
+
+
+Processing: QJ6sjg7SXOQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/QJ6sjg7SXOQ.mp4
+468.48
+Input prompt:  What is this man doing? Choose your answer from below options: A.Throwing the metal bucket into the sea, B.Burning the metal bucket, C.Throwing the metal bucket on the ground, D.Dumping garbage into the metal bucket, E.Placing the metal bucket in a vehicle.
+Output Answer:  The man in the video is holding a metal bucket while standing under a blue sky, possibly near a coastal area given the presence of water. However, the specific actions he might be taking with the bucket are not explicitly detailed. Given the available options, it is challenging to precisely determine the action without more contextual clues. Nevertheless, based on the options provided, the closest plausible action could be interpreted as “D. Dumping garbage into the metal bucket,” assuming he might be handling waste or similar materials. This deduction leans purely on the assumption since the video does not clearly show the man disposing of anything into the bucket.
+
+
+Processing: mH9LdC7IFH8
+/mnt/Shared_03/fsq/LongVideoBench/videos/mH9LdC7IFH8.mp4
+322.04
+Input prompt:  What happens on the screen? Choose your answer from below options: A.The screen switches to four cameras, B.The screen switches to two cameras, C.The camera view is enlarged, D.The screen switches to three cameras, E.The camera view is reduced.
+Output Answer:  B.The screen switches to two cameras
+
+
+Processing: mH9LdC7IFH8
+/mnt/Shared_03/fsq/LongVideoBench/videos/mH9LdC7IFH8.mp4
+322.04
+Input prompt:  What happened on the screen? Choose your answer from below options: A.A black-haired girl was shaking a wine glass in her hand, B.A woman in pink clothes was standing on a ladder, C.A red-haired girl was shaking a wine glass in her hand, D.A person was opening a wine bottle cap, E.A car was driving on the grass.
+Output Answer:  D.A person was opening a wine bottle cap
+
+
+Processing: LB1qPExHQY8
+/mnt/Shared_03/fsq/LongVideoBench/videos/LB1qPExHQY8.mp4
+181.4
+Input prompt:  What change occurred? Choose your answer from below options: A.The text got bigger, B.The text turned black, C.The text turned red, D.The text got smaller, E.The text turned purple.
+Output Answer:  B.The text turned black
+
+
+Processing: LB1qPExHQY8
+/mnt/Shared_03/fsq/LongVideoBench/videos/LB1qPExHQY8.mp4
+181.4
+Input prompt:  What change occurs? Choose your answer from below options: A.The font color changes to white, B.The font size increases, C.The font size decreases, D.The font color changes to red, E.The font color changes to black.
+Output Answer:  A.The font color changes to white,
+
+
+Processing: 8hhcFRoR0mw
+/mnt/Shared_03/fsq/LongVideoBench/videos/8hhcFRoR0mw.mp4
+516.2666666666667
+Input prompt:  What is this woman doing? Choose your answer from below options: A.Rubbing the contents of the pot on her face, B.Adding an egg to the pot, C.Shaping the contents of the pot into a ball, D.Using her hands to stir the contents of the pot, E.Adding water to the pot.
+Output Answer:  D. Using her hands to stir the contents of the pot
+
+
+Processing: 8hhcFRoR0mw
+/mnt/Shared_03/fsq/LongVideoBench/videos/8hhcFRoR0mw.mp4
+516.2666666666667
+Input prompt:  What is this woman doing? Choose your answer from below options: A.Making dumplings, B.Watching TV, C.Listening to music, D.Drinking water, E.Stir-frying vegetables.
+Output Answer:  A.Making dumplings,
+
+
+Processing: h4jIoMxZopU
+/mnt/Shared_03/fsq/LongVideoBench/videos/h4jIoMxZopU.mp4
+538.0792083333333
+Input prompt:  What did the gentleman do after becoming friends with the unicorn? Choose your answer from below options: A.Put on a watch, B.Changed into a different shirt, C.Put on a mask, D.Put on a pair of sunglasses, E.Put on a unicorn headpiece.
+Output Answer:  E.Put on a unicorn headpiece.
+
+
+Processing: h4jIoMxZopU
+/mnt/Shared_03/fsq/LongVideoBench/videos/h4jIoMxZopU.mp4
+538.0792083333333
+Input prompt:  , what did the yak do after coming to the riverbank? Choose your answer from below options: A.Lowered its head to drink water, B.Moved backward, C.Raised its head and made a sound, D.Left the riverbank, E.Turned around to look at the small yak.
+Output Answer:  B.Moved backward
+
+
+Processing: M7YSCIkUaNw
+/mnt/Shared_03/fsq/LongVideoBench/videos/M7YSCIkUaNw.mp4
+522.897375
+Input prompt:  What appears on the screen? Choose your answer from below options: A.silver kitchen utensils, B.white bowl, C.red fruit, D.butterfly, E.white water bottle.
+Output Answer:  E
+
+
+Processing: M7YSCIkUaNw
+/mnt/Shared_03/fsq/LongVideoBench/videos/M7YSCIkUaNw.mp4
+522.897375
+Input prompt:  Lin, what item appears on the screen? Choose your answer from below options: A.A burning white candle, B.A little girl, C.A courier paper box, D.Santa Claus mug, E.Two books.
+Output Answer:  C.A courier paper box
+
+
+Processing: x1FkhxMMIcg
+/mnt/Shared_03/fsq/LongVideoBench/videos/x1FkhxMMIcg.mp4
+199.73286666666667
+Input prompt:  Which of the following sequences of events is correct? Choose your answer from below options: A.First, the male host speaks, then the female host and the teacher have an online discussion, and finally, the female host introduces the teacher., B.First, the male host speaks, then the female host introduces the teacher, and finally, the female host and the teacher have an online discussion., C.First, the female host introduces a teacher, then the female host and the teacher have an online discussion, and finally, a male host speaks., D.First, the female host and the teacher have an online discussion, then the female host introduces the teacher, and finally, a male host speaks., E.First, the female host and the teacher have an online discussion, then the male host speaks, and finally, the female host introduces the teacher..
+Output Answer:  B
+
+
+Processing: CEZ9rbjK3P4
+/mnt/Shared_03/fsq/LongVideoBench/videos/CEZ9rbjK3P4.mp4
+200.8006
+Input prompt:  Where else has this woman appeared? Choose your answer from below options: A.A room with a window, B.Under green trees outdoors, C.In front of a table with potted plants, D.In front of a table with a desk lamp, E.A bench in the park.
+Output Answer:  C. In front of a table with potted plants
+
+
+Processing: CEZ9rbjK3P4
+/mnt/Shared_03/fsq/LongVideoBench/videos/CEZ9rbjK3P4.mp4
+200.8006
+Input prompt:  Where else has this artwork appeared? Choose your answer from below options: A.In a room with a bookshelf, B.On a bench outside, C.In front of a table holding a vase, D.On the glass of a transparent window, E.In front of a table with a desk lamp.
+Output Answer:  B
+
+
+Processing: MPQn_orwpfA
+/mnt/Shared_03/fsq/LongVideoBench/videos/MPQn_orwpfA.mp4
+443.81003333333337
+Input prompt:  What subtitle appears together with the map in the top right corner? Choose your answer from below options: A.Music, B.Europe Russia China, India and Australia most of these lines actually don't exist. So let's assume, C.65 to 94, D.We're funding maybe about 75% of all these train lines, E.You know at first glance this picture.
+Output Answer:  D.We're funding maybe about 75% of all these train lines,
+
+
+Processing: MPQn_orwpfA
+/mnt/Shared_03/fsq/LongVideoBench/videos/MPQn_orwpfA.mp4
+443.81003333333337
+Input prompt:  , which subtitle does this airplane picture appear together with? Choose your answer from below options: A.Europe Russia China, India and Australia most of these lines actually don't exist. So let's assume, B.We're funding maybe about 75% of all these train lines, C.You konw at first glance this picture, D.We live in a time in which air travel is the preferred method of long distance Journeys however, E.65 to 94.
+Output Answer:  A
+
+
+Processing: 5KLSf7kwr7s
+/mnt/Shared_03/fsq/LongVideoBench/videos/5KLSf7kwr7s.mp4
+494.2609275942609
+Input prompt:  Who passes by from the right side of the machine? Choose your answer from below options: A.A woman, B.A man, C.A child, D.A cat, E.A dog.
+Output Answer:  B.A man
+
+
+Processing: 5KLSf7kwr7s
+/mnt/Shared_03/fsq/LongVideoBench/videos/5KLSf7kwr7s.mp4
+494.2609275942609
+Input prompt:  What passed by on the highway? Choose your answer from below options: A.A white truck, B.A black motorcycle, C.A black truck, D.A white car with a black roof, E.A blue car with a black roof.
+Output Answer:  C.A black truck
+
+
+Processing: rMXJOKhf_AA
+/mnt/Shared_03/fsq/LongVideoBench/videos/rMXJOKhf_AA.mp4
+341.6
+Input prompt:  What did the crowned lady do on her first appearance? Choose your answer from below options: A.Accepted the item handed over by the man on the right, B.Accepted the item handed over by the man on the left, C.Refused the item handed over by the man on the right, D.Accepted the item handed over by the man who was bending, E.Refused the item handed over by the man who was bending.
+Output Answer:  B
+
+
+Processing: rMXJOKhf_AA
+/mnt/Shared_03/fsq/LongVideoBench/videos/rMXJOKhf_AA.mp4
+341.6
+Input prompt:  What did the man do the first time he appeared? Choose your answer from below options: A.The man ran to the left side., B.The man kept waving his hands., C.The man wiggled his waist up and down., D.The man spread his hands and climbed the wall., E.The man's flowery ring fell on the ground..
+Output Answer:  E.The man's flowery ring fell on the ground.
+
+
+Processing: LcZxjqtzXJI
+/mnt/Shared_03/fsq/LongVideoBench/videos/LcZxjqtzXJI.mp4
+208.04116666666667
+Input prompt:  What are the black shadows doing? Choose your answer from below options: A.Walking towards the exit, B.Observing the items in the cabinet, C.Tidying up their clothes, D.Touching the cabinet, E.Tapping the cabinet.
+Output Answer:  B
+
+
+Processing: LcZxjqtzXJI
+/mnt/Shared_03/fsq/LongVideoBench/videos/LcZxjqtzXJI.mp4
+208.04116666666667
+Input prompt:  What is this man doing? Choose your answer from below options: A.Touching the showcase, B.Adjusting his collar, C.Knocking on the showcase, D.Adjusting his sleeve, E.Staring at the sculpture.
+Output Answer:  E. Staring at the sculpture.
+
+
+Processing: JIoE18JYGcM
+/mnt/Shared_03/fsq/LongVideoBench/videos/JIoE18JYGcM.mp4
+270.31170833333334
+Input prompt:  What color are his glasses? Choose your answer from below options: A.gold, B.black, C.blue, D.white, E.silver.
+Output Answer:  A
+
+
+Processing: JIoE18JYGcM
+/mnt/Shared_03/fsq/LongVideoBench/videos/JIoE18JYGcM.mp4
+270.31170833333334
+Input prompt:  What kind of feathers does this bird have? Choose your answer from below options: A.Gray feathers, B.Black feathers, C.Black and white feathers, D.Pink feathers, E.White feathers.
+Output Answer:  D.Pink feathers,
+
+
+Processing: rZq-8Bq3mkU
+/mnt/Shared_03/fsq/LongVideoBench/videos/rZq-8Bq3mkU.mp4
+515.1813333333333
+Input prompt:  What is he doing when he appears for the first time? Choose your answer from below options: A.Frantically waving hands, speaking towards the camera, B.Raising both hands with palms open, C.Right hand holding the left hand, speaking towards the camera, D.Arms spread wide, speaking towards the camera, E.Left hand holding the right hand, speaking towards the camera.
+Output Answer:  B.Raising both hands with palms open,
+
+
+Processing: rZq-8Bq3mkU
+/mnt/Shared_03/fsq/LongVideoBench/videos/rZq-8Bq3mkU.mp4
+515.1813333333333
+Input prompt:  What is the person in blue protective clothing doing the first time they appear? Choose your answer from below options: A.Using a cotton swab to treat a wound of the person with short blonde hair, B.Putting a mask on the person with short blonde hair, C.Using a bandage to wrap the person with short blonde hair, D.Taking a photo of the person with short blonde hair using a phone, E.Taking the temperature of the person with short blonde hair with a thermometer.
+Output Answer:  A.Using a cotton swab to treat a wound of the person with short blonde hair,
+
+
+Processing: VSZ8ywgGNGM
+/mnt/Shared_03/fsq/LongVideoBench/videos/VSZ8ywgGNGM.mp4
+232.98274999999998
+Input prompt:  What is the woman holding in her hand to play with the kitten? Choose your answer from below options: A.a flower, B.a string, C.a piece of cloth, D.a blade of grass, E.a cat tease stick.
+Output Answer:  E. a cat tease stick.
+
+
+Processing: VSZ8ywgGNGM
+/mnt/Shared_03/fsq/LongVideoBench/videos/VSZ8ywgGNGM.mp4
+232.98274999999998
+Input prompt:  What is being clamped by the tongs that are reaching towards the lioness's nose? Choose your answer from below options: A.A flower, B.Catnip, C.A piece of meat, D.A leaf, E.A chicken.
+Output Answer:  B. Catnip
+
+
+Processing: ezhafkxoRdo
+/mnt/Shared_03/fsq/LongVideoBench/videos/ezhafkxoRdo.mp4
+292.8759166666666
+Input prompt:  What was the first action he took? Choose your answer from below options: A.Crossed his hands into fists, B.Placed both hands on his abdomen, C.Raised his right hand with palm open, D.Took off his glasses with both hands open, E.Raised both hands with palms open.
+Output Answer:  D
+
+
+Processing: ezhafkxoRdo
+/mnt/Shared_03/fsq/LongVideoBench/videos/ezhafkxoRdo.mp4
+292.8759166666666
+Input prompt:  What does he do first? Choose your answer from below options: A.Takes off glasses and wipes the lenses, B.Both palms clasped together, C.Right hand raised with palm open, D.Both hands raised with palms open, E.Both hands placed on the abdomen.
+Output Answer:  C. Right hand raised with palm open
+
+
+Processing: wxWo44MoCTI
+/mnt/Shared_03/fsq/LongVideoBench/videos/wxWo44MoCTI.mp4
+384.59254166666665
+Input prompt:  On a wooden-colored table, after a strip of meat in a glass bowl is placed into a coffee-colored pot, what change occurs to the strip of meat? Choose your answer from below options: A.Changes from a strip shape to a triangular shape, B.Changes from a strip shape to a pie shape, C.Changes from a strip shape to a pentagonal shape, D.Changes from a strip shape to a paste-like state.
+Output Answer:  D. Changes from a strip shape to a paste-like state.
+
+
+Processing: wxWo44MoCTI
+/mnt/Shared_03/fsq/LongVideoBench/videos/wxWo44MoCTI.mp4
+384.59254166666665
+Input prompt:  What changes occur to the white mold that appears on a wooden table from the coffee-colored pot? Choose your answer from below options: A.The mold changes from white to sauce color, B.The mold changes from scattered to cake-like, C.The mold changes from sheet-like to cake-like, D.The mold changes from white to yellow.
+Output Answer:  C.The mold changes from sheet-like to cake-like
+
+
+Processing: VkNF0rXuDXw
+/mnt/Shared_03/fsq/LongVideoBench/videos/VkNF0rXuDXw.mp4
+221.125
+Input prompt:  What is he doing? Choose your answer from below options: A.Coloring the roof in the drawing, B.Coloring the flowers in the drawing, C.Coloring the radish in the drawing, D.Coloring the sun in the drawing, E.Coloring the western red cedar in the drawing.
+Output Answer:  D. Coloring the sun in the drawing
+
+
+Processing: VkNF0rXuDXw
+/mnt/Shared_03/fsq/LongVideoBench/videos/VkNF0rXuDXw.mp4
+221.125
+Input prompt:  What are they doing? Choose your answer from below options: A.Coloring the roof in the drawing, B.Drawing sweat on the little person in the drawing, C.Coloring the sky in the drawing, D.Coloring the flowers in the drawing, E.Putting clothes on the little person in the drawing.
+Output Answer:  B
+
+
+Processing: v0QLje6xYgA
+/mnt/Shared_03/fsq/LongVideoBench/videos/v0QLje6xYgA.mp4
+181.2811
+Input prompt:  When she appears for the first time, what is she doing? Choose your answer from below options: A.Touching her face with her palm, B.One leg kneeling on the ground, C.Kneeling with her right hand supporting her chin, D.Kneeling with both hands resting on her left leg, E.Both legs kneeling on the ground.
+Output Answer:  B. One leg kneeling on the ground.
+
+
+Processing: UUaiqR1I454
+/mnt/Shared_03/fsq/LongVideoBench/videos/UUaiqR1I454.mp4
+494.125
+Input prompt:  With which subtitles does this man appear together? Choose your answer from below options: A.still blanketed darkness与others weren’t so lucky, B.still blanketed darkness与they did not surrender, C.still blanketed in darkness与almost eclipsed the morning sun his, D.others weren’t so lucky与almost eclipsed the morning sun his, E.they did not surrender与almost eclipsed the morning sun his.
+Output Answer:  A.still blanketed darkness与others weren’t so lucky,
+
+
+Processing: UUaiqR1I454
+/mnt/Shared_03/fsq/LongVideoBench/videos/UUaiqR1I454.mp4
+494.125
+Input prompt:  , in which captions does this baby appear together? Choose your answer from below options: A.cuts and bruises and they did not surrender, B.cuts and bruises and years that followed his wife sadly died, C.cuts and bruises and many more suffered similarly, D.years that followed his wife sadly died and many more suffered similarly, E.they did not surrender and many more suffered similarly.
+Output Answer:  C
+
+
+Processing: x4dFLY_-vKs
+/mnt/Shared_03/fsq/LongVideoBench/videos/x4dFLY_-vKs.mp4
+264.76
+Input prompt:  At this moment, what is the man wearing on his head? Choose your answer from below options: A.black cap, B.green cap, C.red maple leaf, D.white overcoat, E.red-framed glasses.
+Output Answer:  A.black cap
+
+
+Processing: x4dFLY_-vKs
+/mnt/Shared_03/fsq/LongVideoBench/videos/x4dFLY_-vKs.mp4
+264.76
+Input prompt:  What object is present on the screen? Choose your answer from below options: A.Flesh-colored spacesuit without straps, B.Black spacesuit with straps, C.Black spacesuit without straps, D.Glasses, E.Flesh-colored spacesuit with straps.
+Output Answer:  E
+
+
+Processing: yn7oTvw8QRY
+/mnt/Shared_03/fsq/LongVideoBench/videos/yn7oTvw8QRY.mp4
+225.96666666666667
+Input prompt:  According to the video, which character appears first? Choose your answer from below options: A.Boy with short hair and green stripes, B.Boy with golden hair, C.Girl in green clothing with loose hair, D.Girl in green clothing with braided hair, E.Girl in black and white floral clothing with loose hair.
+Output Answer:  E. Girl in black and white floral clothing with loose hair.
+
+
+Processing: yn7oTvw8QRY
+/mnt/Shared_03/fsq/LongVideoBench/videos/yn7oTvw8QRY.mp4
+225.96666666666667
+Input prompt:  According to the video, which of the following pictures appears last? Choose your answer from below options: A.a small bowl made of clay, B.a boy with short golden hair wearing a long-sleeve shirt, C.a boy with short golden hair wearing a short-sleeve shirt, D.a pottery jar with a mountain goat design, E.a girl wearing green clothing and tying her hair.
+Output Answer:  A.a small bowl made of clay
+
+
+Processing: t1nhAnMQBHg
+/mnt/Shared_03/fsq/LongVideoBench/videos/t1nhAnMQBHg.mp4
+398.1310666666667
+Input prompt:  What is the item on the man's head? Choose your answer from below options: A.A black beret with red and white interlaced text, B.A black baseball cap with red and white interlaced text, C.A black top hat with red and white interlaced text, D.A yellow baseball cap with red and white interlaced text, E.A black baseball cap with no text.
+Output Answer:  B. A black baseball cap with red and white interlaced text
+
+
+Processing: s1TjVlKBpjs
+/mnt/Shared_03/fsq/LongVideoBench/videos/s1TjVlKBpjs.mp4
+212.25
+Input prompt:  What is the first type of electronic communication tool that appears? Choose your answer from below options: A.telegraph, B.letter, C.cell phone, D.pager, E.landline phone.
+Output Answer:  A.telegraph
+
+
+Processing: s1TjVlKBpjs
+/mnt/Shared_03/fsq/LongVideoBench/videos/s1TjVlKBpjs.mp4
+212.25
+Input prompt:  What is the first type of weapon shown on the screen? Choose your answer from below options: A.Sword, B.Explosive Pack, C.Rifle, D.Hand Grenade, E.Tank.
+Output Answer:  C.Rifle
+
+
+Processing: KIf2fGmluhY
+/mnt/Shared_03/fsq/LongVideoBench/videos/KIf2fGmluhY.mp4
+508.0
+Input prompt:  What did the boy holding the ball do when he appeared for the first time? Choose your answer from below options: A.Threw the ball into the distance, B.Shot the ball towards the basket, C.Dribbled the ball, D.Stepped on the ball with his foot, E.Passed the ball to someone else.
+Output Answer:  B.Shot the ball towards the basket,
+
+
+Processing: KIf2fGmluhY
+/mnt/Shared_03/fsq/LongVideoBench/videos/KIf2fGmluhY.mp4
+508.0
+Input prompt:  What did the fish do when it first appeared in the fishbowl? Choose your answer from below options: A.Swam back and forth in the fishbowl, B.Fought in the bathtub, C.Slowly sank in the fishbowl, D.Swallowed each other in the bathtub.
+Output Answer:  A.Swam back and forth in the fishbowl
+
+
+Processing: eJr-y6UXnRE
+/mnt/Shared_03/fsq/LongVideoBench/videos/eJr-y6UXnRE.mp4
+592.56
+Input prompt:  What is the color of the first piece of clothing shown in the video? Choose your answer from below options: A.white, B.purple, C.red, D.olive, E.black.
+Output Answer:  B
+
+
+Processing: eJr-y6UXnRE
+/mnt/Shared_03/fsq/LongVideoBench/videos/eJr-y6UXnRE.mp4
+592.56
+Input prompt:  What is the first food item displayed in the video? Choose your answer from below options: A.Avocado, B.Beverage with ice cubes, C.Watermelon, D.Apple, E.Potato chips.
+Output Answer:  D.Apple
+
+
+Processing: _zEM6Fc-7NI
+/mnt/Shared_03/fsq/LongVideoBench/videos/_zEM6Fc-7NI.mp4
+285.9523333333333
+Input prompt:  Which object is not present on the screen? Choose your answer from below options: A.people wearing overalls, B.big tree, C.police car, D.soldier wearing camouflage, E.black car.
+Output Answer:  D
+
+
+Processing: _zEM6Fc-7NI
+/mnt/Shared_03/fsq/LongVideoBench/videos/_zEM6Fc-7NI.mp4
+285.9523333333333
+Input prompt:  Which object is on the screen? Choose your answer from below options: A.portrait of a woman with short hair, B.wine glass, C.airplane, D.armored vehicle, E.police.
+Output Answer:  D
+
+
+Processing: Z00vWImw1KQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/Z00vWImw1KQ.mp4
+476.52
+Input prompt:  Which character closed the door of the ambulance? Choose your answer from below options: A.doctor, B.police officer wearing sunglasses, C.person wearing red clothes, D.woman wearing white clothes, E.soldier wearing camouflage clothing.
+Output Answer:  B.police officer wearing sunglasses
+
+
+Processing: Z00vWImw1KQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/Z00vWImw1KQ.mp4
+476.52
+Input prompt:  , which object is moving quickly? Choose your answer from below options: A.airplane, B.a green tank, C.tent, D.large truck, E.ambulance with yellow lights.
+Output Answer:  E.ambulance with yellow lights.
+
+
+Processing: tGiRbGGwRj8
+/mnt/Shared_03/fsq/LongVideoBench/videos/tGiRbGGwRj8.mp4
+223.43154166666665
+Input prompt:  What color is the outfit the woman is wearing? Choose your answer from below options: A.Black, B.White, C.Red, D.Gray.
+Output Answer:  B. White
+
+
+Processing: tGiRbGGwRj8
+/mnt/Shared_03/fsq/LongVideoBench/videos/tGiRbGGwRj8.mp4
+223.43154166666665
+Input prompt:  At this moment, what is the color of the nail polish on their fingers? Choose your answer from below options: A.pink, B.blue, C.white, D.red.
+Output Answer:  A. pink
+
+
+Processing: ixlQX7lV8dc
+/mnt/Shared_03/fsq/LongVideoBench/videos/ixlQX7lV8dc.mp4
+590.0561333333334
+Input prompt:  After the subtitle 'helped it seek out prey, primarily' appears, which animal is shown? Choose your answer from below options: A.gecko, B.snake, C.chipmunk, D.frog.
+Output Answer:  D.frog.
+
+
+Processing: ixlQX7lV8dc
+/mnt/Shared_03/fsq/LongVideoBench/videos/ixlQX7lV8dc.mp4
+590.0561333333334
+Input prompt:  What person appears? Choose your answer from below options: A.A man in a yellow shirt, B.A man wearing glasses and smiling slightly, C.A man in a green shirt, D.A woman wearing glasses.
+Output Answer:  B.A man wearing glasses and smiling slightly
+
+
+Processing: AnLMDMzO4QY
+/mnt/Shared_03/fsq/LongVideoBench/videos/AnLMDMzO4QY.mp4
+261.8032083333333
+Input prompt:  Which subtitles appear together with this woman? Choose your answer from below options: A.we've got the cookies and the freezer and cooling for about maybe 10 minutes so appear together, B.love the fact they're sweet and, C.the a hint of salt
+, D.beath bars are mike chocolate covered.
+Output Answer:  A
+
+
+Processing: AnLMDMzO4QY
+/mnt/Shared_03/fsq/LongVideoBench/videos/AnLMDMzO4QY.mp4
+261.8032083333333
+Input prompt:  Which subtitles do they appear with? Choose your answer from below options: A.beath bars are mike chocolate covered, B.cooling for about maybe 10 minutes so and let us know what you guys think in the appearing together, C.crunch around the room definitely, D.the a hint of salt
+.
+Output Answer:  B
+
+
+Processing: marOr6mJefE
+/mnt/Shared_03/fsq/LongVideoBench/videos/marOr6mJefE.mp4
+367.992625
+Input prompt:  What is the man in the black shirt and cap doing at this time? Choose your answer from below options: A.playing with a phone, B.playing games, C.driving, D.drinking water.
+Output Answer:  A. playing with a phone
+
+
+Processing: marOr6mJefE
+/mnt/Shared_03/fsq/LongVideoBench/videos/marOr6mJefE.mp4
+367.992625
+Input prompt:  What does the man in the gray top wearing black frame glasses stop to do? Choose your answer from below options: A.look through binoculars, B.run, C.shoot, D.take a photo.
+Output Answer:  A.look through binoculars
+
+
+Processing: LHXS0QR1ThA
+/mnt/Shared_03/fsq/LongVideoBench/videos/LHXS0QR1ThA.mp4
+484.0
+Input prompt:  Which of the following scene sequences is correct? Choose your answer from below options: A.First, there is a girl on a white background with text and the same image appearing twice, once at 47:39 and once at 50:37, then a page with the word 'results' appears, and finally 9 small animals appear., B.First, there is a girl on a white background with text and the same image appearing twice, once at 47:39 and once at 50:37, then 9 small animals appear, and finally a page with the word 'results' appears., C.First, 9 small animals appear, then a girl on a white background with text and the same image appearing twice, once at 47:39 and once at 50:37, and finally a page with the word 'results' appears., D.First, a page with the word 'results' appears, then 9 small animals appear, and finally a girl on a white background with text and the same image appearing twice, once at 47:39 and once at 50:37..
+Output Answer:  The correct sequence is B. First, there is a girl on a white background with text and the same image appearing twice, once at 47:39 and once at 50:37, then 9 small animals appear, and finally a page with the word 'results' appears.
+
+
+Processing: qjY9kmveQAk
+/mnt/Shared_03/fsq/LongVideoBench/videos/qjY9kmveQAk.mp4
+589.8893
+Input prompt:  What other items appear on this train? Choose your answer from below options: A.Biscuit, B.Flower, C.Gun, D.Piano.
+Output Answer:  C
+
+
+Processing: qjY9kmveQAk
+/mnt/Shared_03/fsq/LongVideoBench/videos/qjY9kmveQAk.mp4
+589.8893
+Input prompt:  At this moment, what else appears? Choose your answer from below options: A.sun, B.airplane, C.rainbow, D.stars.
+Output Answer:  Answer: B. airplane
+
+
+Processing: QHS9ZZBdK-g
+/mnt/Shared_03/fsq/LongVideoBench/videos/QHS9ZZBdK-g.mp4
+375.0
+Input prompt:  What action did this man perform? Choose your answer from below options: A.Raised left hand with index and middle fingers pointing up, B.Raised right hand in a fist, C.Raised right hand with index and middle fingers pointing up, D.Raised left hand in a fist.
+Output Answer:  A
+
+
+Processing: QHS9ZZBdK-g
+/mnt/Shared_03/fsq/LongVideoBench/videos/QHS9ZZBdK-g.mp4
+375.0
+Input prompt:  What color is the jacket that the man is wearing? Choose your answer from below options: A.green, B.blue, C.yellow, D.red.
+Output Answer:  C. yellow
+
+
+Processing: h0OHi9uAcBo
+/mnt/Shared_03/fsq/LongVideoBench/videos/h0OHi9uAcBo.mp4
+224.9247
+Input prompt:  In the video, a man wearing a green jacket and holding a green bag is talking to a long-haired woman in a white dress sitting at a desk. what did the long-haired woman in a white sleeveless top do after picking up a pen? Choose your answer from below options: A.Retouched a photo, B.Drew a picture on paper, C.Drank water, D.Wrote.
+Output Answer:  D.Wrote.
+
+
+Processing: h0OHi9uAcBo
+/mnt/Shared_03/fsq/LongVideoBench/videos/h0OHi9uAcBo.mp4
+224.9247
+Input prompt:  What did the woman in black do afterwards? Choose your answer from below options: A.Put the book under the computer, B.Put the book into the copier, C.Put the book into the drawer, D.Put the book on the bookshelf.
+Output Answer:  B.Put the book into the copier
+
+
+Processing: SO3czkzeFjw
+/mnt/Shared_03/fsq/LongVideoBench/videos/SO3czkzeFjw.mp4
+401.4427083333333
+Input prompt:  Which of the following scene sequences is correct? Choose your answer from below options: A.First, on a sunny road, a boy in black clothes holding a skateboard opens the door of a house and walks out. Next, a man in white clothes opens a door inside a building with many doors and walks out. Finally, a boy wearing a purple shirt with yellow floral patterns is sitting in a room full of items, explaining in front of a mirror., B.First, on a sunny road, a boy in black clothes holding a skateboard opens the door of a house and walks out. Next, a boy wearing a purple shirt with yellow floral patterns is sitting in a room full of items, explaining in front of a mirror. Finally, a man in white clothes opens a door inside a building with many doors and walks out., C.First, a boy wearing a purple shirt with yellow floral patterns is sitting in a room full of items, explaining in front of a mirror. Next, on a sunny road, a boy in black clothes holding a skateboard opens the door of a house and walks out. Finally, a man in white clothes opens a door inside a building with many doors and walks out., D.First, a man in white clothes opens a door inside a building with many doors and walks out. Next, on a sunny road, a boy in black clothes holding a skateboard opens the door of a house and walks out. Finally, a boy wearing a purple shirt with yellow floral patterns is sitting in a room full of items, explaining in front of a mirror., E.First, a man in white clothes opens a door inside a building with many doors and walks out. Next, a boy wearing a purple shirt with yellow floral patterns is sitting in a room full of items, explaining in front of a mirror. Finally, on a sunny road, a boy in black clothes holding a skateboard opens the door of a house and walks out..
+Output Answer:  D
+
+
+Processing: SO3czkzeFjw
+/mnt/Shared_03/fsq/LongVideoBench/videos/SO3czkzeFjw.mp4
+401.4427083333333
+Input prompt:  Which of the following sequence of events is correct? Choose your answer from below options: A.First, the video shows a boy in a blue shirt crossing over a tree trunk in a forest. Then, the video shows a room with yellow and white walls with a staircase inside it. The boy, wearing a book bag, walks up the stairs. Finally, in a bedroom, a book bag placed on the bed is shown being zipped up. The boy then wears the book bag and walks out of the room., B.First, a book bag placed on the bed in a bedroom is shown being zipped up. Then, a boy puts on the book bag and walks out of the room. Next, the video shows a room with yellow and white walls with a staircase inside it. The boy, still wearing the book bag, walks up the stairs. Finally, the video shows a boy in a blue shirt crossing over a tree trunk in a forest., C.First, the video shows a room with yellow and white walls with a staircase inside it. The boy, wearing a book bag, walks up the stairs. Then, the video shows a book bag placed on the bed in a bedroom being zipped up. The boy then wears the book bag and walks out of the room. Finally, the video shows a boy in a blue shirt crossing over a tree trunk in a forest., D.First, the video shows a boy in a blue shirt crossing over a tree trunk in a forest. Then, the video shows a book bag placed on the bed in a bedroom being zipped up. The boy then wears the book bag and walks out of the room. Finally, the video shows a room with yellow and white walls with a staircase inside it. The boy, wearing the book bag, walks up the stairs., E.First, the video shows a room with yellow and white walls with a staircase inside it. The boy, wearing a book bag, walks up the stairs. Then, the video shows a boy in a blue shirt crossing over a tree trunk in a forest. Finally, in a bedroom, the video shows a book bag placed on the bed being zipped up. The boy then wears the book bag and walks out of the room..
+Output Answer:  C
+
+
+Processing: liRm38L9EC4
+/mnt/Shared_03/fsq/LongVideoBench/videos/liRm38L9EC4.mp4
+191.2327083333333
+Input prompt:  What objects appear in this scene? Choose your answer from below options: A.A plate with brown objects, B.A plate with purple objects, C.A plate with pink objects, D.A plate with green objects, E.A plate with blue objects.
+Output Answer:  B. A plate with purple objects
+
+
+Processing: liRm38L9EC4
+/mnt/Shared_03/fsq/LongVideoBench/videos/liRm38L9EC4.mp4
+191.2327083333333
+Input prompt:  What objects are present in this scene? Choose your answer from below options: A.A pure white plate, B.A pure blue plate, C.A blue plate with white floral patterns, D.A blue painting board, E.A white plate with blue floral patterns.
+Output Answer:  C.A blue plate with white floral patterns
+
+
+Processing: zk6fgbXI5AE
+/mnt/Shared_03/fsq/LongVideoBench/videos/zk6fgbXI5AE.mp4
+389.2221666666666
+Input prompt:  What appears first on the screen? Choose your answer from below options: A.A man wearing black clothes with a green bookbag and holding hands with a child, B.A man wearing a red floral outfit with a green bookbag and holding hands with a child, C.A woman wearing black clothes with a red bookbag and holding hands with a child, D.A woman wearing a red floral dress with a pink bookbag and holding hands with a child, E.A woman wearing a red floral dress with a yellow bookbag and holding hands with a child.
+Output Answer:  C.A woman wearing black clothes with a red bookbag and holding hands with a child
+
+
+Processing: zk6fgbXI5AE
+/mnt/Shared_03/fsq/LongVideoBench/videos/zk6fgbXI5AE.mp4
+389.2221666666666
+Input prompt:  What object appeared? Choose your answer from below options: A.A red backpack, B.A bed, C.An air conditioner, D.A magazine with a woman with long hair on the cover, E.A flower pot.
+Output Answer:  D. A magazine with a woman with long hair on the cover
+
+
+Processing: fxCRCMLJ0PU
+/mnt/Shared_03/fsq/LongVideoBench/videos/fxCRCMLJ0PU.mp4
+291.2083333333333
+Input prompt:  Which of the following sequences of events is correct? Choose your answer from below options: A.First, a group of soldiers making rowing motions sitting in a green boat on a river, then several gray guns and two green grenades appear against a red background, and finally, five soldiers with helmets and face paint holding guns fiercely facing the camera., B.First, a group of soldiers making rowing motions sitting in a green boat on a river, then several gray guns and two green grenades appear against a green background, and finally, three soldiers with helmets and face paint holding guns fiercely facing the camera., C.First, several gray guns and two green grenades appear against a green background, then a group of soldiers making rowing motions sitting in a green boat on a river, and finally, three soldiers with helmets and face paint holding guns fiercely facing the camera., D.First, several gray guns and two green grenades appear against a green background, then three soldiers with helmets and face paint holding guns fiercely facing the camera, and finally, a group of soldiers making rowing motions sitting in a green boat on a river., E.First, a group of soldiers making rowing motions sitting in a green boat on a river, then several gray guns and two green grenades appear against a blue background, and finally, two soldiers with helmets and face paint holding guns fiercely facing the camera..
+Output Answer:  B
+
+
+Processing: bUaFXONIXzM
+/mnt/Shared_03/fsq/LongVideoBench/videos/bUaFXONIXzM.mp4
+526.48
+Input prompt:  In a foam paper cup containing three drinks, one of the drinks has a raised milk cap in a creamy yellow color. where else has this drink appeared? Choose your answer from below options: A.In the kitchen, B.In the fridge, C.In an amusement park, D.In the hand of a woman without a ring holding a green straw, E.In a Starbucks store.
+Output Answer:  D
+
+
+Processing: bUaFXONIXzM
+/mnt/Shared_03/fsq/LongVideoBench/videos/bUaFXONIXzM.mp4
+526.48
+Input prompt:  Where has this drink appeared before? Choose your answer from below options: A.In a kitchen, B.On a grass field, C.In the hands of a woman looking at a yellow stain on a white shirt, D.On a table, E.In a coffee shop.
+Output Answer:  C
+
+
+Processing: kLuqCtnKr_8
+/mnt/Shared_03/fsq/LongVideoBench/videos/kLuqCtnKr_8.mp4
+600.0661333333334
+Input prompt:  , what did he do next? Choose your answer from below options: A.Rushed towards another person standing on the rock, B.Jumped into someone's arms, C.Jumped into the jade-green sea, D.Hugged the person in front of him, E.Fell down on the rock.
+Output Answer:  C. Jumped into the jade-green sea
+
+
+Processing: kLuqCtnKr_8
+/mnt/Shared_03/fsq/LongVideoBench/videos/kLuqCtnKr_8.mp4
+600.0661333333334
+Input prompt:  What does she do next? Choose your answer from below options: A.Faces the mirror, bends at the waist, and laughs heartily, B.Turns her back to the mirror and faces the ocean, C.Turns her back to the mirror and extends both arms, D.Faces the mirror and extends both hands, E.Faces the mirror and extends one hand.
+Output Answer:  B. Turns her back to the mirror and faces the ocean
+
+
+Processing: 5zbV24vyO44
+/mnt/Shared_03/fsq/LongVideoBench/videos/5zbV24vyO44.mp4
+543.0
+Input prompt:  What does he do? Choose your answer from below options: A.Touches his chin with his hand, B.Touches his nose with his hand, C.Makes a 'Yay' gesture with his hand, D.Holds his fist with one hand, E.Touches his forehead with his hand.
+Output Answer:  C
+
+
+Processing: 5zbV24vyO44
+/mnt/Shared_03/fsq/LongVideoBench/videos/5zbV24vyO44.mp4
+543.0
+Input prompt:  What does he do next? Choose your answer from below options: A.Touches the brain with a hand, B.One hand extends with the index finger pointing upwards, C.Both hands extend with index fingers pointing upwards, D.Both hands spread outwards, E.One hand touches the forehead.
+Output Answer:  B.One hand extends with the index finger pointing upwards
+
+
+Processing: OGaML8Gg8JQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/OGaML8Gg8JQ.mp4
+542.7088333333332
+Input prompt:  , in which of the following scenes did he appear? Choose your answer from below options: A.A scene with a pure black background and a small green map on the side, B.A room filled with clutter and books, C.A scene with a pure white background with a small flower on the side, D.A courtyard with many fresh flowers, E.In a park with many people.
+Output Answer:  A scene with a pure black background and a small green map on the side
+
+
+Processing: OGaML8Gg8JQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/OGaML8Gg8JQ.mp4
+542.7088333333332
+Input prompt:  In which of the following scenes does he appear? Choose your answer from below options: A.In front of a pure black backdrop, there is a scene with a man wearing a white short-sleeved shirt., B.In front of a pure black backdrop, there is a scene with a man wearing a pink short-sleeved shirt., C.In front of a pure black backdrop, there is a scene with a man wearing a green short-sleeved shirt., D.In front of a pure black backdrop, there is a scene with a man wearing a red short-sleeved shirt., E.In front of a pure black backdrop, there is a scene with a man wearing a blue short-sleeved shirt..
+Output Answer:  A
+
+
+Processing: otaJfBSlsG8
+/mnt/Shared_03/fsq/LongVideoBench/videos/otaJfBSlsG8.mp4
+526.4931598264932
+Input prompt:  With which of the following subtitles has she appeared together? Choose your answer from below options: A.history, B.develop, C.warfare, D.people, E.science.
+Output Answer:  D.people
+
+
+Processing: otaJfBSlsG8
+/mnt/Shared_03/fsq/LongVideoBench/videos/otaJfBSlsG8.mp4
+526.4931598264932
+Input prompt:  Which of the following subtitles appeared with this illustrated book? Choose your answer from below options: A.that afternoon stella and her clay, B.let's find a cozy spot and let's get, C.let's begin with our welcome song just, D.started, E.story time and activity now.
+Output Answer:  C
+
+
+Processing: 60-ADf8OL9A
+/mnt/Shared_03/fsq/LongVideoBench/videos/60-ADf8OL9A.mp4
+336.04404166666666
+Input prompt:  What change occurs to this man? Choose your answer from below options: A.Both hands change from resting on his legs to resting on the sofa., B.His right hand changes from resting on the sofa to touching his forehead., C.His right hand changes from resting on the sofa to being raised., D.His left hand changes from resting on the sofa to touching his forehead., E.His left hand changes from resting on the sofa to being raised..
+Output Answer:  D. His left hand changes from resting on the sofa to touching his forehead.
+
+
+Processing: 60-ADf8OL9A
+/mnt/Shared_03/fsq/LongVideoBench/videos/60-ADf8OL9A.mp4
+336.04404166666666
+Input prompt:  What changes occur to the man with glasses and graying hair? Choose your answer from below options: A.Changes from touching his forehead with his left hand to touching his forehead with his right hand, B.Changes from facing the mirror to having his back to the mirror, C.Changes from raising his left hand to raising his right hand, D.Changes from having his back to the mirror to facing the mirror, E.Changes from holding the microphone in his left hand to holding it in his right hand.
+Output Answer:  E. Changes from holding the microphone in his left hand to holding it in his right hand.
+
+
+Processing: VL259eBJ68w
+/mnt/Shared_03/fsq/LongVideoBench/videos/VL259eBJ68w.mp4
+550.6167333333334
+Input prompt:  In the video, a black-haired woman wearing a black strappy dress and a man with dark skin in a black chef's uniform are in a kitchen. the cabinets behind them are white, and the windows have white curtains. on either side of the windows are wooden shelves holding some items. in front of them is a large wooden table. the woman has her arms crossed and is smiling slightly, while the man is holding a semi-circular lid. what are they doing in the kitchen? Choose your answer from below options: A.The man lifts the lid in his hand, B.The man flips the lid in his hand, C.The woman opens the lid in the man's hand, D.The man drops the lid in his hand, E.The man and woman are shaking hands.
+Output Answer:  B
+
+
+Processing: VL259eBJ68w
+/mnt/Shared_03/fsq/LongVideoBench/videos/VL259eBJ68w.mp4
+550.6167333333334
+Input prompt:  What is the woman doing in the kitchen? Choose your answer from below options: A.Turned the large bowl upside down, B.Put a lid on the large bowl, C.Moved the large bowl to the windowsill, D.Placed the large bowl on the counter, E.Put the large bowl on the pink container.
+Output Answer:  B. Put a lid on the large bowl
+
+
+Processing: d8H7hgQY9ew
+/mnt/Shared_03/fsq/LongVideoBench/videos/d8H7hgQY9ew.mp4
+439.36
+Input prompt:  What event occurred? Choose your answer from below options: A.She shook hands with another man, B.She put on glasses, C.She nodded, D.She stood up from her chair, E.She hugged a man next to her.
+Output Answer:  D. She stood up from her chair
+
+
+Processing: d8H7hgQY9ew
+/mnt/Shared_03/fsq/LongVideoBench/videos/d8H7hgQY9ew.mp4
+439.36
+Input prompt:  What event occurred when the text moved to the left? Choose your answer from below options: A.The man smoothed his clothes, B.The man stood up, C.The man picked up a piece of paper from the table, D.The man took a sip of water, E.The woman adjusted her hair.
+Output Answer:  C.The man picked up a piece of paper from the table
+
+
+Processing: LYvStKy8iAc
+/mnt/Shared_03/fsq/LongVideoBench/videos/LYvStKy8iAc.mp4
+575.32
+Input prompt:  What happened after she pressed the foundation liquid onto the sponge? Choose your answer from below options: A.Pressed the sponge onto her neck, B.Pressed the sponge onto her face, C.Washed dishes with the sponge, D.Pressed the sponge onto her hand, E.Threw the sponge away.
+Output Answer:  B.Pressed the sponge onto her face
+
+
+Processing: LYvStKy8iAc
+/mnt/Shared_03/fsq/LongVideoBench/videos/LYvStKy8iAc.mp4
+575.32
+Input prompt:  What happened after she picked up the powder box? Choose your answer from below options: A.She brushed her cheeks, B.She closed the lid of the powder box, C.She brushed her eyelids, D.She opened the lid of the box, E.She threw the powder box.
+Output Answer:  D.She opened the lid of the box
+
+
+Processing: rIU_BQEuKQ8
+/mnt/Shared_03/fsq/LongVideoBench/videos/rIU_BQEuKQ8.mp4
+290.35673333333335
+Input prompt:  What happens afterward? Choose your answer from below options: A.The pop-up on the left shows a picture of an old building under a blue sky, B.The photo pop-up on the left shows a picture of a man and a woman sitting on a beach holding a child, with '10%' written on it, C.The photo pop-up on the left disappears, D.The man changes into a jacket, E.The man takes out a cup.
+Output Answer:  A.The pop-up on the left shows a picture of an old building under a blue sky
+
+
+Processing: X0U3fP0tZyY
+/mnt/Shared_03/fsq/LongVideoBench/videos/X0U3fP0tZyY.mp4
+458.3912666666667
+Input prompt:  What is the first object that appears? Choose your answer from below options: A.A woman in a black dress playing the piano, B.A woman in black clothing sitting and playing a small string instrument, C.A woman in purple clothing sitting and playing a small string instrument, D.A woman in a white dress playing the piano, E.A woman in a black dress sitting and playing a cello.
+Output Answer:  B.A woman in black clothing sitting and playing a small string instrument
+
+
+Processing: X0U3fP0tZyY
+/mnt/Shared_03/fsq/LongVideoBench/videos/X0U3fP0tZyY.mp4
+458.3912666666667
+Input prompt:  What is the first object that appears? Choose your answer from below options: A.A black and red piano, B.A black and red string instrument, C.A white guitar, D.Olive-colored loafers, E.White glasses.
+Output Answer:  E.White glasses.
+
+
+Processing: NexB4vj8_54
+/mnt/Shared_03/fsq/LongVideoBench/videos/NexB4vj8_54.mp4
+228.2
+Input prompt:  What is the person in the video doing? Choose your answer from below options: A.Pouring the yogurt into the container with egg liquid, B.Stirring the yogurt and egg liquid, C.Drinking the yogurt, D.Stirring the yogurt, E.Stirring the egg liquid.
+Output Answer:  B. Stirring the yogurt and egg liquid
+
+
+Processing: NexB4vj8_54
+/mnt/Shared_03/fsq/LongVideoBench/videos/NexB4vj8_54.mp4
+228.2
+Input prompt:  , what is the video creator doing? Choose your answer from below options: A.Eating the cake, B.Setting the table, C.Cutting the cake, D.Cleaning the utensils, E.Decorating the cake.
+Output Answer:  C
+
+
+Processing: JpjytHmGHZ4
+/mnt/Shared_03/fsq/LongVideoBench/videos/JpjytHmGHZ4.mp4
+228.16
+Input prompt:  What is this man doing? Choose your answer from below options: A.Waving to the audience, B.Making a speech, C.Performing magic, D.Dancing on stage, E.Playing the guitar and singing.
+Output Answer:  E. Playing the guitar and singing.
+
+
+Processing: JpjytHmGHZ4
+/mnt/Shared_03/fsq/LongVideoBench/videos/JpjytHmGHZ4.mp4
+228.16
+Input prompt:  A man holding a guitar dressed in a red short-sleeve shirt is standing behind a microphone on stage under the lights. on the screen behind him with a black background, two large english words appear. there is a row of audience members seated in front of the stage. when the subtitles 'thank you' appear, what are the audience members doing? Choose your answer from below options: A.Giving flowers to the man on stage, B.Asking the man on stage a question, C.Standing up and leaving, D.Clapping, E.Sitting still.
+Output Answer:  D
+
+
+Processing: Ng2rNm6Nwsg
+/mnt/Shared_03/fsq/LongVideoBench/videos/Ng2rNm6Nwsg.mp4
+254.379125
+Input prompt:  What happens on the screen? Choose your answer from below options: A.Three men appear on the screen, sitting around a table chatting., B.An old man wearing a checkered suit and round glasses appears on the right side of the screen, standing in front of a wall full of paintings. On the left side, a woman is playing the guitar on a sofa, while a man is sitting on the sofa creating with a pencil., C.An old man wearing a checkered suit and round glasses appears on the right side of the screen, standing in front of a wall full of paintings. On the left side, a woman is sitting on a sofa creating with a pencil, while a man is sitting on the sofa playing the guitar., D.An old man wearing a checkered suit and round glasses appears on the left side of the screen, standing in front of a wall full of paintings. On the right side, a woman is sitting on a sofa creating with a pencil, while a man is sitting on the sofa playing the guitar., E.An old man wearing a checkered suit and round glasses appears on the left side of the screen, standing in front of a wall full of paintings. On the right side, a woman is playing the guitar on a sofa, while a man is sitting on the sofa creating with a pencil..
+Output Answer:  B. An old man wearing a checkered suit and round glasses appears on the right side of the screen, standing in front of a wall full of paintings. On the left side, a woman is playing the guitar on a sofa, while a man is sitting on the sofa creating with a pencil.
+
+
+Processing: Ng2rNm6Nwsg
+/mnt/Shared_03/fsq/LongVideoBench/videos/Ng2rNm6Nwsg.mp4
+254.379125
+Input prompt:  , what happened in the video? Choose your answer from below options: A.A family is standing in front of a house taking a family photo., B.Three children are playing around the house., C.A man and a woman are creating something with paper and pen., D.Three women are sitting in front of a house having a conversation., E.The background is a tiled house with a two-story white staircase. Three men are sitting in front of the house having a discussion, and the man on the far right is smoking..
+Output Answer:  The video shows E. The background is a tiled house with a two-story white staircase. Three men are sitting in front of the house having a discussion, and the man on the far right is smoking.
+
+
+Processing: BktEeBeA7a8
+/mnt/Shared_03/fsq/LongVideoBench/videos/BktEeBeA7a8.mp4
+320.6
+Input prompt:  What is the item? Choose your answer from below options: A.A coffee machine, B.A glass with a wooden stirrer and a straw inserted, C.A can of coffee, D.Some cutlery, E.A plate of fruit.
+Output Answer:  B. A glass with a wooden stirrer and a straw inserted
+
+
+Processing: BktEeBeA7a8
+/mnt/Shared_03/fsq/LongVideoBench/videos/BktEeBeA7a8.mp4
+320.6
+Input prompt:   Choose your answer from below options: A.Wild flowers, B.Vegetables, C.Melon, D.Some colorful trees, E.A pile of green grass.
+Output Answer:  D.Some colorful trees
+
+
+Processing: ydm72ftJStQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/ydm72ftJStQ.mp4
+277.6
+Input prompt:  What object appears on the screen? Choose your answer from below options: A.backpack, B.leather shoes, C.collar, D.glasses, E.hat.
+Output Answer:  C
+
+
+Processing: ydm72ftJStQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/ydm72ftJStQ.mp4
+277.6
+Input prompt:  What object appears on the screen? Choose your answer from below options: A.a man wearing glasses, B.a sphere, C.black English letters, D.a round shape, E.a cube.
+Output Answer:  D
+
+
+Processing: 88LbBgZP1vQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/88LbBgZP1vQ.mp4
+488.6
+Input prompt:  In which of the following locations has the short-haired man appeared? Choose your answer from below options: A.Verdant forest, B.Beautiful seaside, C.Quiet park, D.Crowded amusement park, E.Indoor basketball court.
+Output Answer:  E. Indoor basketball court.
+
+
+Processing: 88LbBgZP1vQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/88LbBgZP1vQ.mp4
+488.6
+Input prompt:  In which of the following places has the girl appeared? Choose your answer from below options: A.In a room with a beige sofa, B.In a playground, C.In a quiet park, D.By the beach, E.In a clothing store with many beautiful clothes.
+Output Answer:  B. In a playground
+
+
+Processing: F7RSW-2rF4w
+/mnt/Shared_03/fsq/LongVideoBench/videos/F7RSW-2rF4w.mp4
+482.56666666666666
+Input prompt:  During the scene with the woman in the white floral half-skirt, which of the following subtitles appear? Choose your answer from below options: A."Music", B."built here since 16th century", C."places", D."this title", E."and it does feel like time has stopped".
+Output Answer:  E."and it does feel like time has stopped".
+
+
+Processing: F7RSW-2rF4w
+/mnt/Shared_03/fsq/LongVideoBench/videos/F7RSW-2rF4w.mp4
+482.56666666666666
+Input prompt:  Which of the following subtitles appeared together with the round traffic barrier? Choose your answer from below options: A."sometimes we feel that our problems are", B."unbearable", C."with their own problems and everyday", D."and things are so bad that it's almost", E."Music".
+Output Answer:  A."sometimes we feel that our problems are"
+
+
+Processing: 3JzhP8qfbqE
+/mnt/Shared_03/fsq/LongVideoBench/videos/3JzhP8qfbqE.mp4
+453.41963333333337
+Input prompt:  What color is the car parked on the red road? Choose your answer from below options: A.Black, B.Pink, C.Silver Grey, D.Red, E.Silver White.
+Output Answer:  C.Silver Grey
+
+
+Processing: 3JzhP8qfbqE
+/mnt/Shared_03/fsq/LongVideoBench/videos/3JzhP8qfbqE.mp4
+453.41963333333337
+Input prompt:  What shape is the box with the red stripe? Choose your answer from below options: A.Triangle, B.Rectangle, C.Square, D.Ellipse, E.Rounded Square.
+Output Answer:  E.Rounded Square.
+
+
+Processing: wq90Upjaij8
+/mnt/Shared_03/fsq/LongVideoBench/videos/wq90Upjaij8.mp4
+212.57903333333334
+Input prompt:  What did she do the first time she appeared? Choose your answer from below options: A.Smoothed her hair, B.Adjusted her clothes, C.Talked to the camera, D.Bent down to look at the floor, E.Covered her face with both hands.
+Output Answer:  D. Bent down to look at the floor, E. Covered her face with both hands.
+
+
+Processing: wq90Upjaij8
+/mnt/Shared_03/fsq/LongVideoBench/videos/wq90Upjaij8.mp4
+212.57903333333334
+Input prompt:  What did she do when she first appeared? Choose your answer from below options: A.Walked forward with big steps, B.Bent down to pick up a document, C.Talked to the mirror, D.Tidied up her hair, E.Holding a phone making a call.
+Output Answer:  E.Holding a phone making a call.
+
+
+Processing: dE5iWeCVpGI
+/mnt/Shared_03/fsq/LongVideoBench/videos/dE5iWeCVpGI.mp4
+412.53712499999995
+Input prompt:  On a black stage, there are many black frames; behind the frames, people are standing, while in front of the frames, someone is performing. there is a woman dressed in a red suspenders with black leggings. what is she doing when the subtitle 'i know that there is a leader for us the' appears? Choose your answer from below options: A.Kneeling on one knee with both hands on the ground, B.Standing and singing, with her right hand raised, C.On both knees with both hands on the ground, D.On both knees with one hand on the ground, E.Kneeling on one knee with both arms open.
+Output Answer:  B
+
+
+Processing: dE5iWeCVpGI
+/mnt/Shared_03/fsq/LongVideoBench/videos/dE5iWeCVpGI.mp4
+412.53712499999995
+Input prompt:  What is the woman doing? Choose your answer from below options: A.Holding a blue pen and writing something, B.Holding a black pen and writing something, C.Holding a purple pen and writing something, D.Holding a white pen and writing something, E.Holding a red pen and writing something.
+Output Answer:  C.Holding a purple pen and writing something
+
+
+Processing: jJGbXCCU5yc
+/mnt/Shared_03/fsq/LongVideoBench/videos/jJGbXCCU5yc.mp4
+404.73333333333335
+Input prompt:  , what is the complete text that appears in the white box? Choose your answer from below options: A.lucky, B.google flights, C.google flight, D.google search, E.search.
+Output Answer:  B
+
+
+Processing: jJGbXCCU5yc
+/mnt/Shared_03/fsq/LongVideoBench/videos/jJGbXCCU5yc.mp4
+404.73333333333335
+Input prompt:  What is the item in this man's hand? Choose your answer from below options: A.glasses, B.backpack, C.camera, D.phone, E.stick.
+Output Answer:  D.phone
+
+
+Processing: WpbB_swXHkc
+/mnt/Shared_03/fsq/LongVideoBench/videos/WpbB_swXHkc.mp4
+526.8333333333334
+Input prompt:  Which subtitles have appeared together with this woman? Choose your answer from below options: A.all right that’s the fun part of the day, B.is just bam it’s kind of slaps, C.Is this a special treatment for members?, D.It’s seven o’clock, did you hear?, E.if you take a deep breath and keep it.
+Output Answer:  B
+
+
+Processing: WpbB_swXHkc
+/mnt/Shared_03/fsq/LongVideoBench/videos/WpbB_swXHkc.mp4
+526.8333333333334
+Input prompt:  With which subtitles does this woman appear together? Choose your answer from below options: A.before the time of the pandemic here, B.crowded men, C.myself, D.really exciting to me to have it all to, E.me to .
+Output Answer:  D
+
+
+Processing: D7VYbsORD8k
+/mnt/Shared_03/fsq/LongVideoBench/videos/D7VYbsORD8k.mp4
+526.926926926927
+Input prompt:  In a room with green wall tiles, there is a woman with long hair wearing a white dress. what change happens to her? Choose your answer from below options: A.A black bag appears on her shoulder., B.Her top changes from white to red., C.A white bag appears on her shoulder., D.Her top changes from white to black., E.A red bag appears on her shoulder..
+Output Answer:  C. A white bag appears on her shoulder.
+
+
+Processing: D7VYbsORD8k
+/mnt/Shared_03/fsq/LongVideoBench/videos/D7VYbsORD8k.mp4
+526.926926926927
+Input prompt:  What happens to the object in her hand? Choose your answer from below options: A.The object in her hand changes from a food container to a fork, B.The object in her hand changes from a food container to a phone with a pink case, C.The object in her hand changes from a food container to a black shoulder bag, D.The object in her hand changes from a food container to a phone with a black case, E.The object in her hand changes from a food container to a phone with a white case.
+Output Answer:  B.The object in her hand changes from a food container to a phone with a pink case
+
+
+Processing: sv4wLIbSDqo
+/mnt/Shared_03/fsq/LongVideoBench/videos/sv4wLIbSDqo.mp4
+315.08
+Input prompt:  What change occurs in his action? Choose your answer from below options: A.He removes his glasses with his right hand, B.He supports his head with his right hand, C.He puts down his right hand, D.He supports his head with his left hand, E.He raises his left hand.
+Output Answer:  A.He removes his glasses with his right hand
+
+
+Processing: sv4wLIbSDqo
+/mnt/Shared_03/fsq/LongVideoBench/videos/sv4wLIbSDqo.mp4
+315.08
+Input prompt:  What changes occur on the left screen? Choose your answer from below options: A.The left screen changes to a map, B.The left screen changes to a man wearing glasses and a tie, C.The left screen changes to a man riding a bicycle on the street, D.The left screen changes to a white car, E.The left screen changes to a red car.
+Output Answer:  B.The left screen changes to a man wearing glasses and a tie
+
+
+Processing: 7rMgpExA4kM
+/mnt/Shared_03/fsq/LongVideoBench/videos/7rMgpExA4kM.mp4
+313.4798333333333
+Input prompt:  In the video, a white airplane is taxiing on the runway at the airport, with a backdrop of golden hills and an orange sky. what happens first on screen after the caption 'water on runway' appears? Choose your answer from below options: A.Two men in work uniforms are manufacturing an airplane in a workshop., B.At night, a man leans out from the front of a parked airplane to talk to the camera., C.The airplane skids on a water puddle on the runway, splashing a huge spray of water., D.A hand is drawing two buildings with a river flowing between them on white paper., E.A person is working in a warehouse filled with boxes of paper..
+Output Answer:  C.The airplane skids on a water puddle on the runway, splashing a huge spray of water.
+
+
+Processing: 7rMgpExA4kM
+/mnt/Shared_03/fsq/LongVideoBench/videos/7rMgpExA4kM.mp4
+313.4798333333333
+Input prompt:  What happens first on the screen? Choose your answer from below options: A.Manufacturing airplane wheels in a factory., B.An airplane model suspended by several steel wires is displayed., C.The man sits in a car looking out the window at the sunlit grass and trees., D.Manufacturing the interior of an airplane fuselage., E.Viewing the city from above..
+Output Answer:  C.The man sits in a car looking out the window at the sunlit grass and trees.
+
+
+Processing: lN3WnXMaE0o
+/mnt/Shared_03/fsq/LongVideoBench/videos/lN3WnXMaE0o.mp4
+295.920625
+Input prompt:  What is the first object that appears on the screen? Choose your answer from below options: A.A person with white hair holding a green shield, B.A person wearing a red robe with black hair, C.Three shields, D.A person with yellow hair holding a water bag, E.A soldier holding a red shield and wearing a helmet.
+Output Answer:  E.A soldier holding a red shield and wearing a helmet.
+
+
+Processing: lN3WnXMaE0o
+/mnt/Shared_03/fsq/LongVideoBench/videos/lN3WnXMaE0o.mp4
+295.920625
+Input prompt:  What object first appeared on the screen? Choose your answer from below options: A.A person with yellow hair holding a waterskin, B.Three soldiers with green shield banners and white-haired with long swords, C.A person dressed in a red robe with black hair, D.Three baskets, E.A soldier holding a red shield banner wearing a helmet.
+Output Answer:  E.A soldier holding a red shield banner wearing a helmet.
+
+
+Processing: Fq3zbbp-lv4
+/mnt/Shared_03/fsq/LongVideoBench/videos/Fq3zbbp-lv4.mp4
+404.73333333333335
+Input prompt:  , this chrysanthemum has also appeared simultaneously with which subtitles? Choose your answer from below options: A.friend, B.my life is full of routines and, C.as defined by someone else's standards, D.or gentle or helpful will we be, E.be when we grow up.
+Output Answer:  A.friend
+
+
+Processing: Fq3zbbp-lv4
+/mnt/Shared_03/fsq/LongVideoBench/videos/Fq3zbbp-lv4.mp4
+404.73333333333335
+Input prompt:  Which of the following subtitles appeared simultaneously with the sight of this black dog? Choose your answer from below options: A."define who we are", B."slow down and recharge and communicate", C."in my case i wanted to be either a", D."my life is full of routines and", E.“that puts me in a nostalgic mood it's”.
+Output Answer:  B."slow down and recharge and communicate"
+
+
+Processing: vJ9hYCUDHTo
+/mnt/Shared_03/fsq/LongVideoBench/videos/vJ9hYCUDHTo.mp4
+554.4
+Input prompt:  What objects are present? Choose your answer from below options: A.A hanging picture with timestamps, B.Earrings, C.Glasses, D.A blue robe, E.A necklace.
+Output Answer:  C. Glasses
+
+
+Processing: vJ9hYCUDHTo
+/mnt/Shared_03/fsq/LongVideoBench/videos/vJ9hYCUDHTo.mp4
+554.4
+Input prompt:  Which non-existent objects are present? Choose your answer from below options: A.yellow pillar, B.black glasses, C.blue flags, D.dark brown door, E.blue curtain.
+Output Answer:  C.blue flags
+
+
+Processing: Q47I8AdRgzc
+/mnt/Shared_03/fsq/LongVideoBench/videos/Q47I8AdRgzc.mp4
+293.2262666666667
+Input prompt:  , where have this hemisphere and which subtitles appeared together before? Choose your answer from below options: A.the paths they previously simulated, B.like Venus, C.Earth's long-time neighbor - Mars, D.exhibited earth-like place tectonics, E.stagnant lid period align the simulation.
+Output Answer:  E
+
+
+Processing: Q47I8AdRgzc
+/mnt/Shared_03/fsq/LongVideoBench/videos/Q47I8AdRgzc.mp4
+293.2262666666667
+Input prompt:  , with which subtitles has this sphere appeared together? Choose your answer from below options: A.original plate structure, B.ancient history of a planet, C.creating a suitable environment, D.stagnant lid period align, E.understanding of planetary bodies like.
+Output Answer:  B
+
+
+Processing: tPQf5sB03ZE
+/mnt/Shared_03/fsq/LongVideoBench/videos/tPQf5sB03ZE.mp4
+202.23536666666666
+Input prompt:  What change takes place after that? Choose your answer from below options: A.It stops moving without any change, B.It drops vertically downward, C.It collides with another star, D.It flies down to the middle of the screen.
+Output Answer:  D.It flies down to the middle of the screen.
+
+
+Processing: tPQf5sB03ZE
+/mnt/Shared_03/fsq/LongVideoBench/videos/tPQf5sB03ZE.mp4
+202.23536666666666
+Input prompt:  What change occurs on this map? Choose your answer from below options: A.The red-marked area on the map is enlarged, B.The map rotates upwards to reveal a city, C.The map rotates to the left to reveal a city, D.The blue section on the map is enlarged.
+Output Answer:  D.The blue section on the map is enlarged.
+
+
+Processing: PzUxuZ-KGsU
+/mnt/Shared_03/fsq/LongVideoBench/videos/PzUxuZ-KGsU.mp4
+245.46666666666667
+Input prompt:  Which of the following ingredients appear? Choose your answer from below options: A.Cooked white meat mince, B.Green scallions, C.White diced onions, D.Yellow minced ginger sauce.
+Output Answer:  B
+
+
+Processing: c6fuIEzOZ2E
+/mnt/Shared_03/fsq/LongVideoBench/videos/c6fuIEzOZ2E.mp4
+464.9311333333333
+Input prompt:  Which objects are not present in the scene? Choose your answer from below options: A.A painting with a black frame, B.A red poster, C.A black microphone with a white pattern, D.A beige pillow with blue design.
+Output Answer:  C.A black microphone with a white pattern
+
+
+Processing: c6fuIEzOZ2E
+/mnt/Shared_03/fsq/LongVideoBench/videos/c6fuIEzOZ2E.mp4
+464.9311333333333
+Input prompt:  Which object does not appear on the screen? Choose your answer from below options: A.black television, B.black wristwatch, C.black-framed glasses, D.black knitted hat.
+Output Answer:  B
+
+
+Processing: 0mEN5Jf2hU0
+/mnt/Shared_03/fsq/LongVideoBench/videos/0mEN5Jf2hU0.mp4
+219.51095833333332
+Input prompt:  What does she do with her hands? Choose your answer from below options: A.Extends three fingers, B.Extends five fingers, C.Extends two fingers, D.Extends four fingers.
+Output Answer:  A.Extends three fingers,
+
+
+Processing: 0mEN5Jf2hU0
+/mnt/Shared_03/fsq/LongVideoBench/videos/0mEN5Jf2hU0.mp4
+219.51095833333332
+Input prompt:  What happened? Choose your answer from below options: A.Took away the picture on the left, B.No change, C.Added a piece of paper, D.The right-hand paper disappeared.
+Output Answer:  D.The right-hand paper disappeared.
+
+
+Processing: ZoUsR8t8IxE
+/mnt/Shared_03/fsq/LongVideoBench/videos/ZoUsR8t8IxE.mp4
+394.52
+Input prompt:  Who appeared? Choose your answer from below options: A.A woman with long black hair wearing a blue coat appeared., B.A man with brown hair wearing a light blue coat appeared., C.A woman with long black hair wearing a purple coat appeared., D.A woman with brown hair wearing a light blue coat appeared..
+Output Answer:  B. A man with brown hair wearing a light blue coat appeared.
+
+
+Processing: 22iOyzE8Ec0
+/mnt/Shared_03/fsq/LongVideoBench/videos/22iOyzE8Ec0.mp4
+231.85662499999998
+Input prompt:  What did he do after this? Choose your answer from below options: A.He styled his hair facing the mirror, B.He made a victory gesture, C.He touched his beard, D.He closed his eyes and clasped his hands in front of him.
+Output Answer:  D.He closed his eyes and clasped his hands in front of him.
+
+
+Processing: 22iOyzE8Ec0
+/mnt/Shared_03/fsq/LongVideoBench/videos/22iOyzE8Ec0.mp4
+231.85662499999998
+Input prompt:  What action does he take afterwards? Choose your answer from below options: A.He tilts his head and supports his cheek with one hand., B.He squats down to tie his shoelaces., C.He bends down to pick something up., D.He spreads his hands open, palms facing outward..
+Output Answer:  A.He tilts his head and supports his cheek with one hand.
+
+
+Processing: JwoBdRC2fzE
+/mnt/Shared_03/fsq/LongVideoBench/videos/JwoBdRC2fzE.mp4
+504.6666666666667
+Input prompt:  What are these two shirtless men in white shorts doing? Choose your answer from below options: A.Running race, B.Long jump competition, C.Swimming competition, D.Wrestling match.
+Output Answer:  A.Running race
+
+
+Processing: JwoBdRC2fzE
+/mnt/Shared_03/fsq/LongVideoBench/videos/JwoBdRC2fzE.mp4
+504.6666666666667
+Input prompt:  What action did the man perform? Choose your answer from below options: A.lift a horse with both hands, B.lift a tree trunk with both hands, C.clench fists with both hands, D.lift a bull with both hands.
+Output Answer:  D. lift a bull with both hands.
+
+
+Processing: qYnloYaeQA8
+/mnt/Shared_03/fsq/LongVideoBench/videos/qYnloYaeQA8.mp4
+408.032625
+Input prompt:  What kind of hat is this man wearing? Choose your answer from below options: A.A blue beret, B.A white ceremonial hat adorned with red flowers, C.An off-white baseball cap, D.A black baseball cap with a white design in the middle and on the upper side of the ear flaps.
+Output Answer:  D. A black baseball cap with a white design in the middle and on the upper side of the ear flaps.
+
+
+Processing: qYnloYaeQA8
+/mnt/Shared_03/fsq/LongVideoBench/videos/qYnloYaeQA8.mp4
+408.032625
+Input prompt:  What style of top is the man in the middle wearing? Choose your answer from below options: A.Gray sweater, B.Olive suit, C.Blue sleeveless top with red and blue patterned front, D.White and black striped long sleeve.
+Output Answer:  A.Grey sweater
+
+
+Processing: Oht0i1DACcA
+/mnt/Shared_03/fsq/LongVideoBench/videos/Oht0i1DACcA.mp4
+238.9055722389056
+Input prompt:  What changes occur to this woman's clothing? Choose your answer from below options: A.No changes, B.She changed to a red jacket, C.She took off the blue jacket and tied it around her waist, wearing a black short-sleeved top, D.She took off the blue jacket and tied it around her waist, wearing a white short-sleeved top.
+Output Answer:  D. She took off the blue jacket and tied it around her waist, wearing a white short-sleeved top.
+
+
+Processing: zda-T6wrEhs
+/mnt/Shared_03/fsq/LongVideoBench/videos/zda-T6wrEhs.mp4
+507.46529166666664
+Input prompt:  What is the woman doing? Choose your answer from below options: A.Crossing both hands, B.Using one hand to stroke her hair, C.Holding her hair with both hands, D.Placing one hand on her knee.
+Output Answer:  B. Using one hand to stroke her hair
+
+
+Processing: zda-T6wrEhs
+/mnt/Shared_03/fsq/LongVideoBench/videos/zda-T6wrEhs.mp4
+507.46529166666664
+Input prompt:  What action is this man performing? Choose your answer from below options: A.Both hands are raised, B.One hand is holding a pen and the other hand is holding a book, C.One hand is placed on his knee, D.Both hands are placed on his knees and he is clenching his fists.
+Output Answer:  A.Both hands are raised
+
+
+Processing: -kaF6SnSEo8
+/mnt/Shared_03/fsq/LongVideoBench/videos/-kaF6SnSEo8.mp4
+486.44429166666663
+Input prompt:  Which item are they both wearing? Choose your answer from below options: A.The man in the white shirt is wearing black-framed glasses, while the man in the red shirt is not, B.A blue bracelet, C.The man in the red shirt is wearing black-framed glasses, while the man in the white shirt is not, D.The man in the red shirt is wearing an orange scarf, while the man in the white shirt is not.
+Output Answer:  B. A blue bracelet
+
+
+Processing: -kaF6SnSEo8
+/mnt/Shared_03/fsq/LongVideoBench/videos/-kaF6SnSEo8.mp4
+486.44429166666663
+Input prompt:  Which of the following sentences is displayed on the screen? Choose your answer from below options: A.25% "Unspecified", B.60% “declared” Czech, C.95% Czech, D.38% Czech.
+Output Answer:  A.25% "Unspecified"
+
+
+Processing: P0BSTjziVys
+/mnt/Shared_03/fsq/LongVideoBench/videos/P0BSTjziVys.mp4
+239.614375
+Input prompt:  In which of the following scenes does melissa maribel appear? Choose your answer from below options: A.In an orange background with a green paper showing a hint in the middle., B.On the left side with an orange background containing white text 'SUBSCRIBE', and on the right side, a green horizontal line, a red vertical line, and some black text., C.In an orange background with a green plant pot in the upper right corner and some curved needles on the left., D.On the right side with an orange background containing white text 'SUBSCRIBE', and on the left, a green horizontal line, a red vertical line, and some black text..
+Output Answer:  B. On the left side with an orange background containing white text 'SUBSCRIBE', and on the right side, a green horizontal line, a red vertical line, and some black text.
+
+
+Processing: P0BSTjziVys
+/mnt/Shared_03/fsq/LongVideoBench/videos/P0BSTjziVys.mp4
+239.614375
+Input prompt:  In which of the following scenes does the green piece of paper also appear? Choose your answer from below options: A.It appears simultaneously with the last SUBSCRIBE in the video., B.In the video, there is a green planter in the upper left corner and a curved needle against an orange background on the right. There is a piece of paper labeled Tip2 on the screen., C.In the video, there is a green planter in the upper right corner and a curved needle against an orange background on the left. There is a piece of paper labeled TIP2 on the screen., D.In the video, there is a green planter in the upper right corner and a curved needle against an orange background on the left. There is a piece of paper labeled NOTE on the screen..
+Output Answer:  C
+
+
+Processing: JASFwBtUK40
+/mnt/Shared_03/fsq/LongVideoBench/videos/JASFwBtUK40.mp4
+191.566375
+Input prompt:  Which person appears on the screen at this moment? Choose your answer from below options: A.Jack, B.Patrick Craine, C.John, D.Andrés Jacque.
+Output Answer:  B.Patrick Craine
+
+
+Processing: JASFwBtUK40
+/mnt/Shared_03/fsq/LongVideoBench/videos/JASFwBtUK40.mp4
+191.566375
+Input prompt:  Which item is not present in the room at this time? Choose your answer from below options: A.Some transparent tubes, B.Yellow pipes, C.Some white pipes, D.Black glasses.
+Output Answer:  B. Yellow pipes
+
+
+Processing: athabNMGceo
+/mnt/Shared_03/fsq/LongVideoBench/videos/athabNMGceo.mp4
+477.5187083333333
+Input prompt:  Which of the following animals can spray feces up to 40 cm? Choose your answer from below options: A.Hamster, B.Whale, C.Ostrich, D.Rabbit.
+Output Answer:  C.Ostrich
+
+
+Processing: athabNMGceo
+/mnt/Shared_03/fsq/LongVideoBench/videos/athabNMGceo.mp4
+477.5187083333333
+Input prompt:  Which of the following animals evolved hindgut fermentation? Choose your answer from below options: A.Ostrich, B.Rabbit, C.Kangaroo, D.Whale.
+Output Answer:  A.Ostrich
+
+
+Processing: SCZ_Z4NnikA
+/mnt/Shared_03/fsq/LongVideoBench/videos/SCZ_Z4NnikA.mp4
+589.356022689356
+Input prompt:  What shape is the white building? Choose your answer from below options: A.cylindrical, B.rectangular, C.square, D.irregular, E.stepped.
+Output Answer:  A.cylindrical
+
+
+Processing: SCZ_Z4NnikA
+/mnt/Shared_03/fsq/LongVideoBench/videos/SCZ_Z4NnikA.mp4
+589.356022689356
+Input prompt:  What color are the railings of the bridge? Choose your answer from below options: A.Yellow, B.White, C.Brown, D.Green, E.Black.
+Output Answer:  B
+
+
+Processing: pFtKaT3GF9I
+/mnt/Shared_03/fsq/LongVideoBench/videos/pFtKaT3GF9I.mp4
+524.8243
+Input prompt:  Which of the following sequence of scenes is correct? Choose your answer from below options: A.First, a picture with the flag of Iraq is shown, followed by a picture of a man in green clothes and a man in white clothes with a black background in the upper right corner, and lastly a man discussing a picture with a sheep and a desert is shown., B.First, a picture of a man in green clothes and a man in white clothes with a black background in the upper right corner is shown, followed by a picture with the flag of Iraq, and lastly a man discussing a picture with a sheep and a desert is shown., C.First, a man discussing a picture with a sheep and a desert is shown, followed by a picture with the flag of Iraq, and lastly a picture of a man in green clothes and a man in white clothes with a black background in the upper right corner is shown., D.First, a man discussing a picture with a sheep and a desert is shown, followed by a picture of a man in green clothes and a man in white clothes with a black background in the upper right corner, and lastly a picture with the flag of Iraq is shown., E.First, a picture of a man in green clothes and a man in white clothes with a black background in the upper right corner is shown, followed by a man discussing a picture with a sheep and a desert, and lastly a picture with the flag of Iraq is shown..
+Output Answer:  B
+
+
+Processing: PQRyGacBRA4
+/mnt/Shared_03/fsq/LongVideoBench/videos/PQRyGacBRA4.mp4
+212.68
+Input prompt:  In which of the following scenes does this man appear? Choose your answer from below options: A.On top of a building with a lot of reporters, and the roof is red., B.On a viewing platform without the Union Jack flag., C.In front of a building with black rectangular tiles, a white carved door frame, black double doors, and surrounded by windows., D.On a road surrounded by trees with cars around., E.On a circular stage with many people below..
+Output Answer:  A.On top of a building with a lot of reporters, and the roof is red.
+
+
+Processing: PQRyGacBRA4
+/mnt/Shared_03/fsq/LongVideoBench/videos/PQRyGacBRA4.mp4
+212.68
+Input prompt:  In which other scenes did he appear? Choose your answer from below options: A.On a stage with British flags displayed, B.In a library with a brown bookshelf full of books, in front of a green desk, C.In front of a blue backdrop with the British flag, D.In front of a complex building with a bell tower and some withered branches on the left, E.In front of a green backdrop painted with various colorful buildings.
+Output Answer:  A.On a stage with British flags displayed,
+
+
+Processing: Efuyl2Anehg
+/mnt/Shared_03/fsq/LongVideoBench/videos/Efuyl2Anehg.mp4
+511.63612499999994
+Input prompt:  , this gentleman simultaneously appears with what kind of subtitles? Choose your answer from below options: A.How hot does it typically get in Bahrain in the summer?, B.They play bagpipes in the Arab world?, C.Abdullah: So she would go like, D.in Bahrain, like 200 years ago, E.Abdullah: Probably like this..
+Output Answer:  B
+
+
+Processing: HAED3riiZkw
+/mnt/Shared_03/fsq/LongVideoBench/videos/HAED3riiZkw.mp4
+300.96733333333333
+Input prompt:  How does he change? Choose your answer from below options: A.He puts on a white brimmed hat and a gray face mask, and wears a yellow beekeeping suit., B.He puts on a black brimmed hat and a gray face mask, and wears a white beekeeping suit., C.He puts on a yellow brimmed hat and a gray face mask, and wears a white beekeeping suit., D.He puts on a white brimmed hat and a gray face mask, and wears a white beekeeping suit., E.He puts on a white brimmed hat and a gray face mask, and wears a black beekeeping suit..
+Output Answer:  D.He puts on a white brimmed hat and a gray face mask, and wears a white beekeeping suit.
+
+
+Processing: HAED3riiZkw
+/mnt/Shared_03/fsq/LongVideoBench/videos/HAED3riiZkw.mp4
+300.96733333333333
+Input prompt:  , what changes occur? Choose your answer from below options: A.Noodles were placed on the honeycomb, B.The honeycomb was poured out of the large bowl, C.Water was added to the honeycomb, D.The honeycomb was cut into pieces, E.The honeycomb was broken into pieces.
+Output Answer:  E.The honeycomb was broken into pieces.
+
+
+Processing: 0_YDrJoUe8s
+/mnt/Shared_03/fsq/LongVideoBench/videos/0_YDrJoUe8s.mp4
+268.60166666666663
+Input prompt:  What change occurs to this woman? Choose your answer from below options: A.The woman shakes hands in front of the painting, B.The woman takes a picture in front of the painting, C.The woman dances in front of the painting, D.The woman flips her hair in front of the painting, E.The woman stands in front of the painting admiring it.
+Output Answer:  A.The woman shakes hands in front of the painting
+
+
+Processing: 0_YDrJoUe8s
+/mnt/Shared_03/fsq/LongVideoBench/videos/0_YDrJoUe8s.mp4
+268.60166666666663
+Input prompt:  What change occurs to the woman onscreen? Choose your answer from below options: A.The woman walks to admire four artworks., B.The woman starts introducing the artworks., C.The woman changed her clothes., D.The woman sits down to admire four artworks., E.The woman's hair was tied up..
+Output Answer:  C. The woman changed her clothes.
+
+
+Processing: TFbGLEZ4qt0
+/mnt/Shared_03/fsq/LongVideoBench/videos/TFbGLEZ4qt0.mp4
+295.25
+Input prompt:  What action did this woman take? Choose your answer from below options: A.She adjusted her hair a bit, B.She picked up the colored pencils, C.She turned around and looked at the shelf, D.She stood up and walked out of the room, E.She is gesturing with her hands.
+Output Answer:  E. She is gesturing with her hands.
+
+
+Processing: TFbGLEZ4qt0
+/mnt/Shared_03/fsq/LongVideoBench/videos/TFbGLEZ4qt0.mp4
+295.25
+Input prompt:  What action did this lady do? Choose your answer from below options: A.She used a purple colored pencil, B.She moved her hand to the right, C.She got up and opened the room door, D.She picked up the bunch of flowers, E.She got up and walked out of the room.
+Output Answer:  A. She used a purple colored pencil
+
+
+Processing: VwZeSoYugZk
+/mnt/Shared_03/fsq/LongVideoBench/videos/VwZeSoYugZk.mp4
+553.5196333333333
+Input prompt:  What color is the roof of the boat in the scene? Choose your answer from below options: A.purple, B.blue, C.orange, D.white, E.yellow.
+Output Answer:  C.orange
+
+
+Processing: VwZeSoYugZk
+/mnt/Shared_03/fsq/LongVideoBench/videos/VwZeSoYugZk.mp4
+553.5196333333333
+Input prompt:  What is the shape of the roof of the small building? Choose your answer from below options: A.Staircase, B.Square, C.Triangle, D.Rectangle, E.Semi-circle.
+Output Answer:  C.Triangle
+
+
+Processing: ip8khYCMb8Y
+/mnt/Shared_03/fsq/LongVideoBench/videos/ip8khYCMb8Y.mp4
+314.81449999999995
+Input prompt:  , what is he doing? Choose your answer from below options: A.Resting on the beach, B.Waving at the camera, C.Playing on the surfboard in the desert, D.Talking with friends, E.Making a phone call.
+Output Answer:  D.Talking with friends
+
+
+Processing: ip8khYCMb8Y
+/mnt/Shared_03/fsq/LongVideoBench/videos/ip8khYCMb8Y.mp4
+314.81449999999995
+Input prompt:  , what is he doing? Choose your answer from below options: A.Walking, B.Talking with friends, C.Riding a bicycle, D.Answering a phone call, E.Skateboarding.
+Output Answer:  B
+
+
+Processing: 8_MG-E8QlBM
+/mnt/Shared_03/fsq/LongVideoBench/videos/8_MG-E8QlBM.mp4
+268.08
+Input prompt:  What is the woman in the middle with her hands covering her face and carrying a child on her back doing? Choose your answer from below options: A.Sweeping the floor, B.Chatting with others, C.Waving to the camera, D.Taking care of the child, E.Covering her face with both hands, looking distressed.
+Output Answer:  E.Covering her face with both hands, looking distressed.
+
+
+Processing: 8_MG-E8QlBM
+/mnt/Shared_03/fsq/LongVideoBench/videos/8_MG-E8QlBM.mp4
+268.08
+Input prompt:  What is the man on the right doing? Choose your answer from below options: A.Chatting with the man, B.Waving to the camera, C.Comforting the distressed man, D.Distributing food to the needy, E.Wiping the man's tears.
+Output Answer:  C.Comforting the distressed man
+
+
+Processing: Lc7RikDaa30
+/mnt/Shared_03/fsq/LongVideoBench/videos/Lc7RikDaa30.mp4
+191.88
+Input prompt:  Which of the following concepts is mentioned first? Choose your answer from below options: A.The COE prices in Singapore have always been high, B.COE prices are determined by supply and demand, C.Using cars is the real issue, D.We need a rational and accurate road pricing system, E.More Singaporeans can own cars.
+Output Answer:  E.More Singaporeans can own cars.
+
+
+Processing: Lc7RikDaa30
+/mnt/Shared_03/fsq/LongVideoBench/videos/Lc7RikDaa30.mp4
+191.88
+Input prompt:  Which of the following scenes appears first? Choose your answer from below options: A.A woman sitting in a car holding the steering wheel, B.A screenshot of news about COE, C.A display screen showing toll information on a road in Singapore, D.People walking and cars driving on a road, E.Tightly packed and neatly arranged cars in a parking lot.
+Output Answer:  B. A screenshot of news about COE
+
+
+Processing: lCvQtGVhUrc
+/mnt/Shared_03/fsq/LongVideoBench/videos/lCvQtGVhUrc.mp4
+513.96
+Input prompt:  What changes occur to the book? Choose your answer from below options: A.The book changes from being in the woman's hand to being on the table, B.The book changes from a black-and-white cover to a colored cover, C.The book changes from a full shot to a close-up, D.The book changes from brand new to damaged, E.The book changes from closed to open.
+Output Answer:  A.The book changes from being in the woman's hand to being on the table,
+
+
+Processing: lCvQtGVhUrc
+/mnt/Shared_03/fsq/LongVideoBench/videos/lCvQtGVhUrc.mp4
+513.96
+Input prompt:  The background shows a wall covered with many postcards and posters, a bookshelf filled with books on the right side, and a woman with bangs wearing glasses and a yellow-green wool coat sitting in front of a mirror talking. at the end of the video, in the yellow-orange background, there are some pictures with white english words on the left side of the round photo frame. what changes can be observed about her? Choose your answer from below options: A.The yellow-green coat changes into a black top, B.She is no longer wearing glasses, C.Her bangs are no longer visible, D.The yellow-green wool coat changes into a white short-sleeve shirt, E.The wool coat changes into a denim jacket.
+Output Answer:  A: The yellow-green coat changes into a black top
+
+
+Processing: aoxy2e7j9Bc
+/mnt/Shared_03/fsq/LongVideoBench/videos/aoxy2e7j9Bc.mp4
+307.4407741074408
+Input prompt:  What objects are present in the scene at this time? Choose your answer from below options: A.Utility Pole, B.Traffic Light, C.A Group of People, D.White Cloud, E.Telegraph Line.
+Output Answer:  E
+
+
+Processing: aoxy2e7j9Bc
+/mnt/Shared_03/fsq/LongVideoBench/videos/aoxy2e7j9Bc.mp4
+307.4407741074408
+Input prompt:  What object can be seen on the screen at this moment? Choose your answer from below options: A.child, B.puppy, C.bird, D.goldfish, E.rock.
+Output Answer:  E.rock
+
+
+Processing: KWv8DJMEHsE
+/mnt/Shared_03/fsq/LongVideoBench/videos/KWv8DJMEHsE.mp4
+237.82091666666665
+Input prompt:  What kind of knives are they holding? Choose your answer from below options: A.Small knife, B.Vegetable knife, C.Military knife, D.Long knife, E.Fruit knife.
+Output Answer:  D.Long knife
+
+
+Processing: KWv8DJMEHsE
+/mnt/Shared_03/fsq/LongVideoBench/videos/KWv8DJMEHsE.mp4
+237.82091666666665
+Input prompt:  What does the house behind them look like? Choose your answer from below options: A.Wooden house, B.Building, C.Villa, D.Straw hut, E.Earthen house.
+Output Answer:  A.Wooden house,
+
+
+Processing: 0WEnmqVVbHo
+/mnt/Shared_03/fsq/LongVideoBench/videos/0WEnmqVVbHo.mp4
+479.4794794794795
+Input prompt:  Who is the person being hugged? Choose your answer from below options: A.The girl wearing a beige long-sleeved outer jacket with a white short-sleeved shirt underneath, B.The man wearing a blue short-sleeved shirt and white shorts, C.The girl wearing a dark green suspender dress with a white short-sleeved shirt underneath, D.The man wearing a light blue long-sleeved outer jacket and beige long pants, E.The man wearing a white short-sleeved shirt.
+Output Answer:  C
+
+
+Processing: f2-6Mh6lyQQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/f2-6Mh6lyQQ.mp4
+331.8732083333333
+Input prompt:  What is this woman doing? Choose your answer from below options: A.Repairing the item, B.Creating a craft, C.Dismantling the craft, D.Excavating the item, E.Cleaning the item.
+Output Answer:  E. Cleaning the item.
+
+
+Processing: f2-6Mh6lyQQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/f2-6Mh6lyQQ.mp4
+331.8732083333333
+Input prompt:  There are three people on the screen. the man on the left is wearing a khaki suit with a white shirt and a tie. the man in the middle is wearing a white hoodie, purple gloves, and glasses, holding a document in his hand. the woman on the right is wearing a grey long-sleeved jacket with a black and white floral underlay, with her hands in purple gloves resting on the table. what are these three people doing around the document on the table? Choose your answer from below options: A.Organizing the document, B.Making a craft, C.Disassembling the document, D.Assembling the document, E.Exploring the contents of the document.
+Output Answer:  E. Exploring the contents of the document.
+
+
+Processing: uWBh0meTg08
+/mnt/Shared_03/fsq/LongVideoBench/videos/uWBh0meTg08.mp4
+297.1
+Input prompt:  What follows next? Choose your answer from below options: A.Draws a cartoon figure with raised hands standing next to a board filled with sketches on the left of the English text, B.Draws a timeline, C.Draws a table composed of colored lines, D.Draws a square frame, E.Draws two gears, one blue and one black.
+Output Answer:  A.Draws a cartoon figure with raised hands standing next to a board filled with sketches on the left of the English text
+
+
+Processing: uWBh0meTg08
+/mnt/Shared_03/fsq/LongVideoBench/videos/uWBh0meTg08.mp4
+297.1
+Input prompt:  What do they do next? Choose your answer from below options: A.Draws a rectangle, B.Draws a table composed of colored lines, C.Draws two yellow smiley faces, D.Draws two purple cylindrical shapes on the left side of the whiteboard, and a fish tank and a shoulder on the right side, E.Draws a timeline.
+Output Answer:  D.Draws two purple cylindrical shapes on the left side of the whiteboard, and a fish tank and a shoulder on the right side
+
+
+Processing: GawGUhl9zuQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/GawGUhl9zuQ.mp4
+340.9406
+Input prompt:  What change occurs to the red-clothed woman's wristwatch? Choose your answer from below options: A.The watch face changes from dim to bright., B.The watch face changes from bright to dim., C.The watch face changes from red to black., D.The watch face changes from black to white., E.The watch face changes from white to yellow..
+Output Answer:  A.The watch face changes from dim to bright.
+
+
+Processing: GawGUhl9zuQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/GawGUhl9zuQ.mp4
+340.9406
+Input prompt:  What changes happen to the notebook? Choose your answer from below options: A.The additional paper on the notebook is gone, B.The notebook only has a blue figure drawn with a pen, C.The notebook has an additional paper and a black figure drawn with a pen, D.The notebook has an additional paper and a black figure drawn with a pen, E.The notebook has an additional paper and a blue figure drawn with a pen.
+Output Answer:  C. The notebook has an additional paper and a black figure drawn with a pen
+
+
+Processing: 2zZSMnGLGao
+/mnt/Shared_03/fsq/LongVideoBench/videos/2zZSMnGLGao.mp4
+463.0296963630297
+Input prompt:  What is this woman doing? Choose your answer from below options: A.Throwing the book into the trash can, B.Turning the back of the book towards the camera, C.Picking up another book with a blue cover, D.Watering the plant, E.Holding the book facing the camera.
+Output Answer:  E
+
+
+Processing: 2zZSMnGLGao
+/mnt/Shared_03/fsq/LongVideoBench/videos/2zZSMnGLGao.mp4
+463.0296963630297
+Input prompt:  The woman in the video is holding an open book, and on the bottom of the yellow page on the right side of the book, there are two whales. what is this woman doing while holding the book? Choose your answer from below options: A.Holding the book with one hand and explaining, B.Standing up with the book, C.Turning her back to the camera, D.Holding the book with both hands and explaining, E.Bending down to pick something up.
+Output Answer:  D. Holding the book with both hands and explaining.
+
+
+Processing: T57jVsvVVR0
+/mnt/Shared_03/fsq/LongVideoBench/videos/T57jVsvVVR0.mp4
+263.96
+Input prompt:  What color is the clothing? Choose your answer from below options: A.black, B.blue, C.red, D.yellow, E.white.
+Output Answer:  A. black
+
+
+Processing: mkqgTAe2_O4
+/mnt/Shared_03/fsq/LongVideoBench/videos/mkqgTAe2_O4.mp4
+520.0416666666666
+Input prompt:  , what is present in this scene? Choose your answer from below options: A.A photographer wearing a hat, B.Skirts, C.Advancing cannons, D.NP-News-Programers, E.Various colored horses.
+Output Answer:  B
+
+
+Processing: mkqgTAe2_O4
+/mnt/Shared_03/fsq/LongVideoBench/videos/mkqgTAe2_O4.mp4
+520.0416666666666
+Input prompt:  What objects are present in this scene? Choose your answer from below options: A.Doctor in a white coat, B.Military green aircraft, C.White horse, D.Broken iron pillar, E.Stacked lumber.
+Output Answer:  C. White horse
+
+
+Processing: lQODAJ_F5yE
+/mnt/Shared_03/fsq/LongVideoBench/videos/lQODAJ_F5yE.mp4
+258.96704166666666
+Input prompt:  What elements are present in this scene? Choose your answer from below options: A.Red triangular paper with 'b' written on it, B.Orange triangular paper with 'b' written on it, C.Red rectangular paper with 'b' written on it, D.Red round paper with 'b' written on it, E.Orange round paper with 'b' written on it.
+Output Answer:  In the scene, there is an orange round paper with the letter 'b' written on it. Hence, the correct answer is:
+
+E. Orange round paper with 'b' written on it.
+
+
+Processing: lQODAJ_F5yE
+/mnt/Shared_03/fsq/LongVideoBench/videos/lQODAJ_F5yE.mp4
+258.96704166666666
+Input prompt:  What is on the woman's body? Choose your answer from below options: A.Blue nail polish, B.Black nail polish, C.White outerwear, D.Necklace, E.Black and white striped outerwear.
+Output Answer:  C
+
+
+Processing: zkmoxOKhpvk
+/mnt/Shared_03/fsq/LongVideoBench/videos/zkmoxOKhpvk.mp4
+541.0
+Input prompt:  Who crossed this bridge? Choose your answer from below options: A.The woman wearing a black corset, B.The curly-haired man wearing a green cat pattern onesie, C.The curly-haired man wearing a pink dog pattern onesie, D.The man wearing a black baseball cap, E.The curly-haired man wearing a pink cat pattern onesie.
+Output Answer:  C.The curly-haired man wearing a pink dog pattern onesie
+
+
+Processing: zkmoxOKhpvk
+/mnt/Shared_03/fsq/LongVideoBench/videos/zkmoxOKhpvk.mp4
+541.0
+Input prompt:  Who is assisting the pink boy to jump down from behind? Choose your answer from below options: A.A woman in a yellow short-sleeved shirt, B.A man with sunglasses and a blue baseball cap, C.A man in orange pants, D.A woman in a black tank top, E.A woman with tied hair in a short-sleeved shirt.
+Output Answer:  B.A man with sunglasses and a blue baseball cap
+
+
+Processing: fp1r40w_PtA
+/mnt/Shared_03/fsq/LongVideoBench/videos/fp1r40w_PtA.mp4
+402.8607916666666
+Input prompt:  What did she do when she appeared? Choose your answer from below options: A.Talked about the interactions between blood and venom, B.Talked about topics related to venom, C.Talked about topics related to muscles, D.Talked about some scientific research progress, E.Talked about topics related to poisonous snakes.
+Output Answer:  B. Talked about topics related to venom.
+
+
+Processing: fp1r40w_PtA
+/mnt/Shared_03/fsq/LongVideoBench/videos/fp1r40w_PtA.mp4
+402.8607916666666
+Input prompt:  What did the snake do when it appeared? Choose your answer from below options: A.Coiled its body, B.Opened its mouth, C.Launched an attack, D.Shook its tail, E.Twisted its neck.
+Output Answer:  B
+
+
+Processing: Aw1_7wSaeKk
+/mnt/Shared_03/fsq/LongVideoBench/videos/Aw1_7wSaeKk.mp4
+222.66666666666666
+Input prompt:  On a grey background, four website addresses are displayed in white text at the center. after the subtitle 'week also there might be a few surprises' appears, what happens above and below the urls? Choose your answer from below options: A.An airplane icon flies above the URLs, and a submarine icon flies below., B.An airplane icon flies above the URLs, and an armored vehicle icon flies below., C.A submarine icon flies above the URLs, and an airplane icon flies below., D.An airplane icon flies above the URLs, and another airplane icon flies below., E.A submarine icon flies above the URLs, and another submarine icon flies below..
+Output Answer:  A
+
+
+Processing: Aw1_7wSaeKk
+/mnt/Shared_03/fsq/LongVideoBench/videos/Aw1_7wSaeKk.mp4
+222.66666666666666
+Input prompt:  What happens in the center of the screen? Choose your answer from below options: A.An image of a machete appears in the center of the screen., B.The grass background becomes blurry, and an image of a gun appears in the center of the screen., C.An identical drill appears., D.An image of a hammer appears in the center of the screen., E.An image of an eagle appears in the center of the screen..
+Output Answer:  B.The grass background becomes blurry, and an image of a gun appears in the center of the screen.
+
+
+Processing: DRIpznER-VQ
+/mnt/Shared_03/fsq/LongVideoBench/videos/DRIpznER-VQ.mp4
+308.9753333333333
+Input prompt:  In which other scenes does the man resting his arm appear? Choose your answer from below options: A.Outside a store window in a high-end mall, B.At a speech venue, holding a mic, C.Outside a plant-filled balcony, D.Flipping through a book on a table, E.On a chair in a library.
+Output Answer:  C. Outside a plant-filled balcony
+
+
+Processing: iJgh2dnudIU
+/mnt/Shared_03/fsq/LongVideoBench/videos/iJgh2dnudIU.mp4
+349.2655833333333
+Input prompt:  What items are behind her to the left? Choose your answer from below options: A.Green and gray boards, B.A pot and some knives, C.Tea cup, D.Water faucet.
+Output Answer:  B. A pot and some knives
+
+
+Processing: iJgh2dnudIU
+/mnt/Shared_03/fsq/LongVideoBench/videos/iJgh2dnudIU.mp4
+349.2655833333333
+Input prompt:  What is this person holding in their left hand? Choose your answer from below options: A.A can, B.A bun, C.A dumpling, D.Beef.
+Output Answer:  B. A bun
+
+
+Processing: ze66pbJYr18
+/mnt/Shared_03/fsq/LongVideoBench/videos/ze66pbJYr18.mp4
+388.9886
+Input prompt:  What objects are present on the screen? Choose your answer from below options: A.Bed, B.Lamp, table, washing machine, C.Lamp, table, chair, D.TV, lamp, table.
+Output Answer:  C.Lamp, table, chair
+
+
+Processing: ze66pbJYr18
+/mnt/Shared_03/fsq/LongVideoBench/videos/ze66pbJYr18.mp4
+388.9886
+Input prompt:  What object is on the screen? Choose your answer from below options: A.Table and chair, B.Teapot, C.Bed, D.Table and stereo.
+Output Answer:  A
+
+
+Processing: AjF13uKVQa0
+/mnt/Shared_03/fsq/LongVideoBench/videos/AjF13uKVQa0.mp4
+579.0
+Input prompt:  What action did this man take? Choose your answer from below options: A.Right hand raised, B.Both hands spread out, palms facing each other with a small distance between them, holding a pen in the right hand, C.Both hands clenched into fists, D.Both hands spread out, palms facing each other with a small distance between them, holding a pen in the left hand.
+Output Answer:  B
+
+
+Processing: AjF13uKVQa0
+/mnt/Shared_03/fsq/LongVideoBench/videos/AjF13uKVQa0.mp4
+579.0
+Input prompt:  What color are these words? Choose your answer from below options: A.The top line is yellow, the rest are black, B.The third line has some blue text, the rest are black, C.The top 8 lines of text are black, the bottom 2 lines are red, D.All are black.
+Output Answer:  B.The third line has some blue text, the rest are black.
+
+
+Processing: X29dPzJIMbA
+/mnt/Shared_03/fsq/LongVideoBench/videos/X29dPzJIMbA.mp4
+209.27573333333333
+Input prompt:  In the video, there are three women sitting on a bench. the woman on the left is wearing a black long-sleeve shirt, with her right hand extended forward. the woman in the middle is wearing a light gray long-sleeve shirt. the woman on the right is wearing a white long-sleeve shirt. who is sitting in the middle? Choose your answer from below options: A.Nancy, B.Davy, C.Jo-Anne, D.Cara.
+Output Answer:  D
+
+
+Processing: X29dPzJIMbA
+/mnt/Shared_03/fsq/LongVideoBench/videos/X29dPzJIMbA.mp4
+209.27573333333333
+Input prompt:  Who is taking a photo with the phone in the video? Choose your answer from below options: A.Cara, B.Nancy, C.Davy, D.Jo-Anne.
+Output Answer:  D.Jo-Anne.
+
+
+Processing: WM78_KqcrSY
+/mnt/Shared_03/fsq/LongVideoBench/videos/WM78_KqcrSY.mp4
+490.23333333333335
+Input prompt:  Which of the following scene sequences is correct? Choose your answer from below options: A.First, a few small planes appear on the left, top right, and bottom right, with a big plane in the middle right, then some lines of yellow and white subtitles appear, and finally, ends with a white bear., B.First, a white bear appears, then a few small planes appear on the left, top right, and bottom right, with a big plane in the middle right, and finally, ends with some lines of yellow and white subtitles., C.First, some lines of yellow and white subtitles appear, then a white bear appears, and finally, ends with a few small planes on the left, top right, and bottom right, with a big plane in the middle right., D.First, a white bear appears, then some lines of yellow and white subtitles appear, and finally, the sequence ends with a screen showing a few small planes on the left, a few small planes on the top right and bottom right, and a big plane in the middle right..
+Output Answer:  

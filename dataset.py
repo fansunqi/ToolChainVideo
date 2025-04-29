@@ -213,7 +213,15 @@ class LVBDataset(BaseDataset):
             
             options = data_item['candidates']
             
-            question_w_options = f"{question} Choose your answer from below options: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}."
+            if len(options) == 5:
+                question_w_options = f"{question} Choose your answer from below options: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}, E.{options[4]}."
+            elif len(options) == 4:
+                question_w_options = f"{question} Choose your answer from below options: A.{options[0]}, B.{options[1]}, C.{options[2]}, D.{options[3]}."
+            elif len(options) == 3:
+                question_w_options = f"{question} Choose your answer from below options: A.{options[0]}, B.{options[1]}, C.{options[2]}."
+            else:
+                raise ValueError(f"Invalid number of options: {len(options)}. Expected 3 or 4.")
+                
             
             video_path = os.path.join(self.args.video_path_base, 'videos', data_item['video_path'])
             
@@ -224,7 +232,7 @@ class LVBDataset(BaseDataset):
             
             q_type = data_item["question_category"]
             
-            data.append({
+            formatted_data_item = {
                 'quid': uid,
                 'uid': uid,
                 'qid': uid,
@@ -233,13 +241,20 @@ class LVBDataset(BaseDataset):
                 'optionA': options[0],
                 'optionB': options[1],
                 'optionC': options[2],
-                'optionD': options[3],
                 'options': options,
                 'question_w_options': question_w_options,
                 'truth': truth,
                 'video_path': video_path,
                 'subtitle_path': subtitle_path,
-            })
+            }
+            
+            if len(options) == 4:
+                formatted_data_item['optionD'] = options[3]
+            elif len(options) == 5:
+                formatted_data_item['optionD'] = options[3]
+                formatted_data_item['optionE'] = options[4]
+            
+            data.append(formatted_data_item)
             
             if len(data) >= self.end_num:
                 break
