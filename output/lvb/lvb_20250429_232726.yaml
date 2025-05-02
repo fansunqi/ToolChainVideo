@@ -18,7 +18,7 @@ tool:
     - "PatchZoomer"
     - "ImageGridQA"
     - "ImageGridSelect"
-    - "ImageQA"
+    # - "ImageQA"
     - "Summarizer"
     - "FrameSelector"
     # - "VideoQA"
@@ -52,18 +52,18 @@ tool:
   summarizer:
     llm_model_name: "gpt-4o-mini"
     use_cache: True
-    mode: "by_qa"         # by_caption, by_qa
+    mode: "by_caption"         # by_caption, by_qa
   frame_selector:
     llm_model_name: "gpt-4o-mini"
   image_captioner:
     device: "cuda:1"
   video_qa:
-    model_path: "Qwen/Qwen2.5-VL-7B-Instruct"
-    # model_path: "Qwen/Qwen2.5-VL-3B-Instruct"
+    # model_path: "Qwen/Qwen2.5-VL-7B-Instruct"
+    model_path: "Qwen/Qwen2.5-VL-3B-Instruct"
     # model_path: "/hf_home/hub/models--Qwen--Qwen2-VL-2B-Instruct/snapshots/895c3a49bc3fa70a340399125c650a463535e71c"
   video_qa_internvl:
-    model_path: 'OpenGVLab/InternVL3-2B'
-    # model_path: 'OpenGVLab/InternVL3-8B'
+    # model_path: 'OpenGVLab/InternVL3-2B'
+    model_path: 'OpenGVLab/InternVL3-8B'
     device: 'cuda:0'
 
 mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"

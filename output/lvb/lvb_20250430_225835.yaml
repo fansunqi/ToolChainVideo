@@ -71,8 +71,8 @@ use_cache: False
 
 dataset: "lvb"
 video_path_base: "/mnt/Shared_03/fsq/LongVideoBench"
-# anno_path: "/mnt/Shared_03/fsq/LongVideoBench/lvb_val.json"
-anno_path: "/mnt/Shared_03/fsq/LongVideoBench/lvb_val_sample.json"
+anno_path: "/mnt/Shared_03/fsq/LongVideoBench/lvb_val.json"
+# anno_path: "/mnt/Shared_03/fsq/LongVideoBench/lvb_val_sample.json"
 num_examples_to_run: -1
 start_num: 0  # short
 # start_num: 900  # medium

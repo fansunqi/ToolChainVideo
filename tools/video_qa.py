@@ -58,6 +58,7 @@ class VideoQA:
         
     
     def video_qa(self, prompt_videoqa):
+
         messages = [
             {
                 "role": "user",
@@ -65,6 +66,8 @@ class VideoQA:
                     {
                         "type": "video",
                         "video": self.video_path,
+                        "fps": 1.0,
+                        "max_frames": 512,
                     },
                     {
                         "type": "text", 

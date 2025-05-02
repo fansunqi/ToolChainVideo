@@ -58,12 +58,12 @@ tool:
   image_captioner:
     device: "cuda:1"
   video_qa:
-    model_path: "Qwen/Qwen2.5-VL-7B-Instruct"
-    # model_path: "Qwen/Qwen2.5-VL-3B-Instruct"
+    # model_path: "Qwen/Qwen2.5-VL-7B-Instruct"
+    model_path: "Qwen/Qwen2.5-VL-3B-Instruct"
     # model_path: "/hf_home/hub/models--Qwen--Qwen2-VL-2B-Instruct/snapshots/895c3a49bc3fa70a340399125c650a463535e71c"
   video_qa_internvl:
-    model_path: 'OpenGVLab/InternVL3-2B'
-    # model_path: 'OpenGVLab/InternVL3-8B'
+    # model_path: 'OpenGVLab/InternVL3-2B'
+    model_path: 'OpenGVLab/InternVL3-8B'
     device: 'cuda:0'
 
 mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"
@@ -73,7 +73,7 @@ dataset: "lvb"
 video_path_base: "/mnt/Shared_03/fsq/LongVideoBench"
 # anno_path: "/mnt/Shared_03/fsq/LongVideoBench/lvb_val.json"
 anno_path: "/mnt/Shared_03/fsq/LongVideoBench/lvb_val_sample.json"
-num_examples_to_run: -1
+num_examples_to_run: 10
 start_num: 0  # short
 # start_num: 900  # medium
 # start_num: 1800  # long
@@ -85,4 +85,4 @@ recursion_limit: 20
 try_num: 1
 
 try_except_mode: True
-to_txt: True
+to_txt: False

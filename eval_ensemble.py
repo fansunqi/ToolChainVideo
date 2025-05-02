@@ -170,7 +170,7 @@ def main(data, output_file, conf, eval_llm):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Evaluate answers")
-    parser.add_argument('--config', default="config/videomme.yaml",type=str)
+    parser.add_argument('--config', default="config/lvb.yaml",type=str)
     args = parser.parse_args()
     conf = OmegaConf.load(args.config)
 
@@ -190,10 +190,16 @@ if __name__ == "__main__":
 
         
         # long
-        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_160749.json",   # VideoQA (Qwen2.5-VL-3B)
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_160749.json",   # VideoQA (Qwen2.5-VL-3B)
         # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_155926.json",   # VideoQA (InternVL3-2B)
-        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_202739.json",   # 16+IGQA
-        "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250427_113813.json",   # 16+ICL+S
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250426_202739.json",   # 16+IGQA
+        # "/home/fsq/video_agent/ToolChainVideo/output/videomme/results_20250427_113813.json",   # 16+ICL+S
+        
+        
+        # lvb-sample-100
+        "/home/fsq/video_agent/ToolChainVideo/eval/lvb/results_20250429_165807.json",
+        "/home/fsq/video_agent/ToolChainVideo/eval/lvb/results_20250428_232733.json",
+        "/home/fsq/video_agent/ToolChainVideo/eval/lvb/results_20250429_002333.json"
     ]
     
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
