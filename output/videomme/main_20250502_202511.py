@@ -160,19 +160,14 @@ if __name__ == "__main__":
         visible_frames_all = 0
         
         for try_count in range(try_num):
-            
-            if 'subtitle_path' in data:
-                subtitle_path=data['subtitle_path']
-            else:
-                subtitle_path=None
-                
+
             visible_frames = VisibleFrames(
                 video_path=video_path, 
                 init_sec_interval=conf.visible_frames.init_sec_interval,
                 init_interval_num=conf.visible_frames.init_interval_num,
                 min_interval=conf.visible_frames.min_interval,
                 min_sec_interval=conf.visible_frames.min_sec_interval,
-                subtitle_path=subtitle_path,
+                subtitle_path=data['subtitle_path'],
             )
             
             for tool_instance in tool_instances:

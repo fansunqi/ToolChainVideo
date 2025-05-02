@@ -255,6 +255,8 @@ class ImageGridSelect:
         actual_end_idx = actual_indices[result.end-1]
         self.visible_frames.remove_all_frames()
         
+        # TODO 正确统计所有可见帧
+        
         # 如果 actual_start_idx 和 actual_end_idx 过近，则往两边扩
         if actual_end_idx - actual_start_idx + 1 < grid_num:
             dist = grid_num - (actual_end_idx - actual_start_idx + 1)

@@ -36,7 +36,7 @@ tool:
     init_grid_size: 4           # [3, 4]
     save_path: null
     mode:  "by_visible_frames"  # "by_video_path"
-    with_analysis: False
+    with_analysis: True
     with_subtitle: False
   temporal_grounding:
     min_sec_interval: 1
@@ -73,8 +73,7 @@ dataset: "videomme"
 # anno_path: "/mnt/Shared_05_disk/fsq/VideoMME/test-00000-of-00001.parquet"
 video_path_base: "/mnt/Shared_03/fsq/VideoMME/unzipped/data"
 # anno_path: "/mnt/Shared_03/fsq/VideoMME/test-00000-of-00001.parquet"
-# anno_path: "/mnt/Shared_03/fsq/VideoMME/sample-100.parquet"
-anno_path: "/mnt/Shared_03/fsq/VideoMME/sample-100-2.parquet"
+anno_path: "/mnt/Shared_03/fsq/VideoMME/sample-100.parquet"
 num_examples_to_run: 100
 start_num: 0  # short
 # start_num: 900  # medium
