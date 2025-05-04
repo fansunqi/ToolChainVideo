@@ -153,7 +153,10 @@ class VideoQAInternVL:
         
     
     def video_qa(self, prompt_videoqa):
-        pixel_values, num_patches_list = load_video(self.video_path, num_segments=self.num_segments, max_num=1)
+        duration = self.visible_frames.video_info["duration"]
+        num_segments = min(int(duration), self.num_segments)
+        print("num_segments: ", num_segments)
+        pixel_values, num_patches_list = load_video(self.video_path, num_segments=num_segments, max_num=1)
         pixel_values = pixel_values.to(torch.bfloat16).cuda()
         video_prefix = ''.join([f'Frame{i+1}: <image>\n' for i in range(len(num_patches_list))])
         question = video_prefix + prompt_videoqa
