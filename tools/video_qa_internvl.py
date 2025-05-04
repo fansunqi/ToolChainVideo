@@ -131,7 +131,7 @@ class VideoQAInternVL:
         self.conf = conf
         
         self.model_path = self.conf.tool.video_qa_internvl.model_path
-        self.device = self.conf.tool.video_qa_internvl.device
+        # self.device = self.conf.tool.video_qa_internvl.device
         self.model = AutoModel.from_pretrained(
             self.model_path,
             torch_dtype=torch.bfloat16,
@@ -139,10 +139,13 @@ class VideoQAInternVL:
             low_cpu_mem_usage=True,
             use_flash_attn=True,
             trust_remote_code=True,
-            device_map=self.device)
+            device_map="auto")
+            # device_map=self.device)
         self.model.eval()
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_path, trust_remote_code=True, use_fast=False)
         self.generation_config = dict(max_new_tokens=1024, do_sample=True)
+        
+        self.num_segments = conf.tool.video_qa_internvl.num_segments
 
     def set_frames(self, visible_frames):
         self.visible_frames = visible_frames
@@ -152,7 +155,7 @@ class VideoQAInternVL:
         
     
     def video_qa(self, prompt_videoqa):
-        pixel_values, num_patches_list = load_video(self.video_path, num_segments=8, max_num=1)
+        pixel_values, num_patches_list = load_video(self.video_path, num_segments=self.num_segments, max_num=1)
         pixel_values = pixel_values.to(torch.bfloat16).cuda()
         video_prefix = ''.join([f'Frame{i+1}: <image>\n' for i in range(len(num_patches_list))])
         question = video_prefix + prompt_videoqa
