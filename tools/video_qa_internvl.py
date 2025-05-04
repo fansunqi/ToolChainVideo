@@ -131,7 +131,6 @@ class VideoQAInternVL:
         self.conf = conf
         
         self.model_path = self.conf.tool.video_qa_internvl.model_path
-        # self.device = self.conf.tool.video_qa_internvl.device
         self.model = AutoModel.from_pretrained(
             self.model_path,
             torch_dtype=torch.bfloat16,
@@ -140,7 +139,6 @@ class VideoQAInternVL:
             use_flash_attn=True,
             trust_remote_code=True,
             device_map="auto")
-            # device_map=self.device)
         self.model.eval()
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_path, trust_remote_code=True, use_fast=False)
         self.generation_config = dict(max_new_tokens=1024, do_sample=True)
