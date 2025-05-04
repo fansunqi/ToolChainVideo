@@ -241,7 +241,8 @@ class ImageGridSelect:
         grid_num = self.grid_size**2
 
         prompt_image_grid_select = IMAGE_GRID_SELECT_PROMPT.format(
-            grid_num = grid_num,
+            # grid_num = grid_num,
+            grid_num = len(frames),
             question = input,
         )
 
@@ -254,8 +255,6 @@ class ImageGridSelect:
         actual_start_idx = actual_indices[result.start-1]
         actual_end_idx = actual_indices[result.end-1]
         self.visible_frames.remove_all_frames()
-        
-        # TODO 正确统计所有可见帧
         
         # 如果 actual_start_idx 和 actual_end_idx 过近，则往两边扩
         if actual_end_idx - actual_start_idx + 1 < grid_num:

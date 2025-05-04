@@ -2,7 +2,7 @@
 EVAL_MODEL_NAME: "gpt-4o-mini"
 
 reasoning_mode: "st"    # langgraph
-reasoning_try_max: 1
+reasoning_try_max: 3
 
 visible_frames:
   init_sec_interval: null
@@ -72,10 +72,10 @@ dataset: "videomme"
 # video_path_base: "/mnt/Shared_05_disk/fsq/VideoMME/data/"
 # anno_path: "/mnt/Shared_05_disk/fsq/VideoMME/test-00000-of-00001.parquet"
 video_path_base: "/mnt/Shared_03/fsq/VideoMME/unzipped/data"
-# anno_path: "/mnt/Shared_03/fsq/VideoMME/test-00000-of-00001.parquet"
+anno_path: "/mnt/Shared_03/fsq/VideoMME/test-00000-of-00001.parquet"
 # anno_path: "/mnt/Shared_03/fsq/VideoMME/sample-100.parquet"
-anno_path: "/mnt/Shared_03/fsq/VideoMME/sample-100-2.parquet"
-num_examples_to_run: 100
+# anno_path: "/mnt/Shared_03/fsq/VideoMME/sample-100-2.parquet"
+num_examples_to_run: -1
 start_num: 0  # short
 # start_num: 900  # medium
 # start_num: 1800  # long
@@ -89,4 +89,4 @@ try_num: 1
 try_except_mode: False
 to_txt: True
 
-# specific_quids: ["151-1"]
+# specific_quids: ["229-3"]

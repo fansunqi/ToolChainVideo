@@ -39,6 +39,7 @@ def spatiotemporal_reasoning(
     question_w_options,
     options,
     tools, 
+    frames_count,
     eval_llm=None,
 ):
 
@@ -53,7 +54,7 @@ def spatiotemporal_reasoning(
     
     output = summarizer_output
     print(f"\nToolChainOutput: {output}") 
-    return output
+    return output, frames_count 
     
     
     
@@ -63,11 +64,13 @@ def spatiotemporal_reasoning_videomme(
     question_w_options,
     options,
     tools, 
+    frames_count,
     eval_llm=None,
 ):
 
     image_grid_qa = identify_tools(ImageGridQA, tools)
     image_grid_select = identify_tools(ImageGridSelect, tools)
+    video_qa = identify_tools(VideoQA, tools)
     
     try_count = 0
     try_max = image_grid_qa.conf.reasoning_try_max
@@ -87,11 +90,21 @@ def spatiotemporal_reasoning_videomme(
             if image_grid_qa_pred == -1:
                 print("\nusing image grid select")
                 image_grid_select.inference(input=question_w_options)
+                frames_count = frames_count.union(image_grid_select.visible_frames.get_frame_indices())
             else:
                 break
     
+    # Qwen-2.5-VL-3B
+    # image_grid_qa_pred, _ = get_predicted_option_with_rephrase(
+    #     image_grid_qa_output, options, question, image_grid_qa.conf, eval_llm
+    # )
+    # if image_grid_qa_pred == -1:
+    #     print("\nusing video qa")
+    #     output = video_qa.inference(input=question_w_options)
+    #     frames_count = frames_count.union(video_qa.visible_frames.get_frame_indices())
+    
     print(f"\nToolChainOutput: {output}") 
-    return output
+    return output, frames_count
     
     
     
@@ -103,6 +116,7 @@ def spatiotemporal_reasoning_nextqa(
     question_w_options,
     options,
     tools, 
+    frames_count,
     eval_llm=None,
 ):
 
@@ -164,7 +178,7 @@ def spatiotemporal_reasoning_nextqa(
     output = [image_grid_qa_output, summarizer_output, temporal_qa_output]
 
     print(f"\nToolChainOutput: {output}") 
-    return output
+    return output, frames_count
 
 
 

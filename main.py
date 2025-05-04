@@ -160,9 +160,9 @@ if __name__ == "__main__":
         visible_frames_all = 0
         
         for try_count in range(try_num):
-            
+          
             if 'subtitle_path' in data:
-                subtitle_path=data['subtitle_path']
+                subtitle_path = data['subtitle_path']
             else:
                 subtitle_path=None
                 
@@ -174,6 +174,9 @@ if __name__ == "__main__":
                 min_sec_interval=conf.visible_frames.min_sec_interval,
                 subtitle_path=subtitle_path,
             )
+            
+            frames_count = set()
+            frames_count = frames_count.union(visible_frames.get_frame_indices())
             
             for tool_instance in tool_instances:
                 tool_instance.set_frames(visible_frames)
@@ -195,11 +198,12 @@ if __name__ == "__main__":
                             mannual_cache_file=mannual_cache_file
                         )
                     elif conf.reasoning_mode == "st":
-                        tool_chain_output = reasoning_func(
+                        tool_chain_output, frames_count = reasoning_func(
                             question=question,
                             question_w_options=question_w_options,
                             options=options,
                             tools=tool_instances,
+                            frames_count=frames_count,
                             eval_llm=eval_llm,
                         )
                     else:
@@ -219,11 +223,12 @@ if __name__ == "__main__":
                         mannual_cache_file=mannual_cache_file
                     )
                 elif conf.reasoning_mode == "st":
-                     tool_chain_output = reasoning_func(
+                     tool_chain_output, frames_count = reasoning_func(
                         question=question,
                         question_w_options=question_w_options,
                         options=options,
                         tools=tool_instances,
+                        frames_count=frames_count,
                         eval_llm=eval_llm,
                     )
                 else:
@@ -236,7 +241,7 @@ if __name__ == "__main__":
             else:
                 raise ValueError("tool_chain_output error")
             
-            visible_frames_all += len(visible_frames.frames)
+            visible_frames_all += len(frames_count)
 
         visible_frames_num = visible_frames_all / try_num
         result["video_info"] = video_info

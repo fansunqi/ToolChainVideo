@@ -261,7 +261,8 @@ class ImageGridQA:
                 subtitle_desp = read_lvb_subtitles(self.visible_frames.subtitles)
                 
                 prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT_SUBTITLE.format(
-                    grid_num=grid_num, 
+                    # grid_num=grid_num, 
+                    grid_num=len(frames),
                     duration=f"{self.visible_frames.video_info['duration']:.2f}",
                     frame_timestamps=timestamp_desp,
                     subtitle_desp=subtitle_desp,
@@ -270,12 +271,14 @@ class ImageGridQA:
         else:
             if self.with_analysis:
                 prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT_ANALYSIS.format(
-                    grid_num=grid_num, 
+                    grid_num=len(frames),
+                    # grid_num=grid_num, 
                     question=input
                 )
             else:   
                 prompt_image_grid_qa = IMAGE_GRID_QA_PROMPT.format(
-                    grid_num=grid_num, 
+                    # grid_num=grid_num, 
+                    grid_num=len(frames),
                     question=input
                 )
                 

@@ -81,7 +81,11 @@ class VideoQA:
         text = self.processor.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True
         )
-        image_inputs, video_inputs = process_vision_info(messages)
+        image_inputs, video_inputs, frames_indices = process_vision_info(messages)
+        
+        # 将视频读取的帧加入到 self.visible_frames 中
+        self.visible_frames.add_frames(frame_indices=frames_indices)
+        
         inputs = self.processor(
             text=[text],
             images=image_inputs,

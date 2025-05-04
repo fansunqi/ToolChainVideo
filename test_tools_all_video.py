@@ -101,6 +101,7 @@ if __name__ == "__main__":
 
         # temporal_qa.set_video_path(video_path)
         video_qa.set_video_path(video_path)
+        video_qa.set_frames(visible_frames)
         # image_grid_qa.set_video_path(video_path)
         # image_grid_qa.set_frames(visible_frames)
         # temporal_grounding.set_video_path(video_path)

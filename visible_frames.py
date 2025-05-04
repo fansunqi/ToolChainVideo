@@ -227,14 +227,14 @@ class VisibleFrames:
         return min(self.frames, key=lambda x: abs(x.timestamp - timestamp))
     
     def get_frame_indices(self) -> tuple:
-        """获取可见帧的索引范围
+        """获取所有可见帧的索引集合
         
         返回:
-            tuple: (起始帧索引, 结束帧索引)
+            set: 所有可见帧的索引集合
         """
         if not self.frames:
-            return (0, 0)
-        return (self.frames[0].index, self.frames[-1].index)
+            return set()
+        return set(sorted(frame.index for frame in self.frames))
 
     def get_invisible_segments(self) -> List[tuple]:
         if not self.frames or not self.video_info:

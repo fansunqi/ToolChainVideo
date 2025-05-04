@@ -235,6 +235,7 @@ class ChatOpenAI(EngineLM, CachedEngine):
                 cache_key = json.dumps(formatted_content)
             cache_or_none = self._check_cache(cache_key)
             if cache_or_none is not None:
+                print("!! cache hit")
                 return cache_or_none
         
         formatted_messages = self._format_messages(sys_prompt_arg=sys_prompt_arg, prompt=formatted_content)
