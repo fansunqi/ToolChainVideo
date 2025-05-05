@@ -19,7 +19,8 @@ class CachedEngine:
     def __init__(self, cache_path):
         super().__init__()
         self.cache_path = cache_path
-        self.cache = dc.Cache(cache_path)
+        # self.cache = dc.Cache(cache_path)
+        self.cache = dc.Cache(cache_path, size_limit=1 * (2 ** 40))  # 1 TiB
 
     def _hash_prompt(self, prompt: str):
         return hashlib.sha256(f"{prompt}".encode()).hexdigest()
@@ -42,4 +43,4 @@ class CachedEngine:
     def __setstate__(self, state):
         # Restore the cache after unpickling
         self.__dict__.update(state)
-        self.cache = dc.Cache(self.cache_path)
+        self.cache = dc.Cache(self.cache_path, size_limit=1 * (2 ** 40))  # 1 TiB

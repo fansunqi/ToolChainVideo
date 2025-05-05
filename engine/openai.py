@@ -53,6 +53,7 @@ class ChatOpenAI(EngineLM, CachedEngine):
         :param is_multimodal:
         """
         if enable_cache:
+            # TODO change name
             root = platformdirs.user_cache_dir("octotools")
             cache_path = os.path.join(root, f"cache_openai_{model_string}.db")
             
@@ -155,7 +156,9 @@ class ChatOpenAI(EngineLM, CachedEngine):
                 cache_key = prompt
             cache_or_none = self._check_cache(cache_key)
             if cache_or_none is not None:
+                print("!! cache hit")
                 return cache_or_none
+            print("!! cache miss")
 
         formatted_messages = self._format_messages(sys_prompt_arg=sys_prompt_arg, prompt=prompt)
 
@@ -197,6 +200,7 @@ class ChatOpenAI(EngineLM, CachedEngine):
 
         if self.enable_cache:
             self._save_cache(cache_key, response)
+            print("!! cache save")
         return response
 
     def __call__(self, prompt, **kwargs):
@@ -237,6 +241,7 @@ class ChatOpenAI(EngineLM, CachedEngine):
             if cache_or_none is not None:
                 print("!! cache hit")
                 return cache_or_none
+            print("!! cache miss")
         
         formatted_messages = self._format_messages(sys_prompt_arg=sys_prompt_arg, prompt=formatted_content)
 
@@ -274,4 +279,5 @@ class ChatOpenAI(EngineLM, CachedEngine):
 
         if self.enable_cache:
             self._save_cache(cache_key, response_text)
+            print("!! cache save")
         return response_text
