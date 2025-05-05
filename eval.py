@@ -96,9 +96,9 @@ def main(input_file, output_file, conf, eval_llm):
     total_visible_frames_fps = 0
     
     if conf.dataset == "videomme":
-        short_total, short_correct = 0, 0
-        medium_total, medium_correct = 0, 0
-        long_total, long_correct = 0, 0
+        short_total, short_have_ans, short_correct = 0, 0, 0
+        medium_total, medium_have_ans, medium_correct = 0, 0, 0
+        long_total, long_have_ans, long_correct = 0, 0, 0
 
     for item in tqdm(data):
         truth = item['truth']
@@ -157,14 +157,20 @@ def main(input_file, output_file, conf, eval_llm):
             uid = int(item["uid"])
             if uid <= 300:
                 short_total += 1
+                if predicted_options:
+                    short_have_ans += 1
                 if is_correct:
                     short_correct += 1
             elif uid <= 600:
                 medium_total += 1
+                if predicted_options:
+                    medium_have_ans += 1
                 if is_correct:
                     medium_correct += 1
             else:
                 long_total += 1
+                if predicted_options:
+                    long_have_ans += 1
                 if is_correct:
                     long_correct += 1
             
@@ -184,12 +190,15 @@ def main(input_file, output_file, conf, eval_llm):
     print(f"avg_visible_frames_fps: {avg_visible_frames_fps:.2f}")
     
     if conf.dataset == "videomme":
-        short_acc = short_correct / short_total if short_total != 0 else 0.0
-        medium_acc = medium_correct / medium_total if medium_total != 0 else 0.0
-        long_acc = long_correct / long_total if long_total != 0 else 0.0
-        print(f"short total: {short_total}; short_correct: {short_correct}; short_acc: {short_acc:.2f}")
-        print(f"medium total: {medium_total}; medium_correct: {medium_correct}; medium_acc: {medium_acc:.2f}")
-        print(f"long total: {long_total}; long_correct: {long_correct}; long_acc: {long_acc:.2f}")
+        short_acc_include_no_ans = short_correct / short_total if short_total != 0 else 0.0
+        medium_acc_include_no_ans = medium_correct / medium_total if medium_total != 0 else 0.0
+        long_acc_include_no_ans = long_correct / long_total if long_total != 0 else 0.0
+        short_acc_exclude_no_ans = short_correct / short_have_ans if short_have_ans != 0 else 0.0
+        medium_acc_exclude_no_ans = medium_correct / medium_have_ans if medium_have_ans != 0 else 0.0
+        long_acc_exclude_no_ans = long_correct / long_have_ans if long_have_ans != 0 else 0.0
+        print(f"--short-- total: {short_total}; have_ans: {short_have_ans}, correct: {short_correct}; acc_include_no_ans: {short_acc_include_no_ans:.2f}; acc_exclude_no_ans: {short_acc_exclude_no_ans:.2f}")
+        print(f"--medium-- total: {medium_total}; have_ans: {medium_have_ans}, correct: {medium_correct}; acc_include_no_ans: {medium_acc_include_no_ans:.2f}; acc_exclude_no_ans: {medium_acc_exclude_no_ans:.2f}")
+        print(f"--long-- total: {long_total}; have_ans: {long_have_ans}, correct: {long_correct}; acc_include_no_ans: {long_acc_include_no_ans:.2f}; acc_exclude_no_ans: {long_acc_exclude_no_ans:.2f}")
 
     # 检查 output_file 所在的文件夹是否存在，如果不存在则创建
     output_dir = os.path.dirname(output_file)

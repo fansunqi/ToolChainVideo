@@ -92,6 +92,16 @@ Options: {options_with_labels}
 The matched option is:"""
 
 
+# EVAL_PROMPT = """Given the following question and answer, determine which option matches the provided answer.
+# If the answer matches one of the options, return that option in full, e.g. 'A. one' ; if it matches none or more than one option, return 'not matched'.
+
+# Question: {question}
+# Answer: {answer}
+# Options: {options_with_labels}
+
+# The matched option is:"""
+
+
 IMAGE_GRID_SELECT_PROMPT = """Analyze this image sequence to identify the most relevant video segment(s) for answering the question:
 
 Question: {question}
