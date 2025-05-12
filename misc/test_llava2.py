@@ -15,8 +15,13 @@ tokenizer, model, image_processor, context_len = load_pretrained_model(
 )
 
 # 提示语和图像路径
-prompt = "What are the things I should be cautious about when I visit here?"
-image_file = "/home/fsq/video_agent/ToolChainVideo/misc/view.jpg"
+# prompt = "What are the things I should be cautious about when I visit here?"
+# image_file = "/home/fsq/video_agent/ToolChainVideo/misc/view.jpg"
+
+# prompt = "Describe this image in detail."
+# prompt = "by using a tractor, how many times faster is the cultivation of the same land compared to manual labor?"
+prompt = "Describe the layout and text of this image"
+image_file = "/home/fsq/video_agent/ToolChainVideo/misc/beast_extracted_frames/frame_0166.jpg"
 
 # 使用 OpenCV 读取图像
 image = cv2.imread(image_file)
@@ -50,4 +55,5 @@ args = type('Args', (), {
 })()
 
 # 调用 eval_model 进行推理
-eval_model(args)
+output = eval_model(args)
+print(output)

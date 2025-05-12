@@ -130,7 +130,6 @@ def spatiotemporal_reasoning_nextqa(
      
     # 1. T: temporal grounding
     temporal_grounding.inference(input=question)
-    frames_count = frames_count.union(temporal_grounding.visible_frames.get_frame_indices())
 
     # 2. S: patch zoomer 对所有 visible_frames 都进行 zoom in
     patch_zoomer.inference(input=question)
@@ -164,7 +163,6 @@ def spatiotemporal_reasoning_nextqa(
         if len(invisible_segments_list) > 0:
             print("\nFrame Selector inferencing...")
             frame_selector.inference(input=question)
-            frames_count = frames_count.union(frame_selector.visible_frames.get_frame_indices())
 
             # 3. image grid qa
             image_grid_qa_output = image_grid_qa.inference(input=question_w_options)

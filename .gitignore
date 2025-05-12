@@ -25,3 +25,5 @@ runs/
 projects/
 misc/image_grid_results*/
 misc/IG*/
+src/detectron2
+misc/*.webm

@@ -54,7 +54,7 @@ timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="demo")               
-    parser.add_argument('--config', default="config/lvb.yaml",type=str)                           
+    parser.add_argument('--config', default="config/videomme.yaml",type=str)                           
     opt = parser.parse_args()
     conf = OmegaConf.load(opt.config)
 

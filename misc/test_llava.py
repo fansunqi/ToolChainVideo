@@ -11,9 +11,11 @@ tokenizer, model, image_processor, context_len = load_pretrained_model(
 )
 
 model_path = "liuhaotian/llava-v1.5-7b"
-prompt = "What are the things I should be cautious about when I visit here?"
+# prompt = "What are the things I should be cautious about when I visit hxere?"
+prompt = "Describe this image in detail."
 # image_file = "https://llava-vl.github.io/static/images/view.jpg"
-image_file = "/home/fsq/video_agent/ToolChainVideo/misc/view.jpg"
+# image_file = "/home/fsq/video_agent/ToolChainVideo/misc/view.jpg"
+image_file = "/home/fsq/video_agent/ToolChainVideo/misc/beast_extracted_frames/frame_0166.jpg"
 
 args = type('Args', (), {
     "model_path": model_path,
