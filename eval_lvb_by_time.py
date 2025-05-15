@@ -84,7 +84,7 @@ def main(json_file):
 if __name__ == "__main__":
     # JSON 文件路径
     # json_file = "/home/fsq/video_agent/ToolChainVideo/eval/lvb/results_20250429_232827.json"
-    json_file = "/home/fsq/video_agent/ToolChainVideo/eval/lvb/results_20250430_230224.json"
+    json_file = "/home/fsq/video_agent/ToolChainVideo/eval/lvb/results_20250513_174854.json"
     
     # 调用主函数
     main(json_file)

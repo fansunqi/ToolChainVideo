@@ -2,11 +2,11 @@
 EVAL_MODEL_NAME: "gpt-4o-mini"
 
 reasoning_mode: "st"    # langgraph
-reasoning_try_max: 2
+reasoning_try_max: 1
 
 visible_frames:
   init_sec_interval: null
-  init_interval_num: null
+  init_interval_num: 16
   min_interval: null
   min_sec_interval: 1
   subtitle_path: null
@@ -18,7 +18,7 @@ tool:
     - "PatchZoomer"
     - "ImageGridQA"
     - "ImageGridSelect"
-    # - "ImageQA"
+    - "ImageQA"
     - "Summarizer"
     - "FrameSelector"
     # - "VideoQA"
@@ -32,11 +32,11 @@ tool:
     batch_size: 10
     device: "cuda:6"
   image_grid_qa:
-    vlm_gpt_model_name: "gpt-4o" # "gpt-4o-mini" 
+    vlm_gpt_model_name: "gpt-4o" 
     init_grid_size: 4           # [3, 4]
-    save_path: null
+    save_path: null # "/home/fsq/video_agent/ToolChainVideo/misc/IG_lvb_sample_100_2"
     mode:  "by_visible_frames"  # "by_video_path"
-    with_analysis: False
+    with_analysis: True
     with_subtitle: False
   temporal_grounding:
     min_sec_interval: 1
@@ -52,7 +52,7 @@ tool:
   summarizer:
     llm_model_name: "gpt-4o-mini"
     use_cache: True
-    mode: "by_caption"         # by_caption, by_qa
+    mode: "by_qa"         # by_caption, by_qa
   frame_selector:
     llm_model_name: "gpt-4o-mini"
   image_captioner:
@@ -62,31 +62,27 @@ tool:
     # model_path: "Qwen/Qwen2.5-VL-3B-Instruct"
     # model_path: "/hf_home/hub/models--Qwen--Qwen2-VL-2B-Instruct/snapshots/895c3a49bc3fa70a340399125c650a463535e71c"
   video_qa_internvl:
+    # model_path: 'OpenGVLab/InternVL3-2B'
     model_path: 'OpenGVLab/InternVL3-8B'
-    num_segments: 64
+    num_segments: 256
 
 mannual_cache_file: "cache/gpt35_cache_new_tool_8.pkl"
 use_cache: False
 
-dataset: "videomme"
-# video_path_base: "/mnt/Shared_05_disk/fsq/VideoMME/data/"
-# anno_path: "/mnt/Shared_05_disk/fsq/VideoMME/test-00000-of-00001.parquet"
-video_path_base: "/mnt/Shared_03/fsq/VideoMME/unzipped/data"
-anno_path: "/mnt/Shared_03/fsq/VideoMME/test-00000-of-00001.parquet"
-# anno_path: "/mnt/Shared_03/fsq/VideoMME/sample-100.parquet"
-# anno_path: "/mnt/Shared_03/fsq/VideoMME/sample-100-2.parquet"
-num_examples_to_run: 10
-# start_num: 0  # short
+dataset: "lvb"
+video_path_base: "/mnt/Shared_03/fsq/LongVideoBench"
+# anno_path: "/mnt/Shared_03/fsq/LongVideoBench/lvb_val.json"
+anno_path: "/mnt/Shared_03/fsq/LongVideoBench/lvb_val_sample.json"
+num_examples_to_run: -1
+start_num: 0  # short
 # start_num: 900  # medium
-start_num: 1800  # long
+# start_num: 1800  # long
 
-output_path: "output/videomme/"
+output_path: "output/lvb/"
 
 recursion_limit: 20
 
 try_num: 1
 
-try_except_mode: False
+try_except_mode: True
 to_txt: False
-
-# specific_quids: ["159-1"]

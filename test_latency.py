@@ -1,6 +1,6 @@
 import os
 import time
-import openai
+# import openai
 import argparse
 from tqdm import tqdm
 from omegaconf import OmegaConf
@@ -20,15 +20,19 @@ torch.backends.cudnn.benchmark = False
 
 from dataset import get_dataset
 
-from util import (
-    save_to_json,
-    adjust_video_resolution,
-    backup_file,
-)
+# from util import (
+#     save_to_json,
+#     adjust_video_resolution,
+#     backup_file,
+# )
 
 from baselines.gpt4o import (
     extract_frames,
     video_qa,
+)
+
+from baselines.videollama3 import (
+    video_qa
 )
 
 if __name__ == "__main__":
@@ -53,10 +57,10 @@ if __name__ == "__main__":
     print("base_url", base_url)
     
     # === 初始化 OpenAI 客户端 (新版 SDK) ===
-    client = openai.OpenAI(
-        api_key=api_key,
-        base_url=base_url
-    )
+    # client = openai.OpenAI(
+    #     api_key=api_key,
+    #     base_url=base_url
+    # )
 
     for data in tqdm(dataset):
         start_time = time.time()  # 开始计时
@@ -70,19 +74,21 @@ if __name__ == "__main__":
 
 
         # trim
-        adjust_video_resolution(video_path)
+        # adjust_video_resolution(video_path)
         
         print(video_path)
         print(question_w_options)
         # === 抽帧 ===
         # N = 384
-        N = 20
-        frames = extract_frames(video_path, N)
+        # N = 20
+        # frames = extract_frames(video_path, N)
 
-        # === 问答 ===
-        answer = video_qa(client, frames, question_w_options)
+        # # === 问答 ===
+        # answer = video_qa(client, frames, question_w_options)
+        
+        answer = video_qa(video_path=video_path, question=question_w_options, frames_num=180)
 
-        print("\n=== GPT-4o 的回答 ===")
+        print("\n=== 模型的回答 ===")
         print(answer)
         
         end_time = time.time()  # 结束计时
